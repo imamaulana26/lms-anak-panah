@@ -1,0 +1,10 @@
+.modal-scroll{
+    display: block !important;
+}
+.modal-dialog-scroll{
+      overflow-y: initial !important
+}
+.modal-body-scroll{
+  height: 25px;
+  overflow-y: auto;
+}

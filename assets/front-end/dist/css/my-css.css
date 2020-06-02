@@ -1,0 +1,100 @@
+.jumbotron {
+  background-color: white;
+}
+
+/* text over image background */
+.card-img-caption {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.card-img-top {
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
+}
+
+.card-img-caption .card-text {
+  position: absolute;
+  text-align: left;
+  top: 8px;
+  left: 10px;
+}
+
+.card-img-caption p {
+  position: absolute;
+  margin-top: 70px;
+  top: 8px;
+  left: 10px;
+}
+
+/* disabled link */
+a.disabled {
+  color: gray;
+  pointer-events: none;
+}
+
+/* glider button */
+.glider-prev,
+.glider-next {
+  top: -1px;
+}
+
+/* glider menu */
+.glider-contain {
+  width: 80%;
+}
+
+a.glider-slide {
+  color: gray;
+}
+
+a.glider-slide:hover {
+  color: #007bff;
+}
+
+a.nav-link.glider-slide {
+  text-align: center;
+}
+
+/* box shadow */
+.card.mapel:hover {
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* icon dropdown */
+#dropdownSubMenu1.dropdown-toggle::after {
+  display: none !important;
+}
+
+/* round */
+.round.active {
+  background-color: #007bff;
+  text-align: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+}
+
+.round {
+  background-color: lightgrey;
+  text-align: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  color: black;
+  font-weight: bold;
+}
+
+/* custome modal */
+.modal-header {
+  background: lightskyblue;
+}
+
+.modal-title {
+  color: white;
+}

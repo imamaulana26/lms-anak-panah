@@ -14,13 +14,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="<?= base_url('assets/front-end/plugins/fontawesome-free/css/all.min.css') ?>">
+       <!-- DataTables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/daterangepicker/daterangepicker.css'?>">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= base_url('assets/front-end/dist/css/adminlte.min.css') ?>">
     <!-- Glider -->
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/front-end/plugins/glider/glider.min.css') ?>">
     <!-- ChartJs -->
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/front-end/plugins/chart.js/chart.min.css') ?>">
-    
+
     <!-- Google Font: Source Sans Pro -->
     <!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> -->
 

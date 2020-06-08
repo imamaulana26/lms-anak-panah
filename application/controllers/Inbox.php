@@ -10,7 +10,6 @@ class Inbox extends CI_Controller
 			$url = base_url('login');
 			redirect($url);
 		};
-		$this->load->model('m_kontak');
 	}
 
 	function index()
@@ -19,6 +18,9 @@ class Inbox extends CI_Controller
 		// $data['inbox'] = $this->db->get_where('tbl_inbox', ['inbox_kontak' => $this->session->userdata('username')]);
 		$this->db->order_by('inbox_id', 'desc');
 		$data['inbox'] = $this->db->get_where('tbl_inbox', ['inbox_kontak' => $this->session->userdata('username')]);
-		$this->load->view('admin/v_inbox', $data);
+		$this->load->view('siswa/layout/v_header');
+		$this->load->view('siswa/layout/v_navbar');
+		$this->load->view('siswa/v_messege', $data);
+		$this->load->view('siswa/layout/v_footer');
 	}
 }

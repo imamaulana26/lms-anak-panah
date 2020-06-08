@@ -16,8 +16,16 @@ class Kisikisi extends CI_Controller{
 		if($this->session->userdata('akses')=='1'){
 			$this->load->view('admin/v_kisikisi');
 		}else{
-			$this->load->view('admin/v_kisikisi_siswa');
+			$kelas = $this->db->select('siswa_kelas_id')->from('tbl_siswa')->where(['siswa_nis' => $this->session->userdata('username')])->get()->row_array();
+			
+			// $data['kisikisi'] = $this->db->select('*')->from('tbl_kisikisi a')->join('tbl_mapel b', 'a.kisikisi_mapel = b.kd_mapel', 'inner')->join('tbl_kelas c', 'a.kisikisi_kelas_id = c.kelas_id', 'inner')->where(['a.kisikisi_kelas_id' => 15])->get()->result_array();
+			$data['kisikisi'] = $this->db->select('*')->from('tbl_kisikisi a')->join('tbl_mapel b', 'a.kisikisi_mapel = b.kd_mapel', 'inner')->join('tbl_kelas c', 'a.kisikisi_kelas_id = c.kelas_id', 'inner')->where(['a.kisikisi_kelas_id' => 15])->get()->result_array();
+			$this->load->view('siswa/layout/v_header');
+			$this->load->view('siswa/layout/v_navbar');
+			$this->load->view('siswa/v_kisikisi',$data);
+			$this->load->view('siswa/layout/v_footer');
 		}
+
 
 	}
 
@@ -26,7 +34,7 @@ class Kisikisi extends CI_Controller{
 		echo json_encode($result);
 		exit;
 	}
-		function hapus_kisikisi($id){
+	function hapus_kisikisi($id){
 		$result = $this->db->delete('tbl_kisikisi',['kisikisi_id'=>$id]);
 		echo json_encode($result);
 		exit;

@@ -49,14 +49,14 @@
                                         </thead>
                                         <tbody>
                                             <?php $no = 1;
-                                            $tagihan = $this->db->select('*')->from('tbl_keuangan a')->join('tbl_tagihan b', 'a.kd_tagihan = b.id_tagihan', 'inner')
+                                            $tagihan = $this->db->select('*')->from('tbl_pembayaran a')->join('tbl_tagihan b', 'a.jns_tagihan = b.id_tagihan', 'inner')
                                                 ->where('a.nis_siswa', $this->session->userdata('username'))->get()->result_array();
                                             foreach ($tagihan as $tgh) { ?>
                                                 <tr>
                                                     <td><?= $no++ ?></td>
                                                     <td><?= $tgh['jns_tagihan'] ?></td>
-                                                    <td><?= $tgh['tgl_pembayaran'] ?></td>
-                                                    <td>Rp. <?= number_format($tgh['nom_pembayaran'], 2, ',', '.') ?></td>
+                                                    <td><?= date('d F Y', strtotime($tgh['tgl_jatuh_tempo'])) ?></td>
+                                                    <td>Rp. <?= number_format($tgh['nom_tagihan'], 2, ',', '.') ?></td>
                                                     <td>Rp. <?= number_format(rand(100000, 1000000), 2, ',', '.') ?></td>
                                                 </tr>
                                             <?php } ?>

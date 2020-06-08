@@ -62,7 +62,7 @@
             <li class="nav-item dropdown">
                 <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fas fa-cogs"></i></a>
                 <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                    <li><a href="#" class="dropdown-item">Profile</a></li>
+                    <li><a href="<?= site_url('biodata') ?>" class="dropdown-item">Profile</a></li>
                     <li><a href="<?= site_url('login/logout') ?>" class="dropdown-item">Log Out</a></li>
                 </ul>
             </li>
@@ -73,10 +73,11 @@
 <div class="jumbotron text-center m-0 p-4">
     <div class="row">
         <?php $nis = $this->session->userdata('username');
-        $siswa = $this->db->select('*')->from('tbl_siswa a')->join('tbl_kelas b', 'a.siswa_kelas_id = b.kelas_id', 'inner')->get()->row_array(); ?>
+        $siswa = $this->db->select('*')->from('tbl_siswa a')->join('tbl_kelas b', 'a.siswa_kelas_id = b.kelas_id', 'inner')->where('a.siswa_nis', $nis)->get()->row_array(); ?>
 
         <div class="offset-1 col-sm-2" style="padding-left: 50px">
             <img class="img-fluid img-thumbnail rounded-circle" src="<?= base_url().'/assets/filesiswa/'.$nis.'/'.$siswa['siswa_photo'] ?>" style="width: 80%">
+
         </div>
         <div class="col-sm-3" style="padding-top: 1em">
             <h3 class="text-left"><?= $this->session->userdata('nama'); ?></h3>
@@ -100,7 +101,9 @@
                     <a href="<?= site_url('course') ?>" class="nav-link" id="course">Course</a>
                     <a href="#" class="nav-link" id="schedule">Schedule</a>
                     <a href="#" class="nav-link" id="forum">Forum</a>
-                    <a href="#" class="nav-link" id="messege">Messege</a>
+                    <a href="<?= site_url('inbox') ?>" class="nav-link" id="pesan">Pesan</a>
+                    <a href="<?= site_url('kisikisi') ?>" class="nav-link" id="kisi-kisi">Kisi-Kisi</a>
+                    <a href="<?= site_url('keuangan') ?>" class="nav-link" id="kisi-kisi">Keuangan</a>
                     <a href="#" class="nav-link" id="score">Score</a>
                 </div>
 

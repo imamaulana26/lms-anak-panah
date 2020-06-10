@@ -16,15 +16,10 @@ class Biodata extends CI_Controller
 	{
 		// var_dump($this->session->userdata('user'));
 		// exit();
-		$data['siswa'] = $this->db->select('*')->from('tbl_siswa b')
-		->join('tbl_kelas c', 'b.siswa_kelas_id = c.kelas_id', 'inner')
-		->join('tbl_orangtua d', 'b.siswa_nis = d.siswa_nis', 'inner')
-		->join('tbl_agama e', 'b.siswa_agama_id = e.agama_id', 'inner')
-		->where(['b.siswa_nis' => $this->session->userdata('user')])->get()->row_array();
-		
+		$data['siswa'] = $this->db->select('*')->from('tbl_siswa b')->join('tbl_kelas c', 'b.siswa_kelas_id = c.kelas_id', 'inner')->join('tbl_orangtua d', 'b.siswa_nis = d.siswa_nis', 'inner')->join('tbl_agama e', 'b.siswa_agama_id = e.agama_id', 'inner')->where(['b.siswa_nis' => $this->session->userdata('user')])->get()->row_array();
 		$this->load->view('siswa/layout/v_header');
 		$this->load->view('siswa/layout/v_navbar');
-		$this->load->view('siswa/v_biodata', $data);
+		$this->load->view('siswa/v_biodata',$data);
 		$this->load->view('siswa/layout/v_footer');
 	}
 

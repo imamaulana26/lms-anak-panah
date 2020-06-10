@@ -103,7 +103,7 @@
                     <a href="#" class="nav-link" id="forum">Forum</a>
                     <a href="<?= site_url('inbox') ?>" class="nav-link" id="pesan">Pesan</a>
                     <a href="<?= site_url('kisikisi') ?>" class="nav-link" id="kisi-kisi">Kisi-Kisi</a>
-                    <a href="<?= site_url('keuangan') ?>" class="nav-link" id="kisi-kisi">Keuangan</a>
+                    <a href="<?= site_url('keuangan_siswa') ?>" class="nav-link" id="kisi-kisi">Keuangan</a>
                     <a href="#" class="nav-link" id="score">Score</a>
                 </div>
 

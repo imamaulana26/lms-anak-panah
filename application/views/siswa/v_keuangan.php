@@ -39,36 +39,36 @@
                   <thead>
                     <tr>
                       <th>No</th>
-                        <th>Tgl. Pembayaran</th>
-                        <th>Kode Pembayaran</th>
-                        <th>Jenis Tagihan</th>
-                        <th>Jumlah Tagihan</th>
-                        <th>Pembayaran Diterima</th>
+                      <th>Tgl. Pembayaran</th>
+                      <th>Kode Pembayaran</th>
+                      <th>Jenis Tagihan</th>
+                      <th>Jumlah Tagihan</th>
+                      <th>Pembayaran Diterima</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php $no = 1;
-                     $sisa = 0;
-                      foreach ($keuangan as $dt) { ?>
-                        <tr>
-                          <td><?= $no++ ?></td>
-                          <td><?= $dt['tgl_pembayaran'] ?></td>
-                          <td><?= $dt['kd_transaksi'] ?></td>
-                          <td><?= $dt['jns_tagihan']; ?></td>
-                          <td>Rp. <?= number_format($dt['nom_tagihan']); ?></td>
-                          <td>Rp. <?= number_format($dt['bayar']); ?></td>
-                        </tr>
-                      <?php } ?>
+                    $sisa = 0;
+                    foreach ($keuangan as $dt) { ?>
+                      <tr>
+                        <td><?= $no++ ?></td>
+                        <td><?= $dt['tgl_pembayaran'] ?></td>
+                        <td><?= $dt['kd_transaksi'] ?></td>
+                        <td><?= $dt['jns_tagihan']; ?></td>
+                        <td>Rp. <?= number_format($dt['nom_tagihan']); ?></td>
+                        <td>Rp. <?= number_format($dt['bayar']); ?></td>
+                      </tr>
+                    <?php } ?>
                   </tbody>
                 </table>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div><!-- /.col -->
-  </div><!-- /.row -->
+      </div><!-- /.col -->
+    </div><!-- /.row -->
 
-</div><!-- /.container-fluid -->
+  </div><!-- /.container-fluid -->
 </div>
 <!-- /.content -->
 
@@ -80,5 +80,5 @@
 
 <!-- script here -->
 <script>
- $("#example1").DataTable();
+  $("#example1").DataTable();
 </script>

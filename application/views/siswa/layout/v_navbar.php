@@ -11,17 +11,17 @@
                 <li class="nav-item dropdown">
                     <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle" onclick="myFunction()"><i class="fas fa-fw fa-bars" id="icon"></i> Menu</a>
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                        <li><a href="<?= site_url('dashboard') ?>" class="dropdown-item">Dashboard</a></li>
-                        <li class="dropdown-divider"></li>
-                        <li><a href="#" class="dropdown-item">Mail</a></li>
+                        <!-- <li><a href="<?= site_url('dashboard') ?>" class="dropdown-item">Dashboard</a></li> -->
+                        <!-- <li class="dropdown-divider"></li> -->
+                        <?php $sumMail = $this->db->select_sum('inbox_status')->from('tbl_inbox')->where('inbox_kontak', $this->session->userdata('username'))->get()->row_array(); ?>
+                        <li><a href="<?= site_url('inbox') ?>" class="dropdown-item">Mail <span class="badge badge-danger" style="position: relative; float: right; top: 0.25em;"><?= $sumMail['inbox_status'] ?></span></a></li>
                         <li class="dropdown-divider"></li>
                         <!-- Level two dropdown-->
-                        <li class="dropdown-submenu dropdown-hover">
+                        <!-- <li class="dropdown-submenu dropdown-hover">
                             <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Private</a>
                             <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
                                 <li><a tabindex="-1" href="#" class="dropdown-item">level 2</a></li>
                                 <li class="dropdown-divider"></li>
-                                <!-- Level three dropdown-->
                                 <li class="dropdown-submenu">
                                     <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">level 2</a>
                                     <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
@@ -30,16 +30,17 @@
                                         <li><a href="#" class="dropdown-item">3rd level</a></li>
                                     </ul>
                                 </li>
-                                <!-- End Level three -->
                                 <li class="dropdown-divider"></li>
                                 <li><a href="#" class="dropdown-item">level 2</a></li>
                                 <li class="dropdown-divider"></li>
                                 <li><a href="#" class="dropdown-item">level 2</a></li>
                             </ul>
-                        </li>
+                        </li> -->
+                        <!-- <li class="dropdown-divider"></li> -->
                         <!-- End Level two -->
+                        <li><a href="<?= site_url('kisikisi') ?>" class="dropdown-item">Exam</a></li>
                         <li class="dropdown-divider"></li>
-                        <li><a href="#" class="dropdown-item">Exam</a></li>
+                        <li><a href="<?= site_url('keuangan_siswa') ?>" class="dropdown-item">Finance</a></li>
                         <li class="dropdown-divider"></li>
                         <li><a href="#" class="dropdown-item">Library</a></li>
                         <li class="dropdown-divider"></li>
@@ -101,9 +102,9 @@
                     <a href="<?= site_url('course') ?>" class="nav-link" id="course">Course</a>
                     <a href="#" class="nav-link" id="schedule">Schedule</a>
                     <a href="#" class="nav-link" id="forum">Forum</a>
-                    <a href="<?= site_url('inbox') ?>" class="nav-link" id="pesan">Pesan</a>
+                    <!-- <a href="<?= site_url('inbox') ?>" class="nav-link" id="pesan">Pesan</a>
                     <a href="<?= site_url('kisikisi') ?>" class="nav-link" id="kisi-kisi">Kisi-Kisi</a>
-                    <a href="<?= site_url('keuangan_siswa') ?>" class="nav-link" id="kisi-kisi">Keuangan</a>
+                    <a href="<?= site_url('keuangan_siswa') ?>" class="nav-link" id="kisi-kisi">Keuangan</a> -->
                     <a href="#" class="nav-link" id="score">Score</a>
                 </div>
 

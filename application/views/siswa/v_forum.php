@@ -104,11 +104,6 @@
                                             <h5>Minggu <?= $val ?></h5>
                                             <small><?= date('d M Y', strtotime('2020-' . rand(1, 12) . '-' . rand(1, 31))) ?></small>
                                             <p>Overview Part <?= $key ?> (<?= $key % 2 == 0 ? 'Pratek' : 'Teori' ?>)</p>
-                                            <!-- <span>
-												<i class="fa fa-fw fa-comments col-lg-2"></i>
-												<i class="fa fa-fw fa-tasks col-lg-2"></i>
-												<i class="fa fa-fw fa-play-circle col-lg-2"></i>
-											</span> -->
                                         </a>
                                     <?php endforeach; ?>
                                 </div>
@@ -134,7 +129,7 @@
 
                                                 <div class="collapse" id="collapseExample">
                                                     <!-- Main Comments -->
-                                                    <div class="card-body">
+                                                    <div class="card-body px-0">
                                                         <div class="row">
                                                             <?php for ($i = 1; $i <= 3; $i++) :
                                                                 if ($i % 2 == 0) $komen = true;

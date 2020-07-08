@@ -136,109 +136,74 @@
                                                     <!-- Main Comments -->
                                                     <div class="card-body">
                                                         <div class="row">
-                                                            <div class="card-header d-flex">
-                                                                <div class="col-md-1">
-                                                                    <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
+                                                            <?php for ($i = 1; $i <= 3; $i++) :
+                                                                if ($i % 2 == 0) $komen = true;
+                                                                else $komen = false; ?>
+                                                                <div class="card-header d-flex">
+                                                                    <div class="col-md-1">
+                                                                        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
+                                                                    </div>
+                                                                    <div class="col-md">
+                                                                        <strong class="float-left">Jhony</strong>
+                                                                        <small class="float-right text-secondary"><?= rand(1, 59) ?> Minutes Ago</small>
+                                                                        <div class="clearfix"></div>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="col-md">
-                                                                    <strong class="float-left">Jhony</strong>
-                                                                    <small class="float-right text-secondary">15 Minutes Ago</small>
-                                                                    <div class="clearfix"></div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card-body pb-0">
-                                                                <p>Lorem Ipsum is simply dummy text of the pr make but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                                                                <span>
-                                                                    <a class="float-right btn btn-sm btn-link"> <i class="fa fa-fw fa-reply"></i> Reply</a>
-                                                                    <span data-toggle="collapse" data-target="#comments-jhony" aria-expanded="false" aria-controls="comments" style="cursor: pointer;">
-                                                                        <i class="fa fa-fw fa-comments"></i> Komentar (<?= rand(1, 100) ?>)
+                                                                <div class="card-body pb-0">
+                                                                    <p>Lorem Ipsum is simply dummy text of the pr make but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                                                    <span>
+                                                                        <a class="float-right btn btn-sm btn-link"> <i class="fa fa-fw fa-reply"></i> Reply</a>
+                                                                        <span data-toggle="collapse" data-target="#comments-<?= $i ?>" aria-expanded="false" aria-controls="comments" style="cursor: pointer;">
+                                                                            <i class="fa fa-fw fa-comments"></i> Komentar <?= $i % 2 != 0 ? '(' . rand(0, 50) . ')' : '' ?>
+                                                                        </span>
                                                                     </span>
-                                                                </span>
-                                                            </div>
+                                                                </div>
 
-                                                            <!-- Reply Main Comments -->
-                                                            <div class="collapse" id="comments-jhony">
-                                                                <div class="col-lg ml-3">
-                                                                    <div class="card-header d-flex">
-                                                                        <div class="col-md-1">
-                                                                            <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
+                                                                <?php if ($komen == false) : ?>
+                                                                    <!-- Reply Main Comments -->
+                                                                    <div class="collapse" id="comments-<?= $i ?>">
+                                                                        <div class="col-lg ml-3">
+                                                                            <div class="card-header d-flex">
+                                                                                <div class="col-md-1">
+                                                                                    <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
+                                                                                </div>
+                                                                                <div class="col-md">
+                                                                                    <strong class="float-left">Akash</strong>
+                                                                                    <small class="float-right text-secondary"><?= rand(1, 59) ?> Minutes Ago</small>
+                                                                                    <div class="clearfix"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="card-body pb-0">
+                                                                                <p>Lorem Ipsum is simply dummy text of the pr make but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                                                                <span>
+                                                                                    <a class="float-right btn btn-sm btn-link"> <i class="fa fa-fw fa-reply"></i> Reply</a>
+                                                                                </span>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="col-md">
-                                                                            <strong class="float-left">Akash</strong>
-                                                                            <small class="float-right text-secondary">15 Minutes Ago</small>
-                                                                            <div class="clearfix"></div>
-                                                                        </div>
+                                                                        <?php if ($i == 1) : ?>
+                                                                            <div class="col-lg ml-3">
+                                                                                <div class="card-header d-flex">
+                                                                                    <div class="col-md-1">
+                                                                                        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
+                                                                                    </div>
+                                                                                    <div class="col-md">
+                                                                                        <strong class="float-left">Maniruzzaman</strong>
+                                                                                        <small class="float-right text-secondary"><?= rand(1, 59) ?> Minutes Ago</small>
+                                                                                        <div class="clearfix"></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="card-body pb-0">
+                                                                                    <p><b>Akash</b> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                                                                    <span>
+                                                                                        <a class="float-right btn btn-sm btn-link"> <i class="fa fa-fw fa-reply"></i> Reply</a>
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
+                                                                        <?php endif; ?>
                                                                     </div>
-                                                                    <div class="card-body pb-0">
-                                                                        <p>Lorem Ipsum is simply dummy text of the pr make but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                                                                        <span>
-                                                                            <a class="float-right btn btn-sm btn-link"> <i class="fa fa-fw fa-reply"></i> Reply</a>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg ml-3">
-                                                                    <div class="card-header d-flex">
-                                                                        <div class="col-md-1">
-                                                                            <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
-                                                                        </div>
-                                                                        <div class="col-md">
-                                                                            <strong class="float-left">Maniruzzaman</strong>
-                                                                            <small class="float-right text-secondary">15 Minutes Ago</small>
-                                                                            <div class="clearfix"></div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="card-body pb-0">
-                                                                        <p><b>Akash : </b> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                                                                        <span>
-                                                                            <a class="float-right btn btn-sm btn-link"> <i class="fa fa-fw fa-reply"></i> Reply</a>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- End of Reply Main Comments -->
-
-                                                            <div class="card-header d-flex">
-                                                                <div class="col-md-1">
-                                                                    <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
-                                                                </div>
-                                                                <div class="col-md">
-                                                                    <strong class="float-left">Anonymous</strong>
-                                                                    <small class="float-right text-secondary">2 Hours Ago</small>
-                                                                    <div class="clearfix"></div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card-body pb-0">
-                                                                <p>Lorem Ipsum is simply dummy text of the pr make but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                                                                <span>
-                                                                    <a class="float-right btn btn-sm btn-link"> <i class="fa fa-fw fa-reply"></i> Reply</a>
-                                                                    <span data-toggle="collapse" data-target="#comments-anonymous" aria-expanded="false" aria-controls="comments" style="cursor: pointer;">
-                                                                        <i class="fa fa-fw fa-comments"></i> Komentar (1)
-                                                                    </span>
-                                                                </span>
-                                                            </div>
-
-                                                            <!-- Reply Main Comments -->
-                                                            <div class="collapse" id="comments-anonymous">
-                                                                <div class="col-lg ml-3">
-                                                                    <div class="card-header d-flex">
-                                                                        <div class="col-md-1">
-                                                                            <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
-                                                                        </div>
-                                                                        <div class="col-md">
-                                                                            <strong class="float-left">Akash</strong>
-                                                                            <small class="float-right text-secondary"><?= rand(1, 10) ?> Minutes Ago</small>
-                                                                            <div class="clearfix"></div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="card-body pb-0">
-                                                                        <p>Lorem Ipsum is simply dummy text of the pr make but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                                                                        <span>
-                                                                            <a class="float-right btn btn-sm btn-link"> <i class="fa fa-fw fa-reply"></i> Reply</a>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- End of Reply Main Comments -->
+                                                                    <!-- End of Reply Main Comments -->
+                                                                <?php endif; ?>
+                                                            <?php endfor; ?>
                                                         </div>
                                                         <!-- End of Main Comments -->
                                                     </div>

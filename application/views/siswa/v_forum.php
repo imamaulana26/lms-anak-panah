@@ -92,12 +92,12 @@
 	<!-- Main content -->
 	<div class="content">
 		<div class="container">
-			<!-- <?= var_dump($materi); ?> -->
 			<div class="row">
 				<div class="offset-1 col-sm-10">
-					<h2 class="pb-3">Forum <?= $forum['nm_mapel'] ?></h2>
-					<div class="card card-outline">
-						<!-- <div class="card-primary card-body row bhoechie-tab-container">
+					<?php if (!empty($materi)) : ?>
+						<h2 class="pb-3">Forum <?= $forum['nm_mapel'] ?></h2>
+						<!-- <div class="card card-outline">
+							<div class="card-primary card-body row bhoechie-tab-container">
 							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
 								<div class="list-group nav flex-column nav-pills">
 									<?php $arr = array(1 => 'Pertama', 2 => 'Kedua', 3 => 'Ketiga', 4 => 'Keempat');
@@ -211,116 +211,117 @@
 							</div>
 						</div> -->
 
-						<div class="card-primary card-body row bhoechie-tab-container">
-							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
-								<div class="list-group nav flex-column nav-pills">
+						<div class="card card-outline">
+							<div class="card-primary card-body row bhoechie-tab-container">
+								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
+									<div class="list-group nav flex-column nav-pills">
+										<?php foreach ($materi as $val) : ?>
+											<a href="#forum-<?= $val['pertemuan'] ?>" class="nav-link list-group-item <?= $val['pertemuan'] == 1 ? 'active' : '' ?>" id="forum-<?= $val['pertemuan'] ?>-tab" aria-controls="forum-<?= $val['pertemuan'] ?>" data-toggle="pill" role="tab">
+												<h5>Forum Ke-<?= $val['pertemuan'] ?></h5>
+												<small><?= date('d M Y', strtotime($val['createDate'])) ?></small>
+												<p><?= word_limiter($val['judul_materi'], 2) ?></p>
+											</a>
+										<?php endforeach; ?>
+									</div>
+								</div>
+								<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
 									<?php foreach ($materi as $val) : ?>
-										<a href="#forum-<?= $val['pertemuan'] ?>" class="nav-link list-group-item <?= $val['pertemuan'] == 1 ? 'active' : '' ?>" id="forum-<?= $val['pertemuan'] ?>-tab" aria-controls="forum-<?= $val['pertemuan'] ?>" data-toggle="pill" role="tab">
-											<h5>Forum Ke-<?= $val['pertemuan'] ?></h5>
-											<small><?= date('d M Y', strtotime($val['createDate'])) ?></small>
-											<p><?= word_limiter($val['judul_materi'], 2) ?></p>
-										</a>
+										<div class="bhoechie-tab-content tab-pane fade <?= $val['pertemuan'] == 1 ? 'show active' : '' ?>" id="forum-<?= $val['pertemuan'] ?>" role="tabpanel" aria-labelledby="forum-<?= $val['pertemuan'] ?>-tab">
+											<div class="card-header">
+												<label><?= $val['judul_materi'] ?> (<?= $val['jns_materi'] ?>)</label>
+												<span class="float-right">
+													<a href=""><i class="fa fa-fw fa-comments ml-3"></i></a>
+													<a href=""><i class="fa fa-fw fa-tasks ml-3"></i></a>
+												</span>
+											</div>
+											<div class="card-body">
+												<p><?= $val['isi_materi'] ?></p>
+												<?php if ($val['jns_materi'] == 'Teori') : ?>
+													<hr>
+													<span data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;">
+														<?php $li_komen = $this->db->get_where('tbl_komentar', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan']])->num_rows(); ?>
+														Lihat Komentar (<?= $li_komen ?>)
+													</span>
+
+													<div class="collapse" id="collapseExample">
+														<!-- Main Comments -->
+														<div class="card-body px-0">
+															<div class="row">
+																<?php $komen = $this->db->get_where('tbl_komentar', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'reply_to' => 0]);
+																foreach ($komen->result_array() as $cmd) :
+																	$siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $cmd['user_komen']])->row_array(); ?>
+																	<div class="card-header d-flex">
+																		<div class="col-md-1">
+																			<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
+																		</div>
+																		<div class="col-md">
+																			<strong class="float-left"><?= $siswa['siswa_nama'] ?></strong>
+																			<small class="float-right text-secondary"><?= date('d M Y H:i', strtotime($cmd['createDate'])) ?></small>
+																			<div class="clearfix"></div>
+																		</div>
+																	</div>
+																	<div class="card-body pb-0">
+																		<p><?= $cmd['isi_komen'] ?></p>
+																		<span>
+																			<a class="float-right btn btn-sm btn-link"> <i class="fa fa-fw fa-reply"></i> Reply</a>
+																			<span data-toggle="collapse" data-target="#comments-<?= $cmd['id'] ?>" aria-expanded="false" aria-controls="comments" style="cursor: pointer;">
+																				<?php $li_reply = $this->db->get_where('tbl_komentar', ['reply_to' => $cmd['id']])->num_rows(); ?>
+																				<i class="fa fa-fw fa-comments"></i> Komentar (<?= $li_reply ?>)
+																			</span>
+																		</span>
+																	</div>
+
+																	<?php $reply = $this->db->get_where('tbl_komentar', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'reply_to' => $cmd['id']]);
+																	foreach ($reply->result_array() as $rep) :
+																		$rep_siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['user_komen']])->row_array();
+																		$mention = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['mention']])->row_array(); ?>
+																		<!-- Reply Main Comments -->
+																		<div class="collapse" id="comments-<?= $cmd['id'] ?>">
+																			<div class="col-lg ml-3">
+																				<div class="card-header d-flex">
+																					<div class="col-md-1">
+																						<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
+																					</div>
+																					<div class="col-md">
+																						<strong class="float-left"><?= $rep_siswa['siswa_nama'] ?></strong>
+																						<small class="float-right text-secondary"><?= date('d M Y H:i', strtotime($rep['createDate'])) ?></small>
+																						<div class="clearfix"></div>
+																					</div>
+																				</div>
+																				<div class="card-body pb-0">
+																					<p><b><?= $mention['siswa_nama'] ?></b> <?= $rep['isi_komen'] ?></p>
+																					<span>
+																						<a class="float-right btn btn-sm btn-link"> <i class="fa fa-fw fa-reply"></i> Reply</a>
+																					</span>
+																				</div>
+																			</div>
+																		</div>
+																		<!-- End of Reply Main Comments -->
+																	<?php endforeach; ?>
+																<?php endforeach; ?>
+															</div>
+															<!-- End of Main Comments -->
+														</div>
+													</div>
+												<?php endif; ?>
+											</div>
+										</div>
 									<?php endforeach; ?>
 								</div>
 							</div>
-							<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
-								<?php foreach ($materi as $val) : ?>
-									<div class="bhoechie-tab-content tab-pane fade <?= $val['pertemuan'] == 1 ? 'show active' : '' ?>" id="forum-<?= $val['pertemuan'] ?>" role="tabpanel" aria-labelledby="forum-<?= $val['pertemuan'] ?>-tab">
-										<div class="card-header">
-											<label><?= $val['judul_materi'] ?> (<?= $val['jns_materi'] ?>)</label>
-											<span class="float-right">
-												<a href=""><i class="fa fa-fw fa-comments ml-3"></i></a>
-												<a href=""><i class="fa fa-fw fa-tasks ml-3"></i></a>
-											</span>
-										</div>
-										<div class="card-body">
-											<p><?= $val['isi_materi'] ?></p>
-											<?php if ($val['jns_materi'] == 'Teori') : ?>
-												<hr>
-												<span data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;">
-													<?php $li_komen = $this->db->get_where('tbl_komentar', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan']])->num_rows(); ?>
-													Lihat Komentar (<?= $li_komen ?>)
-												</span>
-
-												<div class="collapse" id="collapseExample">
-													<!-- Main Comments -->
-													<div class="card-body px-0">
-														<div class="row">
-															<?php $komen = $this->db->get_where('tbl_komentar', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan']]);
-															foreach ($komen->result_array() as $cmd) :
-																$siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $cmd['user_komen']])->row_array(); ?>
-																<div class="card-header d-flex">
-																	<div class="col-md-1">
-																		<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
-																	</div>
-																	<div class="col-md">
-																		<strong class="float-left"><?= $siswa['siswa_nama'] ?></strong>
-																		<small class="float-right text-secondary"><?= date('d M Y H:i', strtotime($cmd['createDate'])) ?></small>
-																		<div class="clearfix"></div>
-																	</div>
-																</div>
-																<div class="card-body pb-0">
-																	<p><?= $cmd['isi_komen'] ?></p>
-																	<span>
-																		<a class="float-right btn btn-sm btn-link"> <i class="fa fa-fw fa-reply"></i> Reply</a>
-																		<span data-toggle="collapse" data-target="#comments-<?= $cmd['id'] ?>" aria-expanded="false" aria-controls="comments" style="cursor: pointer;">
-																			<?php $li_reply = $this->db->get_where('tbl_sub_komen', ['reply_to' => $cmd['id']])->num_rows(); ?>
-																			<i class="fa fa-fw fa-comments"></i> Komentar (<?= $li_reply ?>)
-																		</span>
-																	</span>
-																</div>
-
-																<?php $reply = $this->db->get_where('tbl_sub_komen', ['reply_to' => $val['id']]);
-																foreach ($reply->result_array() as $rep) :
-																	$rep_siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['user_sub_komen']])->row_array(); ?>
-																	<!-- Reply Main Comments -->
-																	<div class="collapse" id="comments-<?= $cmd['id'] ?>">
-																		<div class="col-lg ml-3">
-																			<div class="card-header d-flex">
-																				<div class="col-md-1">
-																					<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
-																				</div>
-																				<div class="col-md">
-																					<strong class="float-left"><?= $rep_siswa['siswa_nama'] ?></strong>
-																					<small class="float-right text-secondary"><?= date('d M Y H:i', strtotime($rep['createDate'])) ?></small>
-																					<div class="clearfix"></div>
-																				</div>
-																			</div>
-																			<div class="card-body pb-0">
-																				<?php if ($rep['mention_to'] == null) : ?>
-																					<p><?= $rep['isi_komen'] ?></p>
-																				<?php else :
-																					$mention = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['mention_to']])->row_array(); ?>
-																					<p><b><?= $mention['siswa_nama'] ?></b> <?= $rep['isi_komen'] ?></p>
-																				<?php endif; ?>
-																				<span>
-																					<a class="float-right btn btn-sm btn-link"> <i class="fa fa-fw fa-reply"></i> Reply</a>
-																				</span>
-																			</div>
-																		</div>
-																	</div>
-																	<!-- End of Reply Main Comments -->
-																<?php endforeach; ?>
-															<?php endforeach; ?>
-														</div>
-														<!-- End of Main Comments -->
-													</div>
-												</div>
-											<?php endif; ?>
-										</div>
-									</div>
-								<?php endforeach; ?>
-							</div>
 						</div>
-					</div>
 				</div>
+			<?php else : ?>
+				<h2 class="pb-3 text-center">Forum Tidak Tersedia</h2>
+			<?php endif; ?>
 			</div>
 		</div>
-		<!-- /.container -->
+	</div>
+	<!-- /.container -->
 
-	</div><!-- /.content-wrapper -->
+</div><!-- /.content-wrapper -->
 
-	<?php $this->load->view('siswa/v_schedule') ?>
+<?php $this->load->view('siswa/v_schedule') ?>
 </div>
 
 <?php $this->load->view('siswa/layout/v_js'); ?>

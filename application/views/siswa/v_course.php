@@ -34,7 +34,8 @@
 								echo "<br>";
 							} ?> -->
 
-					<?php foreach ($course as $key => $val) : ?>
+					<?php foreach ($course->result_array() as $val) :
+						$n_forum = $this->db->get_where('tbl_materi', ['id_forum' => $val['id_pelajaran']])->num_rows(); ?>
 						<div class="col-sm-4">
 							<div class="card mapel">
 								<div class="card-img-caption">
@@ -43,7 +44,7 @@
 									<p>OS1 - 1721 - ISYS6304 - THBA</p>
 								</div>
 								<div class="card-body">
-									<a href="<?= site_url('forum/') . $val['id_pelajaran'] ?>" id="forum"><i class="fas fa-fw fa-comments pr-1"></i> <?= rand(0, 10) ?> new forum posting</a>
+									<a href="<?= site_url('forum/') . $val['id_pelajaran'] ?>" id="forum"><i class="fas fa-fw fa-comments pr-1"></i> <?= $n_forum ?> new forum posting</a>
 									<div class="dropdown-divider"></div>
 									<a href="#"><i class="fas fa-fw fa-tasks pr-1"></i> <?= rand(0, 10) ?> Assigment to do</a>
 									<div class="dropdown-divider"></div>

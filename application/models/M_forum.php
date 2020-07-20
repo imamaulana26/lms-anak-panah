@@ -18,9 +18,9 @@ class M_forum extends CI_Model
 		return $data;
 	}
 
-	// function get_komen($id)
-	// {
-	// 	$data = $this->db->get_where('tbl_komentar', ['id_forum' => $id])->result_array();
-	// 	return $data;
-	// }
+	function get_komen($id)
+	{
+		$data = $this->db->get_where('tbl_komentar', ['id_forum' => $id])->result_array();
+		return $data;
+	}
 }

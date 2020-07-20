@@ -101,7 +101,7 @@
 					<a href="<?= site_url('dashboard') ?>" class="nav-link" id="home">Home</a>
 					<a href="<?= site_url('course') ?>" class="nav-link" id="course">Course</a>
 					<a href="#" class="nav-link" id="schedule">Schedule</a>
-					<a href="<?= site_url('forum') ?>" class="nav-link" id="forum">Forum</a>
+					<!-- <a href="<?= site_url('forum') ?>" class="nav-link" id="forum">Forum</a> -->
 					<!-- <a href="<?= site_url('inbox') ?>" class="nav-link" id="pesan">Pesan</a>
                     <a href="<?= site_url('kisikisi') ?>" class="nav-link" id="kisi-kisi">Kisi-Kisi</a>
                     <a href="<?= site_url('keuangan_siswa') ?>" class="nav-link" id="kisi-kisi">Keuangan</a> -->

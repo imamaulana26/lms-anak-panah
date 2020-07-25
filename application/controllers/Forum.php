@@ -33,4 +33,15 @@ class Forum extends CI_Controller
 		$this->load->view('siswa/layout/v_navbar');
 		$this->load->view('siswa/v_forum', $data);
 	}
+
+	public function test(){
+		
+		$data = array(
+			'komentar' => $this->input->post('editor1')
+		);
+
+		$this->db->insert('tbl_testcoment', $data);
+				var_dump($data['komentar']);
+		exit();
+	}
 }

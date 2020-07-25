@@ -23,6 +23,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/front-end/plugins/glider/glider.min.css') ?>">
     <!-- ChartJs -->
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/front-end/plugins/chart.js/chart.min.css') ?>">
+     <!-- CK editor JS -->
+    <script src="<?= base_url('assets/plugins/ckeditor/ckeditor.js') ?>"></script>
 
     <!-- Google Font: Source Sans Pro -->
     <!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> -->

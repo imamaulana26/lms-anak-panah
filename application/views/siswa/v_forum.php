@@ -78,6 +78,10 @@
 		-webkit-border-radius: 5px 5px 5px 5px;
 		border: 0px solid #000000;
 	}
+
+	.bordered {
+		border-left: 3px solid #007bff;
+	}
 </style>
 
 <!-- Content Wrapper. Contains page content -->
@@ -88,7 +92,7 @@
 		</div><!-- /.container-fluid -->
 	</div>
 	<!-- /.content-header -->
-
+	<?php $page = (empty($this->session->flashdata('page'))) ? 1 : $this->session->flashdata('page'); ?>
 	<!-- Main content -->
 	<div class="content">
 		<div class="container">
@@ -96,127 +100,13 @@
 				<div class="offset-1 col-sm-10">
 					<?php if (!empty($materi)) : ?>
 						<h2 class="pb-3">Forum <?= $forum['nm_mapel'] ?></h2>
-						<!-- <div class="card card-outline">
-							<div class="card-primary card-body row bhoechie-tab-container">
-							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
-								<div class="list-group nav flex-column nav-pills">
-									<?php $arr = array(1 => 'Pertama', 2 => 'Kedua', 3 => 'Ketiga', 4 => 'Keempat');
-									foreach ($arr as $key => $val) : ?>
-										<a href="#week-<?= $key ?>" class="nav-link list-group-item <?= $key == 1 ? 'active' : '' ?>" id="week-<?= $key ?>-tab" aria-controls="week-<?= $key ?>" data-toggle="pill" role="tab">
-											<h5>Minggu <?= $val ?></h5>
-											<small><?= date('d M Y', strtotime('2020-' . rand(1, 12) . '-' . rand(1, 31))) ?></small>
-											<p>Overview Part <?= $key ?> (<?= $key % 2 == 0 ? 'Pratek' : 'Teori' ?>)</p>
-										</a>
-									<?php endforeach; ?>
-								</div>
-							</div>
-							<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
-								<?php foreach ($arr as $key => $val) : ?>
-									<div class="bhoechie-tab-content tab-pane fade <?= $key == 1 ? 'show active' : '' ?>" id="week-<?= $key ?>" role="tabpanel" aria-labelledby="week-<?= $key ?>-tab">
-										<div class="card-header">
-											<label>Minggu <?= $val ?> (<?= $key % 2 == 0 ? 'Pratek' : 'Teori' ?>)</label>
-											<span class="float-right">
-												<a href=""><i class="fa fa-fw fa-comments ml-3"></i></a>
-												<a href=""><i class="fa fa-fw fa-tasks ml-3"></i></a>
-											</span>
-										</div>
-										<div class="card-body">
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque at, ullam excepturi eligendi necessitatibus assumenda ad dolores quasi ducimus! Sequi, nemo ut quia aperiam magni quam id quod autem pariatur.</p>
-											<?php if ($key % 2 != 0) : ?>
-												<hr>
-												<span data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;">
-													Lihat Komentar (<?= rand(1, 100) ?>)
-												</span>
-
-												<div class="collapse" id="collapseExample">
-													Main Comments
-													<div class="card-body px-0">
-														<div class="row">
-															<?php for ($i = 1; $i <= 3; $i++) :
-																if ($i % 2 == 0) $komen = true;
-																else $komen = false; ?>
-																<div class="card-header d-flex">
-																	<div class="col-md-1">
-																		<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
-																	</div>
-																	<div class="col-md">
-																		<strong class="float-left">Jhony</strong>
-																		<small class="float-right text-secondary"><?= rand(1, 59) ?> Minutes Ago</small>
-																		<div class="clearfix"></div>
-																	</div>
-																</div>
-																<div class="card-body pb-0">
-																	<p>Lorem Ipsum is simply dummy text of the pr make but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-																	<span>
-																		<a class="float-right btn btn-sm btn-link"> <i class="fa fa-fw fa-reply"></i> Reply</a>
-																		<span data-toggle="collapse" data-target="#comments-<?= $i ?>" aria-expanded="false" aria-controls="comments" style="cursor: pointer;">
-																			<i class="fa fa-fw fa-comments"></i> Komentar <?= $i % 2 != 0 ? '(' . rand(0, 50) . ')' : '' ?>
-																		</span>
-																	</span>
-																</div>
-
-																<?php if ($komen == false) : ?>
-																	Reply Main Comments
-																	<div class="collapse" id="comments-<?= $i ?>">
-																		<div class="col-lg ml-3">
-																			<div class="card-header d-flex">
-																				<div class="col-md-1">
-																					<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
-																				</div>
-																				<div class="col-md">
-																					<strong class="float-left">Akash</strong>
-																					<small class="float-right text-secondary"><?= rand(1, 59) ?> Minutes Ago</small>
-																					<div class="clearfix"></div>
-																				</div>
-																			</div>
-																			<div class="card-body pb-0">
-																				<p>Lorem Ipsum is simply dummy text of the pr make but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-																				<span>
-																					<a class="float-right btn btn-sm btn-link"> <i class="fa fa-fw fa-reply"></i> Reply</a>
-																				</span>
-																			</div>
-																		</div>
-																		<?php if ($i == 1) : ?>
-																			<div class="col-lg ml-3">
-																				<div class="card-header d-flex">
-																					<div class="col-md-1">
-																						<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
-																					</div>
-																					<div class="col-md">
-																						<strong class="float-left">Maniruzzaman</strong>
-																						<small class="float-right text-secondary"><?= rand(1, 59) ?> Minutes Ago</small>
-																						<div class="clearfix"></div>
-																					</div>
-																				</div>
-																				<div class="card-body pb-0">
-																					<p><b>Akash</b> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-																					<span>
-																						<a class="float-right btn btn-sm btn-link"> <i class="fa fa-fw fa-reply"></i> Reply</a>
-																					</span>
-																				</div>
-																			</div>
-																		<?php endif; ?>
-																	</div>
-																	End of Reply Main Comments
-																<?php endif; ?>
-															<?php endfor; ?>
-														</div>
-														End of Main Comments
-													</div>
-												</div>
-											<?php endif; ?>
-										</div>
-									</div>
-								<?php endforeach; ?>
-							</div>
-						</div> -->
 
 						<div class="card card-outline">
 							<div class="card-primary card-body row bhoechie-tab-container">
 								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
 									<div class="list-group nav flex-column nav-pills">
 										<?php foreach ($materi as $val) : ?>
-											<a href="#forum-<?= $val['pertemuan'] ?>" class="nav-link list-group-item <?= $val['pertemuan'] == 1 ? 'active' : '' ?>" id="forum-<?= $val['pertemuan'] ?>-tab" aria-controls="forum-<?= $val['pertemuan'] ?>" data-toggle="pill" role="tab">
+											<a href="#forum-<?= $val['pertemuan'] ?>" class="nav-link list-group-item <?= $val['pertemuan'] == $page ? 'active' : '' ?>" id="forum-<?= $val['pertemuan'] ?>-tab" aria-controls="forum-<?= $val['pertemuan'] ?>" data-toggle="pill" role="tab">
 												<h5>Forum Ke-<?= $val['pertemuan'] ?></h5>
 												<small><?= date('d M Y', strtotime($val['createDate'])) ?></small>
 												<p><?= word_limiter($val['judul_materi'], 2) ?></p>
@@ -226,7 +116,7 @@
 								</div>
 								<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
 									<?php foreach ($materi as $val) : ?>
-										<div class="bhoechie-tab-content tab-pane fade <?= $val['pertemuan'] == 1 ? 'show active' : '' ?>" id="forum-<?= $val['pertemuan'] ?>" role="tabpanel" aria-labelledby="forum-<?= $val['pertemuan'] ?>-tab">
+										<div class="bhoechie-tab-content tab-pane fade <?= $val['pertemuan'] == $page ? 'show active' : '' ?>" id="forum-<?= $val['pertemuan'] ?>" role="tabpanel" aria-labelledby="forum-<?= $val['pertemuan'] ?>-tab">
 											<div class="card-header">
 												<label><?= $val['judul_materi'] ?> (<?= $val['jns_materi'] ?>)</label>
 												<span class="float-right">
@@ -238,19 +128,40 @@
 												<p><?= $val['isi_materi'] ?></p>
 												<?php if ($val['jns_materi'] == 'Teori') : ?>
 													<hr>
-													<span data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;">
-														<?php $li_komen = $this->db->get_where('tbl_komentar', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan']])->num_rows(); ?>
-														Lihat Komentar (<?= $li_komen ?>)
-													</span>
+													<div>
+														<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $val['id_forum'] . '-' . $val['pertemuan'] ?>">
+															<i class="fa fa-fw fa-reply"></i> Balas
+														</a>
+														<span data-toggle="collapse" data-target="#collapseExample-<?= $val['id'] ?>" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;">
+															<?php $li_komen = $this->db->get_where('tbl_komentar', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan']])->num_rows(); ?>
+															Lihat Komentar (<?= $li_komen ?>)
+														</span>
+														<div class="collapse pt-3" id="show_komen-<?= $val['id_forum'] . '-' . $val['pertemuan'] ?>">
+															<div class="card card-body">
+																<form action="<?= site_url('forum/submit_main') ?>" method="post" autocomplete="off">
+																	<input type="hidden" name="id" id="id" value="<?= $val['id'] ?>">
+																	<input type="hidden" name="id_forum" id="id_forum" value="<?= $val['id_forum'] ?>">
+																	<input type="hidden" name="pertemuan" id="pertemuan" value="<?= $val['pertemuan'] ?>">
+																	<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
+																	<div class="input-group">
+																		<input type="text" name="komentar" class="form-control" id="komentar" placeholder="Tulis balasan...">
+																		<div class="input-group-append">
+																			<button class="btn btn-info" type="submit"><i class="fa fa-fw fa-paper-plane"></i></button>
+																		</div>
+																	</div>
+																</form>
+															</div>
+														</div>
+													</div>
 
-													<div class="collapse" id="collapseExample">
+													<div class="collapse <?= $this->session->flashdata('page') ? 'show' : '' ?>" id="collapseExample-<?= $val['id'] ?>">
 														<!-- Main Comments -->
-														<div class="card-body px-0">
+														<div class="card-body">
 															<div class="row">
 																<?php $komen = $this->db->get_where('tbl_komentar', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'reply_to' => 0]);
 																foreach ($komen->result_array() as $cmd) :
 																	$siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $cmd['user_komen']])->row_array(); ?>
-																	<div class="card-header d-flex">
+																	<div class="card-header bordered mt-3 d-flex">
 																		<div class="col-md-1">
 																			<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
 																		</div>
@@ -260,15 +171,35 @@
 																			<div class="clearfix"></div>
 																		</div>
 																	</div>
-																	<div class="card-body pb-0">
+																	<div class="card-body bordered pb-0">
 																		<p><?= $cmd['isi_komen'] ?></p>
-																		<span>
-																			<a class="float-right btn btn-sm btn-link"> <i class="fa fa-fw fa-reply"></i> Reply</a>
+																		<div>
+																			<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $cmd['id'] ?>">
+																				<i class="fa fa-fw fa-reply"></i> Balas
+																			</a>
 																			<span data-toggle="collapse" data-target="#comments-<?= $cmd['id'] ?>" aria-expanded="false" aria-controls="comments" style="cursor: pointer;">
 																				<?php $li_reply = $this->db->get_where('tbl_komentar', ['reply_to' => $cmd['id']])->num_rows(); ?>
 																				<i class="fa fa-fw fa-comments"></i> Komentar (<?= $li_reply ?>)
 																			</span>
-																		</span>
+																		</div>
+																		<div class="collapse pt-3" id="show_komen-<?= $cmd['id'] ?>">
+																			<div class="card card-body">
+																				<form action="<?= site_url('forum/submit_komen') ?>" method="post" autocomplete="off">
+																					<input type="hidden" name="id" id="id" value="<?= $val['id'] ?>">
+																					<input type="hidden" name="id_forum" id="id_forum" value="<?= $cmd['id_forum'] ?>">
+																					<input type="hidden" name="pertemuan" id="pertemuan" value="<?= $cmd['pertemuan'] ?>">
+																					<input type="hidden" name="mention" id="mention" value="<?= $cmd['user_komen'] ?>">
+																					<input type="hidden" name="reply_to" id="reply_to" value="<?= $cmd['id'] ?>">
+																					<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
+																					<div class="input-group">
+																						<input type="text" name="komentar" class="form-control" id="komentar" placeholder="Tulis balasan...">
+																						<div class="input-group-append">
+																							<button class="btn btn-info" type="submit"><i class="fa fa-fw fa-paper-plane"></i></button>
+																						</div>
+																					</div>
+																				</form>
+																			</div>
+																		</div>
 																	</div>
 
 																	<?php $reply = $this->db->get_where('tbl_komentar', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'reply_to' => $cmd['id']]);
@@ -276,9 +207,9 @@
 																		$rep_siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['user_komen']])->row_array();
 																		$mention = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['mention']])->row_array(); ?>
 																		<!-- Reply Main Comments -->
-																		<div class="collapse" id="comments-<?= $cmd['id'] ?>">
+																		<div class="collapse <?= $this->session->flashdata('mention') == $cmd['id'] ? 'show' : '' ?>" id="comments-<?= $cmd['id'] ?>">
 																			<div class="col-lg ml-3">
-																				<div class="card-header d-flex">
+																				<div class="card-header bordered mt-3 d-flex">
 																					<div class="col-md-1">
 																						<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
 																					</div>
@@ -288,11 +219,31 @@
 																						<div class="clearfix"></div>
 																					</div>
 																				</div>
-																				<div class="card-body pb-0">
+																				<div class="card-body bordered pb-0">
 																					<p><b><?= $mention['siswa_nama'] ?></b> <?= $rep['isi_komen'] ?></p>
-																					<span>
-																						<a class="float-right btn btn-sm btn-link"> <i class="fa fa-fw fa-reply"></i> Reply</a>
-																					</span>
+																					<div>
+																						<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $rep['id'] ?>">
+																							<i class="fa fa-fw fa-reply"></i> Balas
+																						</a>
+																					</div>
+																					<div class="collapse pt-5" id="show_komen-<?= $rep['id'] ?>">
+																						<div class="card card-body">
+																							<form action="<?= site_url('forum/submit_komen') ?>" method="post" autocomplete="off">
+																								<input type="hidden" name="id" id="id" value="<?= $cmd['id'] ?>">
+																								<input type="hidden" name="id_forum" id="id_forum" value="<?= $rep['id_forum'] ?>">
+																								<input type="hidden" name="pertemuan" id="pertemuan" value="<?= $rep['pertemuan'] ?>">
+																								<input type="hidden" name="mention" id="mention" value="<?= $rep['user_komen'] ?>">
+																								<input type="hidden" name="reply_to" id="reply_to" value="<?= $cmd['id'] ?>">
+																								<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
+																								<div class="input-group">
+																									<input type="text" name="komentar" class="form-control" id="komentar" placeholder="Tulis balasan...">
+																									<div class="input-group-append">
+																										<button class="btn btn-info" type="submit"><i class="fa fa-fw fa-paper-plane"></i></button>
+																									</div>
+																								</div>
+																							</form>
+																						</div>
+																					</div>
 																				</div>
 																			</div>
 																		</div>
@@ -318,7 +269,6 @@
 		</div>
 	</div>
 	<!-- /.container -->
-
 </div><!-- /.content-wrapper -->
 
 <?php $this->load->view('siswa/v_schedule') ?>
@@ -330,5 +280,5 @@
 	$('#myTab.nav-link').on('click', function(e) {
 		e.preventDefault()
 		$(this).tab('show')
-	})
+	});
 </script>

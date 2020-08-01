@@ -26,13 +26,19 @@ class Dashboard extends CI_Controller
 			$data['tahun'] = $this->db->select_max('ta')->from('tbl_nilai')->get()->row_array();
 		}
 
-		if ($this->session->userdata('akses') == '1') {
+		$akses = $this->session->userdata('akses');
+		if ($akses == 1) {
 			$this->load->view('admin/v_dashboard');
-		} else {
+		} elseif ($akses == 2) {
 			$this->load->view('siswa/layout/v_header');
 			$this->load->view('siswa/layout/v_navbar');
 			$this->load->view('siswa/v_dashboard', $data);
 			$this->load->view('siswa/layout/v_footer');
+		} else {
+			$this->load->view('pengajar/layout/v_header');
+			$this->load->view('pengajar/layout/v_navbar');
+			$this->load->view('pengajar/v_dashboard', $data);
+			$this->load->view('pengajar/layout/v_footer');
 		}
 	}
 

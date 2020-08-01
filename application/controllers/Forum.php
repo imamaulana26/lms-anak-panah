@@ -18,20 +18,36 @@ class Forum extends CI_Controller
 	{
 		ob_start('ob_gzhandler');
 
-		$this->load->view('siswa/layout/v_header');
-		$this->load->view('siswa/layout/v_navbar');
-		$this->load->view('siswa/v_forum');
+		$akses = $this->session->userdata('akses');
+
+		if ($akses == 2) {
+			$this->load->view('siswa/layout/v_header');
+			$this->load->view('siswa/layout/v_navbar');
+			$this->load->view('siswa/v_forum');
+		} else {
+			$this->load->view('pengajar/layout/v_header');
+			$this->load->view('pengajar/layout/v_navbar');
+			$this->load->view('pengajar/v_forum');
+		}
 	}
 
 	public function diskusi($id)
 	{
+		$akses = $this->session->userdata('akses');
+
 		$data['forum'] = $this->m_forum->get_forum($id);
 		$data['materi'] = $this->m_forum->get_materi($id);
 		// $data['komen'] = $this->m_forum->get_komen($id);
 
-		$this->load->view('siswa/layout/v_header');
-		$this->load->view('siswa/layout/v_navbar');
-		$this->load->view('siswa/v_forum', $data);
+		if ($akses == 2) {
+			$this->load->view('siswa/layout/v_header');
+			$this->load->view('siswa/layout/v_navbar');
+			$this->load->view('siswa/v_forum', $data);
+		} else {
+			$this->load->view('pengajar/layout/v_header');
+			$this->load->view('pengajar/layout/v_navbar');
+			$this->load->view('pengajar/v_forum', $data);
+		}
 	}
 
 	public function get_siswa($nis)
@@ -43,23 +59,37 @@ class Forum extends CI_Controller
 		}
 	}
 
-	// public function submit_komen()
-	// {
-	// 	var_dump($_POST);
-	// 	die;
+	public function add_forum()
+	{
+		$akses = $this->session->userdata('akses');
 
-	// 	$data = array(
-	// 		'id_forum' => $this->input->post('id_forum'),
-	// 		'pertemuan' => $this->input->post('pertemuan'),
-	// 		'reply_to' => $this->input->post('id'),
-	// 		'mention' => $this->input->post('mention'),
-	// 		'isi_komen' => $this->input->post('komentar')
-	// 	);
+		if ($akses == 3) {
+			$kd_mapel = $this->input->post('kd_mapel');
 
-	// 	$this->db->insert('tbl_komentar', $data);
-	// 	echo json_encode(['status' => true]);
-	// 	exit;
-	// }
+			$data = array(
+				'id_forum' => $kd_mapel,
+				'judul_materi' => $this->input->post('judul_materi'),
+				'jns_materi' => $this->input->post('tipe_forum'),
+				'isi_materi' => $this->input->post('isi_materi')
+			);
+
+			$cek = $this->db->get_where('tbl_materi', ['id_forum' => $kd_mapel]);
+			if ($cek->num_rows() > 0) {
+				$count = $cek->num_rows() + 1;
+
+				$data['pertemuan'] = $count;
+
+				$this->db->insert('tbl_materi', $data);
+			} else {
+				$data['pertemuan'] = 1;
+				$this->db->insert('tbl_forum', ['fr_id_pelajaran' => $kd_mapel]);
+
+				$this->db->insert('tbl_materi', $data);
+			}
+
+			$this->diskusi($kd_mapel);
+		}
+	}
 
 	public function submit_main()
 	{

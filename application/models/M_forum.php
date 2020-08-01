@@ -5,10 +5,10 @@ class M_forum extends CI_Model
 {
 	function get_forum($id)
 	{
-		$forum = $this->db->get_where('tbl_forum', ['fr_id_pelajaran' => $id])->row_array();
+		// $forum = $this->db->get_where('tbl_forum', ['fr_id_pelajaran' => $id])->row_array();
 
 		$data = $this->db->select('*')->from('tbl_pelajaran a')->join('tbl_mapel b', 'a.kd_mapel = b.kd_mapel', 'right')
-			->where(['a.id_pelajaran' => $forum['fr_id_pelajaran']])->get()->row_array();
+			->where(['a.id_pelajaran' => $id])->get()->row_array();
 		return $data;
 	}
 

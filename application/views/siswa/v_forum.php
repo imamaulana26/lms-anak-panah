@@ -107,7 +107,7 @@
 									<div class="list-group nav flex-column nav-pills">
 										<?php foreach ($materi as $val) : ?>
 											<a href="#forum-<?= $val['pertemuan'] ?>" class="nav-link list-group-item <?= $val['pertemuan'] == $page ? 'active' : '' ?>" id="forum-<?= $val['pertemuan'] ?>-tab" aria-controls="forum-<?= $val['pertemuan'] ?>" data-toggle="pill" role="tab">
-												<h5>Forum Ke-<?= $val['pertemuan'] ?></h5>
+												<h5>Forum Ke-<?= $val['pertemuan'] ?> <span class="badge badge-danger float-right">New</span></h5>
 												<small><?= date('d M Y', strtotime($val['createDate'])) ?></small>
 												<p><?= word_limiter($val['judul_materi'], 2) ?></p>
 											</a>
@@ -160,13 +160,16 @@
 															<div class="row">
 																<?php $komen = $this->db->get_where('tbl_komentar', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'reply_to' => 0]);
 																foreach ($komen->result_array() as $cmd) :
-																	$siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $cmd['user_komen']])->row_array(); ?>
+																	$siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $cmd['user_komen']])->row_array();
+
+																	$admin = $this->db->get_where('tbl_pengguna', ['pengguna_username' => $cmd['user_komen']])->row_array();
+																	$rep_user = ($siswa == null) ? $admin['pengguna_nama'] . ' (pengajar)' : $siswa['siswa_nama']; ?>
 																	<div class="card-header bordered mt-3 d-flex">
 																		<div class="col-md-1">
 																			<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
 																		</div>
 																		<div class="col-md">
-																			<strong class="float-left"><?= $siswa['siswa_nama'] ?></strong>
+																			<strong class="float-left"><?= $rep_user ?></strong>
 																			<small class="float-right text-secondary"><?= date('d M Y H:i', strtotime($cmd['createDate'])) ?></small>
 																			<div class="clearfix"></div>
 																		</div>
@@ -205,6 +208,9 @@
 																	<?php $reply = $this->db->get_where('tbl_komentar', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'reply_to' => $cmd['id']]);
 																	foreach ($reply->result_array() as $rep) :
 																		$rep_siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['user_komen']])->row_array();
+																		$admin = $this->db->get_where('tbl_pengguna', ['pengguna_username' => $rep['user_komen']])->row_array();
+
+																		$rep_user = ($rep_siswa == null) ? $admin['pengguna_nama'] . ' (pengajar)' : $rep_siswa['siswa_nama'];
 																		$mention = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['mention']])->row_array(); ?>
 																		<!-- Reply Main Comments -->
 																		<div class="collapse <?= $this->session->flashdata('mention') == $cmd['id'] ? 'show' : '' ?>" id="comments-<?= $cmd['id'] ?>">
@@ -214,7 +220,7 @@
 																						<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
 																					</div>
 																					<div class="col-md">
-																						<strong class="float-left"><?= $rep_siswa['siswa_nama'] ?></strong>
+																						<strong class="float-left"><?= $rep_user ?></strong>
 																						<small class="float-right text-secondary"><?= date('d M Y H:i', strtotime($rep['createDate'])) ?></small>
 																						<div class="clearfix"></div>
 																					</div>

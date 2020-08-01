@@ -105,9 +105,25 @@
 							<div class="card-primary card-body row bhoechie-tab-container">
 								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
 									<div class="list-group nav flex-column nav-pills">
-										<?php foreach ($materi as $val) : ?>
+										<?php $user = $this->session->userdata('username');
+										$new = '<span class="badge badge-danger float-right">New</span>';
+										$cek = $this->db->get_where('tbl_log_forum', ['nisn_siswa' => $user, 'id_forum' => $this->uri->segment(2)])->row_array();
+										$exp = explode('::', $cek['log_forum']);
+
+										foreach ($materi as $val) : ?>
 											<a href="#forum-<?= $val['pertemuan'] ?>" class="nav-link list-group-item <?= $val['pertemuan'] == $page ? 'active' : '' ?>" id="forum-<?= $val['pertemuan'] ?>-tab" aria-controls="forum-<?= $val['pertemuan'] ?>" data-toggle="pill" role="tab">
-												<h5>Forum Ke-<?= $val['pertemuan'] ?> <span class="badge badge-danger float-right">New</span></h5>
+												<h5>Forum Ke-<?= $val['pertemuan'] ?>
+													<?php $status = false;
+													foreach ($exp as $key => $n) {
+														if ($n == $val['pertemuan']) {
+															$status = true;
+														}
+													}
+
+													if ($status != true) {
+														echo $new;
+													} ?>
+												</h5>
 												<small><?= date('d M Y', strtotime($val['createDate'])) ?></small>
 												<p><?= word_limiter($val['judul_materi'], 2) ?></p>
 											</a>

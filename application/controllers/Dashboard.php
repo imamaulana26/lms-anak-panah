@@ -19,6 +19,7 @@ class Dashboard extends CI_Controller
 		// $thn = $this->db->get_where('tbl_thn_ajaran',['id_ta'=>$this->input->post('xta')]);
 
 		ob_start('ob_gzhandler');
+		$data = array();
 
 		if (isset($_POST['xta'])) {
 			$data['tahun'] = $this->db->get_where('tbl_nilai', ['ta' => $this->input->post('xta')])->row_array();

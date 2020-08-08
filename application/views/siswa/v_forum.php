@@ -70,49 +70,52 @@
 
 	/* .list-group-item {
 		border: 1px solid #ccc !important;
-	} */
+		} */
 
-	.card-primary {
-		border-radius: 5px 5px 5px 5px;
-		-moz-border-radius: 5px 5px 5px 5px;
-		-webkit-border-radius: 5px 5px 5px 5px;
-		border: 0px solid #000000;
-	}
+		.card-primary {
+			border-radius: 5px 5px 5px 5px;
+			-moz-border-radius: 5px 5px 5px 5px;
+			-webkit-border-radius: 5px 5px 5px 5px;
+			border: 0px solid #000000;
+		}
 
-	.bordered {
-		border-left: 3px solid #007bff;
-	}
-</style>
+		.bordered {
+			border-left: 3px solid #007bff;
+		}
+		#cke_editorfr1{
+			width: 100%;
+		}
+	</style>
 
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-	<!-- Content Header (Page header) -->
-	<div class="content-header">
-		<div class="container">
-		</div><!-- /.container-fluid -->
-	</div>
-	<!-- /.content-header -->
-	<?php $page = (empty($this->session->flashdata('page'))) ? 1 : $this->session->flashdata('page'); ?>
-	<!-- Main content -->
-	<div class="content">
-		<div class="container">
-			<div class="row">
-				<div class="offset-1 col-sm-10">
-					<?php if (!empty($materi)) : ?>
-						<h2 class="pb-3">Forum <?= $forum['nm_mapel'] ?></h2>
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<div class="content-header">
+			<div class="container">
+			</div><!-- /.container-fluid -->
+		</div>
+		<!-- /.content-header -->
+		<?php $page = (empty($this->session->flashdata('page'))) ? 1 : $this->session->flashdata('page'); ?>
+		<!-- Main content -->
+		<div class="content">
+			<div class="container">
+				<div class="row">
+					<div class="offset-1 col-sm-10">
+						<?php if (!empty($materi)) : ?>
+							<h2 class="pb-3">Forum <?= $forum['nm_mapel'] ?></h2>
 
-						<div class="card card-outline">
-							<div class="card-primary card-body row bhoechie-tab-container">
-								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
-									<div class="list-group nav flex-column nav-pills">
-										<?php $user = $this->session->userdata('username');
-										$new = '<span class="badge badge-danger float-right">New</span>';
-										$cek = $this->db->get_where('tbl_log_forum', ['nisn_siswa' => $user, 'id_forum' => $this->uri->segment(2)])->row_array();
-										$exp = explode('::', $cek['log_forum']);
+							<div class="card card-outline">
+								<div class="card-primary card-body row bhoechie-tab-container">
+									<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
+										<div class="list-group nav flex-column nav-pills">
+											<?php $user = $this->session->userdata('username');
+											$new = '<span class="badge badge-danger float-right">New</span>';
+											$cek = $this->db->get_where('tbl_log_forum', ['nisn_siswa' => $user, 'id_forum' => $this->uri->segment(2)])->row_array();
+											$exp = explode('::', $cek['log_forum']);
 
-										foreach ($materi as $val) : ?>
-											<a href="#forum-<?= $val['pertemuan'] ?>" class="nav-link list-group-item <?= $val['pertemuan'] == $page ? 'active' : '' ?>" id="forum-<?= $val['pertemuan'] ?>-tab" aria-controls="forum-<?= $val['pertemuan'] ?>" data-toggle="pill" role="tab">
-												<h5>Forum Ke-<?= $val['pertemuan'] ?>
+											foreach ($materi as $val) : ?>
+												<a href="#forum-<?= $val['pertemuan'] ?>" class="nav-link list-group-item <?= $val['pertemuan'] == $page ? 'active' : '' ?>" id="forum-<?= $val['pertemuan'] ?>-tab" aria-controls="forum-<?= $val['pertemuan'] ?>" data-toggle="pill" role="tab">
+													<h5>Forum Ke-<?= $val['pertemuan'] ?>
 													<?php $status = false;
 													foreach ($exp as $key => $n) {
 														if ($n == $val['pertemuan']) {
@@ -154,18 +157,33 @@
 														</span>
 														<div class="collapse pt-3" id="show_komen-<?= $val['id_forum'] . '-' . $val['pertemuan'] ?>">
 															<div class="card card-body">
-																<form action="<?= site_url('forum/submit_main') ?>" method="post" autocomplete="off">
+																<form  action="<?= site_url('forum/submit_main') ?>" method="post" autocomplete="off" id="my-awesome-dropzone" class="dropzone" enctype="multipart/form-data">
 																	<input type="hidden" name="id" id="id" value="<?= $val['id'] ?>">
 																	<input type="hidden" name="id_forum" id="id_forum" value="<?= $val['id_forum'] ?>">
 																	<input type="hidden" name="pertemuan" id="pertemuan" value="<?= $val['pertemuan'] ?>">
 																	<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
-																	<div class="input-group">
-																		<input type="text" name="komentar" class="form-control" id="komentar" placeholder="Tulis balasan...">
-																		<div class="input-group-append">
-																			<button class="btn btn-info" type="submit"><i class="fa fa-fw fa-paper-plane"></i></button>
-																		</div>
+																	<div class="input-group col-md">
+
+																		<!-- <input type="text" name="komentar" class="form-control" id="komentar" placeholder="Tulis balasan..."> -->
+
+																		<textarea name="komentar" id="editorfr<?= $val['id'] ?>" placeholder="Type Here">
+																		</textarea>
+																		
+																	</div>
+
+																	<div class="form-group">
+																		<label for="gambar">Masukan Gambar disini</label>
+																		<input type="file" class="form-control-file" id="gambar" name="gambar">
+																	</div>
+																	<div class="input-group-append" style="width: 100%">
+																		<button class="btn btn-info" type="submit" style="width: 100%"><i class="fa fa-fw fa-paper-plane"></i></button>
 																	</div>
 																</form>
+																<!-- <form action="<?= site_url('forum/submit_main') ?>" class="dropzone" id="fileupload">
+																	<div class="fallback">
+																		<input name="file" type="file" multiple />
+																	</div>
+																</form> -->
 															</div>
 														</div>
 													</div>
@@ -203,18 +221,25 @@
 																		</div>
 																		<div class="collapse pt-3" id="show_komen-<?= $cmd['id'] ?>">
 																			<div class="card card-body">
-																				<form action="<?= site_url('forum/submit_komen') ?>" method="post" autocomplete="off">
+																				<form action="<?= site_url('forum/submit_komen') ?>" method="post" autocomplete="off" enctype="multipart/form-data">
 																					<input type="hidden" name="id" id="id" value="<?= $val['id'] ?>">
 																					<input type="hidden" name="id_forum" id="id_forum" value="<?= $cmd['id_forum'] ?>">
 																					<input type="hidden" name="pertemuan" id="pertemuan" value="<?= $cmd['pertemuan'] ?>">
 																					<input type="hidden" name="mention" id="mention" value="<?= $cmd['user_komen'] ?>">
 																					<input type="hidden" name="reply_to" id="reply_to" value="<?= $cmd['id'] ?>">
 																					<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
-																					<div class="input-group">
-																						<input type="text" name="komentar" class="form-control" id="komentar" placeholder="Tulis balasan...">
-																						<div class="input-group-append">
-																							<button class="btn btn-info" type="submit"><i class="fa fa-fw fa-paper-plane"></i></button>
-																						</div>
+																					<div class="form-group">
+																						<!-- <input type="text" name="komentar" class="form-control" id="komentar" placeholder="Tulis balasan..."> -->
+																						<textarea name="komentar" id="editor<?= $cmd['id'] ?>" rows="10" cols="45" placeholder="Type Here">
+																						</textarea>
+																					</div>
+
+																					<div class="form-group">
+																						<label for="gambar">Masukan Gambar disini</label>
+																						<input type="file" class="form-control-file" id="gambar" name="gambar">
+																					</div>
+																					<div class="input-group-append" style="width: 100%">
+																						<button class="btn btn-info" type="submit" style="width: 100%"><i class="fa fa-fw fa-paper-plane"></i></button>
 																					</div>
 																				</form>
 																			</div>
@@ -250,18 +275,26 @@
 																					</div>
 																					<div class="collapse pt-5" id="show_komen-<?= $rep['id'] ?>">
 																						<div class="card card-body">
-																							<form action="<?= site_url('forum/submit_komen') ?>" method="post" autocomplete="off">
+																							<form action="<?= site_url('forum/submit_komen') ?>" method="post" autocomplete="off" enctype="multipart/form-data">
 																								<input type="hidden" name="id" id="id" value="<?= $cmd['id'] ?>">
 																								<input type="hidden" name="id_forum" id="id_forum" value="<?= $rep['id_forum'] ?>">
 																								<input type="hidden" name="pertemuan" id="pertemuan" value="<?= $rep['pertemuan'] ?>">
 																								<input type="hidden" name="mention" id="mention" value="<?= $rep['user_komen'] ?>">
 																								<input type="hidden" name="reply_to" id="reply_to" value="<?= $cmd['id'] ?>">
 																								<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
-																								<div class="input-group">
-																									<input type="text" name="komentar" class="form-control" id="komentar" placeholder="Tulis balasan...">
-																									<div class="input-group-append">
-																										<button class="btn btn-info" type="submit"><i class="fa fa-fw fa-paper-plane"></i></button>
-																									</div>
+																								<div class="form-group">
+
+																									<!-- <input type="text" name="komentar" class="form-control" id="komentar" placeholder="Tulis balasan..."> -->
+																									<textarea name="komentar" id="editor<?= $rep['id'] ?>" rows="10" cols="45" placeholder="Type Here">
+																									</textarea>
+																								</div>
+																								
+																								<div class="form-group">
+																									<label for="gambar">Masukan Gambar disini</label>
+																									<input type="file" class="form-control-file" id="gambar" name="gambar">
+																								</div>
+																								<div class="input-group-append" style="width: 100%">
+																									<button class="btn btn-info" type="submit" style="width: 100%"><i class="fa fa-fw fa-paper-plane"></i></button>
 																								</div>
 																							</form>
 																						</div>
@@ -283,17 +316,17 @@
 								</div>
 							</div>
 						</div>
+					</div>
+					<?php else : ?>
+						<h2 class="pb-3 text-center">Forum Tidak Tersedia</h2>
+					<?php endif; ?>
 				</div>
-			<?php else : ?>
-				<h2 class="pb-3 text-center">Forum Tidak Tersedia</h2>
-			<?php endif; ?>
 			</div>
 		</div>
-	</div>
-	<!-- /.container -->
-</div><!-- /.content-wrapper -->
+		<!-- /.container -->
+	</div><!-- /.content-wrapper -->
 
-<?php $this->load->view('siswa/v_schedule') ?>
+	<?php $this->load->view('siswa/v_schedule') ?>
 </div>
 
 <?php $this->load->view('siswa/layout/v_js'); ?>
@@ -304,3 +337,60 @@
 		$(this).tab('show')
 	});
 </script>
+
+<!-- <script>
+	var myDropzone = new Dropzone("div#myId", {
+		url: "/file/post"
+	});
+	$("div#myId").dropzone({
+		url: "/file/post"
+	});
+</script> -->
+
+<!-- <script>
+    // Add restrictions
+    Dropzone.options.fileupload = {
+    	maxFiles:1,
+    	init: function() {
+    		this.on("maxfilesexceeded", function(file) {
+    			this.removeAllFiles();
+    			this.addFile(file);
+    		});
+    	}    
+    };
+</script> -->
+<script>
+	$(document).ready(function(){
+            		// forum
+            		$.ajax({ url: "<?= site_url('forum/datafr_id') ?>",
+            			context: document.body,
+            			dataType : 'json',
+            			success: function(data){
+            				var i;
+            				for(i=0; i<data.length; i++){
+            					CKEDITOR.replace('editorfr'+data[i].id);
+            				}
+            				// assets/plugins/kcfinder/browse.php?type=files
+            				// {
+            				// 		height: 300,
+            				// 		filebrowserBrowseUrl: '<?php echo base_url('assets/plugins/kcfinder/browse.php?type=files');?>',
+            				// 		filebrowserImageBrowseUrl: '<?php echo base_url('assets/plugins/kcfinder/browse.php?type=images');?>',
+            				// 		filebrowserUploadUrl: '<?php echo base_url('assets/plugins/kcfinder/upload.php?type=files');?>',
+            				// 		filebrowserImageUploadUrl: '<?php echo base_url('assets/plugins/kcfinder/upload.php?type=images');?>'
+            				// 		}
+            			}});
+            		// balasan
+            		$.ajax({ url: "<?= site_url('forum/data_id') ?>",
+            			context: document.body,
+            			dataType : 'json',
+            			success: function(data){
+            				// alert("done");
+            				var i;
+            				for(i=0; i<data.length; i++){
+            					CKEDITOR.replace('editor'+data[i].id);
+            					// console.log('editor'+data[i].id);
+            				}
+            				
+            			}});
+            	});
+            </script>

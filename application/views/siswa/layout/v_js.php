@@ -15,6 +15,8 @@
 <script src="<?= base_url('assets/front-end/plugins/moment/moment.min.js') ?>"></script>
 <!-- ChartJs -->
 <script src="<?= base_url('assets/front-end/plugins/chart.js/chart.min.js') ?>"></script>
+<!-- DropzoneJs -->
+<!-- <script src="<?= base_url('assets/front-end/plugins/dropzone/dist/dropzone.js') ?>"></script> -->
 
 <!-- AdminLTE App -->
 <!-- <script src="dist/js/adminlte.min.js"></script> -->

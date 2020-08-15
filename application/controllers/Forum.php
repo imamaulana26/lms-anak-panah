@@ -202,4 +202,32 @@ class Forum extends CI_Controller
 			redirect(site_url('forum/' . $data['id_forum']));
 		}
 	}
+
+	public function delete_komen($id)
+	{
+		$data = $this->db->get_where('tbl_komentar', ['id' => $id])->row_array();
+
+		$this->session->set_flashdata('page', $data['pertemuan']);
+
+		$this->db->delete('tbl_komentar', ['id' => $id]);
+		$this->db->delete('tbl_komentar', ['reply_to' => $id]);
+
+		redirect(site_url('forum/' . $data['id_forum']));
+	}
+
+	public function delete_subkomen($id)
+	{
+		$data = $this->db->get_where('tbl_komentar', ['id' => $id])->row_array();
+
+		$this->session->set_flashdata('page', $data['pertemuan']);
+
+		$this->db->delete('tbl_komentar', ['id' => $id]);
+
+		redirect(site_url('forum/' . $data['id_forum']));
+	}
+
+	public function edit_komen($id)
+	{
+		# code...
+	}
 }

@@ -166,8 +166,7 @@
 																<input type="hidden" name="id" id="id" value="<?= $val['id'] ?>">
 																<input type="hidden" name="id_forum" id="id_forum" value="<?= $val['id_forum'] ?>">
 																<input type="hidden" name="pertemuan" id="pertemuan" value="<?= $val['pertemuan'] ?>">
-																<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
-																
+																<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">																
                                   <div class="input-group col-md">
 																		<textarea name="komentar" id="editorfr<?= $val['id'] ?>" placeholder="Type Here"></textarea>
 																	</div>
@@ -178,8 +177,7 @@
 																	</div>
 																	<div class="input-group-append" style="width: 100%">
 																		<button class="btn btn-info" type="submit" style="width: 100%"><i class="fa fa-fw fa-paper-plane"></i></button>
-																	</div>
-                                  
+																	</div>                                  
 															</form>
 														</div>
 													</div>
@@ -190,11 +188,11 @@
 													<div class="card-body">
 														<div class="row">
 															<?php $komen = $this->db->get_where('tbl_komentar', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'reply_to' => 0]);
-																	foreach ($komen->result_array() as $cmd) :
-																		$siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $cmd['user_komen']])->row_array();
+															foreach ($komen->result_array() as $cmd) :
+																$siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $cmd['user_komen']])->row_array();
 
-																		$admin = $this->db->get_where('tbl_pengguna', ['pengguna_username' => $cmd['user_komen']])->row_array();
-																		$rep_user = ($siswa == null) ? $admin['pengguna_nama'] . ' (pengajar)' : $siswa['siswa_nama']; ?>
+																$admin = $this->db->get_where('tbl_pengguna', ['pengguna_username' => $cmd['user_komen']])->row_array();
+																$rep_user = ($siswa == null) ? $admin['pengguna_nama'] . ' (pengajar)' : $siswa['siswa_nama']; ?>
 																<div class="card-header bordered mt-3 d-flex">
 																	<div class="col-md-1">
 																		<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
@@ -206,7 +204,15 @@
 																	</div>
 																</div>
 																<div class="card-body bordered pb-0">
-																	<p><?= $cmd['isi_komen'] ?></p>
+																	<p>
+																		<?= $cmd['isi_komen'] ?>
+																		<?php if ($siswa['siswa_nis'] == $user) : ?>
+																			<span class="float-right">
+																				<a href="<?= site_url('forum/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;"><i class="fa fa-fw fa-pencil-alt"></i></a>
+																				<a href="<?= site_url('forum/delete_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #dc3545;"><i class="fa fa-fw fa-times"></i></a>
+																			</span>
+																		<?php endif; ?>
+																	</p>
 																	<div>
 																		<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $cmd['id'] ?>">
 																			<i class="fa fa-fw fa-reply"></i> Balas
@@ -243,12 +249,12 @@
 																</div>
 
 																<?php $reply = $this->db->get_where('tbl_komentar', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'reply_to' => $cmd['id']]);
-																			foreach ($reply->result_array() as $rep) :
-																				$rep_siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['user_komen']])->row_array();
-																				$admin = $this->db->get_where('tbl_pengguna', ['pengguna_username' => $rep['user_komen']])->row_array();
+																foreach ($reply->result_array() as $rep) :
+																	$rep_siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['user_komen']])->row_array();
+																	$admin = $this->db->get_where('tbl_pengguna', ['pengguna_username' => $rep['user_komen']])->row_array();
 
-																				$rep_user = ($rep_siswa == null) ? $admin['pengguna_nama'] . ' (pengajar)' : $rep_siswa['siswa_nama'];
-																				$mention = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['mention']])->row_array(); ?>
+																	$rep_user = ($rep_siswa == null) ? $admin['pengguna_nama'] . ' (pengajar)' : $rep_siswa['siswa_nama'];
+																	$mention = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['mention']])->row_array(); ?>
 																	<!-- Reply Main Comments -->
 																	<div class="collapse <?= $this->session->flashdata('mention') == $cmd['id'] ? 'show' : '' ?>" id="comments-<?= $cmd['id'] ?>">
 																		<div class="col-lg ml-3">
@@ -263,7 +269,15 @@
 																				</div>
 																			</div>
 																			<div class="card-body bordered pb-0">
-																				<p><b><?= $mention['siswa_nama'] ?></b> <?= $rep['isi_komen'] ?></p>
+																				<p>
+																					<b><?= $mention['siswa_nama'] ?></b> <?= $rep['isi_komen'] ?>
+																					<?php if ($rep_siswa['siswa_nis'] == $user) : ?>
+																						<span class="float-right">
+																							<a href="<?= site_url('forum/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;"><i class="fa fa-fw fa-pencil-alt"></i></a>
+																							<a href="<?= site_url('forum/delete_subkomen/' . $cmd['id']) ?>" style="font-size: 12px; color: #dc3545;"><i class="fa fa-fw fa-times"></i></a>
+																						</span>
+																					<?php endif; ?>
+																				</p>
 																				<div>
 																					<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $rep['id'] ?>">
 																						<i class="fa fa-fw fa-reply"></i> Balas
@@ -317,8 +331,8 @@
 				</div>
 			</div>
 		</div>
-		<!-- /.container -->
-	</div><!-- /.content-wrapper -->
+	</div><!-- /.container -->
+</div><!-- /.content-wrapper -->
 
 	<?php $this->load->view('siswa/v_schedule') ?>
 </div>

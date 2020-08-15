@@ -197,19 +197,38 @@
 																	</div>
 																	<div class="col-md">
 																		<strong class="float-left"><?= $rep_user ?></strong>
-																		<small class="float-right text-secondary"><?= date('d M Y H:i', strtotime($cmd['createDate'])) ?></small>
+																		<?php if ($siswa['siswa_nis'] == $user) : ?>
+																			<small class="float-right text-secondary">
+																				<div class="dropdown mx-1">
+																					<a href="#" class="btn btn-link btn-xs" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																						<i class='fa fa-ellipsis-v'></i>
+																					</a>
+																					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+																						<a class="dropdown-item" href="<?= site_url('forum/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;">
+																							<i class="fa fa-fw fa-pencil-alt"></i> Sunting
+																						</a>
+																						<a class="dropdown-item" href="javascript:void(0)" onclick="hapus_komen('<?= $cmd['id'] ?>')" style="font-size: 12px; color: #dc3545;">
+																							<i class="fa fa-fw fa-times"></i> Hapus
+																						</a>
+																					</div>
+																				</div>
+																			</small>
+																		<?php endif; ?>
+																		<small class="float-right text-secondary">
+																			<?= date('d M y', strtotime($cmd['createDate'])) ?>
+																		</small>
 																		<div class="clearfix"></div>
 																	</div>
 																</div>
 																<div class="card-body bordered pb-0">
 																	<p>
 																		<?= $cmd['isi_komen'] ?>
-																		<?php if ($siswa['siswa_nis'] == $user) : ?>
+																		<!-- <?php if ($siswa['siswa_nis'] == $user) : ?>
 																			<span class="float-right">
 																				<a href="<?= site_url('forum/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;"><i class="fa fa-fw fa-pencil-alt"></i></a>
 																				<a href="javascript:void(0)" onclick="hapus_komen('<?= $cmd['id'] ?>')" style="font-size: 12px; color: #dc3545;"><i class="fa fa-fw fa-times"></i></a>
 																			</span>
-																		<?php endif; ?>
+																		<?php endif; ?> -->
 																	</p>
 																	<div>
 																		<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $cmd['id'] ?>">
@@ -262,19 +281,36 @@
 																				</div>
 																				<div class="col-md">
 																					<strong class="float-left"><?= $rep_user ?></strong>
-																					<small class="float-right text-secondary"><?= date('d M Y H:i', strtotime($rep['createDate'])) ?></small>
+																					<?php if ($rep_siswa['siswa_nis'] == $user) : ?>
+																						<small class="float-right text-secondary">
+																							<div class="dropdown mx-1">
+																								<a href="#" class="btn btn-link btn-xs" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																									<i class='fa fa-ellipsis-v'></i>
+																								</a>
+																								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+																									<a class="dropdown-item" href="<?= site_url('forum/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;">
+																										<i class="fa fa-fw fa-pencil-alt"></i> Sunting
+																									</a>
+																									<a class="dropdown-item" href="javascript:void(0)" onclick="hapus_subkomen('<?= $rep['id'] ?>')" style="font-size: 12px; color: #dc3545;">
+																										<i class="fa fa-fw fa-times"></i> Hapus
+																									</a>
+																								</div>
+																							</div>
+																						</small>
+																					<?php endif; ?>
+																					<small class="float-right text-secondary"><?= date('d M y', strtotime($rep['createDate'])) ?></small>
 																					<div class="clearfix"></div>
 																				</div>
 																			</div>
 																			<div class="card-body bordered pb-0">
 																				<p>
 																					<b><?= $mention['siswa_nama'] ?></b> <?= $rep['isi_komen'] ?>
-																					<?php if ($rep_siswa['siswa_nis'] == $user) : ?>
+																					<!-- <?php if ($rep_siswa['siswa_nis'] == $user) : ?>
 																						<span class="float-right">
 																							<a href="<?= site_url('forum/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;"><i class="fa fa-fw fa-pencil-alt"></i></a>
 																							<a href="javascript:void(0)" onclick="hapus_subkomen('<?= $rep['id'] ?>')" style="font-size: 12px; color: #dc3545;"><i class="fa fa-fw fa-times"></i></a>
 																						</span>
-																					<?php endif; ?>
+																					<?php endif; ?> -->
 																				</p>
 																				<div>
 																					<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $rep['id'] ?>">

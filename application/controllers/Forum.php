@@ -150,6 +150,16 @@ class Forum extends CI_Controller
 
 			$this->db->insert('tbl_komentar', $data);
 
+			$cek_log = $this->db->get_where('tbl_log_forum', ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
+			if ($cek_log->num_rows() > 0) {
+				$log = $cek_log->row_array();
+				$isi_log = $log['log_forum'] . '::' . $data['pertemuan'];
+
+				$this->db->update('tbl_log_forum', ['log_forum' => $isi_log], ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
+			} else {
+				$this->db->insert('tbl_log_forum', ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum'], 'log_forum' => $data['pertemuan']]);
+			}
+
 			$this->session->set_flashdata('page', $data['pertemuan']);
 			$this->session->set_flashdata('mention', $id);
 
@@ -173,6 +183,18 @@ class Forum extends CI_Controller
 			);
 
 			$this->db->insert('tbl_komentar', $data);
+
+			$cek_log = $this->db->get_where('tbl_log_forum', ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
+			if ($cek_log->num_rows() > 0) {
+				$log = $cek_log->row_array();
+				$isi_log = $log['log_forum'] . '::' . $data['pertemuan'];
+
+				$this->db->update('tbl_log_forum', ['log_forum' => $isi_log], ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
+			} else {
+				$this->db->insert('tbl_log_forum', ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum'], 'log_forum' => $data['pertemuan']]);
+			}
+
+
 
 			$this->session->set_flashdata('page', $data['pertemuan']);
 			$this->session->set_flashdata('mention', $id);

@@ -21,7 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_bukuinduk`
 --
-create database if not exists `db_bukuinduk`;
+drop database if exists `db_bukuinduk`;
+create database `db_bukuinduk`;
 use `db_bukuinduk`;
 
 -- --------------------------------------------------------

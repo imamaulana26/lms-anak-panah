@@ -59,18 +59,20 @@ class Forum extends CI_Controller
 		}
 	}
 
-	function data_id()
+	function data_id($id)
 	{
-		$query = $this->db->select('id')->from('tbl_komentar')->get()->result_array();
-		echo json_encode($query);
-		exit();	
+		// $query = $this->db->select('id')->from('tbl_materi')->get()->result_array();
+		$qry = $this->db->get_where('tbl_komentar', ['id_forum' => $id])->result_array();
+		echo json_encode($qry);
+		exit();
 	}
 
-	function datafr_id()
+	function datafr_id($id)
 	{
-		$query = $this->db->select('id')->from('tbl_materi')->get()->result_array();
-		echo json_encode($query);
-		exit();	
+		// $query = $this->db->select('id')->from('tbl_materi')->get()->result_array();
+		$qry = $this->db->get_where('tbl_materi', ['id_forum' => $id])->result_array();
+		echo json_encode($qry);
+		exit();
 	}
 
 	public function add_forum()
@@ -110,33 +112,33 @@ class Forum extends CI_Controller
 		$komen = $this->input->post('komentar');
 		$id = $this->input->post('id');
 
-		if(!empty($_FILES['gambar']['name'])){
-			$config['upload_path'] = './assets/test/'; 
+		if (!empty($_FILES['gambar']['name'])) {
+			$config['upload_path'] = './assets/test/';
 			$config['allowed_types'] = 'jpg|jpeg|png|gif|pdf';
-		    $config['max_size'] = '1024'; // max_size in kb
-		    $config['file_name'] = $_FILES['gambar']['name'];
-		    $this->load->library('upload',$config); 
+			$config['max_size'] = '1024'; // max_size in kb
+			$config['file_name'] = $_FILES['gambar']['name'];
+			$this->load->library('upload', $config);
 
-		    // File upload
-		    if($this->upload->do_upload('gambar')){
-		       	// Get data about the file
-		    	$uploadData = $this->upload->data();
+			// File upload
+			if ($this->upload->do_upload('gambar')) {
+				// Get data about the file
+				$uploadData = $this->upload->data();
 
-		    	$img = file_get_contents('./assets/test/'.$uploadData['file_name']); 
+				$img = file_get_contents('./assets/test/' . $uploadData['file_name']);
 
 				// Encode the image string data into base64 
-		     	// $data = base64_encode($img); 
+				// $data = base64_encode($img); 
 
-		    	$base_64 = base64_encode($img);
-		    	$this->db->insert('tbl_base64', ['text'=>$base_64]);
-		    	unlink('./assets/test/'.$uploadData['file_name']);
-		     	// $baseendoce = base64_decode($base_64);
+				$base_64 = base64_encode($img);
+				$this->db->insert('tbl_base64', ['text' => $base_64]);
+				unlink('./assets/test/' . $uploadData['file_name']);
+				// $baseendoce = base64_decode($base_64);
 
-		     	// $data = file_get_contents($base_64);
+				// $data = file_get_contents($base_64);
 
-		     	// fclose( $ifp ); 
-		     	// echo '<img src="data:image/webp;base64,'.$base_64.'" />';
-		    }
+				// fclose( $ifp ); 
+				// echo '<img src="data:image/webp;base64,'.$base_64.'" />';
+			}
 		}
 
 		if (!empty($komen)) {
@@ -203,6 +205,7 @@ class Forum extends CI_Controller
 		}
 	}
 
+	/*
 	public function delete_komen($id)
 	{
 		$data = $this->db->get_where('tbl_komentar', ['id' => $id])->row_array();
@@ -224,6 +227,36 @@ class Forum extends CI_Controller
 		$this->db->delete('tbl_komentar', ['id' => $id]);
 
 		redirect(site_url('forum/' . $data['id_forum']));
+	}
+	*/
+
+	public function delete_komen($id)
+	{
+		$data = $this->db->get_where('tbl_komentar', ['id' => $id])->row_array();
+
+		$this->session->set_flashdata('page', $data['pertemuan']);
+
+		$this->db->delete('tbl_komentar', ['id' => $id]);
+		$this->db->delete('tbl_komentar', ['reply_to' => $id]);
+
+		echo json_encode([
+			'msg' => 'Komentar berhasil dihapus!'
+		]);
+		exit;
+	}
+
+	public function delete_subkomen($id)
+	{
+		$data = $this->db->get_where('tbl_komentar', ['id' => $id])->row_array();
+
+		$this->session->set_flashdata('page', $data['pertemuan']);
+
+		$this->db->delete('tbl_komentar', ['id' => $id]);
+
+		echo json_encode([
+			'msg' => 'Komentar berhasil dihapus!'
+		]);
+		exit;
 	}
 
 	public function edit_komen($id)

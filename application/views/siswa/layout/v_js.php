@@ -2,6 +2,7 @@
 
 <!-- jQuery -->
 <script src="<?= base_url('assets/front-end/plugins/jquery/jquery.min.js') ?>"></script>
+<!-- <script src="https://cdn.ckeditor.com/ckeditor5/20.0.0/classic/ckeditor.js"></script> -->
 
 <!-- Bootstrap 4 -->
 <script src="<?= base_url('assets/front-end/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
@@ -15,8 +16,6 @@
 <script src="<?= base_url('assets/front-end/plugins/moment/moment.min.js') ?>"></script>
 <!-- ChartJs -->
 <script src="<?= base_url('assets/front-end/plugins/chart.js/chart.min.js') ?>"></script>
-<!-- DropzoneJs -->
-<!-- <script src="<?= base_url('assets/front-end/plugins/dropzone/dist/dropzone.js') ?>"></script> -->
 
 <!-- AdminLTE App -->
 <!-- <script src="dist/js/adminlte.min.js"></script> -->
@@ -42,6 +41,7 @@
 
 <!-- My JS -->
 <script src="<?= base_url('assets/front-end/dist/js/my-js.js') ?>"></script>
+
 </body>
 
 </html>

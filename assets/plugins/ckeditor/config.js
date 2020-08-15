@@ -3,6 +3,7 @@
  * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
 
+<<<<<<< HEAD
  CKEDITOR.editorConfig = function( config ) {
 	// KCFINDER
 	// config.filebrowserBrowseUrl = 'http://localhost/assets/plugins/kcfinder/browse.php?type=files';
@@ -21,12 +22,16 @@
 	// config.filebrowserFlashUploadUrl = 'kcfinder/upload.php?type=flash';
 
 	// END
+=======
+CKEDITOR.editorConfig = function( config ) {
+>>>>>>> 2ca85e756bdeb988111c4bf0021d5b624ff9aedf
 	// Define changes to default configuration here.
 	// For complete reference see:
 	// http://docs.ckeditor.com/#!/api/CKEDITOR.config
 
 	// The toolbar groups arrangement, optimized for two toolbar rows.
 	config.toolbarGroups = [
+<<<<<<< HEAD
 	{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
 	// { name: 'editing',     groups: [ 'find', 'selection' ] },
 	{ name: 'links' },
@@ -42,6 +47,22 @@
 	// { name: 'styles' },
 	// { name: 'colors' },
 	// { name: 'about' }
+=======
+		{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
+		{ name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
+		{ name: 'links' },
+		{ name: 'insert', groups: [ 'insert', 'Youtube','MathType' ] },
+		{ name: 'forms' },
+		{ name: 'tools' },
+		{ name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },
+		{ name: 'others' },
+		'/',
+		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+		{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
+		{ name: 'styles' },
+		{ name: 'colors' },
+		{ name: 'about' }
+>>>>>>> 2ca85e756bdeb988111c4bf0021d5b624ff9aedf
 	];
 
 	// Remove some buttons provided by the standard plugins, which are

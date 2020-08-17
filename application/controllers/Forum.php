@@ -94,23 +94,21 @@ class Forum extends CI_Controller
 
 	function data_id($id)
 	{
-		// $query = $this->db->select('id')->from('tbl_materi')->get()->result_array();
-		$qry = $this->db->get_where('tbl_komentar', ['id_forum' => $id])->result_array();
+		$qry = $this->db->get_where('tbl_komen_forum', ['id_forum' => $id])->result_array();
 		echo json_encode($qry);
 		exit();
 	}
 
 	function datafr_id($id)
 	{
-		// $query = $this->db->select('id')->from('tbl_materi')->get()->result_array();
-		$qry = $this->db->get_where('tbl_materi', ['id_forum' => $id])->result_array();
+		$qry = $this->db->get_where('tbl_materi_forum', ['id_forum' => $id])->result_array();
 		echo json_encode($qry);
 		exit();
 	}
 
 	public function edit_forum($id)
 	{
-		$data = $this->db->get_where('tbl_materi', ['id' => $id])->row_array();
+		$data = $this->db->get_where('tbl_materi_forum', ['id' => $id])->row_array();
 
 		echo json_encode($data);
 		exit;
@@ -118,7 +116,7 @@ class Forum extends CI_Controller
 
 	public function delete_forum($id)
 	{
-		$this->db->delete('tbl_materi', ['id' => $id]);
+		$this->db->delete('tbl_materi_forum', ['id' => $id]);
 		echo json_encode(['status' => true]);
 		exit;
 	}
@@ -139,18 +137,18 @@ class Forum extends CI_Controller
 				'isi_materi' => $this->input->post('isi_materi')
 			);
 
-			$cek = $this->db->get_where('tbl_materi', ['id_forum' => $kd_mapel]);
+			$cek = $this->db->get_where('tbl_materi_forum', ['id_forum' => $kd_mapel]);
 			if ($cek->num_rows() > 0) {
 				$count = $cek->num_rows() + 1;
 
 				$data['pertemuan'] = $count;
 
-				$this->db->insert('tbl_materi', $data);
+				$this->db->insert('tbl_materi_forum', $data);
 			} else {
 				$data['pertemuan'] = 1;
 				$this->db->insert('tbl_forum', ['fr_id_pelajaran' => $kd_mapel]);
 
-				$this->db->insert('tbl_materi', $data);
+				$this->db->insert('tbl_materi_forum', $data);
 			}
 
 			// $this->diskusi($kd_mapel);
@@ -172,7 +170,7 @@ class Forum extends CI_Controller
 				'isi_materi' => $this->input->post('isi_materi')
 			);
 
-			$this->db->update('tbl_materi', $data, ['id' => $this->input->post('id')]);
+			$this->db->update('tbl_materi_forum', $data, ['id' => $this->input->post('id_fm')]);
 
 			// $this->diskusi($kd_mapel);
 			echo json_encode(['status' => true]);
@@ -226,14 +224,18 @@ class Forum extends CI_Controller
 				'isi_komen' => $this->input->post('komentar')
 			);
 
-			$this->db->insert('tbl_komentar', $data);
+			$this->db->insert('tbl_komen_forum', $data);
 
 			$cek_log = $this->db->get_where('tbl_log_forum', ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
 			if ($cek_log->num_rows() > 0) {
 				$log = $cek_log->row_array();
-				$isi_log = $log['log_forum'] . '::' . $data['pertemuan'];
 
-				$this->db->update('tbl_log_forum', ['log_forum' => $isi_log], ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
+				if ($log['log_forum'] != '') {
+					$isi_log = $log['log_forum'] . '::' . $data['pertemuan'];
+					$this->db->update('tbl_log_forum', ['log_forum' => $isi_log], ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
+				} else {
+					$this->db->update('tbl_log_forum', ['log_forum' => $data['pertemuan']], ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
+				}
 			} else {
 				$this->db->insert('tbl_log_forum', ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum'], 'log_forum' => $data['pertemuan']]);
 			}
@@ -260,14 +262,18 @@ class Forum extends CI_Controller
 				'isi_komen' => $this->input->post('komentar')
 			);
 
-			$this->db->insert('tbl_komentar', $data);
+			$this->db->insert('tbl_komen_forum', $data);
 
 			$cek_log = $this->db->get_where('tbl_log_forum', ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
 			if ($cek_log->num_rows() > 0) {
 				$log = $cek_log->row_array();
-				$isi_log = $log['log_forum'] . '::' . $data['pertemuan'];
 
-				$this->db->update('tbl_log_forum', ['log_forum' => $isi_log], ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
+				if ($log['log_forum'] != '') {
+					$isi_log = $log['log_forum'] . '::' . $data['pertemuan'];
+					$this->db->update('tbl_log_forum', ['log_forum' => $isi_log], ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
+				} else {
+					$this->db->update('tbl_log_forum', ['log_forum' => $data['pertemuan']], ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
+				}
 			} else {
 				$this->db->insert('tbl_log_forum', ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum'], 'log_forum' => $data['pertemuan']]);
 			}
@@ -281,39 +287,14 @@ class Forum extends CI_Controller
 		}
 	}
 
-	/*
 	public function delete_komen($id)
 	{
-		$data = $this->db->get_where('tbl_komentar', ['id' => $id])->row_array();
+		$data = $this->db->get_where('tbl_komen_forum', ['id' => $id])->row_array();
 
 		$this->session->set_flashdata('page', $data['pertemuan']);
 
-		$this->db->delete('tbl_komentar', ['id' => $id]);
-		$this->db->delete('tbl_komentar', ['reply_to' => $id]);
-
-		redirect(site_url('forum/' . $data['id_forum']));
-	}
-
-	public function delete_subkomen($id)
-	{
-		$data = $this->db->get_where('tbl_komentar', ['id' => $id])->row_array();
-
-		$this->session->set_flashdata('page', $data['pertemuan']);
-
-		$this->db->delete('tbl_komentar', ['id' => $id]);
-
-		redirect(site_url('forum/' . $data['id_forum']));
-	}
-	*/
-
-	public function delete_komen($id)
-	{
-		$data = $this->db->get_where('tbl_komentar', ['id' => $id])->row_array();
-
-		$this->session->set_flashdata('page', $data['pertemuan']);
-
-		$this->db->delete('tbl_komentar', ['id' => $id]);
-		$this->db->delete('tbl_komentar', ['reply_to' => $id]);
+		$this->db->delete('tbl_komen_forum', ['id' => $id]);
+		$this->db->delete('tbl_komen_forum', ['reply_to' => $id]);
 
 		echo json_encode([
 			'msg' => 'Komentar berhasil dihapus!'
@@ -323,11 +304,11 @@ class Forum extends CI_Controller
 
 	public function delete_subkomen($id)
 	{
-		$data = $this->db->get_where('tbl_komentar', ['id' => $id])->row_array();
+		$data = $this->db->get_where('tbl_komen_forum', ['id' => $id])->row_array();
 
 		$this->session->set_flashdata('page', $data['pertemuan']);
 
-		$this->db->delete('tbl_komentar', ['id' => $id]);
+		$this->db->delete('tbl_komen_forum', ['id' => $id]);
 
 		echo json_encode([
 			'msg' => 'Komentar berhasil dihapus!'

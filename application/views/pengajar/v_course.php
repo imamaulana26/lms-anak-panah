@@ -13,7 +13,8 @@
 			<div class="offset-1 col-sm-10">
 				<div class="row">
 					<?php foreach ($course->result_array() as $val) :
-						$n_forum = $this->db->get_where('tbl_materi', ['id_forum' => $val['id_pelajaran']])->num_rows(); ?>
+						$n_forum = $this->db->get_where('tbl_materi_forum', ['id_forum' => $val['id_pelajaran']])->num_rows();
+						$n_tugas = $this->db->get_where('tbl_materi_tugas', ['id_forum' => $val['id_pelajaran']])->num_rows(); ?>
 						<div class="col-sm-4">
 							<div class="card mapel">
 								<div class="card-img-caption">
@@ -24,7 +25,7 @@
 								<div class="card-body">
 									<a href="<?= site_url('forum/') . $val['id_pelajaran'] ?>" id="forum"><i class="fas fa-fw fa-comments pr-1"></i> <?= $n_forum ?> forum posting</a>
 									<div class="dropdown-divider"></div>
-									<a href="#"><i class="fas fa-fw fa-tasks pr-1"></i> <?= rand(0, 10) ?> Assigment to do</a>
+									<a href="<?= site_url('tugas/') . $val['id_pelajaran'] ?>"><i class="fas fa-fw fa-tasks pr-1"></i> <?= $n_tugas ?> Assigment to do</a>
 									<div class="dropdown-divider"></div>
 									<a href="javascript:void(0)" id="view" data-toggle="modal" data-target="#modal_schedule"><i class="fas fa-fw fa-clipboard-list pr-1"></i> View schedule</a>
 								</div>

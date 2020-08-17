@@ -154,7 +154,7 @@
 														<i class="fa fa-fw fa-reply"></i> Balas
 													</a>
 													<span data-toggle="collapse" data-target="#collapseExample-<?= $val['id'] ?>" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;">
-														<?php $li_komen = $this->db->get_where('tbl_komentar', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan']])->num_rows(); ?>
+														<?php $li_komen = $this->db->get_where('tbl_komen_forum', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan']])->num_rows(); ?>
 														Lihat Komentar (<?= $li_komen ?>)
 													</span>
 													<div class="collapse pt-3" id="show_komen-<?= $val['id_forum'] . '-' . $val['pertemuan'] ?>">
@@ -185,7 +185,7 @@
 													<!-- Main Comments -->
 													<div class="card-body">
 														<div class="row">
-															<?php $komen = $this->db->get_where('tbl_komentar', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'reply_to' => 0]);
+															<?php $komen = $this->db->get_where('tbl_komen_forum', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'reply_to' => 0]);
 															foreach ($komen->result_array() as $cmd) :
 																$siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $cmd['user_komen']])->row_array();
 
@@ -235,7 +235,7 @@
 																			<i class="fa fa-fw fa-reply"></i> Balas
 																		</a>
 																		<span data-toggle="collapse" data-target="#comments-<?= $cmd['id'] ?>" aria-expanded="false" aria-controls="comments" style="cursor: pointer;">
-																			<?php $li_reply = $this->db->get_where('tbl_komentar', ['reply_to' => $cmd['id']])->num_rows(); ?>
+																			<?php $li_reply = $this->db->get_where('tbl_komen_forum', ['reply_to' => $cmd['id']])->num_rows(); ?>
 																			<i class="fa fa-fw fa-comments"></i> Komentar (<?= $li_reply ?>)
 																		</span>
 																	</div>
@@ -265,7 +265,7 @@
 																	</div>
 																</div>
 
-																<?php $reply = $this->db->get_where('tbl_komentar', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'reply_to' => $cmd['id']]);
+																<?php $reply = $this->db->get_where('tbl_komen_forum', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'reply_to' => $cmd['id']]);
 																foreach ($reply->result_array() as $rep) :
 																	$rep_siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['user_komen']])->row_array();
 																	$admin = $this->db->get_where('tbl_pengguna', ['pengguna_username' => $rep['user_komen']])->row_array();

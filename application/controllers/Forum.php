@@ -31,6 +31,39 @@ class Forum extends CI_Controller
 		}
 	}
 
+	private function validasi_forum()
+	{
+		$data = array();
+		$data['inputerror'] = array();
+		$data['error'] = array();
+		$data['status'] = true;
+
+		if ($this->input->post('judul_materi') == '') {
+			$data['inputerror'][] = 'judul_materi';
+			$data['error'][] = 'Judul materi harus diisi';
+			$data['status'] = false;
+		} else if (!preg_match('/^[a-zA-Z0-9,. ]+$/', strtoupper($this->input->post('judul_materi')))) {
+			$data['inputerror'][] = 'judul_materi';
+			$data['error'][] = 'Judul materi tidak valid';
+			$data['status'] = false;
+		}
+
+		if ($this->input->post('isi_materi') == '') {
+			$data['inputerror'][] = 'isi_materi';
+			$data['error'][] = 'Isi materi harus diisi';
+			$data['status'] = false;
+		} else if (!preg_match('/^[a-zA-Z0-9,. ]+$/', strtoupper($this->input->post('isi_materi')))) {
+			$data['inputerror'][] = 'isi_materi';
+			$data['error'][] = 'Isi materi tidak valid';
+			$data['status'] = false;
+		}
+
+		if ($data['status'] === false) {
+			echo json_encode($data);
+			exit();
+		}
+	}
+
 	public function diskusi($id)
 	{
 		$akses = $this->session->userdata('akses');
@@ -75,8 +108,25 @@ class Forum extends CI_Controller
 		exit();
 	}
 
-	public function add_forum()
+	public function edit_forum($id)
 	{
+		$data = $this->db->get_where('tbl_materi', ['id' => $id])->row_array();
+
+		echo json_encode($data);
+		exit;
+	}
+
+	public function delete_forum($id)
+	{
+		$this->db->delete('tbl_materi', ['id' => $id]);
+		echo json_encode(['status' => true]);
+		exit;
+	}
+
+	public function save_forum()
+	{
+		$this->validasi_forum();
+
 		$akses = $this->session->userdata('akses');
 
 		if ($akses == 3) {
@@ -103,9 +153,35 @@ class Forum extends CI_Controller
 				$this->db->insert('tbl_materi', $data);
 			}
 
-			$this->diskusi($kd_mapel);
+			// $this->diskusi($kd_mapel);
+			echo json_encode(['status' => true]);
+			exit;
 		}
 	}
+
+	public function update_forum()
+	{
+		$this->validasi_forum();
+
+		$akses = $this->session->userdata('akses');
+
+		if ($akses == 3) {
+			$data = array(
+				'judul_materi' => $this->input->post('judul_materi'),
+				'jns_materi' => $this->input->post('tipe_forum'),
+				'isi_materi' => $this->input->post('isi_materi')
+			);
+
+			$this->db->update('tbl_materi', $data, ['id' => $this->input->post('id')]);
+
+			// $this->diskusi($kd_mapel);
+			echo json_encode(['status' => true]);
+			exit;
+		}
+	}
+
+
+
 
 	public function submit_main()
 	{

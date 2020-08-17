@@ -18,6 +18,8 @@
 <script src="<?= base_url('assets/front-end/plugins/chart.js/chart.min.js') ?>"></script>
 <!-- Sweetalert2 -->
 <script src="<?= base_url('assets/front-end/plugins/sweetalert2/sweetalert2.min.js') ?>"></script>
+<!-- CK editor JS -->
+<script src="<?= base_url('assets/plugins/ckeditor/ckeditor.js') ?>"></script>
 
 <!-- AdminLTE App -->
 <!-- <script src="dist/js/adminlte.min.js"></script> -->

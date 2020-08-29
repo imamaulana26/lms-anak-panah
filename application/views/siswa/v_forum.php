@@ -223,12 +223,6 @@
 																<div class="card-body bordered pb-0">
 																	<p>
 																		<?= $cmd['isi_komen'] ?>
-																		<!-- <?php if ($siswa['siswa_nis'] == $user) : ?>
-																			<span class="float-right">
-																				<a href="<?= site_url('forum/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;"><i class="fa fa-fw fa-pencil-alt"></i></a>
-																				<a href="javascript:void(0)" onclick="hapus_komen('<?= $cmd['id'] ?>')" style="font-size: 12px; color: #dc3545;"><i class="fa fa-fw fa-times"></i></a>
-																			</span>
-																		<?php endif; ?> -->
 																	</p>
 																	<div>
 																		<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $cmd['id'] ?>">
@@ -288,7 +282,7 @@
 																									<i class='fa fa-ellipsis-v'></i>
 																								</a>
 																								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-																									<a class="dropdown-item" href="<?= site_url('forum/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;">
+																									<a class="dropdown-item" href="<?= site_url('forum/edit_komen/' . $rep['id']) ?>" style="font-size: 12px; color: #1e7e34;">
 																										<i class="fa fa-fw fa-pencil-alt"></i> Sunting
 																									</a>
 																									<a class="dropdown-item" href="javascript:void(0)" onclick="hapus_subkomen('<?= $rep['id'] ?>')" style="font-size: 12px; color: #dc3545;">
@@ -305,12 +299,6 @@
 																			<div class="card-body bordered pb-0">
 																				<p>
 																					<b><?= $mention['siswa_nama'] ?></b> <?= $rep['isi_komen'] ?>
-																					<!-- <?php if ($rep_siswa['siswa_nis'] == $user) : ?>
-																						<span class="float-right">
-																							<a href="<?= site_url('forum/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;"><i class="fa fa-fw fa-pencil-alt"></i></a>
-																							<a href="javascript:void(0)" onclick="hapus_subkomen('<?= $rep['id'] ?>')" style="font-size: 12px; color: #dc3545;"><i class="fa fa-fw fa-times"></i></a>
-																						</span>
-																					<?php endif; ?> -->
 																				</p>
 																				<div>
 																					<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $rep['id'] ?>">

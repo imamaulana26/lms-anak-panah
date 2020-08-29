@@ -48,15 +48,11 @@ class Forum extends CI_Controller
 			$data['status'] = false;
 		}
 
-		if ($this->input->post('isi_materi') == '') {
-			$data['inputerror'][] = 'isi_materi';
-			$data['error'][] = 'Isi materi harus diisi';
-			$data['status'] = false;
-		} else if (!preg_match('/^[a-zA-Z0-9,. ]+$/', strtoupper($this->input->post('isi_materi')))) {
-			$data['inputerror'][] = 'isi_materi';
-			$data['error'][] = 'Isi materi tidak valid';
-			$data['status'] = false;
-		}
+		// if ($this->input->post('isi_materi') == '') {
+		// 	$data['inputerror'][] = 'isi_materi';
+		// 	$data['error'][] = 'Isi materi harus diisi';
+		// 	$data['status'] = false;
+		// }
 
 		if ($data['status'] === false) {
 			echo json_encode($data);
@@ -108,15 +104,27 @@ class Forum extends CI_Controller
 
 	public function edit_forum($id)
 	{
-		$data = $this->db->get_where('tbl_materi_forum', ['id' => $id])->row_array();
+		$this->db->select('*')->from('tbl_materi_forum a')
+			->join('tbl_pelajaran b', 'a.id_forum = b.id_pelajaran', 'left')
+			->join('tbl_mapel c', 'b.kd_mapel = c.kd_mapel', 'left')
+			->where(['a.id' => $id]);
+		$res = $this->db->get()->row_array();
 
-		echo json_encode($data);
-		exit;
+		$data = array(
+			'data' => $res
+		);
+
+		$this->load->view('pengajar/layout/v_header');
+		$this->load->view('pengajar/layout/v_navbar');
+		$this->load->view('pengajar/v_edit_forum', $data);
 	}
 
 	public function delete_forum($id)
 	{
+		$data = $this->db->get_where('tbl_materi_forum', ['id' => $id])->row_array();
+
 		$this->db->delete('tbl_materi_forum', ['id' => $id]);
+		$this->db->delete('tbl_komen_forum', ['id_forum' => $data['id_forum'], 'pertemuan' => $data['pertemuan']]);
 		echo json_encode(['status' => true]);
 		exit;
 	}
@@ -173,7 +181,7 @@ class Forum extends CI_Controller
 			$this->db->update('tbl_materi_forum', $data, ['id' => $this->input->post('id_fm')]);
 
 			// $this->diskusi($kd_mapel);
-			echo json_encode(['status' => true]);
+			echo json_encode(['status' => true, 'id' => $this->input->post('kd_mapel')]);
 			exit;
 		}
 	}
@@ -316,8 +324,33 @@ class Forum extends CI_Controller
 		exit;
 	}
 
+
 	public function edit_komen($id)
 	{
-		# code...
+		$this->db->select('*')->from('tbl_komen_forum a')
+			->join('tbl_pelajaran b', 'a.id_forum = b.id_pelajaran', 'left')
+			->join('tbl_mapel c', 'b.kd_mapel = c.kd_mapel', 'left')
+			->where(['a.id' => $id]);
+		$res = $this->db->get()->row_array();
+
+		$data = array(
+			'data' => $res
+		);
+
+		$this->load->view('pengajar/layout/v_header');
+		$this->load->view('pengajar/layout/v_navbar');
+		$this->load->view('pengajar/v_edit_komen', $data);
+	}
+
+	public function update_komen()
+	{
+		$data = array(
+			'isi_komen' => $this->input->post('isi_materi')
+		);
+
+		$this->db->update('tbl_komen_forum', $data, ['id' => $this->input->post('id_fm')]);
+
+		echo json_encode(['status' => true, 'id' => $this->input->post('kd_mapel')]);
+		exit;
 	}
 }

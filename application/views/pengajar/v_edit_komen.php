@@ -105,8 +105,8 @@
 			<div class="row">
 				<div class="offset-1 col-sm-10">
 					<!-- <span class="btn btn-primary float-right" onclick="add_forum()">Buat Forum Baru</span> -->
-					<a href="<?= site_url('forum/' . $data['id_forum']) ?>" class="btn btn-link float-right">Back to Forum</a>
-					<h2 class="pb-3">Forum <?= $data['nm_mapel']; ?></h2>
+					<a href="<?= site_url(strtolower($title) . '/' . $data['id_forum']) ?>" class="btn btn-link float-right">Back to <?= $title ?></a>
+					<h2 class="pb-3"><?= $title . ' ' . $data['nm_mapel']; ?></h2>
 
 					<div class="card">
 						<div class="card-body">
@@ -209,7 +209,7 @@
 			'isi_materi': editor.getData()
 		}
 
-		url = '<?= site_url('forum/update_komen') ?>';
+		url = '<?= site_url(strtolower($title) . '/update_komen') ?>';
 		msg = 'Komentar berhasil diubah';
 
 		$.ajax({
@@ -222,7 +222,7 @@
 				$('#btn_save').html('<i class="fa fa-fw fa-spinner fa-pulse"></i> Loading');
 			},
 			success: function(data) {
-				let url = "<?= site_url('forum/') ?>" + data['id'];
+				let url = "<?= site_url(strtolower($title) . '/') ?>" + data['id'];
 
 				if (data.status) {
 					$('#exampleModal').modal('hide');

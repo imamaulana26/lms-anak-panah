@@ -96,7 +96,12 @@
 		</div><!-- /.container-fluid -->
 	</div>
 	<!-- /.content-header -->
-	<?php $page = (empty($this->session->flashdata('page'))) ? 1 : $this->session->flashdata('page'); ?>
+	<?php $page = (empty($this->session->flashdata('page'))) ? 1 : $this->session->flashdata('page');
+	$user = $this->session->userdata('username');
+	$pengajar = $this->db->select('*')->from('tbl_pelajaran a')
+		->join('tbl_pengajar b', 'a.kd_pengajar = b.id_pengajar', 'left')
+		->join('tbl_pengguna c', 'b.nm_pengajar = c.pengguna_nama', 'left')
+		->where(['a.id_pelajaran' => $this->uri->segment(2)])->get()->row_array(); ?>
 	<!-- Main content -->
 	<div class="content">
 		<div class="container">
@@ -109,7 +114,7 @@
 							<div class="card-primary card-body row bhoechie-tab-container">
 								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
 									<div class="list-group nav flex-column nav-pills">
-										<?php $user = $this->session->userdata('username');
+										<?php
 										$new = '<span class="badge badge-danger float-right">New</span>';
 										$cek = $this->db->get_where('tbl_log_forum', ['nisn_siswa' => $user, 'id_forum' => $this->uri->segment(2)])->row_array();
 										$exp = isset($cek['log_tugas']) ? explode('::', $cek['log_tugas']) : '';
@@ -154,7 +159,14 @@
 														<i class="fa fa-fw fa-reply"></i> Balas
 													</a>
 													<span data-toggle="collapse" data-target="#collapseExample-<?= $val['id'] ?>" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;">
-														<?php $li_komen = $this->db->get_where('tbl_komen_tugas', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan']])->num_rows(); ?>
+														<?php $li_komen = 0;
+														$cek = $this->db->get_where('tbl_komen_tugas', ['user_komen' => $user]);
+														if ($cek->num_rows() > 0) {
+															$id = $cek->row_array();
+															$where = 'id_forum = ' . $val['id_forum'] . ' and pertemuan = ' . $val['pertemuan'] . ' and reply_to in (0, ' . $id['id'] . ') and user_komen in ("' . $user . '", "' . $pengajar['pengguna_username'] . '")';
+															$this->db->select('*')->from('tbl_komen_tugas')->where($where);
+															$li_komen = $this->db->get()->num_rows();
+														} ?>
 														Lihat Komentar (<?= $li_komen ?>)
 													</span>
 													<div class="collapse pt-3" id="show_komen-<?= $val['id_forum'] . '-' . $val['pertemuan'] ?>">
@@ -185,7 +197,7 @@
 													<!-- Main Comments -->
 													<div class="card-body">
 														<div class="row">
-															<?php $komen = $this->db->get_where('tbl_komen_tugas', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'reply_to' => 0]);
+															<?php $komen = $this->db->get_where('tbl_komen_tugas', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'user_komen' => $user, 'reply_to' => 0]);
 															foreach ($komen->result_array() as $cmd) :
 																$siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $cmd['user_komen']])->row_array();
 
@@ -223,12 +235,6 @@
 																<div class="card-body bordered pb-0">
 																	<p>
 																		<?= $cmd['isi_komen'] ?>
-																		<!-- <?php if ($siswa['siswa_nis'] == $user) : ?>
-																			<span class="float-right">
-																				<a href="<?= site_url('tugas/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;"><i class="fa fa-fw fa-pencil-alt"></i></a>
-																				<a href="javascript:void(0)" onclick="hapus_komen('<?= $cmd['id'] ?>')" style="font-size: 12px; color: #dc3545;"><i class="fa fa-fw fa-times"></i></a>
-																			</span>
-																		<?php endif; ?> -->
 																	</p>
 																	<div>
 																		<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $cmd['id'] ?>">
@@ -265,12 +271,12 @@
 																	</div>
 																</div>
 
-																<?php $reply = $this->db->get_where('tbl_komen_tugas', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'reply_to' => $cmd['id']]);
+																<?php $reply = $this->db->get_where('tbl_komen_tugas', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'user_komen' => $pengajar['pengguna_username'], 'reply_to' => $cmd['id']]);
 																foreach ($reply->result_array() as $rep) :
 																	$rep_siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['user_komen']])->row_array();
 																	$admin = $this->db->get_where('tbl_pengguna', ['pengguna_username' => $rep['user_komen']])->row_array();
 
-																	$rep_user = ($rep_siswa == null) ? $admin['pengguna_nama'] . ' (pengajar)' : $rep_siswa['siswa_nama'];
+																	$rep_user = $admin['pengguna_nama'] . ' (pengajar)';
 																	$mention = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['mention']])->row_array(); ?>
 																	<!-- Reply Main Comments -->
 																	<div class="collapse <?= $this->session->flashdata('mention') == $cmd['id'] ? 'show' : '' ?>" id="comments-<?= $cmd['id'] ?>">
@@ -305,12 +311,6 @@
 																			<div class="card-body bordered pb-0">
 																				<p>
 																					<b><?= $mention['siswa_nama'] ?></b> <?= $rep['isi_komen'] ?>
-																					<!-- <?php if ($rep_siswa['siswa_nis'] == $user) : ?>
-																						<span class="float-right">
-																							<a href="<?= site_url('tugas/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;"><i class="fa fa-fw fa-pencil-alt"></i></a>
-																							<a href="javascript:void(0)" onclick="hapus_subkomen('<?= $rep['id'] ?>')" style="font-size: 12px; color: #dc3545;"><i class="fa fa-fw fa-times"></i></a>
-																						</span>
-																					<?php endif; ?> -->
 																				</p>
 																				<div>
 																					<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $rep['id'] ?>">

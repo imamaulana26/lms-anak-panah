@@ -228,9 +228,14 @@ class Tugas extends CI_Controller
 			$cek_log = $this->db->get_where('tbl_log_forum', ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
 			if ($cek_log->num_rows() > 0) {
 				$log = $cek_log->row_array();
+				$exp = explode('::', $log['log_tugas']);
 
 				if ($log['log_tugas'] != '') {
-					$isi_log = $log['log_tugas'] . '::' . $data['pertemuan'];
+					if (in_array($data['pertemuan'], $exp)) {
+						$isi_log = $log['log_tugas'];
+					} else {
+						$isi_log = $log['log_tugas'] . '::' . $data['pertemuan'];
+					}
 					$this->db->update('tbl_log_forum', ['log_tugas' => $isi_log], ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
 				} else {
 					$this->db->update('tbl_log_forum', ['log_tugas' => $data['pertemuan']], ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
@@ -251,6 +256,35 @@ class Tugas extends CI_Controller
 		$komen = $this->input->post('komentar');
 		$id = $this->input->post('id');
 
+		if (!empty($_FILES['gambar']['name'])) {
+			$config['upload_path'] = './assets/test/';
+			$config['allowed_types'] = 'jpg|jpeg|png|gif|pdf';
+			$config['max_size'] = '1024'; // max_size in kb
+			$config['file_name'] = $_FILES['gambar']['name'];
+			$this->load->library('upload', $config);
+
+			// File upload
+			if ($this->upload->do_upload('gambar')) {
+				// Get data about the file
+				$uploadData = $this->upload->data();
+
+				$img = file_get_contents('./assets/test/' . $uploadData['file_name']);
+
+				// Encode the image string data into base64 
+				// $data = base64_encode($img); 
+
+				$base_64 = base64_encode($img);
+				$this->db->insert('tbl_base64', ['text' => $base_64]);
+				unlink('./assets/test/' . $uploadData['file_name']);
+				// $baseendoce = base64_decode($base_64);
+
+				// $data = file_get_contents($base_64);
+
+				// fclose( $ifp ); 
+				// echo '<img src="data:image/webp;base64,'.$base_64.'" />';
+			}
+		}
+
 		if (!empty($komen)) {
 			$data = array(
 				'id_forum' => $this->input->post('id_forum'),
@@ -266,9 +300,14 @@ class Tugas extends CI_Controller
 			$cek_log = $this->db->get_where('tbl_log_forum', ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
 			if ($cek_log->num_rows() > 0) {
 				$log = $cek_log->row_array();
+				$exp = explode('::', $log['log_tugas']);
 
 				if ($log['log_tugas'] != '') {
-					$isi_log = $log['log_tugas'] . '::' . $data['pertemuan'];
+					if (in_array($data['pertemuan'], $exp)) {
+						$isi_log = $log['log_tugas'];
+					} else {
+						$isi_log = $log['log_tugas'] . '::' . $data['pertemuan'];
+					}
 					$this->db->update('tbl_log_forum', ['log_tugas' => $isi_log], ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
 				} else {
 					$this->db->update('tbl_log_forum', ['log_tugas' => $data['pertemuan']], ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
@@ -317,6 +356,31 @@ class Tugas extends CI_Controller
 
 	public function edit_komen($id)
 	{
-		# code...
+		$this->db->select('*')->from('tbl_komen_tugas a')
+			->join('tbl_pelajaran b', 'a.id_forum = b.id_pelajaran', 'left')
+			->join('tbl_mapel c', 'b.kd_mapel = c.kd_mapel', 'left')
+			->where(['a.id' => $id]);
+		$res = $this->db->get()->row_array();
+
+		$data = array(
+			'title' => 'Tugas',
+			'data' => $res
+		);
+
+		$this->load->view('pengajar/layout/v_header');
+		$this->load->view('pengajar/layout/v_navbar');
+		$this->load->view('pengajar/v_edit_komen', $data);
+	}
+
+	public function update_komen()
+	{
+		$data = array(
+			'isi_komen' => $this->input->post('isi_materi')
+		);
+
+		$this->db->update('tbl_komen_tugas', $data, ['id' => $this->input->post('id_fm')]);
+
+		echo json_encode(['status' => true, 'id' => $this->input->post('kd_mapel')]);
+		exit;
 	}
 }

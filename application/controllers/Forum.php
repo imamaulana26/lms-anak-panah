@@ -373,6 +373,7 @@ class Forum extends CI_Controller
 		$res = $this->db->get()->row_array();
 
 		$data = array(
+			'title' => 'Forum',
 			'data' => $res
 		);
 

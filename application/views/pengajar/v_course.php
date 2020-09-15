@@ -20,7 +20,7 @@
 								<div class="card-img-caption">
 									<img class="card-img-top" src="<?= base_url('assets/front-end/dist/img/gradient.jpg') ?>">
 									<strong class="card-text"><?= strtoupper($val['nm_mapel']) ?></strong>
-									<p><?= $val['kelas_nama']  ?></p>
+									<p><?= $val['kelas_nama'] ?></p>
 								</div>
 								<div class="card-body">
 									<a href="<?= site_url('forum/') . $val['id_pelajaran'] ?>" id="forum"><i class="fas fa-fw fa-comments pr-1"></i> <?= $n_forum ?> forum posting</a>

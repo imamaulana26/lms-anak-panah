@@ -15,12 +15,13 @@ class M_course extends CI_Model
 			$data = $this->db->select('*')->from('tbl_pelajaran a')->join('tbl_mapel b', 'a.kd_mapel = b.kd_mapel', 'right')
 				->where(['a.id_kelas' => $dt_user['siswa_kelas_id']])->get();
 		} else {
-			$dt_user = $this->db->select('*')->from('tbl_pengguna a')->join('tbl_pengajar b', 'a.pengguna_nama = b.nm_pengajar', 'inner')
+			$dt_user = $this->db->select('*')->from('tbl_pengguna a')
+				->join('tbl_pengajar b', 'a.pengguna_nama = b.nm_pengajar', 'inner')
 				->where(['a.pengguna_username' => $user])->get()->row_array();
-
 			$data = $this->db->select('*')->from('tbl_pelajaran a')
 				->join('tbl_mapel b', 'a.kd_mapel = b.kd_mapel', 'right')
 				->join('tbl_pengajar c', 'a.kd_pengajar = c.id_pengajar', 'right')
+				->join('tbl_kelas d', 'a.id_kelas = d.kelas_id', 'inner')
 				->where(['c.id_pengajar' => $dt_user['id_pengajar']])->get();
 
 			// var_dump($data->result_array());

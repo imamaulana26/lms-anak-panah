@@ -29,7 +29,7 @@ switch ($ver) {
             'hostname' => 'localhost',
             'username' => 'root',
             'password' => '',
-            'database' => 'db_bukuinduk',
+            'database' => 'db_bukuinduk_merge',
             'dbdriver' => 'mysqli'
         );
         break;

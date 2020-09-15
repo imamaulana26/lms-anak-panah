@@ -189,11 +189,9 @@
 																				<i class='fa fa-ellipsis-v'></i>
 																			</a>
 																			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-																				<?php if ($this->session->userdata('nama') == $admin['pengguna_nama']) : ?>
-																					<a class="dropdown-item" href="<?= site_url('forum/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;">
-																						<i class="fa fa-fw fa-pencil-alt"></i> Sunting
-																					</a>
-																				<?php endif; ?>
+																				<a class="dropdown-item" href="<?= site_url('forum/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;">
+																					<i class="fa fa-fw fa-pencil-alt"></i> Sunting
+																				</a>
 																				<a class="dropdown-item" href="javascript:void(0)" onclick="hapus_komen('<?= $cmd['id'] ?>')" style="font-size: 12px; color: #dc3545;">
 																					<i class="fa fa-fw fa-times"></i> Hapus
 																				</a>
@@ -267,11 +265,9 @@
 																							<i class='fa fa-ellipsis-v'></i>
 																						</a>
 																						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-																							<?php if ($this->session->userdata('nama') == $admin['pengguna_nama']) : ?>
-																								<a class="dropdown-item" href="<?= site_url('forum/edit_komen/' . $rep['id']) ?>" style="font-size: 12px; color: #1e7e34;">
-																									<i class="fa fa-fw fa-pencil-alt"></i> Sunting
-																								</a>
-																							<?php endif ?>
+																							<a class="dropdown-item" href="<?= site_url('forum/edit_komen/' . $rep['id']) ?>" style="font-size: 12px; color: #1e7e34;">
+																								<i class="fa fa-fw fa-pencil-alt"></i> Sunting
+																							</a>
 																							<a class="dropdown-item" href="javascript:void(0)" onclick="hapus_subkomen('<?= $rep['id'] ?>')" style="font-size: 12px; color: #dc3545;">
 																								<i class="fa fa-fw fa-times"></i> Hapus
 																							</a>

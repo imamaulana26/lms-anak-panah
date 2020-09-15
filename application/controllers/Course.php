@@ -29,4 +29,28 @@ class Course extends CI_Controller
 			$this->load->view('pengajar/layout/v_footer');
 		}
 	}
+
+	function view($id){
+		// $data = $this->db->get_where('tbl_pelajaran', ['id_pelajaran' => $id])->row_array();
+		$data = $this->db->select('*')->from('tbl_pelajaran a')
+			->join('tbl_mapel b', 'a.kd_mapel = b.kd_mapel', 'inner')
+			->join('tbl_kelas c', 'a.id_kelas = c.kelas_id', 'inner')
+			->where(['a.id_pelajaran' => $id])->get()->row_array();
+
+		echo json_encode($data);
+		exit();
+	}
+	function update_oc(){
+		$data = array(
+			'link_oc' => $this->input->post('link_oc'),
+			'tgl_oc' => $this->input->post('jdl_kelas'),
+			'time_start' => $this->input->post('start_on'),
+			'time_end' => $this->input->post('end_on'),
+			'aktifkan' => $this->input->post('opsi_kls')
+		);
+		$this->db->update('tbl_pelajaran', $data,['id_pelajaran'=>$this->input->post('id')]);
+
+		echo json_encode(['msg' => 'berhasil']);
+		exit();
+	}
 }

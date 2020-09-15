@@ -284,7 +284,7 @@ class Tugas extends CI_Controller
 				// echo '<img src="data:image/webp;base64,'.$base_64.'" />';
 			}
 		}
-
+		
 		if (!empty($komen)) {
 			$data = array(
 				'id_forum' => $this->input->post('id_forum'),
@@ -371,7 +371,6 @@ class Tugas extends CI_Controller
 		$this->load->view('pengajar/layout/v_navbar');
 		$this->load->view('pengajar/v_edit_komen', $data);
 	}
-
 	public function update_komen()
 	{
 		$data = array(

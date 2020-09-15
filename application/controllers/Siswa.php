@@ -22,8 +22,75 @@ class Siswa extends CI_Controller{
 		$this->load->view('admin/v_siswa');
 	}
 
-	function _validasi(){
+	function online_class() {
+		$data['li_peserta'] = $this->db->get_where('tbl_siswa', ['soft_deleted' => 0])->result_array();
+
+		$this->load->view('admin/v_online_class', $data);
+	}
+
+	function save_online_class() {
+		$this->db->update('tbl_siswa', ['oc' => 0], ['oc' => 1]);
+
+		$peserta = $this->input->post('peserta[]');
+
+		foreach ($peserta as $key => $val) {
+			$this->db->update('tbl_siswa', ['oc' => 1], ['siswa_nis' => $val]);
+		}
+
+		redirect(site_url('siswa/online_class'));
+	}
+
+	function online_class_copy(){
+		$siswa = array();
+		$li_siswa = $this->db->get_where('tbl_siswa', ['soft_deleted' => 0])->result_array();
 		
+		foreach ($li_siswa as $key => $sis) {
+			$row = array();
+
+			$row[] = $sis['siswa_nis'];
+			$row[] = $sis['siswa_nama'];
+
+			$siswa[] = $row;
+		}
+
+		$output = array(
+			'li_peserta' => $siswa
+		);
+
+		// $data = array(
+		// 	array(
+		// 		'kelas' => 'Kelas I',
+		// 		'siswa' => array(
+		// 			array(
+		// 				'nis' => 123123,
+		// 				'nama' => 'Merik'
+		// 			),
+		// 			array(
+		// 				'nis' => 3124124124,
+		// 				'nama' => 'Imam'
+		// 			)
+		// 		)
+		// 	),
+		// 	array(
+		// 		'kelas' => 'Kelas II',
+		// 		'siswa' => array(
+		// 			array(
+		// 				'nis' => 512431,
+		// 				'nama' => 'Nugroho'
+		// 			),
+		// 			array(
+		// 				'nis' => 541234,
+		// 				'nama' => 'Maulana'
+		// 			),
+		// 			array(
+		// 				'nis' => 52311,
+		// 				'nama' => 'Ibrahim'
+		// 			)
+		// 		)
+		// 	)
+		// );
+
+		$this->load->view('admin/v_online_class', $output);
 	}
 
 	public function list_siswa()
@@ -44,7 +111,7 @@ class Siswa extends CI_Controller{
 			// $aksi .= '<a href="javascript:void(0)" title="Keluarkan Siswa" onclick="delete_siswa(' . "'" . $li['siswa_nis'] . "'" . ')"><i class="fa fa-fw fa-trash"></i></a> ';
 			// $aksi .= '<br><a href="keuangan"><i class="fa fa-fw fa-dollar"></i></a> ';
 			// $aksi .= ' <a href="javascript:void(0)" title="Detail Siswa" onclick="detail_siswa(' . "'" . $li['siswa_nis'] . "'" . ')"><i class="fa fa-fw fa-user"></i></a></center>';
-			
+
 			$aksi = '<a href="'.site_url('siswa/edit_siswa/'.$li['siswa_nis']).'" class="label label-success col-md-12"><i class="fa fa-fw fa-edit"></i> Edit Siswa</a><br>';
 			$aksi .= '<a href="javascript:delete_siswa('."'".$li['siswa_nis']."'".','."'".$li['siswa_nama']."'".')" class="label label-danger col-md-12"><i class="fa fa-fw fa-trash"></i>Keluarkan Siswa</a><br>';
 			$aksi .= '<a href="javascript:void(0)" class="label label-info col-md-12" onclick="detail_siswa('."'".$li['siswa_nis']."'".')"><i class="fa fa-fw fa-info"></i> Detail Siswa</a><br>';
@@ -107,7 +174,7 @@ class Siswa extends CI_Controller{
 		$result = $this->db->get()->row_array();
 		echo json_encode($result); exit;
 	}
-	
+
 	function edit_siswa($nis){
 		$sql = "select * from tbl_siswa a ";
 		$sql .= "left join tbl_orangtua b on a.siswa_nis = b.siswa_nis ";
@@ -187,7 +254,7 @@ class Siswa extends CI_Controller{
 					return;
 				}
 			}
-			
+
 			if($_FILES['file0']['type'] == 'application/pdf'){
 				$this->session->set_flashdata('msg','info');
 					// header("location:javascript://history.go(-1)");
@@ -265,7 +332,7 @@ class Siswa extends CI_Controller{
 
 					$this->upload->do_upload('file'.$i);
 					$dt_upload = $this->upload->data();
-					
+
 					if($dt_upload['is_image'] === true){
 						$config['image_library'] = 'gd2';
 						$config['source_image'] = './assets/filesiswa/'.$nis.'/'.$dt_upload['file_name'];
@@ -374,7 +441,7 @@ class Siswa extends CI_Controller{
 				} else {
 					// $path='./assets/filesiswa/'.$nis.'/'.$dt_ptlama;
 					// exit();
-					
+
 					$this->upload->do_upload('file'.$i);
 					$dt_upload = $this->upload->data();
 

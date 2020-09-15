@@ -50,7 +50,7 @@
 										<tbody>
 											<?php $no = 1;
 											$tagihan = $this->db->select('*')->from('tbl_pembayaran a')->join('tbl_tagihan b', 'a.jns_tagihan = b.id_tagihan', 'inner')
-												->where('a.nis_siswa', $this->session->userdata('username'))->get()->result_array();
+											->where('a.nis_siswa', $this->session->userdata('username'))->get()->result_array();
 											foreach ($tagihan as $tgh) { ?>
 												<tr>
 													<td><?= $no++ ?></td>
@@ -121,57 +121,72 @@
 			<!-- /.row -->
 			<!-- end of pemberitahuan -->
 
-			<!-- Next Agenda -->
-			<!-- <div class="row">
-                <div class="offset-1 col-sm-10">
-                    <div class="card card-primary card-outline">
-                        <div class="card-header">
-                            <h5 class="card-title m-0">Next Agenda</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="card" style="height: 21%">
-                                        <div class="card-header">
-                                            <i class="fas fa-fw fa-video mr-1"></i> Video Conference
-                                        </div>
-                                        <div class="m-3">
-                                            <p class="card-text"><i class="fas fa-fw fa-bookmark mr-1"></i> Business Application Development</p>
-                                            <p class="card-text"><i class="far fa-fw fa-calendar-alt mr-1"></i> <?= date('d M Y'); ?></p>
-                                            <p class="card-text"><i class="far fa-fw fa-clock mr-1"></i> 19:20 - 20:10</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="card" style="height: 21%">
-                                        <div class="card-header">
-                                            <i class="fas fa-fw fa-video mr-1"></i> Video Conference
-                                        </div>
-                                        <div class="m-3">
-                                            <p class="card-text"><i class="fas fa-fw fa-bookmark mr-1"></i> UI / UX Designer</p>
-                                            <p class="card-text"><i class="far fa-fw fa-calendar-alt mr-1"></i> <?= date('d M Y'); ?></p>
-                                            <p class="card-text"><i class="far fa-fw fa-clock mr-1"></i> 19:20 - 20:10</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="card" style="height: 21%">
-                                        <div class="card-header">
-                                            <i class="far fa-fw fa-file-alt mr-1"></i> Onsite Class Meeting
-                                        </div>
-                                        <div class="m-3">
-                                            <p class="card-text"><i class="fas fa-fw fa-bookmark mr-1"></i> Information System Project Management</p>
-                                            <p class="card-text"><i class="far fa-fw fa-calendar-alt mr-1"></i> <?= date('d M Y'); ?></p>
-                                            <p class="card-text"><i class="far fa-fw fa-clock mr-1"></i> 19:20 - 20:10</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+			<!-- Kelas Online -->
+			<div class="row">
+				<div class="offset-1 col-sm-10">
+					<div class="card card-primary card-outline">
+						<div class="card-header">
+							<h5 class="card-title m-0">Agenda Kelas Online</h5>
+						</div>
+						<div class="card-body ">
+							<div class="row">
+								<?php foreach ($oc as $online) {
+									?>
+									<div class="col-sm-4">
+										<div class="card" style="height: 21%">
+											<?php if ($online['aktifkan']==1) {
+												?>
+												<a href="<?= $online['link_oc']  ?>">
+													<div class="card-header bg-primary">
+														<i class="fas fa-fw fa-video mr-1 blink_me" style="color: #f72121"></i> Sedang Berlangsung
+													</div>
+												</a>
+											<?php } else{ ?>
+												<div class="card-header bg-light">
+													<i class="fas fa-fw fa-video mr-1"></i> Belum Dimulai
+												</div>
+											<?php } ?>
+			
+											<div class="m-3">
+												<p class="card-text"><i class="fas fa-fw fa-bookmark mr-1"></i> <?= $online['nm_mapel']  ?></p>
+												<p class="card-text"><i class="far fa-fw fa-calendar-alt mr-1"></i> <?= $online['tgl_oc'] ?></p>
+												<p class="card-text"><i class="far fa-fw fa-clock mr-1"></i> <?= $online['time_start'] ?> - <?= $online['time_end'] ?></p>
+											</div>
+										</div>
+									</div>
+								<?php } ?>
+								<!-- <div class="col-sm-4">
+									<div class="card" style="height: 21%">
+										<div class="card-header bg-light">
+											<i class="fas fa-fw fa-video mr-1"></i> Belum Dimulai
+										</div>
+										<div class="m-3">
+											<p class="card-text"><i class="fas fa-fw fa-bookmark mr-1"></i> Bahasa Indonesia (SPOK)</p>
+											<p class="card-text"><i class="far fa-fw fa-calendar-alt mr-1"></i> <?= date('d M Y'); ?></p>
+											<p class="card-text"><i class="far fa-fw fa-clock mr-1"></i> 10:20 - 11:10</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="card" style="height: 21%">
+										<div class="card-header bg-light">
+											<i class="fas fa-fw fa-video mr-1"></i> Belum Dimulai
+										</div>
+										<div class="m-3">
+											<p class="card-text"><i class="fas fa-fw fa-bookmark mr-1"></i> Bahasa Inggris (Past Tense)</p>
+											<p class="card-text"><i class="far fa-fw fa-calendar-alt mr-1"></i> <?= date('d M Y'); ?></p>
+											<p class="card-text"><i class="far fa-fw fa-clock mr-1"></i> 19:20 - 20:10</p>
+										</div>
+									</div>
+								</div> -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<!-- /.row -->
+
+			<!-- End Of Kelas Online -->
 
 			<div class="row">
 				<div class="offset-1 col-sm-10">
@@ -215,10 +230,10 @@
 									$n_tugas = $exp_tugas[0] == '' ? 0 : count($exp_tugas);
 
 									$li_materi = $this->db->select('a.id_pelajaran, b.nm_mapel')
-										->from('tbl_pelajaran a')
-										->join('tbl_mapel b', 'a.kd_mapel = b.kd_mapel', 'left')
-										->where(['a.id_kelas' => $dt_user['siswa_kelas_id'], 'a.id_pelajaran' => $log['id_forum']])
-										->group_by('a.id_pelajaran')->get()->result_array();
+									->from('tbl_pelajaran a')
+									->join('tbl_mapel b', 'a.kd_mapel = b.kd_mapel', 'left')
+									->where(['a.id_kelas' => $dt_user['siswa_kelas_id'], 'a.id_pelajaran' => $log['id_forum']])
+									->group_by('a.id_pelajaran')->get()->result_array();
 
 									foreach ($li_materi as $li) : ?>
 										<div class="col-sm-4">
@@ -239,7 +254,7 @@
 												</div>
 											</div>
 										</div>
-								<?php endforeach;
+									<?php endforeach;
 								} ?>
 							</div>
 						</div>
@@ -267,20 +282,20 @@
 				label: '# of Votes',
 				data: [12, 19, 3, 5, 2, 3],
 				backgroundColor: [
-					'rgba(255, 99, 132, 0.2)',
-					'rgba(54, 162, 235, 0.2)',
-					'rgba(255, 206, 86, 0.2)',
-					'rgba(75, 192, 192, 0.2)',
-					'rgba(153, 102, 255, 0.2)',
-					'rgba(255, 159, 64, 0.2)'
+				'rgba(255, 99, 132, 0.2)',
+				'rgba(54, 162, 235, 0.2)',
+				'rgba(255, 206, 86, 0.2)',
+				'rgba(75, 192, 192, 0.2)',
+				'rgba(153, 102, 255, 0.2)',
+				'rgba(255, 159, 64, 0.2)'
 				],
 				borderColor: [
-					'rgba(255, 99, 132, 1)',
-					'rgba(54, 162, 235, 1)',
-					'rgba(255, 206, 86, 1)',
-					'rgba(75, 192, 192, 1)',
-					'rgba(153, 102, 255, 1)',
-					'rgba(255, 159, 64, 1)'
+				'rgba(255, 99, 132, 1)',
+				'rgba(54, 162, 235, 1)',
+				'rgba(255, 206, 86, 1)',
+				'rgba(75, 192, 192, 1)',
+				'rgba(153, 102, 255, 1)',
+				'rgba(255, 159, 64, 1)'
 				],
 				borderWidth: 1
 			}]
@@ -295,4 +310,10 @@
 			}
 		}
 	});
+</script>
+
+<script>
+	(function blink() {
+		$('.blink_me').fadeOut(500).fadeIn(500, blink);
+	})();
 </script>

@@ -205,7 +205,7 @@
 													<th style="width: 25%">Tempat, Tanggal Lahir</th>
 													<td style="width: 15px">:</td>
 													<td><?= $siswa['wali_tempat'] == '' ? '-' :
-																$siswa['wali_tempat'] . ', ' . tgl_indo($siswa['wali_tanggal']) ?></td>
+															$siswa['wali_tempat'] . ', ' . tgl_indo($siswa['wali_tanggal']) ?></td>
 												</tr>
 												<tr>
 													<th style="width: 25%">Pendidikan Terkahir</th>

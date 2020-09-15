@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<!DOCTYPE math PUBLIC "-//W3C//DTD MathML 2.0//EN"
+	"http://www.w3.org/Math/DTD/mathml2/mathml2.dtd">
 <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
@@ -9,6 +10,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
+
 	<script>
 		window.MathJax = {
 			MathML: {
@@ -16,7 +18,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			}
 		};
 	</script>
-	<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=MML_HTMLorMML"></script>
+	<!-- <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=MML_HTMLorMML"></script> -->
+	
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<!-- <script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script> -->
+	<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['\\(','\\)']]}});</script>
+
 
 	<title>HS Anak Panah</title>
 
@@ -42,5 +49,5 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 
 
-<body class="hold-transition sidebar-collapse layout-top-nav">
+<body class="hold-transition sidebar-collapse layout-top-nav" xmlns:m="http://www.w3.org/1998/Math/MathML">
 	<div class="wrapper" style="height: 100%;">

@@ -72,51 +72,51 @@
 		border: 1px solid #ccc !important;
 		} */
 
-	.card-primary {
-		border-radius: 5px 5px 5px 5px;
-		-moz-border-radius: 5px 5px 5px 5px;
-		-webkit-border-radius: 5px 5px 5px 5px;
-		border: 0px solid #000000;
-	}
+		.card-primary {
+			border-radius: 5px 5px 5px 5px;
+			-moz-border-radius: 5px 5px 5px 5px;
+			-webkit-border-radius: 5px 5px 5px 5px;
+			border: 0px solid #000000;
+		}
 
-	.bordered {
-		border-left: 3px solid #007bff;
-	}
+		.bordered {
+			border-left: 3px solid #007bff;
+		}
 
-	#cke_editorfr1 {
-		width: 100%;
-	}
-</style>
+		#cke_editorfr1 {
+			width: 100%;
+		}
+	</style>
 
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-	<!-- Content Header (Page header) -->
-	<div class="content-header">
-		<div class="container">
-		</div><!-- /.container-fluid -->
-	</div>
-	<!-- /.content-header -->
-	<?php $page = (empty($this->session->flashdata('page'))) ? 1 : $this->session->flashdata('page'); ?>
-	<!-- Main content -->
-	<div class="content">
-		<div class="container">
-			<div class="row">
-				<div class="offset-1 col-sm-10">
-					<?php if (!empty($materi)) : ?>
-						<h2 class="pb-3">Forum <?= $forum['nm_mapel'] ?></h2>
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<div class="content-header">
+			<div class="container">
+			</div><!-- /.container-fluid -->
+		</div>
+		<!-- /.content-header -->
+		<?php $page = (empty($this->session->flashdata('page'))) ? 1 : $this->session->flashdata('page'); ?>
+		<!-- Main content -->
+		<div class="content">
+			<div class="container">
+				<div class="row">
+					<div class="offset-1 col-sm-10">
+						<?php if (!empty($materi)) : ?>
+							<h2 class="pb-3">Forum <?= $forum['nm_mapel'] ?></h2>
 
-						<div class="card card-outline">
-							<div class="card-primary card-body row bhoechie-tab-container">
-								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
-									<div class="list-group nav flex-column nav-pills">
-										<?php $user = $this->session->userdata('username');
-										$new = '<span class="badge badge-danger float-right">New</span>';
-										$cek = $this->db->get_where('tbl_log_forum', ['nisn_siswa' => $user, 'id_forum' => $this->uri->segment(2)])->row_array();
-										$exp = isset($cek['log_forum']) ? explode('::', $cek['log_forum']) : '';
+							<div class="card card-outline">
+								<div class="card-primary card-body row bhoechie-tab-container">
+									<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
+										<div class="list-group nav flex-column nav-pills">
+											<?php $user = $this->session->userdata('username');
+											$new = '<span class="badge badge-danger float-right">New</span>';
+											$cek = $this->db->get_where('tbl_log_forum', ['nisn_siswa' => $user, 'id_forum' => $this->uri->segment(2)])->row_array();
+											$exp = isset($cek['log_forum']) ? explode('::', $cek['log_forum']) : '';
 
-										foreach ($materi as $val) : ?>
-											<a href="#forum-<?= $val['pertemuan'] ?>" class="nav-link list-group-item <?= $val['pertemuan'] == $page ? 'active' : '' ?>" id="forum-<?= $val['pertemuan'] ?>-tab" aria-controls="forum-<?= $val['pertemuan'] ?>" data-toggle="pill" role="tab">
-												<h5>Forum Ke-<?= $val['pertemuan'] ?>
+											foreach ($materi as $val) : ?>
+												<a href="#forum-<?= $val['pertemuan'] ?>" class="nav-link list-group-item <?= $val['pertemuan'] == $page ? 'active' : '' ?>" id="forum-<?= $val['pertemuan'] ?>-tab" aria-controls="forum-<?= $val['pertemuan'] ?>" data-toggle="pill" role="tab">
+													<h5>Forum Ke-<?= $val['pertemuan'] ?>
 													<?php $status = false;
 													if ($exp) {
 														foreach ($exp as $key => $n) {
@@ -166,7 +166,10 @@
 																<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
 																<div class="input-group">
 																	<!-- <input type="text" name="komentar" class="form-control" id="komentar" placeholder="Tulis balasan..."> -->
-																	<textarea name="komentar" id="editorfr<?= $val['id'] ?>" placeholder="Type Here"></textarea>
+																	<?php $test = $this->db->get_where('tbl_komen_forum', ['id'=>52])->row_array(); ?>
+																	<textarea name="komentar" id="editorfr<?= $val['id'] ?>"> 
+																		<?= $test['isi_komen'];  ?>
+																	</textarea>
 																</div>
 
 																<div class="form-group">
@@ -223,142 +226,142 @@
 																<div class="card-body bordered pb-0">
 																	<p>
 																		<?= $cmd['isi_komen'] ?>
-																	</p>
-																	<div>
-																		<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $cmd['id'] ?>">
-																			<i class="fa fa-fw fa-reply"></i> Balas
-																		</a>
-																		<span data-toggle="collapse" data-target="#comments-<?= $cmd['id'] ?>" aria-expanded="false" aria-controls="comments" style="cursor: pointer;">
-																			<?php $li_reply = $this->db->get_where('tbl_komen_forum', ['reply_to' => $cmd['id']])->num_rows(); ?>
-																			<i class="fa fa-fw fa-comments"></i> Komentar (<?= $li_reply ?>)
-																		</span>
-																	</div>
-																	<div class="collapse pt-3" id="show_komen-<?= $cmd['id'] ?>">
-																		<div class="card card-body">
-																			<form action="<?= site_url('forum/submit_komen') ?>" method="post" autocomplete="off" enctype="multipart/form-data">
-																				<input type="hidden" name="id" id="id" value="<?= $val['id'] ?>">
-																				<input type="hidden" name="id_forum" id="id_forum" value="<?= $cmd['id_forum'] ?>">
-																				<input type="hidden" name="pertemuan" id="pertemuan" value="<?= $cmd['pertemuan'] ?>">
-																				<input type="hidden" name="mention" id="mention" value="<?= $cmd['user_komen'] ?>">
-																				<input type="hidden" name="reply_to" id="reply_to" value="<?= $cmd['id'] ?>">
-																				<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
-																				<div class="form-group">
-																					<!-- <input type="text" name="komentar" class="form-control" id="komentar" placeholder="Tulis balasan..."> -->
-																					<textarea name="komentar" id="editor<?= $cmd['id'] ?>" rows="10" cols="45" placeholder="Type Here"></textarea>
-																				</div>
+																		</p>
+																		<div>
+																			<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $cmd['id'] ?>">
+																				<i class="fa fa-fw fa-reply"></i> Balas
+																			</a>
+																			<span data-toggle="collapse" data-target="#comments-<?= $cmd['id'] ?>" aria-expanded="false" aria-controls="comments" style="cursor: pointer;">
+																				<?php $li_reply = $this->db->get_where('tbl_komen_forum', ['reply_to' => $cmd['id']])->num_rows(); ?>
+																				<i class="fa fa-fw fa-comments"></i> Komentar (<?= $li_reply ?>)
+																			</span>
+																		</div>
+																		<div class="collapse pt-3" id="show_komen-<?= $cmd['id'] ?>">
+																			<div class="card card-body">
+																				<form action="<?= site_url('forum/submit_komen') ?>" method="post" autocomplete="off" enctype="multipart/form-data">
+																					<input type="hidden" name="id" id="id" value="<?= $val['id'] ?>">
+																					<input type="hidden" name="id_forum" id="id_forum" value="<?= $cmd['id_forum'] ?>">
+																					<input type="hidden" name="pertemuan" id="pertemuan" value="<?= $cmd['pertemuan'] ?>">
+																					<input type="hidden" name="mention" id="mention" value="<?= $cmd['user_komen'] ?>">
+																					<input type="hidden" name="reply_to" id="reply_to" value="<?= $cmd['id'] ?>">
+																					<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
+																					<div class="form-group">
+																						<!-- <input type="text" name="komentar" class="form-control" id="komentar" placeholder="Tulis balasan..."> -->
+																						<textarea name="komentar" id="editor<?= $cmd['id'] ?>" rows="10" cols="45" placeholder="Type Here"></textarea>
+																					</div>
 
-																				<div class="form-group">
-																					<label for="gambar">Masukan Gambar disini</label>
-																					<input type="file" class="form-control-file" id="gambar" name="gambar">
-																				</div>
-																				<div class="input-group-append" style="width: 100%">
-																					<button class="btn btn-info" type="submit" style="width: 100%"><i class="fa fa-fw fa-paper-plane"></i></button>
-																				</div>
-																			</form>
+																					<div class="form-group">
+																						<label for="gambar">Masukan Gambar disini</label>
+																						<input type="file" class="form-control-file" id="gambar" name="gambar">
+																					</div>
+																					<div class="input-group-append" style="width: 100%">
+																						<button class="btn btn-info" type="submit" style="width: 100%"><i class="fa fa-fw fa-paper-plane"></i></button>
+																					</div>
+																				</form>
+																			</div>
 																		</div>
 																	</div>
-																</div>
 
-																<?php $reply = $this->db->get_where('tbl_komen_forum', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'reply_to' => $cmd['id']]);
-																foreach ($reply->result_array() as $rep) :
-																	$rep_siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['user_komen']])->row_array();
-																	$admin = $this->db->get_where('tbl_pengguna', ['pengguna_username' => $rep['user_komen']])->row_array();
+																	<?php $reply = $this->db->get_where('tbl_komen_forum', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'reply_to' => $cmd['id']]);
+																	foreach ($reply->result_array() as $rep) :
+																		$rep_siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['user_komen']])->row_array();
+																		$admin = $this->db->get_where('tbl_pengguna', ['pengguna_username' => $rep['user_komen']])->row_array();
 
-																	$rep_user = ($rep_siswa == null) ? $admin['pengguna_nama'] . ' (pengajar)' : $rep_siswa['siswa_nama'];
-																	$mention = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['mention']])->row_array(); ?>
-																	<!-- Reply Main Comments -->
-																	<div class="collapse <?= $this->session->flashdata('mention') == $cmd['id'] ? 'show' : '' ?>" id="comments-<?= $cmd['id'] ?>">
-																		<div class="col-lg ml-3">
-																			<div class="card-header bordered mt-3 d-flex">
-																				<div class="col-md-1">
-																					<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
-																				</div>
-																				<div class="col-md">
-																					<strong class="float-left"><?= $rep_user ?></strong>
-																					<?php if ($rep_siswa['siswa_nis'] == $user) : ?>
-																						<small class="float-right text-secondary">
-																							<div class="dropdown mx-1">
-																								<a href="#" class="btn btn-link btn-xs" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-																									<i class='fa fa-ellipsis-v'></i>
-																								</a>
-																								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-																									<a class="dropdown-item" href="<?= site_url('forum/edit_komen/' . $rep['id']) ?>" style="font-size: 12px; color: #1e7e34;">
-																										<i class="fa fa-fw fa-pencil-alt"></i> Sunting
+																		$rep_user = ($rep_siswa == null) ? $admin['pengguna_nama'] . ' (pengajar)' : $rep_siswa['siswa_nama'];
+																		$mention = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['mention']])->row_array(); ?>
+																		<!-- Reply Main Comments -->
+																		<div class="collapse <?= $this->session->flashdata('mention') == $cmd['id'] ? 'show' : '' ?>" id="comments-<?= $cmd['id'] ?>">
+																			<div class="col-lg ml-3">
+																				<div class="card-header bordered mt-3 d-flex">
+																					<div class="col-md-1">
+																						<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
+																					</div>
+																					<div class="col-md">
+																						<strong class="float-left"><?= $rep_user ?></strong>
+																						<?php if ($rep_siswa['siswa_nis'] == $user) : ?>
+																							<small class="float-right text-secondary">
+																								<div class="dropdown mx-1">
+																									<a href="#" class="btn btn-link btn-xs" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																										<i class='fa fa-ellipsis-v'></i>
 																									</a>
-																									<a class="dropdown-item" href="javascript:void(0)" onclick="hapus_subkomen('<?= $rep['id'] ?>')" style="font-size: 12px; color: #dc3545;">
-																										<i class="fa fa-fw fa-times"></i> Hapus
-																									</a>
+																									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+																										<a class="dropdown-item" href="<?= site_url('forum/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;">
+																											<i class="fa fa-fw fa-pencil-alt"></i> Sunting
+																										</a>
+																										<a class="dropdown-item" href="javascript:void(0)" onclick="hapus_subkomen('<?= $rep['id'] ?>')" style="font-size: 12px; color: #dc3545;">
+																											<i class="fa fa-fw fa-times"></i> Hapus
+																										</a>
+																									</div>
 																								</div>
-																							</div>
-																						</small>
-																					<?php endif; ?>
-																					<small class="float-right text-secondary"><?= date('d M y', strtotime($rep['createDate'])) ?></small>
-																					<div class="clearfix"></div>
+																							</small>
+																						<?php endif; ?>
+																						<small class="float-right text-secondary"><?= date('d M y', strtotime($rep['createDate'])) ?></small>
+																						<div class="clearfix"></div>
+																					</div>
 																				</div>
-																			</div>
-																			<div class="card-body bordered pb-0">
-																				<p>
-																					<b><?= $mention['siswa_nama'] ?></b> <?= $rep['isi_komen'] ?>
-																				</p>
-																				<div>
-																					<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $rep['id'] ?>">
-																						<i class="fa fa-fw fa-reply"></i> Balas
-																					</a>
-																				</div>
-																				<div class="collapse pt-5" id="show_komen-<?= $rep['id'] ?>">
-																					<div class="card card-body">
-																						<form action="<?= site_url('forum/submit_komen') ?>" method="post" autocomplete="off" enctype="multipart/form-data">
-																							<input type="hidden" name="id" id="id" value="<?= $cmd['id'] ?>">
-																							<input type="hidden" name="id_forum" id="id_forum" value="<?= $rep['id_forum'] ?>">
-																							<input type="hidden" name="pertemuan" id="pertemuan" value="<?= $rep['pertemuan'] ?>">
-																							<input type="hidden" name="mention" id="mention" value="<?= $rep['user_komen'] ?>">
-																							<input type="hidden" name="reply_to" id="reply_to" value="<?= $cmd['id'] ?>">
-																							<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
-																							<div class="form-group">
-																								<!-- <input type="text" name="komentar" class="form-control" id="komentar" placeholder="Tulis balasan..."> -->
-																								<textarea name="komentar" id="editor<?= $rep['id'] ?>" rows="10" cols="45" placeholder="Type Here"></textarea>
-																							</div>
+																				<div class="card-body bordered pb-0">
+																					<p>
+																						<b><?= $mention['siswa_nama'] ?></b> <?= $rep['isi_komen'] ?>
+																					</p>
+																					<div>
+																						<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $rep['id'] ?>">
+																							<i class="fa fa-fw fa-reply"></i> Balas
+																						</a>
+																					</div>
+																					<div class="collapse pt-5" id="show_komen-<?= $rep['id'] ?>">
+																						<div class="card card-body">
+																							<form action="<?= site_url('forum/submit_komen') ?>" method="post" autocomplete="off" enctype="multipart/form-data">
+																								<input type="hidden" name="id" id="id" value="<?= $cmd['id'] ?>">
+																								<input type="hidden" name="id_forum" id="id_forum" value="<?= $rep['id_forum'] ?>">
+																								<input type="hidden" name="pertemuan" id="pertemuan" value="<?= $rep['pertemuan'] ?>">
+																								<input type="hidden" name="mention" id="mention" value="<?= $rep['user_komen'] ?>">
+																								<input type="hidden" name="reply_to" id="reply_to" value="<?= $cmd['id'] ?>">
+																								<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
+																								<div class="form-group">
+																									<!-- <input type="text" name="komentar" class="form-control" id="komentar" placeholder="Tulis balasan..."> -->
+																									<textarea name="komentar" id="editor<?= $rep['id'] ?>" rows="10" cols="45" placeholder="Type Here"></textarea>
+																								</div>
 
-																							<div class="form-group">
-																								<label for="gambar">Masukan Gambar disini</label>
-																								<input type="file" class="form-control-file" id="gambar" name="gambar">
-																							</div>
-																							<div class="input-group-append" style="width: 100%">
-																								<button class="btn btn-info" type="submit" style="width: 100%"><i class="fa fa-fw fa-paper-plane"></i></button>
-																							</div>
-																						</form>
+																								<div class="form-group">
+																									<label for="gambar">Masukan Gambar disini</label>
+																									<input type="file" class="form-control-file" id="gambar" name="gambar">
+																								</div>
+																								<div class="input-group-append" style="width: 100%">
+																									<button class="btn btn-info" type="submit" style="width: 100%"><i class="fa fa-fw fa-paper-plane"></i></button>
+																								</div>
+																							</form>
+																						</div>
 																					</div>
 																				</div>
 																			</div>
 																		</div>
-																	</div>
-																	<!-- End of Reply Main Comments -->
+																		<!-- End of Reply Main Comments -->
+																	<?php endforeach; ?>
 																<?php endforeach; ?>
-															<?php endforeach; ?>
+															</div>
+															<!-- End of Main Comments -->
 														</div>
-														<!-- End of Main Comments -->
 													</div>
 												</div>
 											</div>
-										</div>
-									<?php endforeach; ?>
+										<?php endforeach; ?>
+									</div>
 								</div>
 							</div>
+							<?php else : ?>
+								<h2 class="pb-3 text-center">Forum Tidak Tersedia</h2>
+							<?php endif; ?>
 						</div>
-					<?php else : ?>
-						<h2 class="pb-3 text-center">Forum Tidak Tersedia</h2>
-					<?php endif; ?>
+					</div>
 				</div>
 			</div>
+			<?php $this->load->view('siswa/v_schedule') ?>
 		</div>
-	</div>
-	<?php $this->load->view('siswa/v_schedule') ?>
-</div>
 
-<?php $this->load->view('siswa/layout/v_js'); ?>
+		<?php $this->load->view('siswa/layout/v_js'); ?>
 
-<script>
-	$(document).ready(function() {
+		<script>
+			$(document).ready(function() {
 		// forum
 		$.ajax({
 			url: "<?= site_url('forum/datafr_id/') ?>" + <?= $this->uri->segment(2); ?>,
@@ -366,7 +369,53 @@
 			dataType: 'json',
 			success: function(data) {
 				for (var i = 0; i < data.length; i++) {
-					CKEDITOR.replace('editorfr' + data[i].id);
+					var mathElements = [
+					'math',
+					'maction',
+					'maligngroup',
+					'malignmark',
+					'menclose',
+					'merror',
+					'mfenced',
+					'mfrac',
+					'mglyph',
+					'mi',
+					'mlabeledtr',
+					'mlongdiv',
+					'mmultiscripts',
+					'mn',
+					'mo',
+					'mover',
+					'mpadded',
+					'mphantom',
+					'mroot',
+					'mrow',
+					'ms',
+					'mscarries',
+					'mscarry',
+					'msgroup',
+					'msline',
+					'mspace',
+					'msqrt',
+					'msrow',
+					'mstack',
+					'mstyle',
+					'msub',
+					'msup',
+					'msubsup',
+					'mtable',
+					'mtd',
+					'mtext',
+					'mtr',
+					'munder',
+					'munderover',
+					'semantics',
+					'annotation',
+					'annotation-xml'
+					];
+					CKEDITOR.replace('editorfr' + data[i].id,{
+						extraAllowedContent: mathElements.join( ' ' ) + '(*)[*]{*};img[data-mathml,data-custom-editor,role](Wirisformula)'
+					});
 				}
 			}
 		});
@@ -384,34 +433,34 @@
 		});
 	});
 
-	$('#myTab.nav-link').on('click', function(e) {
-		e.preventDefault()
-		$(this).tab('show')
-	});
+			$('#myTab.nav-link').on('click', function(e) {
+				e.preventDefault()
+				$(this).tab('show')
+			});
 
-	function hapus_komen(id) {
-		Swal.fire({
-			title: 'Hapus komentar ini?',
-			text: "Komentar yang dihapus tidak bisa dikembalikan lagi!",
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Hapus',
-			cancelButtonText: 'Tidak'
-		}).then((result) => {
-			if (result.value) {
-				$.ajax({
-					url: "<?= site_url('forum/delete_komen/') ?>" + id,
-					type: "POST",
-					dataType: "JSON",
-					success: function(res) {
-						Swal.fire({
-							icon: 'success',
-							title: 'Sukses',
-							text: res.msg,
-							timer: 2000,
-							timerProgressBar: true,
+			function hapus_komen(id) {
+				Swal.fire({
+					title: 'Hapus komentar ini?',
+					text: "Komentar yang dihapus tidak bisa dikembalikan lagi!",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Hapus',
+					cancelButtonText: 'Tidak'
+				}).then((result) => {
+					if (result.value) {
+						$.ajax({
+							url: "<?= site_url('forum/delete_komen/') ?>" + id,
+							type: "POST",
+							dataType: "JSON",
+							success: function(res) {
+								Swal.fire({
+									icon: 'success',
+									title: 'Sukses',
+									text: res.msg,
+									timer: 2000,
+									timerProgressBar: true,
 							// onBeforeOpen: () => {
 							// 	Swal.showLoading()
 							// },
@@ -423,33 +472,33 @@
 						})
 					}
 				});
+					}
+				})
 			}
-		})
-	}
 
-	function hapus_subkomen(id) {
-		Swal.fire({
-			title: 'Hapus komentar ini?',
-			text: "Komentar yang dihapus tidak bisa dikembalikan lagi!",
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Hapus',
-			cancelButtonText: 'Tidak'
-		}).then((result) => {
-			if (result.value) {
-				$.ajax({
-					url: "<?= site_url('forum/delete_subkomen/') ?>" + id,
-					type: "POST",
-					dataType: "JSON",
-					success: function(res) {
-						Swal.fire({
-							icon: 'success',
-							title: 'Sukses',
-							text: res.msg,
-							timer: 2000,
-							timerProgressBar: true,
+			function hapus_subkomen(id) {
+				Swal.fire({
+					title: 'Hapus komentar ini?',
+					text: "Komentar yang dihapus tidak bisa dikembalikan lagi!",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Hapus',
+					cancelButtonText: 'Tidak'
+				}).then((result) => {
+					if (result.value) {
+						$.ajax({
+							url: "<?= site_url('forum/delete_subkomen/') ?>" + id,
+							type: "POST",
+							dataType: "JSON",
+							success: function(res) {
+								Swal.fire({
+									icon: 'success',
+									title: 'Sukses',
+									text: res.msg,
+									timer: 2000,
+									timerProgressBar: true,
 							// onBeforeOpen: () => {
 							// 	Swal.showLoading()
 							// },
@@ -461,7 +510,7 @@
 						})
 					}
 				});
+					}
+				})
 			}
-		})
-	}
-</script>
+		</script>

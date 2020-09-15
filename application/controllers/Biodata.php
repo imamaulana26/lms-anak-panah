@@ -12,7 +12,7 @@ class Biodata extends CI_Controller
 		};
 		$this->load->helper('tanggal_helper');
 	}
-
+	
 	function index()
 	{
 		// var_dump($this->session->userdata('user'));

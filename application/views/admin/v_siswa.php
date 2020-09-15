@@ -27,6 +27,8 @@ if ($c['pengguna_level']==2) {
   <link rel="stylesheet" href="<?php echo base_url().'assets/font-awesome/css/font-awesome.min.css'?>">
   <!-- DataTables -->
   <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/datatables/dataTables.bootstrap.css'?>">
+  <!-- Selectpicker -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url().'assets/dist/css/AdminLTE.min.css'?>">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -44,18 +46,106 @@ if ($c['pengguna_level']==2) {
    $this->load->view('admin/v_header');
    ?>
    <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar">
-      <!-- sidebar: style can be found in sidebar.less -->
-      <section class="sidebar">
-        <!-- /.search form -->
-        <!-- sidebar menu: : style can be found in sidebar.less -->
-        <ul class="sidebar-menu">
+   <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- /.search form -->
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu">
 
-          <li class="header">Menu Utama</li>
-          <?php if ($c['pengguna_level']==1): ?>
+        <li class="header">Menu Utama</li>
+        <?php if ($c['pengguna_level']==1): ?>
 
-            <li>
-              <a href="<?php echo base_url().'dashboard'?>">
+          <li>
+            <a href="<?php echo base_url().'dashboard'?>">
+              <i class="fa fa-home"></i> <span>Dashboard</span>
+              <span class="pull-right-container">
+                <small class="label pull-right"></small>
+              </span>
+            </a>
+          </li>
+
+          <li>
+            <a href="<?php echo base_url().'datalembaga'?>">
+              <i class="fa fa-building"></i> <span>Lembaga</span>
+              <span class="pull-right-container">
+                <small class="label pull-right"></small>
+              </span>
+            </a>
+          </li>
+
+          <li>
+            <a href="<?php echo base_url().'satelit'?>">
+              <i class="fa fa-rocket"></i> <span>Data Satelit</span>
+              <span class="pull-right-container">
+                <small class="label pull-right"></small>
+              </span>
+            </a>
+          </li>
+
+
+          <li>
+            <a href="<?php echo base_url().'pegawai'?>">
+              <i class="fa fa-server" aria-hidden="true"></i>
+              <span>Pegawai</span>
+              <span class="pull-right-container">
+                <small class="label pull-right"></small>
+              </span>
+            </a>
+          </li>
+
+          <li class="treeview active">
+            <a href="#">
+              <i class="fa fa-user"></i>
+              <span>Kesiswaan</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="active"><a href="<?php echo base_url().'siswa'?>"><i class="fa fa-users"></i> Data Siswa</a></li>
+              <li><a href="<?php echo base_url().'siswa_keluar'?>"><i class="fa fa-star-o"></i> PD Keluar</a></li>
+            </ul>
+          </li>
+
+
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-files-o"></i>
+              <span>E-Raport</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="<?php echo base_url().'mapel'?>"><i class="fa fa-list-ol"></i> Mapel</a></li>
+              <li><a href="<?php echo base_url().'nilai_raport'?>"><i class="fa fa-sort-numeric-asc"></i> Nilai Raport</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <a href="<?php echo base_url().'kisikisi'?>">
+              <i class="fa fa-file-text"></i> <span>Kisi-Kisi</span>
+              <span class="pull-right-container">
+                <small class="label pull-right bg-green"></small>
+              </span>
+            </a>
+          </li>
+
+          <li>
+            <a href="<?php echo base_url().'keuangan'?>">
+              <i class="fa fa-money"></i> <span>Keuangan</span>
+              <span class="pull-right-container">
+                <small class="label pull-right bg-green"></small>
+              </span>
+            </a>
+          </li>
+
+
+          <?php else: ?>
+
+            <li class="active">
+              <a href="<?php echo base_url().'dashboard-siswa'?>">
                 <i class="fa fa-home"></i> <span>Dashboard</span>
                 <span class="pull-right-container">
                   <small class="label pull-right"></small>
@@ -64,134 +154,46 @@ if ($c['pengguna_level']==2) {
             </li>
 
             <li>
-              <a href="<?php echo base_url().'datalembaga'?>">
-                <i class="fa fa-building"></i> <span>Lembaga</span>
+              <a href="<?php echo base_url().'keuangan-siswa'?>">
+                <i class="fa fa-calendar"></i> <span>Keuangan</span>
                 <span class="pull-right-container">
                   <small class="label pull-right"></small>
                 </span>
               </a>
             </li>
 
-            <li>
-              <a href="<?php echo base_url().'satelit'?>">
-                <i class="fa fa-rocket"></i> <span>Data Satelit</span>
-                <span class="pull-right-container">
-                  <small class="label pull-right"></small>
-                </span>
-              </a>
-            </li>
-
-            
-            <li>
-              <a href="<?php echo base_url().'pegawai'?>">
-                <i class="fa fa-server" aria-hidden="true"></i>
-                <span>Pegawai</span>
-                <span class="pull-right-container">
-                  <small class="label pull-right"></small>
-                </span>
-              </a>
-            </li>
-
-            <li class="treeview active">
-              <a href="#">
-                <i class="fa fa-user"></i>
-                <span>Kesiswaan</span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                <li class="active"><a href="<?php echo base_url().'siswa'?>"><i class="fa fa-users"></i> Data Siswa</a></li>
-                <li><a href="<?php echo base_url().'siswa_keluar'?>"><i class="fa fa-star-o"></i> PD Keluar</a></li>
-              </ul>
-            </li>
-
-
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-files-o"></i>
-                <span>E-Raport</span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="<?php echo base_url().'mapel'?>"><i class="fa fa-list-ol"></i> Mapel</a></li>
-                <li><a href="<?php echo base_url().'nilai_raport'?>"><i class="fa fa-sort-numeric-asc"></i> Nilai Raport</a></li>
-              </ul>
-            </li>
 
             <li>
               <a href="<?php echo base_url().'kisikisi'?>">
-                <i class="fa fa-file-text"></i> <span>Kisi-Kisi</span>
-                <span class="pull-right-container">
-                  <small class="label pull-right bg-green"></small>
-                </span>
-              </a>
-            </li>
-
-            <li>
-              <a href="<?php echo base_url().'keuangan'?>">
-                <i class="fa fa-money"></i> <span>Keuangan</span>
-                <span class="pull-right-container">
-                  <small class="label pull-right bg-green"></small>
-                </span>
-              </a>
-            </li>
-
-
-            <?php else: ?>
-
-              <li class="active">
-                <a href="<?php echo base_url().'dashboard-siswa'?>">
-                  <i class="fa fa-home"></i> <span>Dashboard</span>
-                  <span class="pull-right-container">
-                    <small class="label pull-right"></small>
-                  </span>
-                </a>
-              </li>
-
-              <li>
-                <a href="<?php echo base_url().'keuangan-siswa'?>">
-                  <i class="fa fa-calendar"></i> <span>Keuangan</span>
-                  <span class="pull-right-container">
-                    <small class="label pull-right"></small>
-                  </span>
-                </a>
-              </li>
-
-
-              <li>
-                <a href="<?php echo base_url().'kisikisi'?>">
-                  <i class="fa fa-calendar"></i> <span>Kisi - Kisi</span>
-                  <span class="pull-right-container">
-                    <small class="label pull-right"></small>
-                  </span>
-                </a>
-              </li>
-
-              <li>
-                <a href="#">
-                  <i class="fa fa-calendar"></i> <span>Evaluasi</span>
-                  <span class="pull-right-container">
-                    <small class="label pull-right"></small>
-                  </span>
-                </a>
-              </li>
-
-            <?php endif ?>
-            <li >
-              <a href="<?php echo base_url().'login/logout'?>" >
-                <i class="fa fa-sign-out"></i> <span>Sign Out</span>
+                <i class="fa fa-calendar"></i> <span>Kisi - Kisi</span>
                 <span class="pull-right-container">
                   <small class="label pull-right"></small>
                 </span>
               </a>
             </li>
-          </ul>
-        </section>
-        <!-- /.sidebar -->
-      </aside>
+
+            <li>
+              <a href="#">
+                <i class="fa fa-calendar"></i> <span>Evaluasi</span>
+                <span class="pull-right-container">
+                  <small class="label pull-right"></small>
+                </span>
+              </a>
+            </li>
+
+          <?php endif ?>
+          <li >
+            <a href="<?php echo base_url().'login/logout'?>" >
+              <i class="fa fa-sign-out"></i> <span>Sign Out</span>
+              <span class="pull-right-container">
+                <small class="label pull-right"></small>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <!-- /.sidebar -->
+    </aside>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
@@ -225,103 +227,105 @@ if ($c['pengguna_level']==2) {
                       ?>
                     </select>
                   </div>
-                  <div class="col-md-2" style="float: right;">
+                  
+                  <div class="col-md-6" style="float: right;">
                     <div class="box-header">
                       <a class="btn btn-success btn-flat" style="float: right;" href="<?= site_url('siswa/add_siswa') ?>"><span class="fa fa-plus"></span> Add Siswa</a>
-                    </div>   
+                      <a href="<?= site_url('siswa/online_class') ?>" class="btn btn-info btn-flat" style="float: right; margin-right: 20px;">Online Class</a>
+                      </div>  
+                    </div>
                   </div>
                 </div>
-              </div>
-              <!-- /.box-header -->
-              <div class="box-body">
-                <div>
-                  <table id="table" class="table table-striped table-hover" cellspacing="0" width="100%">
-                    <thead>
-                      <tr>
-                        <th>No</th>
-                        <th>NIS</th>
-                        <th>Nama Siswa</th>
-                        <th>Kelas</th>
-                        <th>Email</th>
-                        <th>No. Telepon</th>
-                        <th>Satelit</th>
-                        <th class="text-center">Aksi</th>
-                      </tr>
-                    </thead>
-                    <tbody id="data_siswa">
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <!-- /.box-body -->
-              <div class="box"> 
-                <div id="table2"> </div>
-              </div>
-            </div>
-            <!-- /.box -->
-          </div>
-        </div>
-        <!-- /.row -->
-      </section>
-    </div>
-    <!-- /.content -->
-    <div class="modal fade" id="modaleditsiswa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
-            <h4 class="modal-title" id="myModalLabel">x </h4>
-          </div>
-          <form class="form-horizontal" action="#" method="post" enctype="multipart/form-data">
-            <div class="modal-body">       
-              <div class="form-group">
-                <label for="inputsiswaName" class="col-sm-4 control-label" ></label>
-                <p>Name: <input id="nama" type="text" name="siswa"></p>
-                <div class="col-sm-7">
-                  <h2></h2>
-                </div>
-                <div class="form-group">
-                  <label for="inputsiswaName" class="col-sm-4 control-label">Keterangan</label>
-                  <div class="col-sm-7">
-                    <textarea cols="30" rows="3" name="xkeuanganket">xx</textarea>
+                <!-- /.box-header -->
+                <div class="box-body">
+                  <div>
+                    <table id="table" class="table table-striped table-hover" cellspacing="0" width="100%">
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>NIS</th>
+                          <th>Nama Siswa</th>
+                          <th>Kelas</th>
+                          <th>Email</th>
+                          <th>No. Telepon</th>
+                          <th>Satelit</th>
+                          <th class="text-center">Aksi</th>
+                        </tr>
+                      </thead>
+                      <tbody id="data_siswa">
+                      </tbody>
+                    </table>
                   </div>
                 </div>
+                <!-- /.box-body -->
+                <div class="box"> 
+                  <div id="table2"> </div>
+                </div>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary btn-flat" id="simpan">Simpan</button>
-              </div>
+              <!-- /.box -->
             </div>
-          </form>
-        </div>
+          </div>
+          <!-- /.row -->
+        </section>
       </div>
-    </div>
-
-    <div class="modal fade" id="modal_send_msg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
-            <h4 class="modal-title" id="myModalLabel">Kirim Pesan Siswa</h4>
-          </div>
-          <form class="form-horizontal" id="form_msg">
-            <div class="modal-body">
-              <input type="hidden" name="nis" id="nis">
-              <div class="form-group">
-                <label for="inputsiswaName" class="col-sm-4 control-label">Keterangan</label>
-                <div class="col-sm-7">
-                  <textarea cols="30" rows="3" name="pesan" id="pesan"></textarea>
+      <!-- /.content -->
+      <div class="modal fade" id="modaleditsiswa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
+              <h4 class="modal-title" id="myModalLabel">x </h4>
+            </div>
+            <form class="form-horizontal" action="#" method="post" enctype="multipart/form-data">
+              <div class="modal-body">       
+                <div class="form-group">
+                  <label for="inputsiswaName" class="col-sm-4 control-label" ></label>
+                  <p>Name: <input id="nama" type="text" name="siswa"></p>
+                  <div class="col-sm-7">
+                    <h2></h2>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputsiswaName" class="col-sm-4 control-label">Keterangan</label>
+                    <div class="col-sm-7">
+                      <textarea cols="30" rows="3" name="xkeuanganket">xx</textarea>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
-                <span class="btn btn-primary btn-flat" onclick="save_form()">Simpan</button>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary btn-flat" id="simpan">Simpan</button>
                 </div>
               </div>
             </form>
           </div>
         </div>
       </div>
+
+      <div class="modal fade" id="modal_send_msg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
+              <h4 class="modal-title" id="myModalLabel">Kirim Pesan Siswa</h4>
+            </div>
+            <form class="form-horizontal" id="form_msg">
+              <div class="modal-body">
+                <input type="hidden" name="nis" id="nis">
+                <div class="form-group">
+                  <label for="inputsiswaName" class="col-sm-4 control-label">Keterangan</label>
+                  <div class="col-sm-7">
+                    <textarea cols="30" rows="3" name="pesan" id="pesan"></textarea>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
+                  <span class="btn btn-primary btn-flat" onclick="save_form()">Simpan</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
 
       <!-- /.content-wrapper -->
       <footer class="main-footer">
@@ -343,6 +347,8 @@ if ($c['pengguna_level']==2) {
     <script src="<?php echo base_url().'assets/plugins/datatables/dataTables.bootstrap.min.js'?>"></script>
     <!-- SlimScroll -->
     <script src="<?php echo base_url().'assets/plugins/slimScroll/jquery.slimscroll.min.js'?>"></script>
+    <!-- Selectpicker -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
     <!-- FastClick -->
     <script src="<?php echo base_url().'assets/plugins/fastclick/fastclick.js'?>"></script>
     <!-- AdminLTE App -->
@@ -351,20 +357,6 @@ if ($c['pengguna_level']==2) {
     <script src="<?php echo base_url().'assets/dist/js/demo.js'?>"></script>
     <script type="text/javascript" src="<?php echo base_url().'assets/plugins/toast/jquery.toast.min.js'?>"></script>
     <!-- page script -->
-    <script>
-      $(document).ready(function(){
-        $("delete_siswa").click(function(){
-          alert("The paragraph was clicked.");
-        });
-      });
-      $('#closedatatable').click(function() {
-        alert("The paragraph was clicked.");
-      });
-      $('.clickMe').click(function(){
-        alert(this.id);
-      });
-
-    </script>
 
     <script type="text/javascript">
       $(document).ready(function() {
@@ -442,7 +434,7 @@ if ($c['pengguna_level']==2) {
           type: "post",
           dataType: "json",
           success: function(data){
-              var gender;
+            var gender;
             if (data.siswa_jenkel == 'L') { gender = "Laki-laki"; } else { gender = "Perempuan"; }
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             var html = "<table class='table table-hover' id='tbl_detail'>";
@@ -497,14 +489,11 @@ if ($c['pengguna_level']==2) {
             html += '<td> <button onclick="destroy_datatable()" class="btn btn-danger btn-flat"><span class="fa fa-times"></span>Close</button></td>';
             html += '</tr>';
             html += '</table>';
-        // html += "<table class='table table-striped table-bordered table-hover' >";
-        // html += '</table>';
-        html += '</div>';
-        $('#table2').html(html);
-      }
-    });
+            html += '</div>';
+            $('#table2').html(html);
+          }
+        });
 }
-
 </script>
 
 <script>

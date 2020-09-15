@@ -20,14 +20,14 @@
 								<div class="card-img-caption">
 									<img class="card-img-top" src="<?= base_url('assets/front-end/dist/img/gradient.jpg') ?>">
 									<strong class="card-text"><?= strtoupper($val['nm_mapel']) ?></strong>
-									<p>OS1 - 1721 - ISYS6304 - THBA</p>
+									<p><?= $val['kelas_nama']  ?></p>
 								</div>
 								<div class="card-body">
 									<a href="<?= site_url('forum/') . $val['id_pelajaran'] ?>" id="forum"><i class="fas fa-fw fa-comments pr-1"></i> <?= $n_forum ?> forum posting</a>
 									<div class="dropdown-divider"></div>
 									<a href="<?= site_url('tugas/') . $val['id_pelajaran'] ?>"><i class="fas fa-fw fa-tasks pr-1"></i> <?= $n_tugas ?> Assigment to do</a>
 									<div class="dropdown-divider"></div>
-									<a href="javascript:void(0)" id="view" data-toggle="modal" data-target="#modal_schedule"><i class="fas fa-fw fa-clipboard-list pr-1"></i> View schedule</a>
+									<a href="javascript:void(0)" id="view" onclick="view('<?= $val['id_pelajaran'] ?>')"><i class="fas fa-fw fa-video pr-1"></i> Kelas Online</a>
 								</div>
 							</div>
 						</div>
@@ -37,8 +37,45 @@
 		</div><!-- /.container-fluid -->
 	</div><!-- /.content -->
 
-	<?php $this->load->view('pengajar/v_schedule'); ?>
+	<?php $this->load->view('pengajar/v_kelasonline'); ?>
 </div>
 <!-- /.content-wrapper -->
 
 <?php $this->load->view('pengajar/layout/v_js'); ?>
+
+<script type="text/javascript">
+	function view(id){
+		$.ajax({
+			url: '<?= site_url('course/view/') ?>'+id,
+			type: 'post',
+			dataType: 'json',
+			success: function(data){
+				$('#modal_kelasonline').modal('show');
+				$('.modal-title').text(data.nm_mapel + ' ('+data.kelas_nama+')');
+
+				$('#id').val(id);
+				$('#jdl_kelas').val(data.tgl_oc);
+				$('#link_oc').val(data.link_oc);
+				$('#start_on').val(data.time_start);
+				$('#end_on').val(data.time_end);
+				$('input:radio[name=opsi_kls][value='+data.aktifkan+']')[0].checked = true;
+			}
+		});
+	}
+
+	function submit(){
+		$.ajax({
+			url: '<?= site_url('course/update_oc/') ?>',
+			type: 'post',
+			dataType: 'json',
+			data:$('#fm_oc').serialize(),
+			beforeSend: function() {
+				$('.btn').html('<i class="fa fa-spin fa-spinner"></i> loading');
+			},
+			success:function(data){
+				 alert(data.msg);
+				 location.reload();
+			} 	
+		})
+	}
+</script>

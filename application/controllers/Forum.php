@@ -381,7 +381,7 @@ class Forum extends CI_Controller
 		$this->load->view('pengajar/layout/v_navbar');
 		$this->load->view('pengajar/v_edit_komen', $data);
 	}
-
+	
 	public function update_komen()
 	{
 		$data = array(

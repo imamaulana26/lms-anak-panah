@@ -335,6 +335,64 @@
 			</div>
 		</div>
 	</div><!-- /.container -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel"></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="fm_forum" autocomplete="off">
+						<div class="form-group row">
+							<label for="judul_materi" class="col-sm-2 col-form-label">Judul Materi</label>
+							<div class="col-sm-10">
+								<input type="hidden" class="form-control" name="id_fm" id="id_fm">
+								<input type="hidden" class="form-control" name="kd_mapel" id="kd_mapel" value="<?= $this->uri->segment(2); ?>">
+								<input type="text" class="form-control" name="judul_materi" id="judul_materi">
+								<span class="help-block"></span>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="isi_materi" class="col-sm-2 col-form-label">Isi Materi</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" name="isi_materi" id="isi_materi" cols="30" rows="4"></textarea>
+								<span class="help-block"></span>
+							</div>
+						</div>
+						<fieldset class="form-group">
+							<div class="row">
+								<label class="col-form-label col-sm-2 pt-0">Tipe Forum</label>
+								<div class="col-sm-10">
+									<div class="form-check">
+										<label class="form-check-label" for="tipe_forum1">
+											<input class="form-check-input" type="radio" name="tipe_forum" id="tipe_forum1" value="Teori" checked>
+											Teori
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label" for="tipe_forum2">
+											<input class="form-check-input" type="radio" name="tipe_forum" id="tipe_forum2" value="Praktek">
+											Praktek
+										</label>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+						<div class="form-group row">
+							<div class="col-sm-10 offset-2">
+								<span class="btn btn-primary" onclick="save_forum()">Simpan</span>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </div><!-- /.content-wrapper -->
 
 
@@ -454,6 +512,56 @@
 			}
 		})
 	}
+
+	function save_forum() {
+		var url = '';
+		var msg = '';
+
+		if (method == 'add') {
+			url = '<?= site_url('forum/save_forum') ?>';
+			msg = 'Forum berhasil dibuat';
+		} else {
+			url = '<?= site_url('forum/update_forum') ?>';
+			msg = 'Forum berhasil diubah';
+		}
+
+		$.ajax({
+			url: url,
+			type: "POST",
+			dataType: "JSON",
+			data: $('#fm_forum').serialize(),
+			success: function(data) {
+				if (data.status) {
+					$('#exampleModal').modal('hide');
+					Swal.fire({
+						icon: 'success',
+						title: 'Sukses',
+						text: msg,
+						timer: 2000,
+						timerProgressBar: true,
+						// onBeforeOpen: () => {
+						// 	Swal.showLoading()
+						// },
+						showConfirmButton: false
+					}).then((result) => {
+						if (result.dismiss === Swal.DismissReason.timer) {
+							location.reload();
+						}
+					})
+				} else {
+					for (var i = 0; i < data.inputerror.length; i++) {
+						if (data.error[i] == '') {
+							$('[name="' + data.inputerror[i] + '"]').addClass('is-invalid');
+						} else {
+							$('[name="' + data.inputerror[i] + '"]').addClass('is-invalid');
+							$('[name="' + data.inputerror[i] + '"]').next().addClass('invalid-feedback').text(data.error[i]);
+						}
+					}
+				}
+			}
+		});
+	}
+
 
 	function hapus_komen(id) {
 		Swal.fire({

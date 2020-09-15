@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 12, 2020 at 12:55 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.2
+-- Generation Time: 13 Sep 2020 pada 17.04
+-- Versi Server: 10.1.8-MariaDB
+-- PHP Version: 5.6.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -21,14 +19,14 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_bukuinduk`
 --
-drop database if exists `db_bukuinduk`;
-create database `db_bukuinduk`;
-use `db_bukuinduk`;
+drop database if exists `db_bukuinduk_merge`;
+create database `db_bukuinduk_merge`;
+use `db_bukuinduk_merge`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_absensi`
+-- Struktur dari tabel `tbl_absensi`
 --
 
 CREATE TABLE `tbl_absensi` (
@@ -42,7 +40,7 @@ CREATE TABLE `tbl_absensi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_absensi`
+-- Dumping data untuk tabel `tbl_absensi`
 --
 
 INSERT INTO `tbl_absensi` (`id_absensi`, `nis_siswa`, `ta`, `semester`, `sakit`, `izin`, `tanpa_ket`) VALUES
@@ -861,7 +859,7 @@ INSERT INTO `tbl_absensi` (`id_absensi`, `nis_siswa`, `ta`, `semester`, `sakit`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_agama`
+-- Struktur dari tabel `tbl_agama`
 --
 
 CREATE TABLE `tbl_agama` (
@@ -870,7 +868,7 @@ CREATE TABLE `tbl_agama` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_agama`
+-- Dumping data untuk tabel `tbl_agama`
 --
 
 INSERT INTO `tbl_agama` (`agama_id`, `agama_nama`) VALUES
@@ -884,7 +882,7 @@ INSERT INTO `tbl_agama` (`agama_id`, `agama_nama`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_catmur`
+-- Struktur dari tabel `tbl_catmur`
 --
 
 CREATE TABLE `tbl_catmur` (
@@ -896,7 +894,7 @@ CREATE TABLE `tbl_catmur` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_catmur`
+-- Dumping data untuk tabel `tbl_catmur`
 --
 
 INSERT INTO `tbl_catmur` (`id_catmur`, `nis_siswa`, `catatan_siswa`, `ta`, `semester`) VALUES
@@ -1715,7 +1713,7 @@ INSERT INTO `tbl_catmur` (`id_catmur`, `nis_siswa`, `catatan_siswa`, `ta`, `seme
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_catpenting`
+-- Struktur dari tabel `tbl_catpenting`
 --
 
 CREATE TABLE `tbl_catpenting` (
@@ -1729,7 +1727,7 @@ CREATE TABLE `tbl_catpenting` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_catpenting`
+-- Dumping data untuk tabel `tbl_catpenting`
 --
 
 INSERT INTO `tbl_catpenting` (`id_catpenting`, `nis_siswa`, `ta`, `sms`, `sikap`, `kegiatan`, `tugas`) VALUES
@@ -2549,7 +2547,7 @@ INSERT INTO `tbl_catpenting` (`id_catpenting`, `nis_siswa`, `ta`, `sms`, `sikap`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_forum`
+-- Struktur dari tabel `tbl_forum`
 --
 
 CREATE TABLE `tbl_forum` (
@@ -2560,19 +2558,20 @@ CREATE TABLE `tbl_forum` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_forum`
+-- Dumping data untuk tabel `tbl_forum`
 --
 
 INSERT INTO `tbl_forum` (`id`, `fr_id_pelajaran`, `createDate`, `isDelete`) VALUES
 (1, 43, '2020-07-18 00:00:00', 0),
 (2, 44, '2020-07-31 20:42:07', 0),
 (3, 45, '2020-07-31 20:45:26', 0),
-(4, 52, '2020-08-17 18:44:41', 0);
+(4, 52, '2020-08-17 18:44:41', 0),
+(5, 58, '2020-08-19 14:59:42', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_inbox`
+-- Struktur dari tabel `tbl_inbox`
 --
 
 CREATE TABLE `tbl_inbox` (
@@ -2585,7 +2584,7 @@ CREATE TABLE `tbl_inbox` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_inbox`
+-- Dumping data untuk tabel `tbl_inbox`
 --
 
 INSERT INTO `tbl_inbox` (`inbox_id`, `inbox_nama`, `inbox_kontak`, `inbox_pesan`, `inbox_tanggal`, `inbox_status`) VALUES
@@ -2601,7 +2600,7 @@ INSERT INTO `tbl_inbox` (`inbox_id`, `inbox_nama`, `inbox_kontak`, `inbox_pesan`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_kelas`
+-- Struktur dari tabel `tbl_kelas`
 --
 
 CREATE TABLE `tbl_kelas` (
@@ -2611,7 +2610,7 @@ CREATE TABLE `tbl_kelas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_kelas`
+-- Dumping data untuk tabel `tbl_kelas`
 --
 
 INSERT INTO `tbl_kelas` (`kelas_id`, `kelas_nama`, `wali_kelas`) VALUES
@@ -2637,7 +2636,7 @@ INSERT INTO `tbl_kelas` (`kelas_id`, `kelas_nama`, `wali_kelas`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_keuangan`
+-- Struktur dari tabel `tbl_keuangan`
 --
 
 CREATE TABLE `tbl_keuangan` (
@@ -2650,7 +2649,7 @@ CREATE TABLE `tbl_keuangan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_keuangan`
+-- Dumping data untuk tabel `tbl_keuangan`
 --
 
 INSERT INTO `tbl_keuangan` (`kd_tagihan`, `nom_pembayaran`, `tgl_pembayaran`, `nis_siswa`, `kd_transaksi`, `status`) VALUES
@@ -2747,7 +2746,7 @@ INSERT INTO `tbl_keuangan` (`kd_tagihan`, `nom_pembayaran`, `tgl_pembayaran`, `n
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_kisikisi`
+-- Struktur dari tabel `tbl_kisikisi`
 --
 
 CREATE TABLE `tbl_kisikisi` (
@@ -2760,7 +2759,7 @@ CREATE TABLE `tbl_kisikisi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_kisikisi`
+-- Dumping data untuk tabel `tbl_kisikisi`
 --
 
 INSERT INTO `tbl_kisikisi` (`kisikisi_id`, `kisikisi_ub`, `kisikisi_deskripsi`, `kisikisi_mapel`, `kisikisi_kelas_id`, `kisikisi_semester`) VALUES
@@ -3056,7 +3055,7 @@ INSERT INTO `tbl_kisikisi` (`kisikisi_id`, `kisikisi_ub`, `kisikisi_deskripsi`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_komen_forum`
+-- Struktur dari tabel `tbl_komen_forum`
 --
 
 CREATE TABLE `tbl_komen_forum` (
@@ -3066,32 +3065,38 @@ CREATE TABLE `tbl_komen_forum` (
   `user_komen` varchar(50) NOT NULL,
   `reply_to` int(15) NOT NULL,
   `mention` varchar(15) DEFAULT NULL,
-  `isi_komen` text NOT NULL,
+  `isi_komen` longtext CHARACTER SET utf8 NOT NULL,
   `createDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_komen_forum`
+-- Dumping data untuk tabel `tbl_komen_forum`
 --
 
 INSERT INTO `tbl_komen_forum` (`id`, `id_forum`, `pertemuan`, `user_komen`, `reply_to`, `mention`, `isi_komen`, `createDate`) VALUES
 (2, 43, 1, '2017298', 0, NULL, 'Testing', '2020-07-18 00:00:00'),
 (4, 43, 1, '2017271', 2, '2017298', 'Hello World', '2020-07-18 00:00:00'),
-(14, 43, 1, '2019638', 2, '2017298', '<p>lorem ipsum dolor</p>\n', '2020-07-25 20:17:38'),
+(14, 43, 1, '2019638', 2, '2017298', 'lorem ipsum', '2020-07-25 20:17:38'),
 (18, 43, 1, '2019638', 2, '2017272', 'Hai', '2020-07-25 20:30:02'),
-(37, 44, 1, 'imam', 0, NULL, '<p>berapa hasil dari&nbsp;<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><msqrt><mn>25</mn></msqrt></math></p>\n', '2020-07-31 21:09:08'),
+(35, 44, 1, '2019638', 0, NULL, 'Baiklah...', '2020-07-31 20:46:54'),
+(36, 44, 1, 'imam', 35, '2019638', 'Semangat', '2020-07-31 20:48:18'),
+(37, 44, 1, 'imam', 0, NULL, 'testing', '2020-07-31 21:09:08'),
+(38, 44, 1, 'imam', 37, 'imam', 'sdfsdf', '2020-07-31 21:09:33'),
 (46, 43, 3, '2019638', 0, NULL, '<p>qwerty</p>\r\n', '2020-08-15 21:11:49'),
 (47, 43, 4, '2019638', 0, NULL, '<p>Hadir</p>\r\n', '2020-08-17 18:46:47'),
-(48, 43, 1, '2019638', 2, '2017298', '<p>Hello ....</p>\n', '2020-08-20 17:41:04'),
-(50, 44, 1, '2019638', 37, 'imam', '<p>akar dari&nbsp;<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><msqrt><mn>25</mn></msqrt></math>&nbsp;adalah 5</p>\n', '2020-08-29 19:28:20'),
-(51, 44, 1, '2019638', 0, NULL, '<p><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><msqrt><mn>12</mn></msqrt><mo>&#160;</mo><mi>x</mi><mo>&#160;</mo><msqrt><mn>2</mn></msqrt><mo>&#160;</mo><mo>=</mo><mo>&#160;</mo><mo>?</mo></math></p>\r\n', '2020-08-29 19:42:41'),
-(60, 43, 2, '2019638', 0, NULL, '<p>qwerty</p>\r\n', '2020-08-29 20:33:51'),
-(61, 43, 2, '2019638', 0, NULL, '<p>asdqwe</p>\r\n', '2020-08-29 20:34:04');
+(48, 43, 1, '2019638', 0, NULL, '<p>testsdaas</p>\r\n', '2020-08-19 14:40:50'),
+(49, 58, 1, '2019638', 0, NULL, '<p><br />\n<iframe allowfullscreen="" frameborder="0" height="360" src="https://www.youtube.com/embed/GFDOzUJD8vk" width="440"></iframe></p>\n', '2020-08-19 15:00:38'),
+(50, 58, 1, '2019639', 49, '2019638', '<p>saya tidak setuju dengan anda</p>\r\n', '2020-08-19 15:11:05'),
+(51, 43, 1, '2019644', 0, NULL, '<p><br />\n<math xmlns="http://www.w3.org/1998/Math/MathML"><mn>2</mn><mfrac><mn>23</mn><mrow><mn>13</mn><mmultiscripts><mn>1</mn><mprescripts/><mn>2</mn><mi>x</mi></mmultiscripts></mrow></mfrac><mo>&#160;</mo><mfenced open="|" close="|"><mtable><mtr><mtd><mn>20</mn></mtd><mtd><mi>x</mi></mtd></mtr><mtr><mtd><mi>y</mi></mtd><mtd><mn>30</mn></mtd></mtr><mtr><mtd><mn>2</mn></mtd><mtd><mn>3</mn></mtd></mtr></mtable></mfenced></math></p>\n\n<p><iframe allowfullscreen="" frameborder="0" height="360" src="https://www.youtube.com/embed/lTpHlyeL6eE" width="240"></iframe></p>\n', '2020-08-20 20:55:46'),
+(52, 43, 1, '2019644', 0, NULL, '<p><math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mn>20</mn><mn>3</mn></mfrac><mo>&#160;</mo><msqrt><mn>3</mn></msqrt></math></p>\n\n<p>test ini</p>\n\n<p><strong>test bold</strong></p>\n\n<table border="1" cellpadding="1" cellspacing="1" style="width:500px">\n	<tbody>\n		<tr>\n			<td>3</td>\n			<td>1</td>\n		</tr>\n		<tr>\n			<td>dasd</td>\n			<td>s</td>\n		</tr>\n		<tr>\n			<td>sa</td>\n			<td>asd</td>\n		</tr>\n	</tbody>\n</table>\n\n<p>&rdquo;</p>\n\n<ul>\n	<li>sadasd</li>\n	<li>sadas</li>\n</ul>\n\n<p>asdasdas</p>\n', '2020-08-20 21:00:48'),
+(53, 43, 1, '2019644', 0, NULL, '<p><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>s</mi><mn>2</mn></msup></math></p>\n', '2020-08-20 21:24:25'),
+(54, 43, 1, '2019644', 0, NULL, '<p><iframe allowfullscreen="" frameborder="0" height="360" src="https://www.youtube.com/embed/n-PEkx7RSYc" width="340"></iframe></p>\r\n', '2020-08-20 21:45:00'),
+(55, 43, 1, '2019644', 0, NULL, '<p>s2</p>\r\n', '2020-08-20 22:03:27');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_komen_tugas`
+-- Struktur dari tabel `tbl_komen_tugas`
 --
 
 CREATE TABLE `tbl_komen_tugas` (
@@ -3105,10 +3110,17 @@ CREATE TABLE `tbl_komen_tugas` (
   `createDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `tbl_komen_tugas`
+--
+
+INSERT INTO `tbl_komen_tugas` (`id`, `id_forum`, `pertemuan`, `user_komen`, `reply_to`, `mention`, `isi_komen`, `createDate`) VALUES
+(1, 43, 1, '2019638', 0, NULL, '<p>asdfgh</p>\r\n', '2020-08-17 20:14:28');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_lembaga`
+-- Struktur dari tabel `tbl_lembaga`
 --
 
 CREATE TABLE `tbl_lembaga` (
@@ -3129,7 +3141,7 @@ CREATE TABLE `tbl_lembaga` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_lembaga`
+-- Dumping data untuk tabel `tbl_lembaga`
 --
 
 INSERT INTO `tbl_lembaga` (`id_lembaga`, `nm_lembaga`, `almt`, `notelp`, `kode_pos`, `kel`, `kec`, `kab`, `prov`, `website`, `nm_yayasan`, `npsn`, `no_ijin`, `kepsek`) VALUES
@@ -3138,7 +3150,7 @@ INSERT INTO `tbl_lembaga` (`id_lembaga`, `nm_lembaga`, `almt`, `notelp`, `kode_p
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_log_forum`
+-- Struktur dari tabel `tbl_log_forum`
 --
 
 CREATE TABLE `tbl_log_forum` (
@@ -3150,7 +3162,7 @@ CREATE TABLE `tbl_log_forum` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_log_forum`
+-- Dumping data untuk tabel `tbl_log_forum`
 --
 
 INSERT INTO `tbl_log_forum` (`id_log`, `nisn_siswa`, `id_forum`, `log_forum`, `log_tugas`) VALUES
@@ -3163,7 +3175,7 @@ INSERT INTO `tbl_log_forum` (`id_log`, `nisn_siswa`, `id_forum`, `log_forum`, `l
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_mapel`
+-- Struktur dari tabel `tbl_mapel`
 --
 
 CREATE TABLE `tbl_mapel` (
@@ -3174,7 +3186,7 @@ CREATE TABLE `tbl_mapel` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_mapel`
+-- Dumping data untuk tabel `tbl_mapel`
 --
 
 INSERT INTO `tbl_mapel` (`kd_mapel`, `nm_mapel`, `status_mapel`, `kelompok`) VALUES
@@ -3199,7 +3211,7 @@ INSERT INTO `tbl_mapel` (`kd_mapel`, `nm_mapel`, `status_mapel`, `kelompok`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_materi_forum`
+-- Struktur dari tabel `tbl_materi_forum`
 --
 
 CREATE TABLE `tbl_materi_forum` (
@@ -3213,7 +3225,7 @@ CREATE TABLE `tbl_materi_forum` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_materi_forum`
+-- Dumping data untuk tabel `tbl_materi_forum`
 --
 
 INSERT INTO `tbl_materi_forum` (`id`, `id_forum`, `pertemuan`, `judul_materi`, `jns_materi`, `isi_materi`, `createDate`) VALUES
@@ -3229,7 +3241,7 @@ INSERT INTO `tbl_materi_forum` (`id`, `id_forum`, `pertemuan`, `judul_materi`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_materi_tugas`
+-- Struktur dari tabel `tbl_materi_tugas`
 --
 
 CREATE TABLE `tbl_materi_tugas` (
@@ -3243,16 +3255,17 @@ CREATE TABLE `tbl_materi_tugas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_materi_tugas`
+-- Dumping data untuk tabel `tbl_materi_tugas`
 --
 
 INSERT INTO `tbl_materi_tugas` (`id`, `id_forum`, `pertemuan`, `judul_materi`, `jns_materi`, `isi_materi`, `createDate`) VALUES
-(1, 43, 1, 'Rukun Iman', 'Teori', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed maiores labore unde at impedit exercitationem assumenda cum incidunt earum beatae quos harum porro, eveniet ad veniam odio. Explicabo, aperiam alias!', '2020-07-18 00:00:00');
+(1, 43, 1, 'Rukun Iman', 'Teori', 'Rukun iman ada 5', '2020-07-18 00:00:00'),
+(3, 43, 2, 'Rukun sholat', 'Praktek', 'Rukun sholat', '2020-08-17 22:22:39');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_nilai`
+-- Struktur dari tabel `tbl_nilai`
 --
 
 CREATE TABLE `tbl_nilai` (
@@ -3266,7 +3279,7 @@ CREATE TABLE `tbl_nilai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_nilai`
+-- Dumping data untuk tabel `tbl_nilai`
 --
 
 INSERT INTO `tbl_nilai` (`id_nilai`, `nis_siswa`, `kd_mapel`, `nilai`, `kelas_id`, `ta`, `semester`) VALUES
@@ -11431,7 +11444,7 @@ INSERT INTO `tbl_nilai` (`id_nilai`, `nis_siswa`, `kd_mapel`, `nilai`, `kelas_id
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_nilai_indv`
+-- Struktur dari tabel `tbl_nilai_indv`
 --
 
 CREATE TABLE `tbl_nilai_indv` (
@@ -11444,7 +11457,7 @@ CREATE TABLE `tbl_nilai_indv` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_nilai_indv`
+-- Dumping data untuk tabel `tbl_nilai_indv`
 --
 
 INSERT INTO `tbl_nilai_indv` (`id_nilai_indv`, `nis_siswa`, `kegiatan`, `nilai`, `ta`, `semester`) VALUES
@@ -12424,7 +12437,34 @@ INSERT INTO `tbl_nilai_indv` (`id_nilai_indv`, `nis_siswa`, `kegiatan`, `nilai`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_orangtua`
+-- Struktur dari tabel `tbl_oc`
+--
+
+CREATE TABLE `tbl_oc` (
+  `id_oc` int(11) NOT NULL,
+  `id_pelajaran` int(10) DEFAULT NULL,
+  `link_oc` varchar(255) NOT NULL,
+  `judul_oc` varchar(255) NOT NULL,
+  `tgl_oc` date NOT NULL,
+  `time_start` time NOT NULL,
+  `time_end` time NOT NULL,
+  `aktifkan` tinyint(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tbl_oc`
+--
+
+INSERT INTO `tbl_oc` (`id_oc`, `id_pelajaran`, `link_oc`, `judul_oc`, `tgl_oc`, `time_start`, `time_end`, `aktifkan`) VALUES
+(1, 54, 'https://web.facebook.com/', 'Kalkulus', '2020-08-29', '00:14:00', '01:01:00', 1),
+(2, 53, 'https://anakpanah.sch.id/student-apps/', 'SPOK', '2020-08-29', '00:14:00', '01:01:00', 0),
+(3, 43, 'https://web.facebook.com/', 'Kalkulus dan Integral', '2020-08-29', '00:14:00', '01:01:00', 1),
+(4, 37, 'https://anakpanah.sch.id/student-apps/', 'SPOK', '2020-08-29', '00:14:00', '01:01:00', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tbl_orangtua`
 --
 
 CREATE TABLE `tbl_orangtua` (
@@ -12460,7 +12500,7 @@ CREATE TABLE `tbl_orangtua` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_orangtua`
+-- Dumping data untuk tabel `tbl_orangtua`
 --
 
 INSERT INTO `tbl_orangtua` (`ortu_id`, `siswa_nis`, `ayah_nama`, `ayah_nik`, `ayah_tempat`, `ayah_tanggal`, `ayah_pendidikan`, `ayah_pekerjaan`, `ayah_penghasilan`, `no_telp_ayah`, `email_ayah`, `ibu_nama`, `ibu_nik`, `ibu_tempat`, `ibu_tanggal`, `ibu_pendidikan`, `ibu_pekerjaan`, `ibu_penghasilan`, `no_telp_ibu`, `email_ibu`, `wali_nama`, `wali_nik`, `wali_tempat`, `wali_tanggal`, `wali_pendidikan`, `wali_pekerjaan`, `wali_penghasilan`, `wali_alamat`, `wali_notelp`) VALUES
@@ -12559,7 +12599,7 @@ INSERT INTO `tbl_orangtua` (`ortu_id`, `siswa_nis`, `ayah_nama`, `ayah_nik`, `ay
 (101, '2018354', 'Aswandi', '367401250970002', 'Bangka', '1971-09-28', 's1', 'PNS', 5000000, '085778373151', 'mbungamas@gmail.com ', 'Nurlaila', '3674016009790004', 'Jakarta', '1979-06-26', 'd3', 'Ibu Rumah Tangga', 0, '085778373151', 'mbungamas@gmail.com ', '', '', '', '0000-00-00', '', '', '', '', ''),
 (103, '2017236', 'Ir. F. M Wahyu Dwi Priyantono', '6471031508730013', 'Palembang', '1973-08-15', 's1', 'Karyawan Swasta', 4999999, '082148687045', 'dindaprasetya888@gmail.com, spsian48@gmail.com, wpriyantono888@gmail.com', 'Annasari Arundati', '6471035003770005', 'Palembang', '1977-03-10', 's1', 'Mengurus Rumah Tangga', 0, '081350342485', 'annasari.arundati9@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (104, '2017204', 'Hendrik', '3171042202650002', 'PD Panjang', '1965-02-22', 's1', 'Karyawan Swasta', 2000000, '0818929292', 'susilo_hd@yahoo.co.id', 'Laxmi Hutami Dewi', '0000000000000000', 'kosong', '2020-03-10', 's1', 'Ibu Rumah Tangga', 0, '0', 'blablabla@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
-(106, '2018392', 'Young Young  Samsudin', '3172010409710001', 'Jakarta', '1971-09-04', 's1', 'Wiraswasta', 5000000, '\'087883300816', 'mieyung11@yahoo.com', 'Mie Yung', '3172015101760001', 'Jakarta', '1976-01-11', 's1', 'Ibu Rumah Tangga', 0, '087883300816', 'mieyung11@yahoo.com', '', '', '', '0000-00-00', '', '', '', '', ''),
+(106, '2018392', 'Young Young  Samsudin', '3172010409710001', 'Jakarta', '1971-09-04', 's1', 'Wiraswasta', 5000000, '''087883300816', 'mieyung11@yahoo.com', 'Mie Yung', '3172015101760001', 'Jakarta', '1976-01-11', 's1', 'Ibu Rumah Tangga', 0, '087883300816', 'mieyung11@yahoo.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (107, '2018386', 'Frederick Budi Prawira', '3273192103790003', 'Bandung', '1979-03-21', 'sma', 'Wiraswasta', 5000000, '', '123456@gmail.com', 'Deity Cesilia Mogi', '3273196801790002', 'Ternate', '1979-01-28', 'sma', 'Ibu Rumah Tangga', 0, '', '123456@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (109, '2018400', 'Hasan Basri', '3173031107131002', 'Jakarta', '0000-00-00', 'sd', 'Unknown', 0, '08556688000', 'audrick1liko@gmail.com', 'Hanny Sumiati Widjaja', '3173035312770003', 'Jakarta', '1977-12-13', 'sma', 'Ibu Rumah Tangga', 0, '', '123456@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (110, '2018355', 'Lucky Sugandha', '3671072306750004', 'Jakarta', '1975-06-23', 's1', 'Karyawan Swasta', 5000000, '08970007661', 'jsobitha@yahoo.com ', 'Juliana', '3671075707760013', 'Jakarta', '1976-07-17', 's1', 'Mengurus Rumah Tangga', 0, '08970007661', 'jsobitha@yahoo.com ', '', '', '', '0000-00-00', '', '', '', '', ''),
@@ -12571,7 +12611,7 @@ INSERT INTO `tbl_orangtua` (`ortu_id`, `siswa_nis`, `ayah_nama`, `ayah_nik`, `ay
 (119, '2018356', 'Deshir Mauluddin', '3175103112820008', 'Cirebon', '1982-12-31', 's1', 'Karyawan Swasta', 5000000, '12345678', '12345@gmail.com', 'Wiena Priswandari', '3175100304820002', 'Semarang', '1982-04-23', 's1', 'Karyawan Swasta', 5000000, '123455678', '12345@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (120, '2018390', 'Supriyono', '3174030504100038', 'Unknown', '0000-00-00', 'sd', 'Unknown', 0, '081280129318', 'salma.ilyass29@gmail.com', 'Salmah', '3174036906800005', 'Jakarta', '1980-06-29', 'sma', 'Wiraswasta', 5000000, '081280129318', 'salma.ilyass29@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (122, '2018361', 'Heribertus Parjoko', '3603281004670010', 'Yogyakarta', '1967-04-19', 'd3', 'Karyawan swasta', 5000000, '081222372247', 'heribertusparjoko@gmail.com', 'Edith Angela', '3603288811740006', 'Jakarta', '1974-11-25', 'd3', 'Karyawan Swasta', 5000000, '081222372247', '12345@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
-(123, '2018393', 'Adhie Muhadir', '3202301103620001', 'Buton', '1962-03-11', 's1', 'Wiraswasta', 5000000, '\'085759545182', 'amalia.ramadhaniyah@gmail.com, lilisholisoh569@gmail.com', 'Lilis Holisoh', '3202301103620001', 'Sukabumi', '1969-05-20', 'sma', 'Ibu Rumah Tangga', 0, '085720812520', '123456@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
+(123, '2018393', 'Adhie Muhadir', '3202301103620001', 'Buton', '1962-03-11', 's1', 'Wiraswasta', 5000000, '''085759545182', 'amalia.ramadhaniyah@gmail.com, lilisholisoh569@gmail.com', 'Lilis Holisoh', '3202301103620001', 'Sukabumi', '1969-05-20', 'sma', 'Ibu Rumah Tangga', 0, '085720812520', '123456@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (124, '2018357', 'Tjahjadhi Santoso', '12345678910', 'Semarang', '1969-09-12', 's1', 'Seniman', 5000000, '00000', '12345@gmail.com', 'Fenny Pringadi', '12345678910', 'Jakarta', '1974-02-20', 's1', 'Mengurus Rumah Tangga', 0, '00000', '12345@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (125, '2018396', 'Muhammad Arifin', '3674021401690001', 'Banjar Baru', '1969-01-14', 's1', 'PNS', 10000000, '08118118368', 'andinyshausan5@gmail.com', 'Maylina Arifin', '3674024905670001', 'Jakarta', '1967-05-09', 'd3', 'Ibu Rumah Tangga', 0, '', '123456@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (126, '2018364', 'Wira Sumargo', '3671070604710001', 'Bandung', '1971-04-06', 's1', 'Karyawan swasta', 4999999, '', 'navanna07@gmail.com', 'Ne Lie Ling', '367075003760002', 'Medan', '1979-08-10', 'd3', 'Ibu rumah tangga', 0, '', 'navanna07@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
@@ -12586,7 +12626,7 @@ INSERT INTO `tbl_orangtua` (`ortu_id`, `siswa_nis`, `ayah_nama`, `ayah_nik`, `ay
 (135, '2018363', 'Hatifun', '1273020306720001', 'Tebing Tinggi', '1972-06-03', 'sma', 'Wiraswasta', 5000000, '085261273534', 'hatifun_hong@yahoo.co.id', 'Hapini', '1273024704730002', 'P. Siantar', '1973-04-07', 'd3', 'Mengurus rumah tangga', 0, '085261273534', '12345@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (136, '2018358', 'Stephen Martana', '12345678910', 'Surabaya', '1974-07-09', 's1', 'Wiraswasta', 5000000, '081333578888', 'eastjava_26@yahoo.com', 'Jennifer Anastasia Sulinadi', '12345678910', 'Surabaya', '1978-11-30', 's1', 'Mengurus Rumah Tangga', 0, '081333578888', 'eastjava_26@yahoo.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (137, '2018383', 'Agung Halim', '3173022705710008', 'Medan', '1971-05-27', 's1', 'Wiraswasta', 5000000, '08161158187', 'huatwang@gmail.com', 'Nancy Apriyani ', '3173024404730014', 'Pringsewu', '1973-04-04', 'd3', 'Ibu Rumah Tangga', 0, '08161158187', 'huatwang@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
-(138, '2018401', 'Stephen Lee Mowat', '3671011910110016', 'Unknown', '0000-00-00', 'sd', 'Guru', 5000000, '\'087888788086', 'sari.mowat@gmail.com, biancaalaasya.mowat@gmail.com', 'Sri Laksmi Listyo Hapsari', '3671015004820012', 'Tangerang', '1982-04-10', 's1', 'Wiraswasta', 5000000, '087888788086', 'sari.mowat@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
+(138, '2018401', 'Stephen Lee Mowat', '3671011910110016', 'Unknown', '0000-00-00', 'sd', 'Guru', 5000000, '''087888788086', 'sari.mowat@gmail.com, biancaalaasya.mowat@gmail.com', 'Sri Laksmi Listyo Hapsari', '3671015004820012', 'Tangerang', '1982-04-10', 's1', 'Wiraswasta', 5000000, '087888788086', 'sari.mowat@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (139, '2018384', 'Victor ', '3171911504710002', 'Jakarta', '1971-04-15', 's1', 'Karyawan Swasta', 5000000, '081383155554', 'harisratna@gmail.com ', 'Ratna Haris', '3171014601700003', 'Pontianak', '1970-01-06', 'sma', 'Karyawan Swasta', 5000000, '081383155554', 'harisratna@gmail.com ', '', '', '', '0000-00-00', '', '', '', '', ''),
 (140, '2018372', 'Budianto ', '12345678910', 'Jambi', '1976-12-14', 's1', 'Karyawan Swasta', 5000000, '081216877782', 'iinemil2@gmail.com ', 'Iin Emilia', '12345678910', 'Jakarta', '1975-12-30', 's1', 'Mengurus Rumah Tangga', 0, '123455678', 'iinemil2@gmail.com ', '', '', '', '0000-00-00', '', '', '', '', ''),
 (141, '2018368', 'Sukito Karnadi ', '3171042301700001', 'Jakarta ', '1970-01-23', 'sma', 'wiraswasta', 4999999, '', 'graciellemichelle24@gmail.com ', 'Handayani', '31710423015001690002', 'Surakarta', '1969-01-10', 's1', 'Ibu rumah tangga', 0, '', 'graciellemichelle24@gmail.com ', '', '', '', '0000-00-00', '', '', '', '', ''),
@@ -12817,7 +12857,7 @@ INSERT INTO `tbl_orangtua` (`ortu_id`, `siswa_nis`, `ayah_nama`, `ayah_nik`, `ay
 (370, '2017162', 'Herman Syahlim', '3172061204810008', 'Tebing Tinggi', '1981-04-12', 's1', 'Karyawan Swasta', 5000000, '08557878733', '12345@gmail.com', 'Diana Milka ', '3173076508810002', 'Jakarta', '1981-08-25', 'd3', 'Ibu Rumah Tangga', 5000000, '087808878388', 'dianamilka81@yahoo.co.id', '', '', '', '0000-00-00', '', '', '', '', ''),
 (371, '2017163', 'Junaidi Hasan', '3603281709770005', 'Teluk Betung', '1977-09-17', 'sma', 'Wiraswasta', 5000000, '0811701628', 'junhasan@yahoo.com', 'Henny Friyanti', '3603285604820006', 'Teluk Betung', '1982-04-16', 'sma', 'Wiraswasta', 5000000, '081290062288', 'hennyfr@yahoo.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (372, '2017154', 'Karnadi ', '3671081207790009', 'Tanjung Pandang', '1979-07-12', 'sma', 'wiraswasta', 4999999, '08176666681', '1234@gmail.com', 'Susilawati ', '3671086604840007', 'Tanjung Pandan', '1984-04-16', 'sma', 'Ibu rumah tangga', 0, '08170988885', 'susilawatifuina688@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
-(373, '2017168', 'Norman William Ng', '3173040510840002', 'Houston', '1984-10-05', 's1', 'Karyawan Swasta', 4999999, '087817171984', 'normanngjkt@gmail.com', 'Elvira Tasman', '3171016407840003', 'Jakarta', '1984-07-24', 'sma', 'Ibu Rumah Tangga', 4999999, '087787770122', ' elviratasman@hotmail.com\'', '', '', '', '0000-00-00', '', '', '', '', ''),
+(373, '2017168', 'Norman William Ng', '3173040510840002', 'Houston', '1984-10-05', 's1', 'Karyawan Swasta', 4999999, '087817171984', 'normanngjkt@gmail.com', 'Elvira Tasman', '3171016407840003', 'Jakarta', '1984-07-24', 'sma', 'Ibu Rumah Tangga', 4999999, '087787770122', ' elviratasman@hotmail.com''', '', '', '', '0000-00-00', '', '', '', '', ''),
 (374, '2017164', 'Hanafi Tasley', '3173070305780019', 'Padang', '1978-05-03', 's1', 'Karyawan Swasta', 5000000, '081931062727', 'Hanafi.tarsley@outlook.com', 'Sisilia Rayi Anggarini', '3173076304790007', 'Jakarta', '1979-04-03', 's1', 'Ibu Rumah Tangga', 5000000, '081931062728', 'sisiliarayi@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (375, '2017170', 'Julia Asmi', '3173066407680005', 'Kutoarjo', '1968-07-24', 's1', 'Mengurus Rumah Tangga', 4999999, '08100000', '123@gmail.com', 'Julia Asmi', '3173066407680005', 'Kutoarjo', '1968-07-24', 's1', 'Ibu Rumah Tangga', 4999999, '081000000', '123@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (376, '2017172', 'Erwin Setiandi', '3172051412760008', 'Jakarta', '1976-12-14', 's1', 'Karyawan Swasta', 5000000, '0816990983', 'erwintian@me.com', 'Felicia Tirtaputra', '3172015309790008', 'Jakarta', '1979-09-13', 's1', 'Ibu Rumah Tangga', 0, '0', '12345@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
@@ -12919,13 +12959,13 @@ INSERT INTO `tbl_orangtua` (`ortu_id`, `siswa_nis`, `ayah_nama`, `ayah_nik`, `ay
 INSERT INTO `tbl_orangtua` (`ortu_id`, `siswa_nis`, `ayah_nama`, `ayah_nik`, `ayah_tempat`, `ayah_tanggal`, `ayah_pendidikan`, `ayah_pekerjaan`, `ayah_penghasilan`, `no_telp_ayah`, `email_ayah`, `ibu_nama`, `ibu_nik`, `ibu_tempat`, `ibu_tanggal`, `ibu_pendidikan`, `ibu_pekerjaan`, `ibu_penghasilan`, `no_telp_ibu`, `email_ibu`, `wali_nama`, `wali_nik`, `wali_tempat`, `wali_tanggal`, `wali_pendidikan`, `wali_pekerjaan`, `wali_penghasilan`, `wali_alamat`, `wali_notelp`) VALUES
 (484, '2019681', 'Hermansyah', '1571072904750040', '-', '1975-04-29', 's2', 'Karyawan Swasta', 5000000, '081283249733', 'hermansyah7576@gmail.com', 'Silawati', '0', 'Oki', '1976-01-05', 'sma', 'Ibu Rumah Tangga', 0, ' 081282414697', 'silawati7576@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (485, '2018523', 'Onggo Wiryawan', '3174052008830010', 'Jakarta', '1983-08-20', 's2', 'Dosen', 5000000, '08170017990', 'clonofo@gmail.com', 'Lina Rosliana', '3671067003850001', 'Jakarta', '1985-03-30', 's1', 'Ibu Rumah Tangga', 0, '085217174213', 'lina.rosliana@ymail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
-(486, '2018524', 'Zaien Aji Trahutomo', '3573042810830003', 'Surabaya', '1983-10-28', 's1', 'Wiraswasta', 5000000, '08977720002', 'zaien.aji@gmail.com', 'Dwi Novianti Puspitasari', '3573015311820001', 'Bondowoso', '1982-11-10', 's1', 'Dokter', 5000000, '081334277915\'', 'dwinov13@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
+(486, '2018524', 'Zaien Aji Trahutomo', '3573042810830003', 'Surabaya', '1983-10-28', 's1', 'Wiraswasta', 5000000, '08977720002', 'zaien.aji@gmail.com', 'Dwi Novianti Puspitasari', '3573015311820001', 'Bondowoso', '1982-11-10', 's1', 'Dokter', 5000000, '081334277915''', 'dwinov13@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (487, '2019729', 'Meidi Kosandi', '3174081305760003', 'Jakarta', '1976-05-13', 's3', 'Dosen', 4999999, '082114733780', 'evida.kartini@gmail.com', 'Evida Kartini', '3174096104790006', 'Jakarta', '1979-04-21', 's2', 'Dosen', 4999999, '081298807707', 'evida.kartini@yahoo.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (488, '2019674', 'Yogie Atmaja Wardojo', '3172012107590002', 'Jakarta', '1959-07-21', 's1', 'Karyawan swasta', 5000000, '087875172377', '0@gmail.com', 'Ivonne Litanto', '3172016311770001', 'Jakarta', '1977-11-23', 's1', 'Mengurus rumah tangga', 0, '087875172377', '0@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (490, '2018522', 'Hermansyah', '1571072904750041', 'Palembang', '1975-04-29', 's2', 'Wiraswasta', 5000000, '081283249733', 'hermansyah7576@gmail.com', 'Silawati', '1571074501760121', 'Oki', '1976-01-05', 'sma', 'Ibu Rumah Tangga', 0, '081282414697', 'silawati7576@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (491, '2017255', 'LU, Liat Hian', '3671086809630003', '0', '2020-03-03', 'sd', '0', 0, '085591139836', 'bongoilang@gmail.com, genygreciaa@gmail.com ', 'Bong Oi Lang', '3671086809630003', 'Pemangkat', '1963-09-28', 'sd', 'Mengurus rumah tangga', 0, '0', 'bongoilang@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (492, '2017254', 'Stephen Martana', '3173080077740002', 'Surabaya', '1974-07-09', 's1', 'Wiraswasta', 5000000, '081333578888', 'eastjava_26@yahoo.com', 'Jennifer Anastasia Sulinadi', '3173087011780002', 'Surabaya', '1978-11-30', 'd3', 'Mengurus rumah tangga', 0, '081333578888', '0@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
-(493, '2017274', 'Muh Syafi\'I Assifa', '3604013004710591', 'Ponorogo', '1971-04-30', 's1', 'Pekerjaan Lainnya', 5000000, '085219931131', 'rratnairmawati@gmail.com ', 'Ratna Irmawati', '3604014408720592', 'Serang', '1972-08-04', 'd3', 'Mengurus rumah tangga', 0, '085283217646', 'rratnairmawati@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
+(493, '2017274', 'Muh Syafi''I Assifa', '3604013004710591', 'Ponorogo', '1971-04-30', 's1', 'Pekerjaan Lainnya', 5000000, '085219931131', 'rratnairmawati@gmail.com ', 'Ratna Irmawati', '3604014408720592', 'Serang', '1972-08-04', 'd3', 'Mengurus rumah tangga', 0, '085283217646', 'rratnairmawati@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (494, '2017276', 'Boby Jatnikasani, SE.MM', '3671090409700006', 'Garut', '1970-09-04', 's2', 'Wiraswasta', 5000000, '081220874218', 'bobyjatnikasani@yahoo.co.id', 'Chicha Dewi Larasati, SE.MM', '3671095512750011', 'Bandung', '1975-12-15', 's2', 'Mengurus rumah tangga', 0, '081220874218', 'indiramarthanangameka@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (495, '2020737', 'Dedy Rinaldo', '1605012606800002', 'Mataram', '2020-03-18', 'sma', 'Wiraswasta', 4999999, '0', 'lusi.delumunata@gmail.com', 'Lusiani Septika Sari', '1771085609830003', 'Bengkulu', '1983-04-15', 's2', 'PNS', 5000000, '082286709239', 'lusi.delumunata@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (496, '2019727', 'Anthosius Heryanto', '0000000000000000', '0', '2020-03-19', 'sd', 'Wiraswasta', 5000000, '081574170699', 'oeylingling77@gmail.com', 'Oey Ling Ling', '3173076903770001', 'Jakarta', '1977-03-29', 'sma', 'Mengurus Rumah Tangga', 0, '08118109990', 'oeylingling77@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
@@ -12982,7 +13022,7 @@ INSERT INTO `tbl_orangtua` (`ortu_id`, `siswa_nis`, `ayah_nama`, `ayah_nik`, `ay
 (549, '2016049', 'R. Rachmat  Drajat ', '3207010303650001', 'Ciamis', '1965-03-03', 'd3', 'Belum/Tidak Bekerja', 0, '12345678', '12345@gmail.com', 'Rima', '0000000000000000', '0', '2020-03-23', 'sd', '0', 0, '123455678', '12345@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (550, '2016051', 'Darmono Santoso', '3603282708700009', 'Blitar', '1970-08-27', 's1', 'Karyawan Swasta', 5000000, '12345678', '12345@gmail.com', 'Lucy Bramastya', '3603284703710007', 'Temanggung', '1971-03-07', 's1', 'Karyawan Swasta', 0, '123455678', '12345@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (551, '2016045', 'Alex Indrajaya', '3173010801710001', 'Jakarta', '1971-01-08', 'd3', 'Karyawan Swasta', 5000000, '12345678', '12345@gmail.com', 'Christina Ariadne Seka S', '3173014804710003', 'Jakarta', '1971-04-08', 'd3', 'Mengurus Rumah Tangga', 0, '123455678', '12345@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
-(552, '2020788', 'Eddy Kunady', '3171020103630004', 'Jakarta', '1963-03-01', 's1', 'Wiraswasta', 5000000, '\'085883387637', 'michaelchristian2099@gmail.com,lannywidjaja@yahoo.com', 'Lanny Widjaja', '3171026710670002', 'Jakarta', '1967-10-27', 's1', 'Mengurus Rumah Tangga', 0, '085883387637', 'lannywidjaja@yahoo.com', '', '', '', '0000-00-00', '', '', '', '', ''),
+(552, '2020788', 'Eddy Kunady', '3171020103630004', 'Jakarta', '1963-03-01', 's1', 'Wiraswasta', 5000000, '''085883387637', 'michaelchristian2099@gmail.com,lannywidjaja@yahoo.com', 'Lanny Widjaja', '3171026710670002', 'Jakarta', '1967-10-27', 's1', 'Mengurus Rumah Tangga', 0, '085883387637', 'lannywidjaja@yahoo.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (553, '2020769', 'Edi Sukardono ', '3175052804670005', 'Gunung Kidul', '1967-04-28', 's1', 'Pegawai Negeri', 5000000, '081311062830', 'riani4175@gmail.com', 'Dian Evi Riani', '3175055304750007', 'Yogyakarta', '1975-04-13', 's1', 'Mengurus Rumah Tangga', 0, '081311062830', 'riani4175@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (554, '2020743', 'teuku afifuddin', '3671061710650003', 'Banda Aceh', '1965-10-17', 's1', 'Karyawan Swasta', 5000000, '081219133568', 'cutsafinaa@gmail.com', 'Ade Sarah Prinasari ', '3671066106790002', 'Jakarta', '1979-06-21', 's1', 'Mengurus Rumah Tangga', 0, '081299276379', 'cutsafinaa@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
 (555, '2017278', 'Eko Laksana Hadi', '0000000000000', '0', '2020-01-22', 'sd', '00', 0, '081311130960', 'eko.laksana.sigma@gmail.com, mamathifa@gmail.com', 'Nenny Yuniarti', '00000000000000', '0', '2020-02-19', 'sd', '0', 0, '081311130960', '12345@gmail.com', '', '', '', '0000-00-00', '', '', '', '', ''),
@@ -13077,7 +13117,7 @@ INSERT INTO `tbl_orangtua` (`ortu_id`, `siswa_nis`, `ayah_nama`, `ayah_nik`, `ay
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_pegawai`
+-- Struktur dari tabel `tbl_pegawai`
 --
 
 CREATE TABLE `tbl_pegawai` (
@@ -13096,7 +13136,7 @@ CREATE TABLE `tbl_pegawai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_pegawai`
+-- Dumping data untuk tabel `tbl_pegawai`
 --
 
 INSERT INTO `tbl_pegawai` (`pegawai_id`, `pegawai_nip`, `pegawai_nama`, `pegawai_jenkel`, `pegawai_tmp_lahir`, `pegawai_tgl_lahir`, `pegawai_bagian`, `pegawai_photo`, `pegawai_tgl_input`, `soft_deleted`, `pegawai_file`, `lokasi_dinas`) VALUES
@@ -13124,179 +13164,178 @@ INSERT INTO `tbl_pegawai` (`pegawai_id`, `pegawai_nip`, `pegawai_nama`, `pegawai
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_pelajaran`
+-- Struktur dari tabel `tbl_pelajaran`
 --
 
 CREATE TABLE `tbl_pelajaran` (
   `id_pelajaran` int(11) NOT NULL,
   `id_kelas` int(11) NOT NULL,
   `kd_mapel` int(11) NOT NULL,
-  `kd_pengajar` int(11) DEFAULT NULL
+  `kd_pengajar` int(11) DEFAULT NULL,
+  `link_oc` varchar(255) NOT NULL,
+  `tgl_oc` date DEFAULT NULL,
+  `time_start` time DEFAULT NULL,
+  `time_end` time DEFAULT NULL,
+  `aktifkan` tinyint(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_pelajaran`
+-- Dumping data untuk tabel `tbl_pelajaran`
 --
 
-INSERT INTO `tbl_pelajaran` (`id_pelajaran`, `id_kelas`, `kd_mapel`, `kd_pengajar`) VALUES
-(12, 2, 1, NULL),
-(13, 2, 2, NULL),
-(14, 2, 3, NULL),
-(15, 1, 4, NULL),
-(16, 1, 5, NULL),
-(17, 1, 6, NULL),
-(18, 1, 7, NULL),
-(20, 5, 2, NULL),
-(21, 5, 1, NULL),
-(22, 5, 3, NULL),
-(23, 5, 4, NULL),
-(24, 5, 5, NULL),
-(25, 5, 6, NULL),
-(26, 5, 7, NULL),
-(27, 10, 1, NULL),
-(29, 10, 3, NULL),
-(30, 10, 4, NULL),
-(32, 10, 6, NULL),
-(33, 10, 7, NULL),
-(34, 10, 8, NULL),
-(35, 10, 2, NULL),
-(36, 10, 9, NULL),
-(37, 10, 10, NULL),
-(38, 1, 2, NULL),
-(40, 5, 16, NULL),
-(42, 5, 18, NULL),
-(43, 11, 1, 1),
-(44, 11, 3, 1),
-(45, 11, 2, 1),
-(49, 11, 11, 1),
-(52, 11, 4, 1),
-(53, 11, 12, 2),
-(54, 11, 13, 2),
-(55, 11, 6, 2),
-(57, 11, 7, 2),
-(58, 11, 15, NULL),
-(59, 11, 18, NULL),
-(60, 6, 1, NULL),
-(63, 6, 2, NULL),
-(64, 6, 3, NULL),
-(65, 6, 4, NULL),
-(66, 6, 5, NULL),
-(67, 6, 16, NULL),
-(68, 6, 6, NULL),
-(69, 6, 7, NULL),
-(70, 6, 14, NULL),
-(71, 7, 1, NULL),
-(73, 7, 3, NULL),
-(74, 7, 2, NULL),
-(75, 7, 4, NULL),
-(76, 7, 5, NULL),
-(77, 7, 16, NULL),
-(78, 7, 17, NULL),
-(79, 7, 6, NULL),
-(80, 7, 7, NULL),
-(81, 7, 14, NULL),
-(82, 1, 1, NULL),
-(83, 1, 16, NULL),
-(84, 1, 3, NULL),
-(85, 9, 1, NULL),
-(95, 2, 4, NULL),
-(101, 1, 14, NULL),
-(102, 2, 5, NULL),
-(109, 2, 6, NULL),
-(110, 2, 7, NULL),
-(113, 2, 14, NULL),
-(115, 2, 16, NULL),
-(116, 3, 1, NULL),
-(118, 3, 2, NULL),
-(119, 3, 3, NULL),
-(120, 3, 4, NULL),
-(121, 3, 5, NULL),
-(122, 3, 6, NULL),
-(123, 3, 7, NULL),
-(124, 3, 14, NULL),
-(125, 3, 16, NULL),
-(126, 4, 1, NULL),
-(127, 4, 2, NULL),
-(128, 4, 3, NULL),
-(129, 4, 4, NULL),
-(130, 4, 5, NULL),
-(131, 4, 6, NULL),
-(132, 4, 7, NULL),
-(133, 4, 14, NULL),
-(134, 4, 16, NULL),
-(136, 5, 14, NULL),
-(137, 8, 1, NULL),
-(138, 8, 2, NULL),
-(139, 8, 3, NULL),
-(140, 8, 4, NULL),
-(141, 8, 5, NULL),
-(143, 8, 6, NULL),
-(144, 8, 7, NULL),
-(145, 8, 14, NULL),
-(146, 8, 16, NULL),
-(147, 8, 17, NULL),
-(148, 9, 3, NULL),
-(149, 9, 2, NULL),
-(152, 9, 5, NULL),
-(153, 9, 4, NULL),
-(154, 9, 6, NULL),
-(155, 9, 7, NULL),
-(156, 9, 14, NULL),
-(157, 9, 16, NULL),
-(158, 9, 17, NULL),
-(159, 10, 17, NULL),
-(160, 10, 15, NULL),
-(161, 11, 17, NULL),
-(162, 12, 1, NULL),
-(163, 12, 2, NULL),
-(164, 12, 3, NULL),
-(165, 12, 4, NULL),
-(166, 12, 6, NULL),
-(167, 12, 7, NULL),
-(168, 12, 8, NULL),
-(169, 12, 9, NULL),
-(170, 12, 10, NULL),
-(171, 12, 15, NULL),
-(172, 12, 17, NULL),
-(173, 15, 1, NULL),
-(174, 15, 2, NULL),
-(175, 15, 3, NULL),
-(176, 15, 4, NULL),
-(177, 15, 6, NULL),
-(178, 15, 7, NULL),
-(181, 0, 0, NULL),
-(182, 15, 11, NULL),
-(183, 15, 12, NULL),
-(184, 15, 13, NULL),
-(185, 15, 15, NULL),
-(186, 15, 17, NULL),
-(187, 14, 1, NULL),
-(188, 14, 2, NULL),
-(189, 14, 3, NULL),
-(190, 14, 4, NULL),
-(191, 14, 6, NULL),
-(192, 14, 7, NULL),
-(193, 14, 8, NULL),
-(194, 14, 9, NULL),
-(195, 14, 10, NULL),
-(196, 14, 14, NULL),
-(197, 14, 17, NULL),
-(198, 13, 1, NULL),
-(199, 13, 2, NULL),
-(200, 13, 3, NULL),
-(201, 13, 4, NULL),
-(202, 13, 6, NULL),
-(203, 13, 7, NULL),
-(204, 13, 11, NULL),
-(205, 13, 12, NULL),
-(206, 13, 13, NULL),
-(207, 13, 17, NULL),
-(209, 13, 15, NULL);
+INSERT INTO `tbl_pelajaran` (`id_pelajaran`, `id_kelas`, `kd_mapel`, `kd_pengajar`, `link_oc`, `tgl_oc`, `time_start`, `time_end`, `aktifkan`) VALUES
+(12, 2, 1, NULL, '', NULL, NULL, NULL, 0),
+(13, 2, 2, NULL, '', NULL, NULL, NULL, 0),
+(14, 2, 3, NULL, '', NULL, NULL, NULL, 0),
+(15, 1, 4, NULL, '', NULL, NULL, NULL, 0),
+(17, 1, 6, NULL, '', NULL, NULL, NULL, 0),
+(18, 1, 7, NULL, '', NULL, NULL, NULL, 0),
+(20, 5, 2, NULL, '', NULL, NULL, NULL, 0),
+(21, 5, 1, NULL, '', NULL, NULL, NULL, 0),
+(22, 5, 3, NULL, '', NULL, NULL, NULL, 0),
+(23, 5, 4, NULL, '', NULL, NULL, NULL, 0),
+(24, 5, 5, NULL, '', NULL, NULL, NULL, 0),
+(25, 5, 6, NULL, '', NULL, NULL, NULL, 0),
+(26, 5, 7, NULL, '', NULL, NULL, NULL, 0),
+(27, 10, 1, NULL, '', NULL, NULL, NULL, 0),
+(29, 10, 3, NULL, '', NULL, NULL, NULL, 0),
+(30, 10, 4, NULL, '', NULL, NULL, NULL, 0),
+(32, 10, 6, NULL, '', NULL, NULL, NULL, 0),
+(33, 10, 7, NULL, '', NULL, NULL, NULL, 0),
+(34, 10, 8, NULL, '', NULL, NULL, NULL, 0),
+(35, 10, 2, NULL, '', NULL, NULL, NULL, 0),
+(36, 10, 9, NULL, '', NULL, NULL, NULL, 0),
+(37, 10, 10, NULL, '', NULL, NULL, NULL, 0),
+(40, 5, 16, NULL, '', NULL, NULL, NULL, 0),
+(43, 11, 1, 2, 'https://answer-id.com/id/54384462', '2020-09-08', '00:02:00', '01:13:00', 0),
+(44, 11, 3, 1, '', NULL, NULL, NULL, 0),
+(45, 11, 2, 1, '', NULL, NULL, NULL, 0),
+(49, 11, 11, 1, '', NULL, NULL, NULL, 0),
+(52, 11, 4, 1, '', NULL, NULL, NULL, 0),
+(53, 11, 12, 1, '', NULL, NULL, NULL, 0),
+(54, 11, 13, 2, 'https://web.facebook.com/', '2020-08-29', '00:14:00', '01:01:00', 0),
+(55, 11, 6, 2, 'https://web.facebook.com/', '2020-08-29', '00:14:00', '01:01:00', 0),
+(57, 11, 7, 2, 'https://web.facebook.com/', '2020-08-29', '00:14:00', '01:01:00', 0),
+(58, 11, 15, 2, 'https://web.facebook.com/', '2020-08-29', '00:14:00', '01:01:00', 1),
+(60, 6, 1, NULL, '', NULL, NULL, NULL, 0),
+(63, 6, 2, NULL, '', NULL, NULL, NULL, 0),
+(64, 6, 3, NULL, '', NULL, NULL, NULL, 0),
+(65, 6, 4, NULL, '', NULL, NULL, NULL, 0),
+(66, 6, 5, NULL, '', NULL, NULL, NULL, 0),
+(67, 6, 16, NULL, '', NULL, NULL, NULL, 0),
+(68, 6, 6, NULL, '', NULL, NULL, NULL, 0),
+(69, 6, 7, NULL, '', NULL, NULL, NULL, 0),
+(70, 6, 14, NULL, '', NULL, NULL, NULL, 0),
+(71, 7, 1, NULL, '', NULL, NULL, NULL, 0),
+(73, 7, 3, NULL, '', NULL, NULL, NULL, 0),
+(74, 7, 2, NULL, '', NULL, NULL, NULL, 0),
+(75, 7, 4, NULL, '', NULL, NULL, NULL, 0),
+(76, 7, 5, NULL, '', NULL, NULL, NULL, 0),
+(77, 7, 16, NULL, '', NULL, NULL, NULL, 0),
+(78, 7, 17, NULL, '', NULL, NULL, NULL, 0),
+(79, 7, 6, NULL, '', NULL, NULL, NULL, 0),
+(80, 7, 7, NULL, '', NULL, NULL, NULL, 0),
+(81, 7, 14, NULL, '', NULL, NULL, NULL, 0),
+(83, 1, 16, NULL, '', NULL, NULL, NULL, 0),
+(85, 9, 1, NULL, '', NULL, NULL, NULL, 0),
+(95, 2, 4, NULL, '', NULL, NULL, NULL, 0),
+(101, 1, 14, NULL, '', NULL, NULL, NULL, 0),
+(102, 2, 5, 2, 'https://web.facebook.com/', '2020-08-29', '00:14:00', '01:01:00', 0),
+(109, 2, 6, NULL, '', NULL, NULL, NULL, 0),
+(110, 2, 7, NULL, '', NULL, NULL, NULL, 0),
+(113, 2, 14, 2, 'https://web.facebook.com/', '2020-08-29', '00:14:00', '01:01:00', 0),
+(115, 2, 16, NULL, '', NULL, NULL, NULL, 0),
+(116, 3, 1, NULL, '', NULL, NULL, NULL, 0),
+(118, 3, 2, NULL, '', NULL, NULL, NULL, 0),
+(119, 3, 3, NULL, '', NULL, NULL, NULL, 0),
+(120, 3, 4, NULL, '', NULL, NULL, NULL, 0),
+(121, 3, 5, NULL, '', NULL, NULL, NULL, 0),
+(122, 3, 6, NULL, '', NULL, NULL, NULL, 0),
+(123, 3, 7, NULL, '', NULL, NULL, NULL, 0),
+(124, 3, 14, NULL, '', NULL, NULL, NULL, 0),
+(125, 3, 16, NULL, '', NULL, NULL, NULL, 0),
+(126, 4, 1, NULL, '', NULL, NULL, NULL, 0),
+(127, 4, 2, NULL, '', NULL, NULL, NULL, 0),
+(128, 4, 3, NULL, '', NULL, NULL, NULL, 0),
+(129, 4, 4, NULL, '', NULL, NULL, NULL, 0),
+(130, 4, 5, NULL, '', NULL, NULL, NULL, 0),
+(131, 4, 6, NULL, '', NULL, NULL, NULL, 0),
+(132, 4, 7, NULL, '', NULL, NULL, NULL, 0),
+(133, 4, 14, NULL, '', NULL, NULL, NULL, 0),
+(134, 4, 16, NULL, '', NULL, NULL, NULL, 0),
+(136, 5, 14, NULL, '', NULL, NULL, NULL, 0),
+(137, 8, 1, NULL, '', NULL, NULL, NULL, 0),
+(138, 8, 2, NULL, '', NULL, NULL, NULL, 0),
+(139, 8, 3, NULL, '', NULL, NULL, NULL, 0),
+(140, 8, 4, NULL, '', NULL, NULL, NULL, 0),
+(141, 8, 5, NULL, '', NULL, NULL, NULL, 0),
+(143, 8, 6, NULL, '', NULL, NULL, NULL, 0),
+(144, 8, 7, NULL, '', NULL, NULL, NULL, 0),
+(145, 8, 14, NULL, '', NULL, NULL, NULL, 0),
+(146, 8, 16, NULL, '', NULL, NULL, NULL, 0),
+(147, 8, 17, NULL, '', NULL, NULL, NULL, 0),
+(148, 9, 3, NULL, '', NULL, NULL, NULL, 0),
+(149, 9, 2, NULL, '', NULL, NULL, NULL, 0),
+(152, 9, 5, NULL, '', NULL, NULL, NULL, 0),
+(153, 9, 4, NULL, '', NULL, NULL, NULL, 0),
+(154, 9, 6, NULL, '', NULL, NULL, NULL, 0),
+(155, 9, 7, NULL, '', NULL, NULL, NULL, 0),
+(156, 9, 14, NULL, '', NULL, NULL, NULL, 0),
+(157, 9, 16, NULL, '', NULL, NULL, NULL, 0),
+(158, 9, 17, NULL, '', NULL, NULL, NULL, 0),
+(159, 10, 17, NULL, '', NULL, NULL, NULL, 0),
+(160, 10, 15, NULL, '', NULL, NULL, NULL, 0),
+(161, 11, 17, NULL, '', NULL, NULL, NULL, 0),
+(162, 12, 1, NULL, '', NULL, NULL, NULL, 0),
+(163, 12, 2, NULL, '', NULL, NULL, NULL, 0),
+(164, 12, 3, NULL, '', NULL, NULL, NULL, 0),
+(165, 12, 4, NULL, '', NULL, NULL, NULL, 0),
+(166, 12, 6, NULL, '', NULL, NULL, NULL, 0),
+(167, 12, 7, NULL, '', NULL, NULL, NULL, 0),
+(168, 12, 8, NULL, '', NULL, NULL, NULL, 0),
+(169, 12, 9, NULL, '', NULL, NULL, NULL, 0),
+(170, 12, 10, NULL, '', NULL, NULL, NULL, 0),
+(171, 12, 15, NULL, '', NULL, NULL, NULL, 0),
+(172, 12, 17, NULL, '', NULL, NULL, NULL, 0),
+(173, 15, 1, NULL, '', NULL, NULL, NULL, 0),
+(174, 15, 2, NULL, '', NULL, NULL, NULL, 0),
+(175, 15, 3, NULL, '', NULL, NULL, NULL, 0),
+(176, 15, 4, NULL, '', NULL, NULL, NULL, 0),
+(177, 15, 6, NULL, '', NULL, NULL, NULL, 0),
+(178, 15, 7, NULL, '', NULL, NULL, NULL, 0),
+(181, 0, 0, NULL, '', NULL, NULL, NULL, 0),
+(182, 15, 11, NULL, '', NULL, NULL, NULL, 0),
+(183, 15, 12, NULL, '', NULL, NULL, NULL, 0),
+(184, 15, 13, NULL, '', NULL, NULL, NULL, 0),
+(185, 15, 15, NULL, '', NULL, NULL, NULL, 0),
+(186, 15, 17, NULL, '', NULL, NULL, NULL, 0),
+(187, 14, 1, NULL, '', NULL, NULL, NULL, 0),
+(188, 14, 2, NULL, '', NULL, NULL, NULL, 0),
+(189, 14, 3, NULL, '', NULL, NULL, NULL, 0),
+(190, 14, 4, NULL, '', NULL, NULL, NULL, 0),
+(191, 14, 6, NULL, '', NULL, NULL, NULL, 0),
+(192, 14, 7, NULL, '', NULL, NULL, NULL, 0),
+(193, 14, 8, NULL, '', NULL, NULL, NULL, 0),
+(194, 14, 9, NULL, '', NULL, NULL, NULL, 0),
+(195, 14, 10, NULL, '', NULL, NULL, NULL, 0),
+(196, 14, 14, NULL, '', NULL, NULL, NULL, 0),
+(197, 14, 17, NULL, '', NULL, NULL, NULL, 0),
+(198, 13, 1, NULL, '', NULL, NULL, NULL, 0),
+(199, 13, 2, NULL, '', NULL, NULL, NULL, 0),
+(200, 13, 3, NULL, '', NULL, NULL, NULL, 0),
+(201, 13, 4, NULL, '', NULL, NULL, NULL, 0),
+(202, 13, 6, NULL, '', NULL, NULL, NULL, 0),
+(203, 13, 7, NULL, '', NULL, NULL, NULL, 0),
+(204, 13, 11, NULL, '', NULL, NULL, NULL, 0),
+(205, 13, 12, NULL, '', NULL, NULL, NULL, 0),
+(206, 13, 13, NULL, '', NULL, NULL, NULL, 0),
+(207, 13, 17, NULL, '', NULL, NULL, NULL, 0),
+(209, 13, 15, NULL, '', NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_pembayaran`
+-- Struktur dari tabel `tbl_pembayaran`
 --
 
 CREATE TABLE `tbl_pembayaran` (
@@ -13312,7 +13351,7 @@ CREATE TABLE `tbl_pembayaran` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_pembayaran`
+-- Dumping data untuk tabel `tbl_pembayaran`
 --
 
 INSERT INTO `tbl_pembayaran` (`id_pembayaran`, `nis_siswa`, `jns_tagihan`, `tgl_jatuh_tempo`, `tgl_pembayaran`, `sisa_angsur`, `jml_pembayaran`, `ket_pembayaran`, `sts_pembayaran`) VALUES
@@ -13459,7 +13498,7 @@ INSERT INTO `tbl_pembayaran` (`id_pembayaran`, `nis_siswa`, `jns_tagihan`, `tgl_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_pengajar`
+-- Struktur dari tabel `tbl_pengajar`
 --
 
 CREATE TABLE `tbl_pengajar` (
@@ -13468,17 +13507,17 @@ CREATE TABLE `tbl_pengajar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_pengajar`
+-- Dumping data untuk tabel `tbl_pengajar`
 --
 
 INSERT INTO `tbl_pengajar` (`id_pengajar`, `nm_pengajar`) VALUES
 (1, 'Imam Maulana Ibrahim S.Kom'),
-(2, 'Merick Nugroho S.Kom');
+(2, 'Merik Nugroho S.Kom');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_pengguna`
+-- Struktur dari tabel `tbl_pengguna`
 --
 
 CREATE TABLE `tbl_pengguna` (
@@ -13492,7 +13531,7 @@ CREATE TABLE `tbl_pengguna` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_pengguna`
+-- Dumping data untuk tabel `tbl_pengguna`
 --
 
 INSERT INTO `tbl_pengguna` (`pengguna_id`, `pengguna_nama`, `pengguna_username`, `pengguna_password`, `pengguna_status`, `pengguna_level`, `pengguna_register`) VALUES
@@ -14116,7 +14155,7 @@ INSERT INTO `tbl_pengguna` (`pengguna_id`, `pengguna_nama`, `pengguna_username`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_pengumuman`
+-- Struktur dari tabel `tbl_pengumuman`
 --
 
 CREATE TABLE `tbl_pengumuman` (
@@ -14126,16 +14165,16 @@ CREATE TABLE `tbl_pengumuman` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_pengumuman`
+-- Dumping data untuk tabel `tbl_pengumuman`
 --
 
 INSERT INTO `tbl_pengumuman` (`pengumuman_id`, `pengumuman_deskripsi`, `aktifkan`) VALUES
-(1, 'Selama dalam kondisi pandemic COVID-19 semua siswa diharapkan untuk belajar secara online melalui website <a href=\"\" class=\"alert-link\">BI-LMS</a>', 0);
+(1, 'Selama dalam kondisi pandemic COVID-19 semua siswa diharapkan untuk belajar secara online melalui website <a href="" class="alert-link">BI-LMS</a>', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_satelit`
+-- Struktur dari tabel `tbl_satelit`
 --
 
 CREATE TABLE `tbl_satelit` (
@@ -14148,7 +14187,7 @@ CREATE TABLE `tbl_satelit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_satelit`
+-- Dumping data untuk tabel `tbl_satelit`
 --
 
 INSERT INTO `tbl_satelit` (`satelit_id`, `satelit_nama`, `satelit_alamat`, `satelit_pic`, `satelit_notelp`, `satelit_email`) VALUES
@@ -14165,13 +14204,14 @@ INSERT INTO `tbl_satelit` (`satelit_id`, `satelit_nama`, `satelit_alamat`, `sate
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_siswa`
+-- Struktur dari tabel `tbl_siswa`
 --
 
 CREATE TABLE `tbl_siswa` (
   `siswa_id` int(50) NOT NULL,
   `siswa_nis` varchar(20) DEFAULT NULL,
   `siswa_nisn` varchar(20) DEFAULT NULL,
+  `nik_siswa` varchar(25) DEFAULT NULL,
   `siswa_nama` varchar(100) DEFAULT NULL,
   `siswa_jenkel` varchar(2) DEFAULT NULL,
   `siswa_tempat` varchar(125) DEFAULT NULL,
@@ -14187,628 +14227,629 @@ CREATE TABLE `tbl_siswa` (
   `soft_deleted` tinyint(1) NOT NULL DEFAULT '0',
   `anak_ke` int(2) DEFAULT NULL,
   `sekolah_asal` varchar(125) DEFAULT NULL,
-  `satelit` int(11) DEFAULT NULL
+  `satelit` int(11) DEFAULT NULL,
+  `oc` tinyint(2) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_siswa`
+-- Dumping data untuk tabel `tbl_siswa`
 --
 
-INSERT INTO `tbl_siswa` (`siswa_id`, `siswa_nis`, `siswa_nisn`, `siswa_nama`, `siswa_jenkel`, `siswa_tempat`, `siswa_tgl_lahir`, `siswa_agama_id`, `siswa_kewarganegaraan`, `siswa_alamat`, `siswa_email`, `siswa_dokumen`, `siswa_no_telp`, `siswa_kelas_id`, `siswa_photo`, `soft_deleted`, `anak_ke`, `sekolah_asal`, `satelit`) VALUES
-(1, '2019638', '2049966773', 'Adyakhansa Mustika Jagatwanata', 'P', 'Jakarta', '2004-09-06', 1, 'WNI', 'JALAN RINJANI BLOK A/24 KOMPLEK SERUA PERMAI\n', 'emailadyakansha@gmail.com', 'adyakansa-dikompresi.pdf', '08567400617', 11, 'adyakansaphoto.jpg', 0, 3, 'SMP Negri 9 Kota Tangerang Selatan', 1),
-(2, '2019637', '0043056211', 'Advent Roan Widiyono', 'L', 'Tangerang ', '2004-12-05', 3, 'WNI', 'regensi melati mas blok E6 no.17 regensi melati mas blok E6 no.17\ntangerang banten 15323\nIndonesia', 'adventroan.w@gmail.com', '03-05-2020-16.28_.29_.pdf', '08871847067', 10, 'WhatsApp_Image_2020-03-05_at_4.21_.00_PM_.jpeg', 0, 2, 'PKBM Alfa Omega', 1),
-(3, '2019558', '2079628928', 'Adeline Callista Maurren', 'P', 'Jakarta ', '2007-11-24', 5, 'WNI', 'Green Lake City Asia 15 Nomor 37 Cipondoh Tangerang', 'mieyung11@yahoo.com', 'adelin_calista.pdf', '0895322475001', 7, 'WhatsApp_Image_2020-03-05_at_15.58_.18_.jpeg', 0, 2, 'Hope for Generations ', 1),
-(4, '2019565', '0086194139', 'Amazing Grace Danielle Prakoso', 'P', 'Jakarta', '2008-09-01', 2, 'WNI', 'Panorama serpong D10 No.20 Jl. Raya Puspiptek Serpong ', 'anakpanah200@gmail.com', 'amazing.pdf', '0817777673', 7, 'WhatsApp_Image_2020-03-05_at_16.25_.09_.jpeg', 0, 1, 'Sekolah Anak Panah ', 1),
-(5, '2019644', '0045421810', 'Alfarezha Prasetya V', 'L', 'Yogyakarta', '2004-07-24', 1, 'WNI', 'Apartemen Kebagusan City Tower C lt 19 no 20,Jl Baung,RT.2/RW.3,Kebagusan,Kec Ps.Minggu,Kota Jakarta Selatan,Daerah Khusus Ibu Kota Jakarta 12520', 'rezcam24@gmail.com', 'alfares.pdf', '087787241700', 11, 'WhatsApp_Image_2020-03-05_at_4.38_.04_PM_.jpeg', 0, 1, 'SMP Pesat Kota Bogor', 1),
-(6, '2019573', '2074888707', 'Cheyshammah Chalysta Putra', 'P', 'Jakarta', '2007-10-24', 2, 'WNI', 'Kompleks Pendidikan, Jl. Melati No. 42 Cilandak Barat, Cilandak\nJakarta Selatan DKI Jakarta 12430\nIndonesia', 'cheyshammah.putra@gmail.com', 'cheyshammah.pdf', '08112994305', 7, 'WhatsApp_Image_2020-03-05_at_16.45_.24_.jpeg', 0, 3, 'Sekolah Harapan Bangsa ', 1),
-(7, '2019639', '0041012123', 'Afnan Al Kautzar', 'L', 'Tangerang ', '2004-05-24', 1, 'WNI', 'Nusa Loka blok T9 no 16 Sektor XIV - 5 Rawamekar Jaya, Serpong', 'afnankautzar@gmail.com', 'afnan1.pdf', '081387990729', 11, 'WhatsApp_Image_2020-03-05_at_5.06_.03_PM_.jpeg', 0, 2, 'PKBM Anak Panah', 1),
-(8, '2019574', '2072395994', 'Chris Johannes Ammer', 'L', 'Sorong', '2007-03-31', 2, 'WNI', 'Jalan Gunung Tidar No. 1 Kampung Baru\nSorong Papua Barat 98413\nIndonesia', 'anita.e.matahari@gmail.com', 'chris_john_amer.pdf', '081247289903', 7, 'WhatsApp_Image_2020-03-05_at_17.16_.02_.jpeg', 0, 3, 'SD Advent', 1),
-(9, '2019575', '0079408138', 'Danish Arfa Indrawan', 'L', 'Karawang ', '2007-05-19', 1, 'WNI', 'Perumahan Citra Raya Cluster Parkview Y25/28 kelurahan mekar bakti kecamatan panongan kabupaten tangerang', 'vinta.gunasti@gmail.com', '05-03-2020-17.28_.01(1)_.pdf', '081315458727', 7, 'WhatsApp_Image_2020-03-05_at_17.30_.57_.jpeg', 0, 1, 'SD Negeri 03 Madiun Lor ', 1),
-(10, '2019570', '2062172832', 'Benedictus Benfilio Prihadi', 'L', 'Jakarta', '2006-10-08', 3, 'WNI', 'Jl Alicante Barat 3 No 12 Cluster Alicante, Gading Serpong\nTangerang Selatan Banten 15810', 'yurinasofiarni@gmail.com', '06-03-2020-09.26_.20_.pdf', '081294632297', 7, 'WhatsApp_Image_2020-03-06_at_09.28_.32_.jpeg', 0, 1, 'SD Tarakanita Gading Serpong', 1),
-(11, '2019571', '0069337219', 'Benita Videline Aprillia', 'P', 'perempuan ', '2006-04-30', 2, 'WNI', 'Jl. Kesatrian IX 27G, RT03/RW03 Keb. Manggis, Matraman, Jakarta Timur ', 'benitavideline@gmail.com', 'benitta_videlin.pdf', '081717441007', 7, 'WhatsApp_Image_2020-03-06_at_09.53_.02_.jpeg', 0, 1, 'Sekolah Anak Panah', 1),
-(12, '2019636', '0042591635', 'Abigail Calista', 'P', 'Tangerang ', '2004-07-29', 5, 'WNI', 'Jl. Kelapa Sawit XVII BH 5/7 Kelapa Dua, Tangerang', 'abigail.lista29@gmail.com', 'abigail.pdf', '081219838006', 11, 'WhatsApp_Image_2020-03-06_at_10.05_.16_AM_.jpeg', 0, 1, 'PKBM Anak Panah', 1),
-(13, '2019572', '0078287605', 'Bennett Sean Nugroho ', 'L', 'Padang', '2007-03-23', 2, 'WNI', 'Jl. Mangga 24 Blok F No. 140A Duri Kepa, Kebun\nJeruk, DKI Jakarta 11510 ', 'sheroctav@gmail.com', 'benette.pdf', '0818857755', 7, 'WhatsApp_Image_2020-03-06_at_10.20_.48_.jpeg', 0, 2, 'Sekolah Anak Panah', 1),
-(14, '2019646', '2045784036', 'Ananda Meisya', 'P', 'Jakarta', '2004-05-27', 2, 'WNI', 'Jl. Pulo Harapan Indah No.220 Cengkareng, Jakarta Barat', 'ananda27meysia@gmail.com', 'ananda_mesya.pdf', '088210612329', 11, 'WhatsApp_Image_2020-03-06_at_11.06_.48_AM_.jpeg', 0, 1, 'PKBM Anak Panah', 1),
-(15, '2019650', '2048219109', 'Aryoscha Prashantivari Herynanto', 'P', 'Jakarta', '2004-03-11', 3, 'WNI', 'DE LATINOS BRAZILLIA FLAMENGO BLOK D5 NO 3\nBSD CITY TANGERANG SELATAN 15318\nIndonesia', 'aryoscha.herynanto@gmail.com', 'KK_Aryoscha-converted.pdf', '087885407448', 11, 'WhatsApp_Image_2020-03-06_at_11.51_.45_AM_.jpeg', 0, 1, 'SMP Anderson', 1),
-(16, '2017270', '0022361972', 'Livia Natasha Denise Tunggul Rahardiyo', 'P', 'Tegal', '2002-12-13', 2, 'WNI', 'Villa Melati Mas Blok G 4/32', 'livianatasha71@gmail.com', 'Livia_Natasha1.pdf', '0818880399', 15, 'WhatsApp_Image_2020-03-19_at_11.26_.11_AM_1.jpeg', 0, 1, 'PKBM Anak Panah', 1),
-(17, '2017277', '0020476861', 'Naiffa Nurrahma Untsa', 'P', 'Tangerang', '2002-07-13', 1, 'WNI', 'Jl Kecipir 11 No 158 Rt. 004/014. Cibodasari, Cibodas, Kota Tangerang', 'herumput@gmail.com', 'naifa.pdf', '087718770707', 15, 'WhatsApp_Image_2020-03-20_at_3.39_.58_PM_.jpeg', 0, 1, 'SMPN 9 Kota Tangerang', 1),
-(18, '2017279', '0022151032', 'Pearliani Fatima Harum', 'P', 'Surabaya', '2002-04-29', 1, 'WNI', 'Jl. Papandayan No.16 Mediterania 1 Sentul City', 'dadank.premier@gmail.com', 'Pearliani_Fatima.pdf', '087888220635', 15, 'WhatsApp_Image_2020-03-19_at_10.57_.10_AM_.jpeg', 0, 3, 'SMP Bina Insani', 1),
-(19, '2017272', '0025273797', 'Manuel Apriadi', 'L', 'Jakarta ', '2002-04-16', 3, 'WNI', 'JL. RUBY II B 4/17 RT 005 RW 001', 'lalala@gmail.com', 'manuel.pdf', '000', 14, 'Manuel_Apriadi.jpeg', 0, 2, 'SMP NOTRE DAME', 1),
-(21, '2017262', '0030074956', 'Jonathan Kindangan', 'L', 'Manado', '2003-02-09', 2, 'WNI', 'Malendeng Lingkungan V RT 024 RW 005 Kecamatan Tikala Kelurahan Malendeng , Kota Manado. Sulawesi Utara 95128', '12345@gmail.com', 'jonathan.pdf', '085394999210', 14, 'Jonathan_Kindangen.jpeg', 0, 3, 'MTS.NEGERI 4 JAKARTA', 1),
-(22, '2017286', '9993447464', 'Rinaldi Syahputra Pratama', 'L', 'Jakarta', '1999-02-14', 1, 'WNI', 'Bank I/9, 007/007, Pela mampang, mampang prapatan, Jakarta Selatan', '123456@gmail.com', 'rinaldi.pdf', '081314228068', 13, 'Screenshot_7.png', 0, 2, 'Cognitive Challenge', 1),
-(23, '2017280', '0028578014', 'Putri Amalia Rahmayani Sinaga', 'P', 'Bekasi', '2002-11-18', 1, 'WNI', 'Citra Raya Cluster Taman Raya Jl. Musik 8 Blok M No.35 RT21/RW05 Dukuh Tangerang', 'sng_donni@yahoo.co.id', 'putri.pdf', '081266663737', 15, 'WhatsApp_Image_2020-03-20_at_9.56_.45_AM_.jpeg', 0, 2, 'SMP Citra Berkat', 1),
-(24, '2017281', '9988749707', 'Raden Monica Silvia', 'P', 'Ciamis', '1998-05-21', 1, 'WNI', 'Jl. IR. H Juanda', 'radenmonicasilvia@gmail.com', 'raden_monica.pdf', '085322649805', 14, 'Raden_Monica1.jpeg', 0, 1, 'Anak Panah', 1),
-(25, '2017291', '0001106687', 'Sheryn Rose', 'P', 'Surabaya', '2000-11-30', 2, 'WNI', 'KP. Gebang RT001 RW006', '123456@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '', 15, 'tidur-dengan-kucing.jpg', 0, 1, 'SMP Stella Maris ', 1),
-(26, '2017271', '0025475041', 'Maansie Shaguffta Kaur', 'P', 'Jakarta', '2002-06-21', 4, 'WNI', 'Jl. Bungur Raya No.5 RT/RW 01/01 Kebayoran Lama Selatan, Jakarta Selatan', 'lalala@gmail.com', 'shaguftah.pdf', '081291282794', 14, 'Maansie_Shaguffa.jpeg', 0, 2, 'SMP BINA NUSANTARA', 1),
-(28, '2017284', '0024966861', 'Raka Rasendriya Reswara', 'L', 'Tangerang', '2002-05-22', 1, 'WNI', 'Jl. Darma Putra VI No 24 Komp. Kostrad RT 07/07, Kebayoran lama', 'melayenkawati@gmail.com', 'Raka_Rasendriya_Reswara.pdf', '085893222415', 15, 'Raka_Rasendriya1.jpeg', 0, 1, 'SMP Islam Plus Baitul Maal Kota Tangerang', 1),
-(29, '2017292', '9986274415', 'Siti Fatimah', 'P', 'Jakarta', '1998-03-07', 1, 'WNI', 'Jl. Kebon Pala II RT11/RW004 Kampung Melayu Jatinegara Jakarta Timur', '123456@gmail.com', 'Siti_Fatimah.pdf', '085788587982', 15, 'Siti_Fatimah.jpeg', 0, 2, 'SMPN 26 Jakarta Timur', 1),
-(30, '2017264', '0024240588', 'Justin Andean Sunardi', 'L', 'Jakarta', '2002-06-07', 2, 'WNI', 'Jl. Jamblang Indah II/12 RT 013 RW 002 Kelurahan Duri Selatan Kecamatan Tambora, Kota Jakarta Barat DKI Jakarta 11270', '12345@gmail.com', 'justin.pdf', '12345678', 15, 'Justin_Andean.jpeg', 0, 1, 'Smp Kristen 2 Penabur', 1),
-(31, '2017297', '0029369713', 'Tirza Theophilia', 'P', 'Bandung', '2002-06-21', 2, 'WNI', 'Jl Wakeke 24 Lingkungan II Rt 002/002 Wenang Utara, Kota Manado', '12345@gmail.com', 'Tirza_Theophilia.pdf', '0817436626', 14, 'WhatsApp_Image_2020-03-17_at_3.04_.50_PM_.jpeg', 0, 2, 'SMP Kristen Ebenhaezar 2 Manado', 1),
-(32, '2017285', '0025984039', 'Rendy Juliansyah', 'L', 'Tangerang', '2002-07-27', 1, 'WNI', 'Jl. Beruang II No 82 RT 01/02, Ciputat timur, Kota Tangerang Selatan ', 'ratnaindriatna@gmail.com', 'rendy_juliansah.pdf', '0817162449', 15, 'Rendy_Juliansyah1.jpeg', 0, 4, 'Anak Panah', 1),
-(33, '2017275', '0015875755', 'Muhammad Ikraam Mahendra', 'L', 'Bandung', '2001-07-26', 2, 'WNI', 'Jl. Babakan Periuk I No.8 RT/RW 001/006', 'lalala@gmail.com', 'ikraam.pdf', '08122008947', 14, 'WhatsApp_Image_2020-03-20_at_2.42_.07_PM_.jpeg', 0, 1, 'SMP MUTIARA BUNDA', 1),
-(34, '2017293', '0020994122', 'Stanley Nathanael', 'L', 'Tangerang', '2002-05-27', 2, 'WNI', 'Jl. Pal Merah Barat No. 21 RT001/RW005 Grogol Utara Kebayoran Lama Jakarta Selatan', 'stanleynathanael277@gmail.com', 'stanley_nathanael.pdf', '083875200857', 14, 'Stanley_Nathanael.jpeg', 0, 2, 'SMP Swasta Athalia Kota Tangerang Selatan', 1),
-(35, '2017296', '0015845787', 'Theresa Zevanya', 'P', 'Jakarta', '2001-06-28', 2, 'WNI', 'Bukit Pamulang Indah Blok E 16 No.3 Rt. 002/005 Pamulang Timur, Kota Tangerang Selatan', 'tytha@icloud.com', 'Theresa_Zevanya.pdf', '089636949886', 15, 'WhatsApp_Image_2020-03-19_at_10.50_.06_AM_.jpeg', 0, 2, 'PKBM Kak Seto', 1),
-(36, '2017295', '0023094252', 'Steven Chen', 'L', 'Pematang Siantar', '2002-09-22', 3, 'WNI', 'Bukit Serpong Mas Blok D-1/20 RT003/RW007 Pakulonan Serpong Utara Kota Tangerang Selatan', '123456@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '', 14, 'tidur-dengan-kucing.jpg', 1, 1, 'SMP Menara Tirza', 1),
-(37, '2017282', '0017661202', 'Raisha Hapsari', 'P', 'Tangerang', '2001-10-18', 1, 'WNI', 'Kp.Parabon RT 02/03 Ciloto, Cipanas, Cianjur', 'monika.eleska@gmail.com', 'Raisha_Hapsari1.pdf', '081221747891', 15, 'Raisha_Hapsari1.jpeg', 0, 1, 'SMPIT Daarul Hasan', 1),
-(38, '2017298', '0012694762', 'Valencia Anggi Putri', 'P', 'Tangerang', '2001-02-15', 2, 'WNI', 'Jl Danau Toba Raya No. 40 Rt.004/008 Bencongan Kelapa Dua Tangerang', 'valenjoestar@yahoo.com', 'valencia_angi1.pdf', '081218327657', 14, 'Valencia2.jpeg', 0, 3, 'SMP Strada Slamet Riyadi Kota Tangerang', 1),
-(39, '2017287', '0016469246', 'Ryo Adrian Pangestu', 'L', 'Jakarta', '2001-12-16', 2, 'WNI', 'Cluster IL Rosa Jl. Rosa 5 Blok O 52', 'ryu33661@gmail.com', 'ryo_adrian.pdf', '081314039006', 15, 'Ryo_Adrian.jpeg', 0, 1, 'SMA Kristen IPEKA BSD', 1),
-(40, '2017299', '0002885795', 'Vardian Veronico', 'L', 'Bireuen ', '2000-05-01', 2, 'WNI', 'Jl. Kh Moch Mansyur Blok 15F No 18 Rt 10/02 Duri Pulo, Gambir', 'vardianveronicoliva@yahoo.co.id', 'Vardian_Veronico.pdf', '08111651905', 14, 'Vardian_Veronico.jpeg', 0, 3, 'SMP Kristen Samaria Grogol', 1),
-(41, '2017288', '0013071953', 'Salsabila Zaahidiyah Azzahra', 'P', 'Surabaya', '2001-01-20', 1, 'WNI', 'Kedung Banteng RT002/RW001 Kedung Banteng Tanggulangin Sidoarjo 61272 Jawa Timur', 'salsabilazaadiyahazzahra@gmail.com', 'salsabila1.pdf', '081311736295', 14, 'Salsabilla_Zaadiyah.jpeg', 0, 1, 'PKBM 25 Kuningan', 1),
-(42, '2017191', '0057673276', 'Andillie Wiliady', 'L', 'Jakarta ', '2005-02-11', 3, 'WNI', 'BATUJAYA SELATAN rt1/1 Desa / Kelurahan : Batujaya Kode Pos  : 15121', 'susana.bong@yahoo.com', '09-03-2020-15.57_.29_.pdf', '0817738830', 9, 'Andilie.jpeg', 0, 3, 'SD Mutiara Bangsa ', 1),
-(43, '2017283', '0022442795', 'Raissa Cleodora Junia', 'P', 'Tangerang', '2002-06-18', 2, 'WNI', 'Perum tm Adiyasa Ruko L1-2 Cikasungka Solear ', 'raissa.cleodora@gmail.com', 'Raissa_Cleodora_Junia1.pdf', '081382652555', 14, 'WhatsApp_Image_2020-03-20_at_5.36_.08_PM_1.jpeg', 0, 3, 'SMP Strada Tunas Harapan', 1),
-(44, '2017235', '2991925707', 'Anandeiva Amanda', 'P', 'Jakarta', '1999-09-18', 1, 'WNI', 'Jl.Guntur Blok A/24 RT 004 RW 014 Kelurahan Jati Makmur Kecamatan  Pondok Gede, Kota Bekasi Jawa Barat 17413', 'anandeiva.a@gmail.com', 'anandeiva1.pdf', '08881029642', 14, 'Anandeiva.jpeg', 0, 1, 'Smp Negeri 9 Kota Bekasi', 1),
-(45, '2017273', '0022282338', 'Michelle Zevinca', 'P', 'Jakarta', '2002-03-15', 3, 'WNI', 'Komp. Delta Kedoya Blok G/9 RT/RW 05/03', 'hartono72@gmail.com', 'michele_zevincha.pdf', '08557535995', 15, 'Michelle_Zevinca.jpeg', 0, 1, 'SMP KATOLIK SANG TIMUR', 1),
-(46, '2017192', '0046961156', 'Andrea Christabella Darmadji', 'P', 'Tangerang ', '2004-08-03', 2, 'WNI', 'Banara Serpong Ambara D2/11\nTangerang Tangerang Selatan 15314\n', 'deadarmadji@gmail.com', '09-03-2020-17.10_.10_.pdf', '081210105209', 9, 'Andrea_Darmaji.jpeg', 0, 1, 'PKBM Geliat Bocah Kampoeng Program', 1),
-(47, '2017241', '0023689300', 'Carolline ', 'P', 'Jakarta', '2002-11-06', 3, 'WNI', 'gang masjid III RT 005/007 Angke, Tambora, Jakarta Barat', 'carollinehalim@icloud.com', 'caroline.pdf', '081882005085', 15, 'WhatsApp_Image_2020-03-20_at_5.28_.32_PM_.jpeg', 0, 1, 'PKBM Hasanah Ilmu', 1),
-(48, '2017249', '2093204937', 'Emmanuela Louis', 'P', 'Bogor', '2002-10-10', 2, 'WNI', 'Jl. DR. Angka Komp. Ruko PD 2/15-16 001/011, Purwokerto utara, Banyumas', 'emmanuellalouis@gmail.com', 'emanuela_louis.pdf', '08176695510', 15, 'Emmanuela_Louis1.jpeg', 0, 2, 'SMPN 3 Bahasa Putera Harapan', 1),
-(50, '2017240', '0021878678\r\n', 'Ashwin Vijay Sarkar', 'L', 'Jakarta', '2002-08-09', 1, 'WNI', 'Talagasari RT 007 RW 003  Kelurahan Talagasari Kecamatan Cikupa, Kota Tangerang. Banten 15710', 'rajashwin222@gmaill.com', 'ashwin-compressed.pdf', '081295261118', 15, 'WhatsApp_Image_2020-03-20_at_5.19_.58_PM_.jpeg', 0, 1, 'Sekolah Citra Berkat', 1),
-(51, '2017242', '0028519836', 'Christi Stefani Arita', 'P', 'Jambi', '2002-09-17', 2, 'WNI', 'Jl Cipinang Cempedak IV No 47 RT 11 RW 03 Cipinang Jakarta Timur', 'susanto@gmail.com', 'chisty_final.pdf', '08117297000', 14, 'WhatsApp_Image_2020-03-17_at_3.20_.16_PM_.jpeg', 0, 1, 'SMP Kristen BPK Penabur', 6),
-(52, '2017251', '0022640803', 'Faradisha Lailatul Azari Azhar', 'P', 'Pekan Baru', '2002-12-20', 1, 'WNI', 'Jl. Sultan Syarif Qasim Gang keluarga No 09 Rintis, Limapuluh', 'violetdelure@hotmail.com', 'faradisha.pdf', '085156303546', 15, 'Faradisha1.jpeg', 0, 1, 'SMP Swasta Sains Tahfizh Islamic Center', 1),
-(54, '2017243', '0018578372', 'Dave Adriel', 'L', 'Jakarta', '2001-12-20', 3, 'WNI', 'Villa Melati Mas Blok Vista II/42 Rt 003/006 Jelupang Serpong Utara', '12345@gmail.com', 'dave_adriel.pdf', '081316022081', 14, 'Dave_Adriel.jpeg', 0, 3, 'PKBM Alfa Omega', 1),
-(55, '2017253', '0029858432', 'Fatimah Azzahra ', 'P', 'Riau', '2002-05-05', 1, 'WNI', 'Jl. Sukajadi No 7 RT 07/03 Sukabungah, Kota Bandung', 'fatimahazzahra55bandung@gmail.com', 'fatimah_azzahra.pdf', '082386069190', 15, 'WhatsApp_Image_2020-03-20_at_2.33_.10_PM_1.jpeg', 0, 2, 'SMPN 12 Bandung', 1),
-(58, '2017248', '0018581452', 'Dzaki Alkamal', 'L', 'Tasikmalaya', '2001-05-08', 1, 'WNI', 'Cluster Syailendra No 73, Perumahan Grantaruma, Kab, Karawang', 'lia.dewi21@gmail.com', 'dzaki_akmal.pdf', '085717768666', 15, 'Dzaki_Alkamal.jpg', 0, 1, 'PKBM Cepat Tepat', 1),
-(59, '2017234', '0028328936', 'Aloysius Giorgio', 'L', 'Tangerang', '2002-02-18', 3, 'WNI', 'Bsd Blok N-7 sektor 1-2 RT 002 RW 004 Kelurahan/ Desa Rawabuntu Kecamatan Serpong, Kota Tangerang. Banten 15318', 'jorujo.suzanto99@gmail.com', 'aloysius.pdf', '08811054834', 14, 'Aloysius_Giorgio.jpeg', 0, 1, 'SMP Santa Laurensia', 1),
-(60, '2017247', '0021076548', 'Dyssa Chysilla Cathlin', 'P', 'Jakarta', '2002-01-26', 1, 'WNI', 'Jl Tenis IV No 101 Rt 06/08 Kapuk Jakarta Utara', 'eddy_hermanto@yahoo.co.id', 'dyasa.pdf', '089661554012', 15, 'Dyssa.jpeg', 0, 1, 'SMPN 273 Jakarta Pusat', 1),
-(61, '2017250', '0022499109', 'Faiza Piatunisa', 'P', 'Jakarta', '2002-03-31', 1, 'WNI', 'Kp. Pondok Randu RT 13/02 Duri kosambi, Jakarta barat', 'sjafjan@gmail.com', 'faiza.pdf', '089602568884', 15, 'WhatsApp_Image_2020-03-17_at_3.08_.14_PM_1.jpeg', 0, 1, 'SMPN 176 Jakarta', 6),
-(62, '2017257', '0023962777', 'Hansen Anthony Hose Wijaya', 'L', 'Bandung', '2002-11-13', 2, 'WNI', 'Lingk Cimenyan I RT02/RW01 Mekar Sari Banjar', 'hansen69anthony@gmail.com', 'hansen_antony.pdf', '081323381999', 15, 'WhatsApp_Image_2020-03-20_at_5.23_.45_PM_.jpeg', 0, 3, 'SMPN 1 Banjar', 1),
-(63, '2017258', '0022036530', 'Helen Evelyn', 'P', 'Tangerang', '2002-10-10', 5, 'WNI', 'Jl. Pademangan III GG.12 RT003/RW007 Pademangan Jakarta Utara DKI Jakarta', 'helen.evelyn1010@gmail.com', 'helen_final.pdf', '081271477489', 14, 'Helen_Evelyn.jpeg', 0, 1, 'SMP Tarakanita Citra Raya', 1),
-(64, '2017238', '0015799774', 'Andre Alvino Siauw Ko Peng', 'L', 'Tangerang', '2001-10-13', 3, 'WNI', 'JL. Janur Kuning I BF 15/17 RT 002 RW 013 Kelurahan Pakulonan Barat Kecamatan Kelapa Dua, Kota Tangerang. Banten 15812', 'dreskp2@gmail.com', 'andre_alvino.pdf', '08111540113', 14, 'WhatsApp_Image_2020-03-19_at_11.46_.44_AM_.jpeg', 0, 1, 'SMP Pahoa', 1),
-(65, '2017252', '0024801233', 'Fath Fazzu Fahim', 'L', 'Jakarta', '2002-03-20', 1, 'WNI', 'Komplek Wisuda Mas Blok C1 No 11 RT 03/10 ', 'fazzufahim@gmail.com', 'fath.pdf', '0811174857', 15, 'WhatsApp_Image_2020-03-20_at_9.41_.59_AM_1.jpeg', 0, 1, 'PKBM KAK SETO', 1),
-(66, '2017246', '0029380007', 'Dizza Azahra Tanuwijaya', 'P', 'Jakarta', '2002-05-02', 1, 'WNI', 'Jl Nurul Yaqin Rt 04/04 Poris Palawad Indah Tangerang', 'ms.dahlia.s@gmail.com', 'dizza_final.pdf', '081911005380', 14, 'Dizza_Azzahra.jpeg', 0, 1, 'SMP Batavia Kota Tangerang', 1),
-(67, '2017259', '0011154949', 'Intan Kirana Wulandari', 'P', 'Jakarta', '2001-09-23', 1, 'WNI', 'Jl. Bambu Betung 5 No.9 RT03/RW011 Cilendek Bogor', 'intankirana230901@gmail.com', 'intant_kirana_final.pdf', '085880455467', 15, 'WhatsApp_Image_2020-03-20_at_3.22_.53_PM_.jpeg', 0, 3, 'SMPN 14 Bogor', 1),
-(68, '2017260', '0021723776', 'Jason Joserio', 'L', 'Jakarta', '2002-11-05', 5, 'WNI', 'Jl. Samarosa III 06/05, Angke, Tambora, Jakarta Barat', 'jasonjoserio11@gmail.com', 'jason.pdf', '081296903133', 15, 'WhatsApp_Image_2020-03-19_at_2.09_.04_PM_1.jpeg', 0, 2, 'SMP Tunas Mulia', 1),
-(69, '2017244', '0020476035', 'Dian Sugandha', 'P', 'Jakarta', '2002-07-08', 2, 'WNI', 'Bojong Larang Rt 01/04, Bojong Jaya Tangerang', 'jsobhita@yahoo.com', 'diansuganda.pdf', '08970007661', 14, 'WhatsApp_Image_2020-03-20_at_11.47_.41_AM_.jpeg', 0, 1, 'SMP Kristen Kanaan', 1),
-(70, '2017233', '0024628111', 'Ahmad Shofwan Nizhomi ', 'L', 'Tangerang', '2002-03-01', 1, 'WNI', 'Taman Mangu Indah E.13/2 RT 003 RW 006 Kelurahan Pondok Aren Kecamatan Pondok Aren, Kota Tangerang Selatan. Banten 15424', 'ahmadnimu@gmail.com', 'ahmad_sofwan-compressed.pdf', '081296903490', 15, 'Ahmad_Sofwan.jpeg', 0, 1, 'SMP Islam Plus Baitul Maal', 1),
-(71, '2017256', '0023978051', 'Haezel Wahyudya Perdana', 'L', 'Magelang', '2002-01-30', 2, 'WNI', 'Dusun Bulu Lor RT004/RW002 Podosoko Sawangan Magelang Jawa Tengah 56481', '123456@gmail.com', 'haezel1.pdf', '', 15, 'Haezel.jpeg', 0, 1, 'SMPN 3 Sleman', 1),
-(72, '2017245', '0020450340', 'Dinda Nurlaela Rahma', 'P', 'Tasikmalaya', '2002-01-29', 1, 'WNI', 'Jl Taruna Jaya No 28 Rt 04/03', '12345@gmail.com', 'Dinda_Nurlela_Rahma.pdf', '0', 15, 'Dinda_Nurlaela.jpeg', 0, 1, 'SMA Quantum Indonesia', 1),
-(73, '2017261', '2029069865', 'Jonah Levi', 'L', 'Bogor', '2002-04-10', 2, 'WNI', 'Jl. Bukit Nirwana Raya No. 27 RT 02/12 Kota Bogor selatan', 'joexsigo@gmail.com', 'jonah_levi.pdf', '082111526297', 15, 'WhatsApp_Image_2020-03-20_at_3.27_.29_PM_1.jpeg', 0, 1, 'SMA Regina Pacis', 1),
-(74, '2018346', '0061528273', 'Alodie Kayley Azalia', 'P', 'Tangerang', '2006-05-07', 1, 'WNI', 'Jln Taman Legian 3 Nomor 3 Lippo Karawaci Tangerang', 'azalialodie@gmail.com', 'Contoh.pdf', '089622222606', 8, 'Alodie.jpeg', 0, 2, 'SD Hilaris Kecamatan Kelapa Dua', 1),
-(76, '2017268', '0024383209', 'Khansa Nazla Syahirah', 'P', 'Pekan Baru', '2002-05-22', 1, 'WNI', 'Griya Jakarta Jl. Kemang 7 Blok B 1 No 58 05/08, Pamulang, Kota tangerang', 'khansasyahirah4@gmail.com', 'khansa.pdf', '081289832490', 14, 'Khansa_Nazla1.jpeg', 0, 1, 'SMA Al-Wildan Islamic School Gading Serpong', 1),
-(77, '2017231', '0015816493', 'Agatha Putri Adiningtyas ', 'P', 'Tangerang', '2001-03-04', 3, 'WNI', 'Permata Pamulang Blok G-14/12 RT 006 RW 005 Kelurahan Bakti Jaya Kecmatan Setu, Kota Tangerang.Banten 15315', '12345@gmail.com', 'aghata.pdf', '12345678', 15, 'Agatha_Putri.jpeg', 0, 1, 'SMP Mater Dei', 1),
-(78, '2017290', '2021801696', 'Seno Bayu Aji Arinanto', 'L', 'Giriklopo Mulyo', '2002-05-09', 1, 'WNI', 'Demangan, 001/003, Ngunggahan, Eromoko, Wonogiri, 57663. Jawa Tengah', 'ganesha@persija.ac.id', 'seno_aji.pdf', '082260050574', 14, 'WhatsApp_Image_2020-03-19_at_10.11_.56_AM_.jpeg', 0, 2, 'SMA WIDYA GAMA', 5),
-(79, '2018347', '0063041634', 'Alvin Arwoon', 'L', 'Jakarta', '2006-03-06', 5, 'WNI', 'Apartement City Park Tower A Lantai 8 No 1\nCengkareng Timur\nJakarta Barat', 'ffebriyanti.sap@gmail.com ', 'alvin_arwoon.pdf', '089604282632', 8, 'Screenshot_6.png', 0, 2, 'SDS Impian Bunda', 1),
-(80, '2017269', '0025603737', 'Kheyla ramadhani hakim', 'P', 'Jakarta', '2002-12-04', 1, 'WNI', 'Jl. H. Saabun Kav. 15 RT 09/05, Jati Padang, Pasar Minggu, Jakarta Selatan', 'kheylaramadhani@gmail.com', 'kheyla.pdf', '0812 8716 0761', 14, 'WhatsApp_Image_2020-03-19_at_1.51_.31_PM_1.jpeg', 0, 2, 'SMP HighScope Indonesia Bintaro', 1),
-(82, '2017237', '0001527686', 'Anastasia Natalia', 'P', 'Jakarta', '2000-12-26', 2, 'WNI', 'Komplek Sekneg RT 001 RW 006 Kelurahan Grogol Selatan Kecamatan Kebayoran Lama, Kota Jakarta Selatan. DKI Jakarta', 'anastasiandtz@gmail.com', 'anastasia.pdf', '081806035566', 15, 'Anastasia_Natalia.jpeg', 0, 1, 'SMP Pangudi Luhur', 1),
-(83, '2018349', '0068298168', 'Andrew Christian Sinaga', 'L', 'Jakarta', '2006-03-01', 2, 'WNI', 'Taman Surya 3 Blok K1 No.3 Jakarta Barat', 'andrew06sinaga@gmail.com', 'andres_sinaga.pdf', '087886472065', 8, 'Andrew_Christian.jpeg', 0, 1, 'SD Kasih Immanuel', 1),
-(84, '2017267', '0023796353', 'Khairun Nisa Saliha', 'P', 'Balikpapan', '2002-02-18', 1, 'WNI', 'Jl. sumatra Blok H.1 No 4 Nusa Loka BSD RT 02/05 Rawamekar Jaya', 'sallysaliha0000@gmail.com', 'khairunisa_saliha.pdf', '081399284599', 14, 'Khairun_Nisa1.jpeg', 0, 2, 'SMP Sinar Cendekia', 1),
-(85, '2017289', '0017234792', 'Samuel', 'L', 'Jakarta', '2001-03-03', 2, 'WNI', 'Jl. Kp. Rawa Seli No.21 RT/RW 10/04 Kel. Kampung Rawa, Jakarta Pusat', 'diana.imelda@id.pwc.com', 'Samuel.pdf', '08986876958', 14, 'Samuel.jpeg', 0, 2, 'SMP MAHANAIM BEKASI', 1),
-(86, '2020744', '0030675573', 'Anastasia Amanda', 'P', 'JAKARTA', '2003-03-18', 3, 'WNI', 'Kemuning Utama II Blok A10/10 Kosambi Jakarta Barat', 'theresia.henny@ymail.com', 'Anastasia_Amanda_Doc.pdf', '087877376510', 12, 'Anastasia_Amanda.jpg', 0, 2, 'SMP Santo Leo II Cengkareng', 1),
-(87, '2018350', '2057947803', 'Andrew Julian Fawazza Permana', 'L', 'Balikpapan', '2006-07-27', 1, 'WNI', 'Apartemen Waterplace Residences Tower F 1810 JL Pakuwon Indah Lakarsantri 60213', 'permanabcr@gmail.com ', 'andrew_julian_permana.pdf', '082195953388', 8, 'Andrew_Julian.jpeg', 0, 1, 'PKBM Anak Panah', 1),
-(88, '2017265', '0022550751', 'Kanaesya Putri Wijaya', 'P', 'Sukaharjo', '2002-10-14', 1, 'WNI', 'Pemuda Residence I, Jl Pemuda II no 1 Rt 08/09 Srengseng sawah, Jakarta Selatan', 'taufik.esmawa@gmail.com', 'khanaesa.pdf', '081296948000', 15, 'Kanaesya_Putri1.jpeg', 0, 1, 'Anak Panah', 1),
-(89, '2020734', '0033360061', 'Alif Ariel Ramadhan', 'L', 'Surabaya', '2003-11-22', 1, 'WNI', 'Cluster Riviera No.28 Palemsemi Bencongan Kelapa Dua Tangerang', 'adam.shafei@gmail.com', 'Alif_Ariel_Ramadhan.pdf', '08111342030', 13, 'tidur-dengan-kucing.jpg', 0, 1, 'SMP Plus Islamic Village', 1),
-(90, '2018351', '0067867138', 'Arthur Christian Anderson', 'L', 'Tangerang', '2006-04-24', 2, 'WNI', 'Jl Tanah Sereal I/14A-74 Tambora Jakarta Barat', 'amansaid@yahoo.com', 'arthur_anderson.pdf', '0818754388', 8, 'Arthur_Christian.jpeg', 0, 1, 'SD Kristen Tunas Bangsa', 1),
-(91, '2017232', '0030138860', 'Ahmad Rusadi', 'L', 'Samarinda', '2003-04-04', 1, 'WNI', 'Jl. KH. Harun Nafsi No.09 RT12/- Kelurahan Rapak Dalam Kecamatan Loa Janan Ilir, Kota Samarinda. Kalimantan Timur 75132', 'ahmadrusadi0404@gmail.com', 'ahmad_rusadi-compressed.pdf', '081805896745', 15, 'Ahmad_Rusadi.jpeg', 0, 2, 'SMP Negeri 36 Samarinda', 1),
-(92, '2017266', '0024387626', 'Kenny sumihardjo', 'L', 'Jakarta', '2002-06-15', 3, 'WNI', 'Jl.Cimanuk No 43 RT 08/01 Cideng Jakarta Pusat', 'minceong9@gmail.com', 'Kenny_Sumihardjo1.pdf', '0811153533', 15, 'Kenny_Sumihardjo1.jpeg', 0, 2, 'Cambidge International School', 1),
-(93, '2018352', '0064483907', 'Azzam Alifiandra Kosandi', 'L', 'Kyoto', '2006-11-13', 1, 'WNI', 'Jl PLN Duren Tiga Pancoran Jakarta Selatan', 'evida.kartini@yahoo.com ', 'azzam_kosandi.pdf', '0', 8, 'Azzam.jpeg', 0, 2, 'PKBM Bina Insan Mandiri', 1),
-(94, '2018394', '2039284861', 'Ammar Attamimi', 'L', 'Solo', '2003-03-22', 1, 'WNI', 'PSSI National Youth Tranning Centre', '123456@gmail.com', 'Ammar_Attamimi_doc.pdf', '', 13, 'Ammar.JPG', 0, 1, 'SMPN 18 Malang', 1),
-(95, '2017294', '0021351689', 'Stefhany Helga Anjelin', 'P', 'Bandar Lampung', '2002-02-06', 3, 'WNI', 'Taman Puspita Blok I.17/18 RT/RW 008/002 Kel. Cikupa, Tangerang Banten.', 'helgastefhany@gmail.com', 'Stefhany_helga_anjelin_IPS_baru.pdf', '085213152935', 15, 'Stefhany_Helga.jpeg', 0, 3, 'SMP STRADA PELITA II ', 1),
-(96, '2017239', '2018925618', 'Annethe Viriya Ksanti', 'P', 'Magelang', '2001-02-03', 5, 'WNI', 'Jl. Diponegoro 30 A RT 001 RW 005 Kelurahan Temanggung 1 Kecamatan Temanggung, Kota Temanggung. Jawa Tengah 56212', 'astrid.yeung@yahoo.com', 'annet-compressed.pdf', '08119993989', 14, 'WhatsApp_Image_2020-03-20_at_4.52_.18_PM_.jpeg', 0, 1, 'PKBM Anugrah Bangsa', 1),
-(97, '2020748', '0030095908', 'Amira Fathia Putriansyah', 'P', 'Jakarta', '2003-03-07', 1, 'WNI', 'Jl. Carita Blok AB No. 4 Depok Mulya II RT001/RW016 Kel. Beji Kota Depok', ') 	amira.ptrsyh@gmail.com', 'amira.pdf', '087776522907', 13, 'amira_fatha.jpg', 0, 2, 'SMP Santa Theresia', 1),
-(98, '2017202', '0053565887', 'Jeanice Tyshia Fayola', 'P', 'Jakarta', '2005-10-12', 3, 'WNI', 'Poris Indah Blok F7 No 39 Cipondoh Tangerang', 'jeanice.thysia2008@gmail.com', 'Jeanice_Tyshia.pdf', '082128602985', 9, '159472fd-9af0-4f18-a3b8-d2afb517087b.jpg', 0, 2, 'SD Maria Immaculata', 1),
-(99, '2018353', '0061728771', 'Brandon Clifford Shawn', 'L', 'Jakarta', '2006-01-05', 2, 'WNI', 'Perumahan Green lake City, Cluster Europe 9  no 68, rt 002  010, kelurahan ketapang, kecamatan Cipondoh, Kota Tangerang, Banten 15147', 'brandoncs2006@gmail.com ', 'brandon.pdf', '089512081115', 8, 'Brandon_Clifford.jpeg', 0, 3, 'PKBM Anak Panah', 1),
-(100, '2018398', '0023133947', 'Arya Ramadhana', 'L', 'Sidoarjo', '2002-11-14', 1, 'WNI', 'Jl. Sri Endah No.1 RT008/RW008 Ancol Regol Kota Bandung', 'fent.pri@gmail.com', 'Arya_Ramadhan_Doc.pdf', '0811339308', 12, 'arya_ramadhan.jpg', 0, 1, 'SMP Taruna Bakti', 1),
-(101, '2018354', '0068519464', 'Bungamas Ghania Manai', 'P', 'Tangerang', '2006-07-25', 1, 'WNI', 'De Latinos Cluser Brazilia D6/02', 'mbungamas@gmail.com', 'Contoh.pdf', '085778373151', 8, 'Bunga_mas.jpeg', 0, 1, 'PKBM Technosa', 1),
-(103, '2017236', '0020133029', 'Anastasia Dinda Prasetya Utami', 'P', 'Palembang ', '2002-01-31', 3, 'WNI', 'Balikpapan baru Blok L3/21 Kelurahan Damai Baru Kecamatan Balikpapan Selatan, Kota Balikpapan. Kalimantan Timur', 'adputami@gmail.com', 'anastasia_dinda.pdf', '082148687040', 15, 'Anastasia_Dinda_Prasetya.jpeg', 0, 2, 'SMP Negeri 1 Balikpapan', 1),
-(104, '2017204', '0058543814', 'Justyn Aurelius Khong', 'L', 'Jakarta', '2005-10-28', 5, 'WNI', 'Jalan Starling Timur 3 Nomor 9 Cluster Starling Perumahan Gading Serpong Tangerang Selatan', 'justyn1818@gmail.com', 'Justyn_Aurelius_Khong.pdf', '082114426141', 9, 'WhatsApp_Image_2020-03-10_at_11.41_.20_AM_.jpeg', 0, 2, 'SD Swasta Stella Maris', 1),
-(106, '2018392', '0023602623\r\n', 'Amadeus Justin Farrell', 'L', 'Jakarta', '2003-12-03', 5, 'WNI', 'Grand Grisenda Blok 60 RT007/RW003 Kapuk Muara Penjaringan Jakarta Utara', 'mieyung11@yahoo.com', 'amadeus_justine_.pdf', '087883300816', 13, 'amadeus_justin.jpg', 0, 1, 'SMPK 6 Penabur', 1),
-(107, '2018386', '3273191407020001', 'Andrian Ernest Prawira Putra', 'L', 'Bandung', '2002-07-14', 3, 'WNI', 'Jl. Sunda 6 No.93 RT001/RW001 Merdeka Sumur Bandung Kota Bandung', '123456@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '', 12, 'tidur-dengan-kucing.jpg', 1, 2, 'Unknown', 1),
-(109, '2018400', '0033646287', 'Audrick Liko Tanjaya', 'L', 'Jakarta', '2003-08-16', 5, 'WNI', 'Jl. Kemenangan II No. 26 RT004/RW002 Glodok Taman Sari Jakarta Barat', 'audrick1liko@gmail.com', 'Audrick_Liko_Tanjaya.pdf', '08556688000', 12, 'Audrick_liko.jpeg', 0, 1, 'PKBMN 16 Rawa Sari', 1),
-(110, '2018355', '0061071011', 'Christine Sugandha', 'P', 'Jakarta', '2006-03-21', 2, 'WNI', 'Bojong Larang RT 001 RW 004 Kelurahan  Bojong Jaya Kecamatan Karawaci, Kota Tangerang. Banten 15115', 'christinesugandha@gmail.com', 'Christine_Sugandha.pdf', '08970007661', 8, 'Christien_Sugandha.jpeg', 0, 2, 'SD Swasta Hilaris Nasional Plus', 1),
-(113, '2018387', '2033929116', 'Agung Dharmawan', 'L', 'Bau Bau', '2003-09-30', 1, 'WNI', 'Jl. Sao-sao No.222F RT009/RW003 Bandu Kodia Kota Kendari', '123456@gmail.com', 'agung_darmawan_akta-converted.pdf', '', 13, 'agung_darmawan.JPG', 0, 2, 'SMPN 1 Kendari', 1),
-(114, '2020735', '0059129142', 'Erika Sophia Lumban Tobing', 'P', 'Jakarta', '2006-05-02', 2, 'WNI', 'JL. Delima 1 No.21 RT 003 RW 003 Kelurahan Malaka Sari Kecamatan Duren Sawit, Kota Jakarta Timur. DKI Jakarta 13460', ' 	erikatobing05@gmail.com', 'erika_IJazah-converted.pdf', '08118873576', 8, 'Erika_Sophia.jpeg', 0, 2, 'SMP Negeri 27 Jakarta', 1),
-(115, '2018397', '0032590631', 'Angel Kurniawan', 'P', 'Tangerang', '2003-01-23', 2, 'WNI', 'Jl. Crystal Timur A No.18 RT001/RW003 Pakulonan Barat Kelapa Dua Tangerang', 'angelkurniawan126@gmail.com', 'angel_kurniawan1.pdf', '', 13, 'angel_kurniawan.jpg', 0, 2, 'SMP Pahoa', 1),
-(116, '2018399', '0039920235', 'Arya Tejawijaya', 'L', 'Makassar', '2003-11-06', 5, 'WNI', 'Jl. Mangga 27 No.1/A RT05/RW03 Duri Kepa Jakarta Barat', 'ashta.kontraktor@gmail.com', 'Arya_Tejawijaya.pdf', '081808082136', 12, 'arya_teja.jpg', 0, 1, 'SMP Narada', 1),
-(118, '2018391', '0027319487', 'Almaida Salwa Putra Rais', 'P', 'Jakarta', '2002-04-02', 1, 'WNI', 'Griya Serpong Asri Anyelir 5/9 Suradita RT05/RW08 Suradita Tangerang 15343', 'guguslegal@gmail.com', 'ALmaida_Salwa.pdf', '081311012319', 13, 'almaida_salwa.jpg', 0, 2, 'PKBM Bina Mandiri', 1),
-(119, '2018356', '0061935570', 'Fachry Ghulam Arodana', 'L', 'Jakarta', '2006-09-19', 1, 'WNI', 'Cendana Residence blok C8/2 Pondok Benda, Pamulang, Tangsel 15416', '12345@gmail.com', 'Fachry_Ghulam_Aradana.pdf', '12345678', 8, 'Fachry_ghulam,.JPG', 0, 1, 'SD Al-Zahra Indonesia', 1),
-(120, '2018390', '0030695397', 'Alfath Kemal Pasya', 'L', 'Jakarta', '2003-05-03', 1, 'WNI', 'Jl. Bangka VIII A/23 RT01/RW12 Pela Mampang Jakarta Selatan', 'salma.ilyass29@gmail.com', 'alfath.pdf', '081280129318', 13, 'alfath_kemal.jpg', 0, 1, 'MI Al-Hikmah', 1),
-(122, '2018361', '0034368486', 'Jonathan Ansell Prasetya', 'L', 'Tangerang', '2003-11-28', 3, 'WNI', 'Jade Selatan no.3 Pondok Hijau Golf Summarecon Serpong Gading Serpong Tangerang 15810', 'heribertusparjoko@gmail.com', 'Jonathan_ansel.pdf', '081222372247', 8, 'Jonathan_Ansell.JPG', 0, 1, 'SD Kristen Penabur Gading Serpong', 1),
-(123, '2018393', '0017378026', 'Amalia Ramadhaniyah ADP', 'P', 'Sukabumi', '2001-12-07', 1, 'WNI', 'KP. Kadudampit RT12/RW03 Sukabumi Jawa Barat 43153', 'amalia.ramadhaniyah@gmail.com', 'Amalia_Ramadhaniyah.pdf', '085720812520', 12, 'amalia_ramadaniah.jpg', 0, 2, 'SMPN 1 Cisaat', 1),
-(124, '2018357', '0055147497', 'Gavin Amos Junior', 'L', 'Tangerang', '2005-10-14', 2, 'WNI', 'KP. Buaran Barat RT 015 RW 005 Kelurahan Jelupang Kecamatan Serpong Utara, Kota Tangerang Selatan. Banten', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '12345678', 8, 'Chrysanthemum.jpg', 1, 2, 'PKBM Sukses', 1),
-(125, '2018396', '2024011212', 'Andiny Shausan Arifin', 'P', 'Jakarta', '2002-08-06', 1, 'WNI', 'Perum Serpong Jaya Cluster The Garden Blok GD 11', 'andinyshausan5@gmail.com', 'Andiny_shausan.pdf', '', 12, 'andiny.jpg', 0, 1, 'SMPK Penabur Bintaro Jaya', 1),
-(126, '2018364', '0058323854', 'Lourencius Natanael Sumargo', 'L', 'Tangerang', '2005-12-28', 2, 'WNI', 'l. Permai 35 No.21\nKomplek margahayu permai\nBandung', 'navanna07@gmail.com', 'Laurensius1.pdf', '087889008311', 8, 'Lourencius_Sumargo.jpeg', 0, 1, 'Tunas Bina Bangsa', 1),
-(127, '2018389', '0031137651', 'Alessandro Bernard Santoso', 'L', 'Jakarta', '2003-07-14', 3, 'WNI', 'Taman Brawijaya Jl. Kemang No.5 Lippo Karawaci', 'sinar_bintang_jaya@yahoo.com', 'Alesandri_Bernard.pdf', '087878855757', 12, 'alessandro_benard.jpg', 0, 2, 'SMP Mardi Yuana Cirebon', 1),
-(128, '2018362', '0062849436', 'Joshua Miracle Thomas', 'L', 'Manado', '2006-03-27', 2, 'WNI', 'Lingkungan III -/003 Kel. Bahu, Manado', 'erni_th2504@yahoo.co.id ', 'joshua_miracle.pdf', '0812934711975', 8, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 2, 'PKBM Anak Panah', 1),
-(129, '2020765', '0057140981', 'Muhammad Darrel Hugo Rabbani', 'L', 'Depok', '2005-11-03', 1, 'WNI', 'Jl. Swadaya no.58 RT06/RW02 Kel.Limo, Kec.Limo, Depok, Jawa Barat 16515', 'riosplace@gmail.com', 'muhammad_darel.pdf', '', 8, 'Darrel_Hugo.jpeg', 0, 2, 'SD Islam Sinar Cendekia', 1),
-(130, '2018388', '0014826161\r\n', 'Agustinus Friki', 'L', 'Cibinong', '2001-05-20', 3, 'WNI', 'Commercial III Blok B1 No.1-1A Sektor1.5 BSD City RT07/RW08 Lengkong Gudang Timur Tangerang Selatan 15318', 'as@dnet.net.id', 'agustinus_fikri.pdf', '081290744894', 13, 'agustinus_friki.jpg', 0, 1, 'SMP Sint Joseph', 1),
-(131, '2018366', '2065030126', 'Muhammad Ghana Hadi', 'L', 'Depok', '2006-07-08', 1, 'WNI', 'Komp Poin Mas Blok E No 2 Pancoran Mas, Kota Depok', '123456@gmail.com', 'muhammad_ghana_hadi1.pdf', '087881848300', 8, 'Screenshot_8.png', 0, 2, 'SD Perjuangan Terpadu Kecamatan Pancoran mas', 1),
-(132, '2018402', '0012667213', 'Bilqistha Maysah M.', 'P', 'Surabaya', '2001-05-09', 1, 'WNI', 'Jl. H. Mochtar KP. Pondok Randu RT13/RW02 Duri Kosambi Jakarta Barat 11750', 'bilqistham09@gmail.com', 'BIlqistha1.pdf', '08994366822', 13, 'bilaista.jpg', 0, 1, 'SDI Al-Ikhwan', 1),
-(133, '2018381', '0066892835', 'Stacy Queency Pandean', 'P', 'Manado', '2006-06-25', 2, 'WNI', 'BTN Puskopad Blok A16 Perkamil Manado', 'stacypandean@gmail.com ', 'stacy_quency.pdf', '081356656342', 8, 'Stacy_Qeency.jpeg', 0, 3, 'SD Katolik 3 Frater ', 1),
-(134, '2018367', '0069062468', 'Matthew Claudius', 'L', 'Jakarta', '2005-04-03', 3, 'WNI', 'Villa Resort Mediterania no. A9i. ', 'devysagita@gmail.com ', NULL, '085718888337', 8, 'Matthew_Claudius.jpeg', 0, 1, 'SD The Woodlands Montessori Primary School', 1),
-(135, '2018363', '0054981753', 'Kenji Dallas Hong', 'L', 'Medan', '2005-02-24', 5, 'WNI', 'jL.R. Junjungan Lubis no.35 Sibolga, Sumatera Utara', '12345@gmail.com', 'kenji1.pdf', '085261273534', 8, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SD Tri Ratna ', 1),
-(136, '2018358', '0066651217', 'Georgiena Raissa Martana', 'P', 'Surabaya', '2006-08-09', 2, 'WNI', 'Jalan  : TAMAN KEBON JERUK BLOK U 9 NOMOR 10 rt.04/06	\n', 'eastjava_26@yahoo.com', 'Scan_Museum_Anatomi.pdf', '12345678', 8, 'Geogina_raissa.jpeg', 0, 2, 'SD Swasta Stella Maris', 1),
-(137, '2018383', '0064469202', 'Theresia Regitha Halim', 'P', 'Jakarta', '2006-08-12', 3, 'WNI', 'Jl Dr. Muwardi Raya No 22 Grogol Jakarta Barat', 'huatwang@gmail.com', 'theresia.pdf', '08161158187', 8, 'Theresia_Regita.jpeg', 0, 3, 'SMP Kemurnian II', 1),
-(138, '2018401', '2035965400', 'Bianca Alaasya Putri Nugraha', 'P', 'Tangerang', '2003-05-09', 1, 'WNI', 'Perumahan Alam Sutera, Jl. Sutera Elok 1/6 Serpong Tangerang', 'biancaalaasya.mowat@gmail.com', 'BIANCA_ALASYA.pdf', '081288826533', 12, 'bianca.jpg', 0, 1, 'SDN Ngelempong Sleman', 1),
-(139, '2018384', '0057912761', 'Viona Gwyn Victor', 'P', 'Jakarta', '2005-06-03', 2, 'WNI', 'Gelong Baru Tengah No 19 Tomang Jakarta Barat', 'harisratna@gmail.com ', 'viona.pdf', '081383155554', 8, 'Viona_Gwyn.jpeg', 0, 1, 'SDS Woodlands Montessori', 1),
-(140, '2018372', '0057562625', 'Nicholas Septhian', 'L', 'Jakarta', '2005-09-11', 2, 'WNI', 'Jl. Kerukunan 1 blok F2 no 15 Jak Bar', 'iinemil2@gmail.com ', 'nicholas.pdf', '081216877782', 8, 'Nichiolas_Septian.jpeg', 0, 1, 'PKBM Anak Panah', 1),
-(141, '2018368', '0065158415', 'Michelle Gracielle Karnadi', 'P', 'Jakarta', '2006-12-24', 2, 'WNI', 'Jl.Kembang Sepatu No 27 11/01 Kel Kramat, Jakarta pusat', 'graciellemichelle24@gmail.com ', 'Michelle_Graciella_K81.pdf', '', 8, 'Michelle_graciella.jpeg', 0, 3, 'SMPK 2 Penabur', 1),
-(142, '2018404', '0034377502', 'Danisha Sofie Tanuwidjaja', 'P', 'Tangerang', '2003-11-29', 1, 'WNI', 'Jl. Peta Selatan Blok I No.32 Jakarta Kalideres 11840', 'hendri.0701@gmail.com ', 'Danisha_ijazah-converted.pdf', '081383447006', 12, 'danisha_safie.jpg', 0, 2, 'SMP Bonavita', 1),
-(143, '2018369', '0065556998', 'Mohammad Akhtar Amarthya M D', 'L', 'Jakarta', '2006-09-25', 1, 'WNI', 'Taman Permata I Bintaro HG 16 no 7. Bintaro Jaya Sektor 9. Tangerang Selatan 15227', 'reeve1001@gmail.com', 'M_akhtar1.pdf', '087876127345', 8, 'Screenshot_4.png', 0, 2, 'Anak Panah', 1),
-(144, '2018379', '2084182271', 'Sintha Edlyn Chung', 'P', 'Jakarta', '2006-08-24', 3, 'WNI', 'Bukit Serpong Mas Blok D 6 no 20', 'skhamdari81@gmail.com', 'shinta_.pdf', '089651961041', 8, 'Sintha_Edelyn.jpeg', 0, 2, 'PAHOA', 1),
-(145, '2018371', '0054490800', 'Muhammad Zaki Ikbaar Ramadhan', 'L', 'Surabaya', '2005-10-08', 1, 'WNI', 'Tambak Seragan No 66 04/09 Kel Rangkah, Surabaya', 'salmaaaabidahazzhra@gmail.com', 'zaki1.pdf', '087853101981', 8, 'M_zaki.jpeg', 0, 1, 'Anak Panah', 1),
-(146, '2018418', '2778520858', 'Jasson Owen Lipriatna', 'L', 'Jakarta', '2002-08-15', 2, 'WNI', 'Jl Prof Dr Latumelen V No.23 Jakarta Barat', '12345@gmail.com', 'jasseon_owen.pdf', '0', 13, 'Screenshot_6.png', 0, 1, 'SMPK 2 Penabur', 1),
-(147, '2018405', '0033591757', 'David Rivendell Walalangi', 'L', 'Makassar', '2003-05-10', 3, 'WNI', 'Jl. Boulevard Tulip C1/5 RT03/RW05 Panakkukang Masale Makassar', 'rudysw@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '0811469690', 13, 'david_rivendell.jpg', 0, 1, 'SMP Dian Harapan', 1),
-(148, '2018421', '0035756509', 'Joshua Torkis Gultom', 'L', 'Tangerang', '2003-06-09', 2, 'WNI', 'Villa Melati Mas Blok V.10/16 Rt. 57/08 Jelupang, Serpong Utara, Tangerang Selatan', 'jtorkis@gmail.com', 'josua_torkis.pdf', '0', 15, 'joshua_torkis.jpg', 0, 2, 'SMP Efata Serpong', 1),
-(149, '2018427', '0036911321', 'Leonardus Billy Adindra', 'L', 'Jakarta', '2001-01-23', 3, 'WNI', 'Commercial III blok B1 No 1 Sekt 1,5 RT 07/08 Lengkang Gudang TImur, Serpong', '123456@gmail.com', NULL, '', 13, 'leonardus_billy.jpg', 0, 7, 'Anak Panah', 1),
-(150, '2018374', '0068577354', 'Rhenata Hanisa Putri', 'P', 'Depok', '2006-06-08', 1, 'WNI', 'Jalan  : PERUM BCI BLOKA 6 NO.22 rt.04/26	\n', 'kirana.niy@gmail.com ', 'Scan_Museum_Anatomi.pdf', '087781413293', 8, 'Rhenata.jpeg', 0, 1, 'PKBM Anak Panah', 1),
-(151, '2018407', '0035747350', 'Enjelita Suwandi', 'P', 'Jakarta', '2003-08-21', 5, 'WNI', 'APT Mansion Blok JD28/K RT007/RW011 Pademangan Timur Jakarta Timur', 'enjelitasuwandi@gmail.com', 'enjelita_sumandi.pdf', '0816889890', 13, 'enejlita_suwadi.jpg', 0, 1, 'SMP Universal School', 1),
-(152, '2018419', '0031873789', 'Johannes Evan Budiman', 'L', 'Jakarta', '2003-06-18', 2, 'WNI', 'Apartemen Green Palm lt. 7/A05 Jl Kresek Raya Duri Kosambi Jakarta Barat', '12345@gmail.com', 'evan_budiman.pdf', '08998371190', 13, 'Screenshot_6.png', 0, 3, 'SMP Efata Serpong', 1),
-(153, '2018380', '0068527055', 'Siti Aulia Gemilang Maulana', 'P', 'Jakarta', '2006-04-26', 1, 'WNI', 'perumahan sakura regency 1 Blok G 14 jatiasih bekasi 17423', 'qq_padri@yahoo.com ', 'siti_aulia.pdf', '089683064839', 8, 'Siti_Aulia.jpeg', 0, 1, 'SD Tunas Jakasampurna', 1),
-(154, '2018406', '0032497573', 'Eda Akman', 'P', 'Tangerang', '2003-07-15', 3, 'WNI', 'Taman Ubud Loka VII No.16 Lippo Karawaci Kelurahan Binong Tangerang', 'ssoenanta@yahoo.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '', 12, 'tidur-dengan-kucing.jpg', 0, 1, 'PKBMN 29 Cempaka Baru', 1),
-(155, '2018433', '0031930834', 'Michelle Roan Widiyono', 'P', 'Jakarta', '2003-07-23', 3, 'WNI', 'Regensi Melati Mas Blok E6/17 Tangerang Selatan', '123456@gmail.com', 'michelle_roan1.pdf', '', 12, 'michelle_roan_w.jpg', 0, 1, 'PKBM Alfa Omega', 1),
-(156, '2018375', '2061375954', 'Rianna Callysta Nadien', 'P', 'Serang', '2005-09-18', 1, 'WNI', 'ln Adhyaksa VI RT 04/05 Karang Tengah- Karang Mulya. Tangerang.', 'enenghidayati68@gmail.com', 'rianna_nadien.pdf', '0813 1847 8268', 8, 'Tulips.jpg', 0, 3, 'SDN Begeg', 1),
-(157, '2018413', '2014659446', 'Frederico Antonius Mario Labina', 'L', 'Tangerang', '2001-10-20', 3, 'WNI', 'Medang Lestari Blok C IV/A71 RT007/RW009 Medang Pagedangan Tangerang', '123456@gmail.com', 'fredrico.pdf', '', 13, 'tidur-dengan-kucing.jpg', 0, 1, 'SMP Bendemper Secondary School', 1),
-(158, '2018428', '2034556976', 'M Alfarel Ferdi ', 'L', 'Padang', '2003-02-20', 1, 'WNI', 'Perum Mutiara Putih R/7 Padang', '123456@gmail.com', 'Muhammad_Alfarel_Ferdi1.pdf', '', 13, 'Screenshot_4.png', 0, 2, 'Plus Marhamah padang', 1),
-(159, '2018408', '0033319808', 'Fanes Timothy', 'L', 'Jakarta', '2003-12-19', 2, 'WNI', 'Centro Havana M3/10 De Latinos BSD RT005/RW018 Rawa Buntu Serpong Tangerang', 'fanes.timothy@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '081806398766', 12, 'fanes_timothy.jpg', 0, 3, 'SMPK IPEKA BSD', 1),
-(160, '2018429', '0034717225', 'Malika Hasna Syafira', 'P', 'Pekalongan', '2003-08-24', 1, 'WNI', 'Jl. Manunggal XVII No 103 Jakarta Timur', '123456@gmail.com', NULL, '', 12, 'Screenshot_6.png', 0, 1, 'SMAN 113 Jakarat', 1),
-(161, '2018376', '0068130310', 'Salma Alfira', 'P', 'Tangerang', '2006-01-28', 1, 'WNI', ' Jalan Akasia Raya K. 4-5 rt.07/12	\n', 'renoyusfira@gmail.com', 'salma_alfira.pdf', '0811909311', 8, 'Tulips.jpg', 0, 2, 'PKBM Anak Panah', 1),
-(162, '2018409', '0034378710', 'Felisia Agata', 'P', 'Tangerang', '2003-09-27', 3, 'WNI', 'Jl. Jamblang III No.75 RT003/RW015 Cibodas Tangerang', '123456@gmail.com', 'felicis_agata.pdf', '', 13, 'felisia_agata.jpg', 0, 3, 'SMP Citra Kasih Kota Tangerang', 1),
-(163, '2018385', '0', 'Yasmin Mumtaz Lantu', 'P', 'Jakarta', '2006-09-28', 1, 'WNI', 'Prumpung Tengah RT/RW 004/006 Cipinang besar utara, Jatinegara, Jakarta Timur', 'noermarisa@yahoo.com ', 'yasmin.pdf', '081210447044', 8, 'Yasmin_Mumtaz.jpeg', 0, 2, 'MI Tunas Mulia', 1),
-(164, '2018432', '0032496407', 'Michael Marvin IP', 'L', 'Jakarta', '2003-10-05', 3, 'WNI', 'BRBJ Cluster Fedura Blok J 20/16 RT 06/15, Pakujaya, Serpong Utara', '123456@gmail.com', 'marvin1.pdf', '', 12, 'Screenshot_81.png', 0, 1, 'SMP Tarakanita Gading Serpong', 1),
-(165, '2018422', '0020887761', 'Justine Anthony Efendy', 'L', 'Jakarta', '2002-03-12', 5, 'WNI', 'Villa Gading Indah Blok I No 26, Rt 05/14 Kelapa Gading Jakarta Utara', 'cenni1476@gmail.com', 'justine_anthony1.pdf', '081808377688', 13, 'justine.jpg', 0, 2, 'SMP Tunas Karya', 1),
-(166, '2018411', '0021130115', 'Feyla Moira', 'P', 'Denpasar', '2002-06-26', 1, 'WNI', 'Jl. Gunung Lempuyangan V No.04 BR/LINK. Bhuana Sari Tegal Karta Denpasar 80119', 'yudi.hart@yahoo.co.id', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '081933113037', 13, 'feyla_moira.jpg', 0, 1, 'SMP Muhammadiyah 2 Denpasar', 1),
-(167, '2019673', '0031268621', 'Jessica Priscillia Kim', 'P', 'Bogor', '2003-11-11', 1, 'WNI', 'Grand Cilegon Residence Jl Bougenville Raya No 19', 'oeylingling77@gmail.com', 'Contoh.pdf', '085218071448', 11, 'Screenshot_6.png', 0, 1, 'SMP 1 Cilegon', 1),
-(168, '2018431', '0033491559', 'Michael Jan', 'L', 'Jakarta', '2003-10-27', 3, 'WNI', 'Taman Kebon Jeruk B 1/43 02/09 Srengseng, Kembangan, Jakarta Barat', '123456@gmail.com', 'michael_jan1.pdf', '', 12, 'michae_jan.jpg', 0, 1, 'SMP Katolik Abdi siswa 11', 1),
-(169, '2018410', '0025158149', 'Ferdy Raihan', 'L', 'Jakarta', '2002-10-20', 1, 'WNI', 'Jl. Panca Warga 1 RT011/RW03 No.5 Jakarta Timur 13410', 'aisatriawati1@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '087775774200', 13, 'ferdy.jpg', 0, 2, 'SMPN 149 Jakarta Timur', 1),
-(170, '2018423', '2033400023', 'Katrina Samantha Lastra Mangahas', 'P', 'Filipina', '2003-03-03', 2, 'WNI', 'Jl Danau Batur Raya 40B Taman Griya Jimbaran', '12345@gmail.com', 'katrina.pdf', '0', 12, 'katrina_samanta.jpg', 0, 2, 'SMP Cipta Dharma Denpasar', 1),
-(171, '2018435', '0024743884', 'Muhammad ThohaBangun', 'L', 'Berastogi', '2002-06-04', 1, 'WNI', 'Alamat Jalan  : DOLAT RAYAT Desa / Kelurahan : Dolat Rayat Kode Pos  : 22171\n', '123456@gmail.com', 'toha_bangun1.pdf', '', 12, 'm_thoha_bangun.jpg', 0, 2, 'SMPN 1 Berastogi', 1),
-(172, '2018420', '0031657261', 'Jonathan Jason Junianto', 'L', 'Palangkaraya', '2003-09-05', 3, 'WNI', 'Jl Raya BD Utara Ruko Paramount Blue No 19 Rt 001/020 Kelapa Dua', '12345@gmail.com', 'jason_junianto1.pdf', '0', 12, 'jonatha_jason.jpg', 0, 1, 'SMP Pahoa', 1),
-(173, '2018412', '0038550861', 'Firyal Aisyah Zalfa', 'P', 'Jakarta', '2003-03-22', 1, 'WNI', 'Jl. Paradise Rasamala I Blok16/22 RT02/RW07 Babakan Serpong City Tangerang Selatan 15315', 'firyalaisyah2203@gmail.com', 'Firyal_Aisyah.pdf', '0895344091315', 13, 'firyal_aisyah.jpg', 0, 2, 'SMP Taruna Mandiri', 1),
-(174, '2018377', '0063064077', 'Sebastian Hans Purnomo', 'L', 'Jakarta', '2006-01-04', 3, 'WNI', ' JLN.KRISTAL PERMATA HIJAU BLOK G/6 rt.08/13	\n', 'sebastianhanspurnomo@gmail.com', 'Sebastian_Hans.pdf', '08161988876', 8, 'Sebastian_Hans.jpeg', 0, 1, 'SD Swasta Regina Pacis', 1),
-(175, '2018436', '0029886675', 'Muhammad Tsaqif Hilmy Asy Syatri', 'L', 'Jakarta', '2002-09-18', 1, 'WNI', 'Alamat Jalan  : JL. NUH RAYA NO.8 rt.05/05 Desa / Kelurahan : Sukabumi Utara Kode Pos  : 11540\n', '123456@gmail.com', NULL, '089688494641', 12, 'muhammad_tsaqif_hilmy.jpg', 0, 2, 'SMPN 127 Jakarta', 1),
-(176, '2018424', '2133893769', 'Kea Adinda Hari', 'P', 'Jakarta', '2003-06-25', 3, 'WNI', 'Jl Banyuwangi No 5 Rt 04/05 Menteng Jakarta Pusat', 'as@dnet.net.id', 'kea1.pdf', '081290744894', 13, 'hea_adinda_itari.jpg', 0, 2, 'PKBM Anak Panah', 1),
-(177, '2018434', '0036306956', 'Mohammed Shaquelle A', 'L', 'Dubai', '2003-10-29', 1, 'WNI', 'Alamat Jalan  : CLUSTER MICHELIA JL. MICHELIA 10 NO.5 GADING SERPONG rt.03/08\n', '123456@gmail.com', NULL, '', 12, 'm_shaquelle.jpg', 0, 1, 'SMPS SYafana Islamis School', 1),
-(178, '2018425', '0031930823', 'Kevin Antonius', 'L', 'Jakarta', '2003-07-09', 3, 'WNI', 'Jl Tangki Lio Timur 46B', '12345@gmail.com', 'kevin_antonius.pdf', '0', 12, 'Screenshot_6.png', 0, 1, 'Binus School Serpong', 1),
-(179, '2018378', '2055723917', 'Shafadinda Rizkya Ramadanhy', 'P', 'Jakarta', '2005-09-06', 1, 'WNI', 'JALAN PALMERAH BARAT 1 NOMOR 38 rt.07/07	\n', 'novelialokasasmita@gmail.com', 'Shafadinda.pdf', '087822949393', 8, 'Shafadinda.jpeg', 0, 4, 'SD Negeri Palmerah 07 Pagi', 1),
-(180, '2018430', '0038216337', 'Matthew Alexander Panggabean', 'L', 'Jakarta', '2003-06-04', 2, 'WNI', 'Alamat Jalan  : JL DUREN TIGA BARAT NO 11 rt.04/01 Desa / Kelurahan : Duren Tiga\n', '123456@gmail.com', NULL, '', 13, 'matthew_alex.jpg', 0, 1, '', 1),
-(181, '2020747', '0033616136', 'Gabriella Ranti', 'P', 'Tangerang', '2003-01-15', 2, 'WNI', 'Jl. Empu Kanwa II No.36 RT006/RW006 Cibodas Baru Cibodas Kota Tangerang 15138', 'tary74@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '081213966659', 12, 'tidur-dengan-kucing.jpg', 0, 1, 'SMP Swasta Surya Bangsa', 1),
-(182, '2018416', '2031472634', 'Grace Abdiella Husada', 'P', 'Delft', '2003-12-29', 2, 'WNI', 'Jl. Cempaka Putih Barat 2H/7E RT010/RW003 Kel. Cempaka Putih Barat Kec. Cempaka Putih Jakarta Pusat DKI Jakarta', '123456@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '', 12, 'tidur-dengan-kucing.jpg', 1, 2, 'PKBM Alfa Omega', 1),
-(183, '2018414', '0038290298', 'Giacinta mitchelia dharma', 'P', 'Samarinda', '2003-10-19', 3, 'WNI', 'Jl. Dewi Sartika RT008 Kel. Bontang Baru Kec. Bontang Utara Kota Bontang 75313 Kalimantan Timur', '123456@gmail.com', 'giacinta.pdf', '0811581003', 12, 'tidur-dengan-kucing.jpg', 0, 1, 'SMPN 1 Bontang', 1),
-(184, '2018415', '0018698649', 'Gisela Olga Kurniawan', 'P', 'Tangerang', '2001-12-31', 3, 'WNI', 'Jl. Kelapa Puan XX AH.6 No.9 RT08/RW12 Kel. Pakulonan Barat Kota Tangerang 15812', 'thomas.skudo@gmail.com', 'Gisela_Olga_Kurniawan.pdf', '082122221163', 13, 'gisela_olga.jpg', 0, 2, 'SMP Swasta Pahoa', 1),
-(185, '2019668', '2043584770', 'Gracia  Listiana Rahayu', 'P', 'Ungaran', '2004-04-30', 2, 'WNI', 'Br. Sorongga Kelod Sorongga Gianyar Bali 80561', '123456@gmail.com', 'Gracia_Listiana_Rahayu.pdf', '', 11, 'tidur-dengan-kucing.jpg', 0, 2, '', 1),
-(186, '2018417', '2038949816', 'Iqbal Maulana Abrori ', 'L', 'Situbondo', '2003-03-23', 1, 'WNI', 'Unknown', '123456@gmail.com', 'iqbal_maulana_abrori.pdf', '', 13, 'tidur-dengan-kucing.jpg', 0, 1, 'SMPN 1 Kendit', 1);
-INSERT INTO `tbl_siswa` (`siswa_id`, `siswa_nis`, `siswa_nisn`, `siswa_nama`, `siswa_jenkel`, `siswa_tempat`, `siswa_tgl_lahir`, `siswa_agama_id`, `siswa_kewarganegaraan`, `siswa_alamat`, `siswa_email`, `siswa_dokumen`, `siswa_no_telp`, `siswa_kelas_id`, `siswa_photo`, `soft_deleted`, `anak_ke`, `sekolah_asal`, `satelit`) VALUES
-(187, '2019672', '9931453504\r\n', 'Indra Lesmana', 'L', 'Bogor', '1993-11-07', 1, 'WNI', 'KP. Nanggela RT003/RW006 Kel. Sukamaja Kec. Tajurhalang Kota Bogor 16320', '123456@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '089611421793', 13, 'tidur-dengan-kucing.jpg', 1, 1, 'SMPN 1 Bojong Gede', 1),
-(189, '2018437', '0012742564', 'Patricia Ysabel', 'P', 'Salatiga', '2001-12-08', 2, 'WNI', 'Jl. Alpukat Blok XB No 19 Harapan Indah RT 2/20 Pejuang, Medan Satria, Kota Bekasi', '123456@gmail.com', 'patricia_ysabel1.pdf', '1212121212121', 13, 'patricia_xsabel.jpg', 0, 2, 'PKBM Negeri 29 Cempaka', 1),
-(190, '2018447', '0027507801', 'Sintia Putri Fajar', 'P', 'Purbalingga', '2002-04-30', 1, 'WNI', 'Karangbanjar rt 1/1, Bojongsari, Purbalingga, Jawa Tengah	\n', '12345@gmail.com', 'sintia_putri.pdf', '0895379048664', 12, 'sintia_putri_fajar.jpg', 0, 2, 'SMP Negeri 2 Kutasari', 1),
-(191, '2018486', '0094905047', 'Abel Cicero Markam ', 'L', 'Jakarta ', '2009-06-06', 1, 'WNI', 'KP. Pondok Randu RT013/RW002 Kel. Duri Kosambi Kec. Cengkareng Jakarta Barat 11750', 'febriyanti.sap@gmail.com ', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '082310742720', 3, 'Abel._C_._M_.jpg', 0, 5, 'PKBM Anak Panah HS', 1),
-(192, '2018442', '2108820179', 'Raihan Addar Quthni ', 'L', 'Bondowoso', '2000-03-29', 1, 'WNI', 'Alamat Jalan  : JALAN HEBRAS NOMOR 245 rt.02/06 Desa / Kelurahan : Jatimulya\n', 'ganesha@persija.ac.id', 'Raihan_Addar_quthni1.pdf', '12121212121', 13, 'raihan_addar1.JPG', 0, 2, 'MI Negeri Malang I', 1),
-(193, '2018448', '0038120642', 'Sisilia Jonta', 'P', 'Makassar', '2003-05-29', 5, 'WNI', 'Alamat Jalan  : CLUSTER BOSTON VILLAGE JALAN BOSTON BARAT rt.01/33 Desa / Kelurahan : Kelebet Kode Pos  : 15334	\n', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '12345678', 12, 'sisilia_jantra.jpg', 0, 1, 'SMP Katolik Rajawali Makassar', 1),
-(194, '2018491', '0111560833', 'Audrey Aulia Anindhita Permana', 'P', 'Jakarta', '2011-06-12', 1, 'WNI', 'Dolok Merangir Simalungun Sumatera Utara', 'permanabcr@gmail.com', 'audrey.pdf', '08116244664', 3, 'Audrey_Aulia_Anindita_Permana.jpg', 0, 2, 'PKBM Anak Panah HS', 1),
-(195, '2018439', '0034638769', 'Rafaesa Devani Azzahra', 'P', 'Jakarta', '2003-03-17', 1, 'WNI', 'Alamat Jalan  : CLUSTER SEVILLA BLOK AK/21 BSD CITY rt.01/13 Desa / Kelurahan : Rawa Mekar\n', '123456@gmail.com', 'rafaesa_21.pdf', '12121212121', 12, 'Screenshot_7.png', 0, 1, 'SMP Sinar Cendekia', 1),
-(196, '2018488', '0113375235', 'Alexander Christian Prabowo', 'L', 'Tangerang', '2011-01-04', 2, 'WNI', 'Jl. Porto 2 No.1 Sektor 6 Gading Serpong', 'lily.chris12@gmail.com', 'Alexander_Christian_.pdf', '081212623322', 3, 'Alexander_Christian.jpg', 0, 2, 'PKBM Anak Panah HS', 1),
-(197, '2018450', '2032819203', 'Sulthan Dandhy  Alfito', 'L', 'Jakarta', '2003-07-12', 1, 'WNI', 'Alamat Jalan  : JALAN PALMERAH BARAT 1 NOMOR 38 rt.07/07 Desa / Kelurahan : Palmerah Kode Pos  : 11480	\n', '12345@gmail.com', 'sulthan_akta-converted.pdf', '12345678', 13, 'sultan_dandry.jpg', 0, 3, 'SMP Negeri 88 Jakarta', 1),
-(198, '2018445', '0020456571', 'Rifka Dwi Octavia', 'P', 'Tangerang', '2002-10-08', 1, 'WNI', 'Alamat Jalan  : BUANA PERMAI BLOK 1-14 rt.03/09 Desa / Kelurahan : Cipondoh Kode Pos  : 15148\n', 'rudyarnowo15@gmail.com', NULL, '08174860558', 13, 'rifka_dwi_oktavia.jpg', 0, 2, 'SMPN 1 Tangerang', 1),
-(199, '2018487', '0113951432', 'Ahsan Khairyansyah Adhyatmika', 'L', 'Jakarta', '2011-07-05', 1, 'WNI', 'Jl. Raya Malaka No.54 RT002/RW008 Kel. Malaka Sari Kec. Duren Sawit Jakarta Timur 13460', 'endra_adhyatmika@yahoo.co.id', 'ahsan.pdf', '087877047795', 3, 'Ahsan.jpg', 0, 1, 'PKBM Anak Panah HS', 1),
-(200, '2018443', '0022239581', 'Reaven Shabian Himawan', 'L', 'Jakarta', '2002-04-26', 2, 'WNI', 'Alamat Jalan  : JL LONTAR TMR NO.17A rt.10/06 Desa / Kelurahan : Tanjung Duren Utara\n', 'hhimawan24@yahoo.com', NULL, '083876302788', 13, 'reaven.jpg', 0, 3, 'Anak Panah', 1),
-(201, '2018490', '0104191940', 'Ardean Arwoon', 'L', 'Jakarta', '2010-05-19', 5, 'WNI', 'Apartement City Park Tower A Lantai 8 No 1', 'febriyanti.sap@gmail.com', 'arden_arwon.pdf', '082123928889', 3, 'Ardean._A_.jpg', 0, 4, 'PKBM Anak Panah HS', 1),
-(202, '2018446', '0032013694', 'Shilla Aprodhita', 'P', 'Bogor', '2003-01-10', 1, 'WNI', 'JALAN KELAPA SAWIT 12 BLOK BF-8 NO 02 rt.04/13 Desa / Kelurahan : Pakulonan Barat Kode Pos  : 15812	\n', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '12345678', 13, 'Tulips.jpg', 1, 2, 'SMA Tunas Mulia', 1),
-(203, '2018441', '0022777473', 'Rafiqa Imani', 'P', 'Tangerang', '2002-11-11', 1, 'WNI', 'Alamat Jalan  : KP.PARABON rt.02/03 Desa / Kelurahan : Ciloto Kode Pos  : 43255\n', 'bundararaty.traderfx@yahoo.co.id', 'Rafiqa_Imani.pdf', '081388097227', 12, 'rariqa.jpg', 0, 2, 'SMPIT Daarul Hasan', 1),
-(204, '2018489', '0101892013', 'Angela Prudence Prasetyo', 'P', 'Jakarta', '2010-11-29', 3, 'WNI', 'Bukit Rivaria sektor 5 blok i5 no 2 Sawangan Depok', 'angela.prudence.prasetyo@gmail.com', 'anggela_prudence.pdf', '081228094179', 3, 'Angela_Prudence_Prasetyo.jpg', 0, 1, 'PKBM Anak Panah HS', 1),
-(205, '2018449', '0028707324', 'Stefanie Lauw', 'P', 'Tangerang', '2002-06-21', 2, 'WNI', 'Jalan  : KP. BUARAN BARAT rt.15/05 Desa / Kelurahan : Jelupang Kode Pos  : 15323	\n', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '081399113322', 13, 'Tulips.jpg', 1, 2, 'PKBM 21 Tebet Timur', 1),
-(206, '2018492', '0108365292', 'Bryan Nathanael Abednego H.', 'L', 'Denpasar', '2010-12-15', 2, 'WNI', 'Perum. Graha Bagasasi Blok G4 No 1. Sindang Mulya. Cibarusah. Kab. Bekasi.', 'dancingclown9@gmail.com ', 'bryan_hutasoit.pdf', '081237812868', 3, 'Bryan_Nathanael_Abednego.jpg', 0, 2, 'PKBM Anak Panah HS', 1),
-(207, '2018451', '0029268268', 'Tony Candra Wijaya', 'L', 'Tangerang', '2002-09-17', 5, 'WNI', 'CLUSTER ANGELONIA BLOK A.I/H.27 rt.05/15 Desa / Kelurahan : Medang	\n', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '087741617276', 13, 'tony_candra_wajaya.jpg', 0, 2, 'SMP Perguruan Budhi', 1),
-(208, '2018444', '0020128256', 'Rifda Agustin', 'P', 'Tangerang', '2002-08-13', 1, 'WNI', 'Alamat Jalan  : JL.FALAQI 1 BLOK C NO.85 VILA ILHAMI rt.08/13\n', '123456@gmail.com', 'rifda1.pdf', '12121212121', 13, 'rifda_agustin_auliani.jpg', 0, 2, 'SMPN 1 Tenjolya', 1),
-(209, '2017205', '0045192463', 'Kevin Kartono', 'L', 'Jakarta', '2004-10-17', 3, 'WNI', 'Jl. Teuku Cik Ditiro no 76 PAV , Jakarta Pusat, Menteng', 'robertkartono7@gmail.com', 'Kevin_Kartono.pdf', '085691099817', 9, 'WhatsApp_Image_2020-03-11_at_11.26_.28_AM_.jpeg', 0, 2, 'SD Swasta Santo Ignatius', 1),
-(210, '2018493', '0107457991', 'Cheryl Valerie Hasjim', 'P', 'Jakarta', '2010-10-06', 2, 'WNI', 'Taman Ratu Indah Blok A. 1 No.38 RT001/RW013 Kel. Duri Kepa Kec. Kebon Jeruk Jakarta Pusat', 'mariamagdalena1184@gmail.com', 'cherryl.pdf', '02129020651', 3, 'Cheryl_Valete.jpg', 0, 1, 'SDS Woodlands Montessori', 1),
-(211, '2018440', '2037083314', 'Raffi Hilmi Hidayat ', 'L', 'Tasik malaya', '2003-03-28', 1, 'WNI', 'Alamat Jalan  : JL. CEMPAKAWARNA NO.4/55  rt.01/08 Desa / Kelurahan : Cilembang Kode Pos  : 46123\n', '123456@gmail.com', NULL, '12121212121', 13, 'Screenshot_7.png', 0, 1, 'MTs Negeri 1 Tasik Malaya', 1),
-(212, '2018453', '0034494946', 'Vanessa Febry', 'P', 'Pontianak', '2003-02-28', 3, 'WNI', 'TAMAN SEMANAN INDAH BLOK E7 NOMOR 39 rt.13/12	\n', 'vanessafebry@gmail.com ', 'vanesa_ferby.pdf', '087789281666', 13, 'Vannesa_febri.jpg', 0, 2, 'SMP Kristen Kasih Kemuliaan', 1),
-(213, '2018494', '0106022436', 'Ekranio Khowarizmi', 'L', 'Jakarta', '2010-02-17', 1, 'WNI', 'Lorong O No.7 \nRT/RW: 011 / 005 KOJA\nJakarta Utara', 'enny.pzia@gmail.com', 'ekraino_2.pdf', '085219344344', 3, 'Ekranio_Khowarismi.jpg', 0, 1, 'PKBM Anak Panah HS', 1),
-(214, '2017210', '0060130788', 'Melvern Deannova Vimanta', 'L', 'Jakarta', '2005-04-28', 2, 'WNI', 'Jl. Kelapa Lilin Utara IV Blok DF - 6 No 07, Kelapa Dua, Tangerang', 'keiven77@yahoo.com', 'Melvern_Deannova.pdf', '08159005217', 9, 'WhatsApp_Image_2020-03-11_at_11.53_.05_AM_.jpeg', 0, 1, 'SD Surya Bangsa', 1),
-(215, '2017207', '2058811854', 'Marc Ryanheart Laoh', 'L', 'Jakarta', '2005-03-18', 2, 'WNI', 'Jl. Lempuyang VI E. 24/25. Komp.  Mega Cinere blok L\nCinere - Depok', 'marcryanlaoh@gmail.com', 'Marc_Ryanheart.pdf', '081314097339', 9, 'WhatsApp_Image_2020-03-11_at_12.08_.59_PM_.jpeg', 0, 2, 'SMP Madania', 1),
-(216, '2019541', '12345678', 'Francesco Enzo De Ernesto Puimara', 'L', 'Lampung Tengah', '2012-05-24', 3, 'WNI', 'Komp. Puri Serpong I Blok D-7/2 RT008/RW002 Kel. Setu Kec. Setu Kota Tangerang Selatan 15343', 'yuliana.erniyusnita@yahoo.com', 'enzo.pdf', '081282670682', 3, 'Francesco_Erzo.jpg', 0, 1, 'PKBM Anak Panah HS', 1),
-(217, '2018455', '0047239265', 'Vincenzo Matalino', 'L', 'Jakarta', '2004-03-21', 3, 'WNI', 'TELUK GONG TIMUR NO.50 rt.04/09 , Pejagalan', '12345@gmail.com', 'Doc1.docx', '0', 13, NULL, 0, 1, 'SMP Narada', 1),
-(218, '2018495', '0094684840', 'Fabian Galih Wibowo', 'L', 'Jakarta', '2009-06-07', 1, 'WNI', 'Grand Kahuripan Cluster Sumeru Blok HL-10 RT008/RW006 Cileungsi Bogor', 'ellyzuaniarti@gmail.com', 'fabian_galih.pdf', '085881250610', 3, 'Fabian_Galih.jpg', 0, 1, 'MI Muhammdiyah II', 1),
-(219, '2018454', '0020128255', 'Vania Agustin', 'P', 'Jakarta', '2002-08-13', 1, 'WNI', 'JL.FALAQI 1 BLOK C NO.85 VILA ILHAMI rt.08/13\n', '12345@gmail.com', 'vania.pdf', '0817894056', 13, 'vania_agustin_auliani.jpg', 0, 1, 'SMP IC Magnet', 1),
-(220, '2018456', '3023860910', 'Wedatama Pambudi ', 'P', 'Bogor', '2002-04-23', 1, 'WNI', ' JALAN SERDANG BARU NOMOR 2 rt.14/05, Serdang', '12345@gmail.com', 'wedatama_IJAZAH-converted1.pdf', '0811261532', 13, 'wedatama.jpg', 0, 1, 'PKBM Anak Panah', 1),
-(221, '2018496', '0116271265', 'Gregory Damar Jibben', 'L', 'Sukabumi', '2011-10-27', 2, 'WNI', 'Perum Dasana Indah Blok RA.4 No. 8-9 RT001/RW017 Kel. Bojong Nangka Kec. Kelapa Dua Kota Tangerang 15812', 'gregoryjibben@gmail.com', 'gregory.pdf', '123456', 3, 'Gregory_Damar.jpg', 0, 2, 'SD Yuwati Bhakti', 1),
-(222, '2020746', '1', 'Antonia Emmanuelle Acirathasa Wibowo', 'P', 'Jakarta', '2009-01-18', 3, 'WNI', 'kompleks pamulang permai 1, jalan matoa, blok A37 no 5', 'veronikahepy@gmail.com', 'Antonia_Emmanuelle1.pdf', '087878724282', 4, 'Antonio_Emmanuella_K4.jpg', 0, 1, 'PKBM Aluna', 1),
-(223, '2018497', '0119022113', 'Hannah Felicia Given Lauw', 'P', 'Bekasi', '2011-08-31', 2, 'WNI', 'Foresta Naturale Blok M.9/6 BSD City RT002/RW003 Kec. Pagedangan Kab. Tangerang Tangerang 15850', 'louise.halim@gmail.com ', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '081283456244', 3, 'tidur-dengan-kucing.jpg', 0, 2, 'PKBM Anak Panah HS', 1),
-(225, '2018498', '0113389133', 'Izzati Khansa Hefrizal Putra', 'P', 'Tangerang', '2011-02-17', 1, 'WNI', 'Fortune Breeze D5/F10 RT005/RW001 Kel. Tajur Kota Tangerang 15152', 'nani.mh75@yahoo.com', 'izzati.pdf', '082119567599', 3, 'Izzati.jpg', 0, 2, 'PKBM Anak Panah HS', 1),
-(226, '2020751', '9879', 'Ale Febio Andreansyyah', 'L', 'Bogor', '2009-02-02', 1, 'WNI', 'Kp. Nanggela Tajurhalang Bogor', '12345@gmail.com', 'kolom soal.docx', '085739686988', 11, 'Screenshot_6.png', 0, 1, 'SMP Tunas Harapan', 1),
-(227, '2018461', '2094667873', 'Aqila dhawy setyaki', 'L', 'Tangerang', '2009-07-09', 1, 'WNI', 'Jl.sunset road no 39 C seminyak kuta badung Bali  Kuta badung Bali 80361\n', 'ginta_windianty@yahoo.com', 'Aqila_Dhawy_Setyaki.pdf', '081283236888', 4, 'Aqila_Dhawy.jpeg', 0, 1, 'SD Al Madinah Islamic Center', 1),
-(229, '2017206', '0050679559', 'Marc Raynerheart Laoh', 'L', 'Jakarta', '2005-03-18', 2, 'WNI', 'Jl. Lempuyang VI E. 24/25. Komp.  Mega Cinere blok L\nCinere - Depok', 'marcraynerlaoh@gmail.com', '03-10-2020-10.58_.28(8)_.pdf', '081311989793', 9, 'WhatsApp_Image_2020-03-11_at_2.32_.09_PM_.jpeg', 0, 2, 'SMP Madania', 1),
-(230, '2018464', '0091673268', 'Clyde yvette kho', 'L', 'Jakarta', '2009-05-31', 3, 'WNI', 'Galeri Niaga Mediterania D/8J', 'Irvan_kho@yahoo.com', 'Clyde_KK-merged.pdf', '081283221926', 4, 'Clyde.jpeg', 0, 2, 'SDS Woodlands Montessori', 4),
-(232, '2017211', '0052618748', 'Mikha Aurelia Wiranata', 'P', 'Jakarta', '2005-03-20', 2, 'WNI', 'JL. KR Kwitang I H No 52, Kwitang, Senen, Jakarta Pusat', 'mikha.aurelia@gmail.com', 'Mikha_Aurelia.pdf', '087786374841', 9, 'WhatsApp_Image_2020-03-11_at_11.38_.04_AM_.jpeg', 0, 1, 'SMP Kristen 3 Penabur', 1),
-(233, '2018463', '0107020518', 'Christopher Andrew Sinaga', 'L', 'Kisaran', '2010-06-20', 2, 'WNI', 'Angsana Hijau IV Blok G6/21 Rt. 003/009 Duri Kosambi Jakarta Barat', 'christopherandrew@gmail.com', 'Christopher_andrew_sinaga.pdf', '087886472065', 4, 'Christoper_Andrew_K4.jpg', 0, 2, '-', 1),
-(234, '2018465', '0104686731', 'Darlene Evangeline Lay', 'P', 'Makassar', '2010-01-16', 2, 'WNI', 'perumahan Taman Metropolitan,  jl Green Garden Utara no 30 Tanjung Bunga Makassar 90224', 'sunshine.lau@bubutech.com ', 'Darlene_Evangeline_Lay.pdf', '081234625280', 4, 'Darlane_evangeline_lay.jpeg', 0, 1, 'Sekolah Dian Harapan Makassar.', 1),
-(235, '2017212', '0034858025', 'Muhammad Hadi', 'L', 'Jakarta', '2003-08-13', 1, 'WNI', 'JL. Berdikari GG. Rayong, Kebon Jeruk, Jakarta Barat', 'hadimuhammad129@gmail.com', 'Muhammad_Hadi.pdf', '081290487782', 9, 'WhatsApp_Image_2020-03-11_at_2.57_.46_PM_.jpeg', 0, 2, 'PKBM Anak Panah', 1),
-(236, '2018462', '0097883249', 'Caroline Roseanne Pramadhwari M.', 'P', 'Sleman', '2009-11-19', 1, 'WNI', 'Pramanditya Andi Wardhana\n\nJalan Ramin 3 \nGang Demak no: 1B\nKel.Panarung\nKec. Pahandut\nPalangkaraya\nKalimantan Tengah \nKode pos 73111\nNo hp: 08562770666', 'aisgirl_90210@yahoo.com', 'Carolline_Roseanne.pdf', '08156870583', 4, 'CAroline_Roseane.jpeg', 0, 1, '-', 1),
-(237, '2018459', '0093481206', 'Andi Danendra Daffa Alief', 'L', 'Jakarta', '2009-10-26', 1, 'WNI', 'Jl. Falaqi 2 C 97, Villa Ilhami - Tangerang\n', 'ranada0208@gmail.com', 'Andi_Danendra_Daffa_Alief.pdf', '0818909628', 4, 'Andi_Danendra.jpeg', 0, 1, 'PKBM Anak Panah', 1),
-(238, '2020732', '34567', 'Carlson Constantine Lay', 'L', 'Jakarta', '2010-05-22', 5, 'WNI', 'Perum Permata Buana Jl Pantara Blok P4/63', 'grow.beyondacademy@gmail.com', 'Carlson_Constantine_Lay.pdf', '0', 4, 'Carlson.jpeg', 0, 2, 'SDS Woodlands Montessori', 4),
-(239, '2018503', '2094490729', 'Kevin Chen ', 'L', 'Tasikmalaya', '2009-08-15', 2, 'WNI', 'Taman Kopo Indah III Blok D.1 No.108 Kel. Rahayu Kec. Margaasih Bandung 40218', ' 	kongming2014@gmail.com', 'Kevin_Chen.pdf', '082116858889', 3, 'Kevin_Chen.jpeg', 0, 2, 'SD Joy Kids Nasional Plus', 1),
-(240, '2018468', '0107543306', 'Gita Permata Kristi Perangin.D', 'P', 'Jakarta', '2010-04-25', 2, 'WNI', 'Vila Melati Mas H 16 no. 8A Serpong Tangerang Selatan Banten 51114 \n', 'csetyadi@yahoo.com', 'Gita_Permata_Kristi_Perangin_Angin_Damanik1.pdf', '081319632718', 4, 'Gita_Permata_Kristi_K4.jpg', 0, 1, 'Anak Panah', 1),
-(241, '2018460', '0099526365', 'Andreas Rama Suresh Sitorus', 'L', 'Bekasi', '2009-06-22', 2, 'WNI', 'Perumahan Taman Century 2 blok D no 19. Pekayon - Bekasi		\n', 'rames.sitorus@gmail.com ', 'Andreas_Rama_Suresh_Sitorus.pdf', '08881880028', 4, 'Andreas_Rama_Sitorus.jpeg', 0, 3, 'TK Permata Preschool-Bekasi', 1),
-(242, '2018467', '2123129518', 'Ezar Ilmi Khairan', 'L', '0', '2009-11-25', 1, 'WNI', 'GG Mawar No.90 003/004, Tanjung Barat Jagakarsa, Jakarta Selatan', 'ezarcool@gmail.com', 'Ezar_Ilmi_Khairan.pdf', '081213171338', 4, 'Ezar_Ilmi.jpeg', 0, 1, '0', 1),
-(243, '2017214', '0056434465', 'Nathanael Clementino Rawis', 'L', 'Jakarta', '2005-12-28', 2, 'WNI', 'Apartemen City Garden Jl. Kamal Raya Cengkareng Jakarta Barat', 'Rawis.ario@gmail.com', 'Nathannael_Clementino_Rawis.pdf', '083897005155', 9, 'Nathanael_Clementino_Rawis.jpeg', 0, 1, 'Homeschooling Primagama', 1),
-(244, '2018470', '2104183430', 'Isaac Rafael Rawis ', 'L', 'Jakarta', '2010-09-06', 2, 'WNI', 'Apartment city garden Unit 1510. Kapuk Cengkareng Jakarta Barat\n', 'marlinda.tjhie@gmail.com', 'Isaac_Rafael_Rawis1.pdf', '12121212121', 4, 'Isaac1.jpeg', 0, 3, 'Homeschooling Primagama', 1),
-(245, '2018499', '0117478232', 'Jennifer Jasonnita Toembelaka', 'P', 'Jakarta', '2011-06-10', 5, 'WNI', 'Jl. Samarasa I Dalam No.2 RT012/RW005 Kel. Angke Kec. Tambora Jakarta Barat 11330', 'isabellaliem1981@gmail.com ', 'jenifer.pdf', '081514350527', 3, 'Jennifer_Jasonnita_Toembelaka.jpg', 0, 1, 'PKBM Anak Panah HS', 1),
-(246, '2018469', '0083395739', 'I Gusti Bagus Devarananda M', 'L', 'Denpasar', '2008-11-23', 4, 'WNI', 'Jl.Kenanga No.11 Tabanan - Bali \n', 'udsepakat@yahoo.co.id ', 'IGB_Devarananda1.pdf', '081338991115', 4, 'I_gusti_bagus1.jpeg', 0, 2, 'Anak Panah', 1),
-(247, '2018528', '0124494947', 'Khadeeja Prisa Azzahra', 'P', 'Jakarta', '2012-05-11', 1, 'WNI', 'Jl. Pinang Suasa 4 Blok UZ 6-7 RT014/RW003 Kel. Pondok Pinang Jakarta Selatan', 'annisabhi@gmail.com', 'khadeeja_.pdf', '08070003390', 2, 'Khadeeja.jpg', 0, 2, 'PKBM Anak Panah HS', 1),
-(248, '2018471', '0101772335', 'Jane Emelia Veruschka', 'P', 'Semarang', '2010-07-23', 2, 'WNI', 'JL. PERINTIS KEMERDEKAAN. PERUMAHAN PALM TOWN HOUSE NO. C9 TEGAL JAWA TENGAH 52125 ', 'JaneEmeliaVe@gmail.com', 'akte_n_KK_Jane_Emelia_Veruschka_(_kelas_4_DL_)(2).pdf', '081911608099', 4, 'Jane_Emelia.jpeg', 0, 2, 'PKBM Kak Seto ', 1),
-(249, '2018472', '0121645132', 'Jovanna Alexandria Gumulya', 'P', 'Jakarta', '2010-06-25', 3, 'WNI', 'Jl. Tambora I No. 21 C, RT 009/002, Tambora, Jakarta Barat 11220 \n', ' jovanna.seva@gmail.com', 'Jovanna_Alexandria.pdf', '08111767567', 4, 'Jovanna_Alexandria_Gumulya_K.4_.jpg', 0, 1, 'SD St. Leo', 1),
-(250, '2018458', '0111206030', 'Amadeo Jova Paundralingga', 'L', 'Davis', '2011-06-28', 2, 'WNI', 'The Boulevard Apartment Unit 17M Jl. Fachruddin Raya No. 5 Tanah Abang Jakarta Pusat 10250 						\n', 'sketsavia@gmail.com', 'Amadeo_Jova.pdf', '082143197230', 4, 'Amadeo_Jova_Paundra_L_K4.jpg', 0, 1, 'PKBM Anak Panah', 1),
-(251, '2018500', '0115704336', 'John Arthur Benyamin', 'L', 'Jakarta', '2011-09-27', 2, 'WNI', 'Jl. Cipayung RT005/RW003 Kel. Cipayung Kec. Cipayung Jakarta Timur 15152', 'bennybenyamin77@gmail.com', 'john_arthur.pdf', '082119567599', 3, 'John_Arthur.jpg', 0, 2, 'PKBM Anak Panah HS', 1),
-(252, '2018474', '0104939824', 'Livana Yo Belia Sumargo', 'P', 'Tangerang', '2010-03-09', 2, 'WNI', 'Jl. Permai 35 no 21\nKomplek Margahayu Permai\nBandung', 'Yobelialivana@gmail.com', 'Livana_Yo_Belia_Sumargo1.pdf', '087889008311', 4, 'Livana_Yo_Belia_Sumargo_K4.jpg', 0, 3, 'SD Tunas Bina Bangsa', 1),
-(253, '2018466', '0107788697', 'Eirene Agallia Siregar', 'P', 'Surabaya', '2010-03-30', 2, 'WNI', 'Bluru Permai C-21 RT/RW 006/009, Kel. Bluru Kidul, Sidoarjo', 'marsal.siregar@rentokil-initial.com', 'Eirene_Agalia_Siregar.pdf', '082336063222', 4, 'Eirene.jpeg', 0, 1, 'TK Providensia', 1),
-(254, '2018473', '0107052192', 'Kayla Azrina Hanania', 'P', 'Jakarta', '2010-03-27', 1, 'WNI', 'Jl Sabar No 25 Rt. 009/ 004 Petukangan Jakarta', 'nana.asiautama@yahoo.com', 'Kayla_Azrina_Hanania.pdf', '0818675172', 4, 'Kayla_Azrina_Hanania_K4.jpg', 0, 2, 'PKBM Anak Panah', 1),
-(255, '2018475', '0097485024', 'Marcos Chenata', 'L', 'Medan', '2009-12-04', 5, 'WNI', 'Foresta fiore blok B7 no. 23 bsd city  Tangerang Banten 15311\n', 'eltien_chen22@yahoo.com', 'Marcos_Chenata1.pdf', '081361518538', 4, 'Marcos1.jpeg', 0, 2, 'IPEKA', 1),
-(256, '2018526', '0121725956', 'Keiko Laquisha Gumulya', 'P', 'Jakarta', '2012-01-25', 3, 'WNI', 'Jl Tambora I No 21 C Rt 009/002, Tambora Jakarta Barat', ' keiko.seva@gmail.com', 'keikko.pdf', '081295744255', 2, 'Keiko_Laauisha.jpg', 0, 2, 'TK St Leo 2', 1),
-(257, '2017193', '0051556768', 'Anna Marie Lynn', 'P', 'Jakarta', '2005-06-25', 3, 'WNI', 'Komp. Dept. Hub Jl. Elang No. 26 RT 006/ RW\n010, Kebayoran Lama, Jakarta Selatan 12240 ', 'theresia8210@gmail.com', 'anne_marie.pdf', '000', 9, 'index.jpg', 0, 1, 'SD Swasta Pangudi Luhur ', 1),
-(258, '2018502', '2108412467', 'Kaylen yehonala christivend', 'P', 'Jambi', '2010-04-03', 3, 'WNI', 'Jl. Permata Medang  Cluster Barleria B1 G33', 'kaykay.yehonala@gmail.com', 'Kayleen.pdf', '081254066066', 3, 'Kaylen.jpg', 0, 2, 'PKBM Anak Panah HS', 1),
-(259, '2017187', '0073585671', 'Agnes davita putri dahana', 'P', 'Depok', '2004-11-16', 2, 'WNI', 'Griya lembah depok Blok G4 no 7\nDepok Jawa Barat 16411\nIndonesia', 'tasyadavito@gmail.com', 'Agnes_Davita1.pdf', '082213139722', 9, 'index.jpg', 0, 1, 'SD Holy Faithful Obedient', 1),
-(260, '2018501', '0103071878', 'Kaylee yehonala christivend', 'L', 'Jambi', '2010-04-03', 3, 'WNI', 'Jl. Permata Medang Cluster Barleria B1 G33', 'kaykay.yehonala@gmail.com', 'Kaylee.pdf', '081254066066', 3, 'Kaylen.jpg', 0, 1, 'PKBM Anak Panah HS', 1),
-(261, '2018504', '0117779290', 'Leonard Nathanael Lee', 'L', 'Jakarta', '2011-02-01', 3, 'WNI', 'Jl. Mangga Besar I No. 98 A RT001/RW003 Kel. Mangga Besar Kec. Taman Sari Jakarta Barat', 'l3onardlee@gmail.com', 'Leonard_Nathanael_Lee.pdf', '0818768867', 3, 'Leonard_Nathanael_Lee.jpg', 0, 2, 'PKBM HSPG Meruya', 1),
-(262, '2018505', '0105342004', 'Luiza Aaliyah Wicaksono', 'P', 'Jakarta', '2010-07-07', 1, 'WNI', 'Pulo Asem Utara III No. 6A Jakarta Timur', 'chakapriambudi@gmail.com', 'Luiza_Akta-converted.pdf', '081294993233', 3, 'Luiza_Aliyah_Wicaksono.jpg', 0, 1, 'PKBM Anak Panah HS', 1),
-(263, '2018478', '0107189150', 'Olivia Roan Widiyono', 'P', 'Tangerang', '2009-11-17', 3, 'WNI', 'Regensi Melati Mas Blok E-6/17 002/011 Jelupang', 'vrauw@yahoo.com', 'Olivia_Roan_Widiyono.pdf', '08170174817', 4, 'Olivia_Roan.jpeg', 0, 3, 'PKBM Alfa Omega', 1),
-(264, '2018481', '0099227013', 'Richard Orlando Casterson', 'L', 'Jakarta', '2009-07-07', 5, 'WNI', 'Jl Mangga 16BB No 22 B Duri Kepa  Jakarta Barat Jakarta 11510\n', ' 	deny.globalart@gmail.com', 'RIchard_Orlando_Casterson.pdf', '082112484012', 4, 'Richard_Orlando.jpeg', 0, 1, 'Ichthus School', 1),
-(265, '2018506', '0113717869', 'Meaghan De Maria Rastana', 'P', 'Surabaya', '2010-05-22', 2, 'WNI', 'Bukit Duri Tanjakan Gang SD No. 54 A Bukit Duri Tanjakan Tebet', ' 	parisdelamodeparisdelamode21@gmail.com', 'meghan.pdf', '081385935295', 3, 'tidur-dengan-kucing.jpg', 0, 2, 'PKBM Anak Panah HS', 1),
-(266, '2018480', '0104166740', 'Revand Wijaya', 'L', 'Tangerang', '2010-03-13', 5, 'WNI', 'Perum Legok permai..Cluster Kaliandra Blok : K2 No.A2\nLegok - Tangsel', 'camelliaw83@gmail.com', 'Revand_Wijaya.pdf', '08562225533', 4, 'Revan_Wijaya_K.4_.jpg', 0, 2, 'TK Mutiara Bangsa', 1),
-(267, '2017189', '0043068358', 'Ananda Noah Nathanael ', 'L', 'Jakarta', '2004-11-14', 2, 'WNI', 'Melati Mas Vista V9/21, Melati Mas Residence,\nJelupang. ', 'sonsi04@yahoo.com', 'Ananda_Noah1.pdf', '08159926033', 9, 'WhatsApp_Image_2020-03-12_at_13.47_.27_.jpeg', 0, 1, 'SD Stella Maris ', 1),
-(268, '2018479', '0107189150', 'Raphael William Suganda', 'L', 'Jakarta', '2010-10-06', 2, 'WNI', 'Jalan Vanda 3 nomor 5 \n', 'nike_s_99@yahoo.com', 'Raphael.pdf', '08176895195', 4, 'Rafael_William_K4.jpg', 0, 1, 'SDK Penabur Gading Serpong', 1),
-(269, '2018507', '0115807852', 'Michael Jayden Oentoro', 'L', 'Tangerang', '2011-09-30', 2, 'WNI', 'Jl. Kelapa Puan XIII AF - 6/18 RT005/RW012 Pakulonan Barat Tangerang\n', 'richard.oentoro@gmail.com', 'michael_jayden.pdf', '0818855149', 3, 'Michael_Jayden.jpg', 0, 1, 'PKBM Anak Panah HS', 1),
-(270, '2017185', '0042649156', 'Abraham Dominic Nugroho', 'L', 'Padang', '2004-11-14', 2, 'WNI', 'Jl. Mangga 24 Blok F No.140a. Duri Kepa Kebun\nJeruk Jakarta Barat 11510 Indonesia ', 'abrahamdnug@gmail.com', 'Abraham_Dominic_Nugroho1.pdf', '087820041411', 9, 'WhatsApp_Image_2020-03-12_at_14.08_.40_.jpeg', 0, 1, 'SMP Widuri Jaya ', 1),
-(271, '2018482', '0103327655', 'Sir Leon Maximilllianus Bolang', 'L', 'Balikpapan', '2010-06-17', 2, 'WNI', 'Perum Kencana Loka 1 Blok F1/39 RT. 002/ RW.014  - BSD City; Kelurahan Rawa Buntu Kec. Serpong 15318', 'leonard.bolang@gmail.com', 'Sir_Leon_Maximillianus_Bolang.pdf', '082254813348', 4, 'Sir_leon.jpeg', 0, 1, 'Kalimantan International christian School', 1),
-(272, '2018509', '0108242901', 'Muhammad Khalid', 'L', 'Bantul', '2010-12-04', 1, 'WNI', 'Jl. Pendustrian I No. 64 Lr. Jati RT001/RW001 Kel. Kebun Bunga Palembang', 'meindraeko@gmail.com', 'M_khalid.pdf', '085740631858', 3, 'Muhammad_Khalid.jpg', 0, 1, 'PKBM Anak Panah HS', 1),
-(273, '2019564', '2065231130', 'Alicia', 'P', 'Jakarta', '2006-09-17', 2, 'WNI', 'Taman ubud cendana 2 no.10 lippo karawaci  Tanggerang Banten 15810\n', 'liaong7524@gmail.com', 'alicia.pdf', '0', 7, 'Screenshot_6.png', 0, 2, 'SD Strada', 1),
-(274, '2018477', '0072600857', 'Narendra Fattaah Ari Kusuma', 'L', 'Yogyakarta', '2007-03-26', 1, 'WNI', 'The Mansion Jasmine Tower Bellavista Unit JB36B Jl Trembesi Blok D Pademangan Kemayoran Jakarta Utara 14410							\n', ' 	citra.kusumastuti@gmail.com', 'Narendra_Fattah.pdf', '081228971477', 5, 'Narendra_Fattah.jpeg', 0, 2, 'Tumbuh Primary School', 7),
-(275, '2017186', '0046575938', 'Adonis Tandal', 'L', 'Jakarta', '2004-05-05', 5, 'WNI', 'Perumahan Citra Garden 5 blok E6 no. 11 Jakarta\nBarat 11840 ', 'lenny.sujanto14@gmail.com', 'Adonis_Tandal1.pdf', '08161147336', 9, 'WhatsApp_Image_2020-03-12_at_14.25_.21_.jpeg', 0, 1, 'Sekolah Mahabodhi Vidya', 1),
-(276, '2018508', '0108176319', 'Michelle Prameswari Sutanto', 'P', 'Jakarta', '2010-07-01', 3, 'WNI', 'Jl. Duri Kencana Raya 13 RT005/RW007 Kel. Duri Kepa Jakarta Barat', 'markust75@gmail.com', 'michelle_prameswari.pdf', '082211764575', 3, 'Michelle_Prameswari_Sutanto.jpg', 0, 3, 'Sekolah Pilar Bangsa', 1),
-(278, '2017215', '0053072362', 'Nicholas Zubel Ebenhezer Hutasoit', 'L', 'Denpasar', '2005-04-21', 2, 'WNI', 'PRM Balangan Pratama BB VI. No 10 Lingk. Cengiling , Jimbaran, Kuta Selatan', 'samuraibali46@gmail.com', 'Nicholas_Zubel.pdf', '082118803182', 9, 'WhatsApp_Image_2020-03-12_at_2.22_.54_PM_.jpeg', 0, 1, 'SD Tunas Bangsa', 1),
-(279, '2017195', '2047651208', 'Bunga Azalia Fauzia Shafa', 'P', 'Surakarta', '2004-11-06', 1, 'WNI', 'Vila Dago Cluster Maribaya E06/24 RT004/020, Benda Baru, Pamulang\nTangerang Selatan Banten 15416\nIndonesia', 'vasilissazalia@gmail.com', '12-03-2020-14.37_.19_.pdf', '088233984003', 9, 'WhatsApp_Image_2020-03-12_at_14.41_.22_.jpeg', 0, 1, 'SD Al-Zahra Indonesia', 1),
-(280, '2018483', '0102748768', 'Valerie Nightingale', 'P', 'Jakarta', '2010-01-19', 2, 'WNI', 'JL. DR. Semeru Rays No.65 RT/RW 010/010 Kel. Grogol, Jakarta Barat', 'natalie.visca@gmail.com', 'valerie1.pdf', '081380687898', 4, 'Valerie_Nightingale_k4.jpg', 0, 1, '0', 1),
-(281, '2019566', '0', 'Andrew Fabian Prawira Putra', 'L', 'Bandung', '2007-01-06', 2, 'WNI', 'Jl Sunda No 93 Rt 001/001 Kel. Merdeka, Kec. Sumur Bandung\n', '12345@gmail.com', 'Contoh.pdf', '0', 7, 'Screenshot_6.png', 0, 3, 'PKBM Anak Panah', 1),
-(282, '2018510', '0118984129', 'Nathanael Joseph Wijaya', 'L', 'New York', '2011-06-19', 2, 'WNI', 'jalan sumatera nomor 3 medan belawan sumatera utara 20411', 's_0308885@yahoo.com', 'Nathanael_J_Akta-converted.pdf', '081210566533', 3, 'Nathanael_Joseph_Wijaya.jpg', 0, 1, 'PKBM Anak Panah HS', 1),
-(283, '2019569', '0073592295', 'Baswara Abi Satria', 'L', 'Yogyakarta', '2007-02-28', 1, 'WNI', 'apartement Mediterania Palace, Kemayoran \n', 'dnd_satrio@yahoo.com ', 'baswara_adi.pdf', '0', 7, 'Baswara.jpeg', 0, 1, 'PKBM Anak Panah', 1),
-(284, '2018476', '0104030197', 'Naomi Allicia Benyamin', 'P', 'Jakarta', '2010-04-06', 2, 'WNI', 'Perum Jati Asih Indah Blok D6 / 110 Bekasi Selatan 	\n', 'bennybenyamin77@gmail.com', 'Joseph_Alvin_Benyamin.pdf', '08561776052', 4, 'Naomi_Alicia_K4.jpg', 0, 2, 'PKBM Anak Panah', 1),
-(285, '2018484', '0107712392', 'Violeta Eunike Seancho', 'P', 'Jakarta', '2010-10-08', 2, 'WNI', 'Taman Palem Lestari Blok E 16 no. 11', 'willymicco@yahoo.com', 'Violeta_Eunike_Seancho.pdf', '08998884569', 4, 'Violeta_Eunike_K4.jpg', 0, 1, '0', 1),
-(286, '2018512', '2095325924', 'Princeton Darion Zein', 'L', 'Jakarta', '2009-03-06', 2, 'WNI', 'City Resort APT Tower Alamanda Lt.11/16', 'edzein71@gmail.com', 'princenton.pdf', '0818172961', 3, 'Princeton.jpg', 0, 2, 'sds woodlands', 1),
-(287, '2017213', '0055732850', 'Nathan Naufal Wardani', 'L', 'Tangerang ', '2005-01-27', 1, 'WNI', 'Jl. Labu I Blok G3 No 3 Sektor I.6 Griya Loka BSD, Rawabuntu', 'aliwardani@gmail.com', 'nathan_nauval.pdf', '081386317168', 9, 'WhatsApp_Image_2020-03-12_at_3.06_.42_PM_.jpeg', 0, 1, 'SMP Islam Cikal Harapan 1', 1),
-(288, '2018511', '0113291398', 'Petra William Lay ', 'L', 'Makassar', '2011-06-08', 2, 'WNI', 'perumahan Taman Metropolitan,  jl Green Garden Utara no 30 Tanjung Bunga Makassar 90224', 'shanecarolina777@gmail.com', 'petra_lay.pdf', '082192909989', 3, 'Petra_William_Lay.jpg', 0, 2, 'PKBM Anak Panah HS', 1),
-(289, '2019578', '0075542191', 'Felix Alexandro Yap', 'L', 'Tangerang', '2007-02-03', 5, 'WNI', 'Simprug poris e3 no 5 RT 6 Rw 3 Poris jaya \n', 'chyztraa@gmail.com', 'felix.pdf', '081281819173', 7, 'WhatsApp_Image_2020-04-22_at_13.51_.55_.jpeg', 0, 1, 'PKBM Anak Panah', 1),
-(290, '2017194', '0043056156', 'Brigitta Gwyneth Xaviera ', 'P', 'Jakarta', '2004-08-10', 3, 'WNI', 'Taman Aries A-5/3 Rt. 04/Rw. 09 Meruya Utara,\nJakarta Barat ', 'brigittagwyneth@gmail.com', '12-03-2020-15.30_.18_.pdf', '08111097802', 9, 'WhatsApp_Image_2020-03-12_at_15.33_.10_.jpeg', 0, 5, 'Sekolah Harapan Bangsa', 1),
-(291, '2019580', '0077805529', 'Flora Chenita', 'P', 'Medan', '2007-02-19', 2, 'WNI', 'Komplek foresta - fiore blok B7 no.23 bsd city Tangerang Banten 15311 \n', 'eltien_chen22@yahoo.com', 'FLORA.pdf', '081519616318', 7, 'Screenshot_6.png', 0, 1, 'SD Ipeka BSD', 1),
-(292, '2018513', '2108820179', 'Rayhana Zulfa Bachmid', 'P', 'Bacan ', '2010-10-10', 1, 'WNI', 'Jalan Hebras desa jatimulya nomor 245 rt 02 rw 06 kecamatan tambun selatan kabupaten bekasi 17510', 'rana.rzb@gmail.com', 'rayhana.pdf', '085885665886', 3, 'Rayhana.jpg', 0, 1, 'SDAT TAMAN FIRDAUS', 1),
-(293, '2018485', '0092506771', 'Winston Alden Widjaja', 'L', 'Jakarta', '2009-05-19', 2, 'WNI', 'JL. Graha Sunter Pratama Blok F No.6', 'widjajasandy72@gmail.com', 'Winston_Alden.pdf', '08118800072', 4, 'Winston_Alden_K4.jpg', 0, 2, 'Stars School', 1),
-(294, '2019582', '0065532969', 'Gunawan Wahyu ', 'L', 'Tangerang', '2006-11-22', 1, 'WNI', 'JALAN SWADAYA DALAM Rt 11 RW 2kel Wijaya kusuma 11460\n', 'ganesha@persija.id ', 'gunawan_wahyu_widodo.pdf', '0', 7, 'gunawan_wahyu.JPG', 0, 1, 'SD Negeri Wijaya Kusuma 05', 1),
-(295, '2019584', '2077314594', 'Hanifah Chandra Kurniawati', 'P', 'Cilegon', '2007-03-29', 1, 'WNI', 'Lingkungan Pagebangan Rt 012/03 Desa Ketileng Cilegon ', '12345@gmail.com', 'Contoh.pdf', '0', 7, 'Screenshot_6.png', 1, 7, 'SDN 1 Cilegon', 1),
-(296, '2019587', '2074493332', 'Jacqueline Venessa Leifon', 'P', 'Tangerang', '2007-02-26', 2, 'WNI', 'canary timur 3 no.42 gading serpong 15810\n', '12345@gmail.com', 'Jacqueline.pdf', '12345678', 7, 'WhatsApp_Image_2020-03-20_at_11.41_.23_.jpeg', 0, 1, 'SD Pahoa', 1),
-(297, '2019591', '0078142885', 'Jeremy Giovanni', 'L', 'Jakarta', '2007-03-02', 2, 'WNI', 'Taman Palem Lestari Blok E13 Nomor 2 RT 02 RW 15 Cengkareng Barat', 'ytn2110@gmail.com', 'JEREMY.pdf', '08176355598', 7, 'WhatsApp_Image_2020-03-20_at_13.53_.51_.jpeg', 0, 2, 'SD Kasih Imannuel School', 1),
-(298, '2019594', '0', 'Justin Odilo', 'L', 'Medan', '2005-12-29', 2, 'WNI', 'APE Green Palm Lt 9 Blok A No 7 Rt 05/013 Jakarta', 'da1717ys@yahoo.com', 'justin_odilo.pdf', '0', 7, 'WhatsApp_Image_2020-04-22_at_14.27_.33_.jpeg', 0, 3, 'PKBM Anak Panah', 1),
-(299, '2019592', '0075381236', 'Jovan Farrel Sumargo', 'L', 'Tangerang', '2007-07-07', 2, 'WNI', 'Jalan Permai 35 nomor 21 Komplek Margahayu Permai Bandung', 'jovanfarrel507@gmail.com', 'jovan_farrel1.pdf', '083140639024', 7, 'WhatsApp_Image_2020-04-22_at_14.12_.35_.jpeg', 0, 2, 'PKBM Anak Panah', 1),
-(300, '2020749', '123', 'Kenonwayne Wijaya', 'L', 'Banyuwangi', '2006-04-23', 5, 'WNI', 'Ruby Utara 1 no 7 Kelapa Dua Tangerang', '12345@gmail.com', 'Contoh.pdf', '0', 7, 'Screenshot_6.png', 0, 1, 'SD Bina Nusantara Serpong', 1),
-(301, '2019595', '0075547739', 'Kaisar Ivan Shalimar', 'L', 'Jakarta', '2007-05-06', 2, 'WNI', 'Pulo Asem Timur I No. 10 A,  Rt 001/ Rw 002, Jak-Tim', 'yoanatantriyadie@gmail.com', 'kaisar_ivan.pdf', '081382079555', 7, 'WhatsApp_Image_2020-03-20_at_14.24_.57_.jpeg', 0, 1, 'SDS Global Sevilla Pulo Mas', 1),
-(302, '2019589', '0072931917', 'Jasmine Lian Juskiw', 'P', 'Denpasar', '2007-01-26', 3, 'WNA', 'Jalan tukad badung 17 no 27, Renon Denpasar Bali 80226 Indonesia \n', 'kadeayu@gmail.com', 'Scan_Museum_Anatomi.pdf', '08999029128', 7, 'WhatsApp_Image_2020-03-20_at_14.27_.12_.jpeg', 0, 1, 'PKBM Anak Panah', 1),
-(303, '2018514', '12345678', 'Reinhard Rich Reagan', 'L', 'Tangerang', '2011-09-17', 2, 'WNI', 'Cikahuripan RT005/RW006 Kel. Neglasari Kec. Neglasari Tangerang 15129', 'mkt_rajawalimuda@yahoo.com', 'reinhard_rich.pdf', '081213700888', 3, 'Reinard_Rich_Reagan.jpg', 0, 3, 'SDK Plus Penabur Cirebon', 1),
-(304, '2019593', '0076959153', 'Juanito Mannuel Halim', 'L', 'Jakarta', '2007-02-28', 2, 'WNI', 'Puri Bintaro PB.33/123 RT.009 RW.009 Sawah Baru Ciputat, Tangerang Selatan', 'yuszhy@yahoo.com', 'juanito.pdf', '0811936402', 7, 'WhatsApp_Image_2020-03-20_at_11.54_.48(1)_.jpeg', 0, 1, 'SD Highscope Indonesia Bintaro', 1),
-(305, '2017217', '0052536602', 'Orceola Primo Edriatama', 'L', 'Jakarta', '2005-01-14', 3, 'WNI', 'JL PETOJO VTY V NO. 22 rt.13/06, Desa / Kelurahan : Cideng,Kode Pos  : 10150\n', 'orceola.14@gmail.com', 'Orceola_Primo.pdf', '08118991245', 9, 'Orceola.jpeg', 0, 1, 'PKBM Anak Panah', 1),
-(306, '2017216', '0058712499', 'Omar Ari Olafsoon', 'L', 'Jakarta', '2005-07-31', 1, 'WNI', 'Cluster alicante  blok ABT nomor 100 gading serpong Tangerang', 'omarari.olafsson@yahoo.com', 'Omar_Ari.pdf', '081296465032', 9, 'WhatsApp_Image_2020-03-12_at_5.06_.15_PM_.jpeg', 0, 1, 'Junior High School Stella Maris', 1),
-(307, '2019590', '0069592027', 'Jennifer Gracia Leunura', 'P', 'Serang', '2006-12-24', 2, 'WNI', 'Taman Lopang Indah, Jl. Anyelir, Block C 38 No.1  Serang Banten 42112\n', 'yuliusbernadus@gmail.com', 'Jennifer_Gracia_Leunura1.pdf', '081288681381', 7, 'Jennifer_gracia.jpeg', 0, 1, 'SD Swasta Evfia land', 1),
-(308, '2019599', '0071074442', 'Maleeka Kendra Adhitia', 'P', 'Jakarta', '2007-11-15', 1, 'WNI', 'Apartemen Taman Rasuna. Tower 9 unit 14C. Jl HR Rasuna Said. Jakarta Selatan', 'maleekakendra@gmail.com', 'maleeka1.pdf', '085892595985', 7, 'WhatsApp_Image_2020-03-20_at_14.13_.05_.jpeg', 0, 1, 'Al Azhar Syifa Budi, Kemang Jakarta Selatan.', 1),
-(309, '2019600', '2073769566', 'Marciano Emmanuel Chandra', 'L', 'Jakarta', '2007-03-26', 2, 'WNI', 'Perumahan Garden Aryana Blok B3/15, Binong, kelurahan Sukabakti, Desa kadu, kecamatan curug, Tangerang 15810 \n', 'tweenty_toety@yahoo.com', 'marciano.pdf', '081319838652', 7, 'Marciano.jpeg', 0, 1, 'Anak Panah', 1),
-(310, '2019603', '2073582542', 'Mohammad Satria Jannatan', 'L', 'Surabaya', '2007-04-20', 1, 'WNI', 'JL. PAPANDAYAN NO. 16, MEDITERANIA 1, SENTUL CITY Jl. Papandayan no. 16, Mediterania Golf 1, Kecamatan Babakan Madang, Sentul City\n', '123456@gmail.com', NULL, '12121212121', 7, 'Penguins.jpg', 0, 4, 'SD Bina Insani', 1),
-(311, '2019606', '0061671015', 'Muhammad Sholahuddin Ulya', 'L', 'Berebes', '2006-07-15', 1, 'WNI', 'Jl. H muri salim raya no 2 Rt 6 Rw 2 Pondok Bulak, Pisangan, Ciputat Tangsel\n', 'aliyahaqna@gmail.com', 'ulya1.pdf', '081260680019', 7, 'WhatsApp_Image_2020-03-20_at_11.43_.59_.jpeg', 0, 1, 'PPS Daarul Quran', 1),
-(312, '2019598', '0062052551', 'Laura Fei Susanto', 'P', 'Purworejo', '2006-07-14', 2, 'WNI', 'JL GN PUTRI NO 12, TAMAN RT 002 RW 008 BROMO, LIPPO VILLAGE SENTRAL , KELAPA DUA\n', 'da1717ys@yahoo.com', 'laura_fei1.pdf', '081905057650', 7, 'WhatsApp_Image_2020-04-22_at_14.40_.25_.jpeg', 0, 1, 'SD Mutiara Ibu', 1),
-(313, '2019619', '0072402150', 'Sekar Humaera Putranto', 'P', 'Jakarta', '2006-04-10', 1, 'WNI', 'Jalan Pejaten Indah 1 F11 Pancoran Jakarta Selatan', '123456@gmail.com', 'sekar1.pdf', '085695778373', 7, 'Penguins1.jpg', 0, 1, 'Anak Panah', 1),
-(314, '2019621', '0074880389', 'Sherina Thu Tiwanie ', 'P', 'Tangerang', '2007-07-10', 1, 'WNI', 'GADING SERPONG 7B DD 5 NOMOR 22 RT 4 RW 3 Curug sangereng \n', 'thusherin@gmail.com ', 'sherina1.pdf', '12121212121', 7, 'WhatsApp_Image_2020-03-20_at_14.19_.11_.jpeg', 0, 1, '0', 1),
-(315, '2019622', '0071761102', 'Siti Afraisyah', 'P', 'Balikpapan', '2007-10-18', 1, 'WNI', 'Ahmad yani karang jawa dalam Karang jawa dalma no 2 rt 11 rw 4 Balikpapan Balikpapan tengah 76123 \n', 'mirantimachmud46@gmail.com', 'siti_af1.pdf', '081912341998', 7, 'WhatsApp_Image_2020-03-20_at_14.08_.40_.jpeg', 0, 2, 'Anak Panah', 1),
-(316, '2019623', '0071742259', 'Siti Zahra Izzati Maulana ', 'P', 'Jakarta', '2007-10-24', 1, 'WNI', 'perumahan sakura regency 1 Blok G 14 jatiasih bekasi 17423', '123456@gmail.com', 'SITI_ZAHRA1.pdf', '089683064839', 7, 'Siti_zahra.JPG', 0, 2, '0', 1),
-(318, '2019607', '0072085374', 'Nadine Aureora Anzany', 'P', 'Tangerang', '2007-04-05', 1, 'WNI', 'Komp Amarapura Blok C1 No.7, Kel Kademangan, Kec Setu Tangerang Selatan 	\n', 'novanrizany@gmail.com', 'nadine.pdf', '081908346700', 7, 'WhatsApp_Image_2020-04-22_at_14.58_.01_.jpeg', 0, 2, 'PKBM Anak Panah', 1),
-(319, '2017218', '0052351507', 'Patrick Hermansyah Wihardja', 'L', 'Jakarta', '2005-07-25', 2, 'WNI', 'Jl. Kelapa Puan XXVI Blok AK 6/1 Sektor 1 G. RT 06/RW.010 \nKecamatan Pakulonan Barat \nKelurahan Kelapa Dua\nGading Serpong Tangerang 15811', 'lilypsusanto@gmail.com', 'Pradipta_Daffa.pdf', '08111998089', 9, 'WhatsApp_Image_2020-03-13_at_9.32_.47_AM_.jpeg', 0, 1, 'Sekolah Anak Panah', 1),
-(320, '2019596', '0077105460', 'Khatira Nahiza Suharta', 'P', 'Jakarta', '2007-04-04', 1, 'WNI', 'Griya Jakarta, Jl. Kemang 7 Blok B1 No.58', '12345@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 7, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 1, 3, 'SDIT Nur Fatahillah', 1),
-(321, '2019608', '0074520693', 'Padhang Moncar  Bagus Nalar Pekerti', 'L', 'Depok', '2007-12-24', 1, 'WNI', 'Jl. Pembangunan No 6. Hankam RT 003 RW 002 Desa/Kelurahan Pasir Gunung Selatan Kecamatan Cimanggis, Kota Depok. Jawa Barat 16951', '12345@gmail.com', 'padhang.pdf', '12345678', 7, 'WhatsApp_Image_2020-04-22_at_15.00_.41_.jpeg', 0, 1, 'Sekolah Musik Yayasan Pendidikan Musik', 1),
-(322, '2019597', '0079240801', 'Kyla Petahia', 'P', 'Jakarta', '2007-01-10', 2, 'WNI', 'jalan s kemanggisan pulo nomor 6b rt 07 rw 17 palmerah jakarta barat 11480', 'kylapetahia@gmail.com', 'kyla.pdf', '081383767084', 7, 'WhatsApp_Image_2020-03-20_at_14.10_.24_.jpeg', 0, 1, 'SDS Tunas Muda IKKT', 1),
-(323, '2019628', '0078586176', 'Taufiq Husein Bachsin', 'L', 'Jakarta', '2007-07-17', 1, 'WNI', 'Jln Putri tunggal no 8A,Harjamukti,cimanggis,Depok', 'riezafir@gmail.com', 'Taufik_Husein.pdf', '0818101747', 7, 'WhatsApp_Image_2020-03-20_at_14.29_.11_.jpeg', 0, 2, 'Sd Semut-Semut', 1),
-(324, '2019609', '0074481342', 'Putri Alyssa Manggarsari', 'P', 'Depok', '2007-08-23', 1, 'WNI', 'Perum BCI Blok A 6 No.22 RT 004 RW 026  Desa/Kelurahan Sukatani Kecamatan Tapos, Kota Depok. Jawa Barat 16454', '12345@gmail.com', 'putri_alisya.pdf', '12345678', 7, 'Tulips.jpg', 0, 2, 'sekolah dasar cita persada', 1),
-(325, '2019617', '0', 'Ryan Putra Dwidanda Sutiono', 'L', 'Jakarta', '2005-11-12', 2, 'WNI', 'Tebet Timur Dlm VE/6 RT 004 RW 005 Desa/Kelurahan Tebet Timur Kecamatan Tebet, Kota Jakarta Selatan. DKI Jakarta ', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '081218444711', 7, 'Tulips.jpg', 0, 3, 'SDS Notre Dame', 1),
-(326, '2017219', '0050832649', 'Pradipta Daffa', 'L', 'Tangerang ', '2005-03-22', 1, 'WNI', 'DUTA BINTARO KINTAMANI BLOK B10/1 rt.03/07, Desa / Kelurahan : Kunciran, Kode Pos  : 15144\n', 'sawnetham21@gmail.com', '03-13-2020-09.27_.11(1)_.pdf', '089668329234', 9, 'WhatsApp_Image_2020-03-13_at_11.30_.23_AM_.jpeg', 0, 2, 'SMP Islam Az Zamir', 1),
-(327, '2019629', '0073834616', 'Theresia Elizabeth Lumban Tobing', 'P', 'Jakarta', '2007-01-10', 2, 'WNI', 'Bukit Cengkeh Berbunga Blok C4 No.9 Baktijaya RT 4 RW 24, Kecamatan Sukmajaya Depok, Jawa Barat 16418', 'friedasinaga@yahoo.com', 'theresia.pdf', '081361625319', 7, 'WhatsApp_Image_2020-03-20_at_12.03_.22_.jpeg', 0, 1, 'PKBM Anak Panah', 1),
-(328, '2019611', '0063794543', 'RanggaBiya Ichiro Sahaja Wijaksono', 'L', 'Jakarta', '2006-10-24', 2, 'WNI', 'Griya Suradita Indah, Blok O12/3, Suradita Cisauk - Tangerang	\n', 'yanuarpersonal@gmail.com', 'Ranggabiya_Ichiro.pdf', '081219743998', 7, 'WhatsApp_Image_2020-03-20_at_14.23_.33_.jpeg', 0, 1, 'SD Waskito', 1),
-(329, '2018300', '0987654', 'Adlu Ahmad Fahrezy', 'L', 'Jakarta', '2008-01-31', 1, 'WNI', 'Kota wisata cluster Belleveu blok SF 6 No 15 kel Ciangsana  kec gunung putri Bogor Jawa barat 16968', 'zyasorayya@gmail.com', 'Adlu_Ahmad_Fahrezi.pdf', '081293132781', 5, 'adlu.jpg', 0, 2, 'SDN Penggilingan 9', 1),
-(330, '2019630', '0071769877', 'Timothy Emmanuel Lumban Tobing', 'L', 'Jakarta', '2007-01-10', 2, 'WNI', 'Bukit Cengkeh Berbunga Blok C4 No.9 Baktijaya RT 4 RW 24, Kecamatan Sukmajaya Depok, Jawa Barat 16418', 'friedasinaga@yahoo.com', 'timoty.pdf', '081319305777', 7, 'WhatsApp_Image_2020-03-20_at_14.11_.40_.jpeg', 0, 2, 'PKBM Anak Panah', 1),
-(331, '2018301', '0096370511', 'Alden Ely Pniel ', 'L', 'Gampong Cot', '2009-05-05', 2, 'WNI', 'Desa Neusu Aceh, Ulee Jurong: Tuan Meunasah, Jln.Tandi, Toke Haji. Kecamatan: Baiturrahman, Kota Banda Aceh. Kode Pos. 23244', 'josberlidaudupai321@gmail.com', 'Alden_Ely_Peniel.pdf', '081321445370', 5, 'Alden_K.5_.jpg', 0, 1, 'PKBM Anak Panah', 1),
-(332, '2018317', '2095903197', 'Efania Sumanadevi', 'P', 'Jakarta', '2009-07-14', 5, 'WNI', 'jl KH syahdan no 40A , Palmerah, Jakarta Barat\n', 'efaniasumanadevi@gmail.com', 'Efania_Sumanadevi.pdf', '089503687168', 5, 'Efania_Sumanadevi_K.5_.jpg', 0, 1, 'Global Sevilla Puri Indah', 1),
-(333, '2018302', '0099366486', 'Aliqqa Kayyisa Noverry', 'P', 'Jakarta', '2009-04-02', 1, 'WNI', 'JL.. Rasamala VII No.25 RT 001/010 Menteng Dalam Tebet Jakarta Selatan\n', '12345@gmail.com', 'Aliqqa_Kayissa.pdf', '0', 5, 'Aliqqa_Kayyisa_K.5_.jpg', 0, 2, 'SD Kupu Kupu', 1),
-(334, '2018304', '0087654550', 'Amelia Arwoon', 'P', 'Jakarta', '2008-05-18', 5, 'WNI', 'Apartement City Park Tower A Lantai 8 No 1', 'Arwoonamel@gmail.com', 'Amelia_Arwoon.pdf', '089604282632', 5, 'Amelia_A._K_.5_.jpg', 0, 1, 'PKBM Anak Panah', 1),
-(335, '2018305', '0091060058', 'Anastasya Cantika Kuswijaya', 'P', 'Tangerang', '2009-06-21', 1, 'WNI', 'Komp citra raya. Taman puspa blok D 1 no 19 cikupa tangerang \n', 'anastasyacantikakuswijaya@gmail.com', 'Anastasia_Cantika_Kuswijaya.pdf', '081212949481', 5, 'Anastasya_Cantika_K.5_.jpg', 0, 1, 'PKBM Anak Panah', 1),
-(336, '2018330', '2092055913', 'Marco emmanuel rudtio', 'L', 'Jakarta', '2009-08-22', 2, 'WNI', 'Green lake city, cluster East Asia 2 no. 26 Tangerang\n\n', '123456@gmail.com', 'Marco_Emmanuel_Ruditio1.pdf', '12121212121', 5, 'Marco_Em_K.5_.jpg', 0, 1, 'Grow Beyond Academy', 1),
-(337, '2018320', '0082163268', 'Ethan Vincent Pranata', 'L', 'Jakarta', '2008-11-22', 2, 'WNI', 'Jl. Pascal Barat 1 No. 1 Cluster Pascal Scientia Garden Summarecon Serpong Tangerang \n', 'winardi.tj@gmail.com', 'Ethan_Vincent_Pranata.pdf', '0818783880', 5, 'Ethan_Vincent_P._K5_.jpg', 0, 1, 'PKBM Anak Panah', 1),
-(338, '2018306', '0092129043', 'Angelyn Callista Sucipto', 'P', 'Jakarta', '2009-08-05', 2, 'WNI', 'claster faraday selatan 3 No.9 sumarecon serpong tanggerang banten 15811\n', 'harcourts.tjipto@gmail.com', 'Angelyn_Callista_Sucipto.pdf', '082114999777', 5, 'Angelyn_Callista_Sucipto_K.5_.jpg', 0, 1, 'PKBM Anak Panah', 1),
-(339, '2018308', '0084648120', 'Aurellia Jesslyn', 'P', 'Jember', '2008-09-08', 2, 'WNI', 'Porto2 No.1 sektor 6 Gading Serpong \n', 'aurellia@gmail.com', 'Aurellia_Jesslyn_21.pdf', '081212623322', 5, 'Aurellia_Jesslyn_K.5_.jpg', 0, 1, 'PKBM Anak Panah', 1),
-(340, '2018314', '0083837954', 'Delroy Kumara Djuwono', 'L', 'Jakarta', '2008-12-18', 2, 'WNI', 'taman ratu blok dd 6 no 21-23  jakarta barat DKI Jakarta 11520\n', '12345@gmail.com', 'Delroy_Kumara_Djuwono.pdf', '0', 5, 'Delroy_Kumara_K.5_.jpg', 0, 1, 'SDK 11 Penabur', 1),
-(341, '2018326', '0082904932', 'James Alexander Benyamin', 'L', 'Jakarta', '2008-06-16', 2, 'WNI', 'Botania Lake Residence Blok C 1 Sawangan Depok', 'bennybenyamin77@gmail.com', 'James_Alexander_Benyamin1.pdf', '081298881986', 5, 'James_Alexander_Benyamin_K5.jpg', 0, 1, 'Anak Panah', 1),
-(342, '2018332', '2096846334', 'Michael Joshua Leunura', 'L', 'Serang', '2009-01-18', 2, 'WNI', 'Taman Lopang Indah, Jl. Anyelir, Block C38, No. 1  Serang Banten 42112\n', '123456@gmail.com', 'Michael_Joshua_Leunura1.pdf', '12121212121', 5, 'Michael_Josua_K.5_1.jpg', 0, 2, 'EvFIA LAND School', 1),
-(343, '2019631', '0067404372', 'Tobiano Rikie Nathanael', 'L', 'Jakarta', '2006-04-08', 2, 'WNI', 'Fiordini F2 No.70 Gading serpong, RT 001/RW 010, Curug Sangereng, Tangerang', '12345@gmail.com', 'tobiano.pdf', '0', 7, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 2, 'PKBM Anak Panah', 1),
-(344, '2018310', '0092838157', 'Daniel Bep Junior', 'L', 'Tangerang', '2009-12-28', 1, 'WNI', 'Jl. Jomas Rt.2 rw. 5 meruya utara \n', '12345@gmail.com', 'Daniel_BEP_Junior.pdf', '08119222467', 5, 'Daniel_Bep_Junior.jpg', 0, 2, 'PKBM Anak Panah', 1),
-(345, '2018327', '2094954053', 'Jason Hanan', 'L', 'Tangerang', '2009-04-21', 2, 'WNI', 'Jl.chadna utama blok F1 no 17, cluster chadna, the avani, BSD', 'marietantri12@gmail.com', 'Jason_Hanan1.pdf', '087871111922', 5, 'Koala.jpg', 0, 1, 'SD Hosana Ranca Bungur', 1),
-(346, '2018311', '0093475301', 'Daniel Oliver Wijaya', 'L', 'Jambi', '2009-06-15', 3, 'WNI', 'Jl. Dr. Sumbiyono no 19 Kecamatan Jelutung Jambi 36136 \n', 'graceherman@gmail.com', 'Daniel_Oliver_Wijaya.pdf', '081274996899', 5, 'Screenshot_6.png', 0, 1, 'PKBM Anak Panah', 1),
-(347, '2018333', '0008522566', 'Michelle Callista Romauli P.', 'L', 'Jakarta', '2009-07-29', 2, 'WNI', 'Cluster Beryl. Jln Beryl Timur 1 no.1 Gading Serpong Tangerang selatan Banten 15811 \n', '123456@gmail.com', 'Michelle_Callista1.pdf', '12121212121', 5, 'Koala.jpg', 0, 2, 'Anak Panah', 1),
-(348, '2018312', '0097741908', 'Darnel Hadrian', 'L', 'Jakarta', '2009-07-17', 1, 'WNI', 'Emerald Terrace A-18, Bintaro Jaya, Tangerang Selatan', 'fifiaufarda@gmail.com', 'darnel.pdf', '081314390999', 5, 'Darnel_Hadrian_K.5_.jpg', 0, 3, 'PKBM Anak Panah', 1),
-(349, '2018321', '0093056854', 'Federico Tjen', 'L', 'Jakarta', '2009-03-30', 2, 'WNI', 'Gg manggis 14 no 4 rt.007/04 Tanjung duren \n', 'dewiwulan888@gmail.com', 'Federico_Tjen.pdf', '081288880131', 5, 'Federico_Tjen_K.5_.jpg', 0, 1, 'Sekolah Kristen Rahmani II', 1),
-(350, '2018328', '0099197143', 'Jemimah Ayumi', 'P', 'Tangerang', '2009-08-26', 2, 'WNI', 'Jl.pasar serpong no.77 \n', 'suguy11@yahoo.co.id', 'Jemimah_Ayumi1.pdf', '0811883270', 5, 'Jemimah_Ayumi_K.5_.jpg', 0, 1, 'IPEKA', 1),
-(351, '2018316', '0088547093', 'Drupadi Putri Kurniadi', 'P', 'Jakarta', '2008-09-18', 2, 'WNI', 'Kav DKI blok 142 no. 8, Kembangan, Meruya Selatan, Jakarta Barat', 'dyan.lohana@gmail.com', 'Drupadi_Putri_Kurniadi.pdf', '0', 5, 'Screenshot_6.png', 0, 2, 'PKBM Anak Panah', 1),
-(352, '2018336', '0092805248', 'Nizellia Alisya', 'P', 'Tangerang', '2009-02-28', 1, 'WNI', 'Green leaf Residence jl.Raya cadas kec.Rajeg kel.Mekarsari kab.Tangerang 15540 \n', 'nspestudio@gmail.com', 'Nizellia_Alisya_2.pdf', '087778501670', 5, 'Nizelia_Aisyah_K.5_.jpg', 0, 1, 'SDN SUKATANI III', 1),
-(353, '2019632', '0071696806', 'Tristan Evan Aditia', 'L', 'Jakarta', '2007-06-12', 2, 'WNI', 'JL. Pulau Sebaru VIII Blok L-7/21 Jakarta Barat', '12345@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia1.pdf', '0', 7, NULL, 1, 1, 'Springfield School', 1),
-(354, '2018338', '0098718592', 'Princesca Daniella', 'P', 'Jakarta', '2009-05-10', 3, 'WNI', 'Jl puyuh barat blok EF 4 no 15 Bintaro Jaya sektor 5 Tangerang selatan Banten 15224\n', 'zesca_x@yahoo.com', 'princesca1.pdf', '087775071705', 5, 'Princesca_Daniella_K.5_.jpg', 0, 1, 'Anak Panah', 1),
-(355, '2018329', '0109646426', 'Karen Glorianne Bunga Piga', 'P', 'Jakarta', '2010-06-04', 2, 'WNI', 'Perumahan Kosambi Baru\nJl.  Flamboyan Jingga 1A Blok C15 No. 20 \nDuri Kosambi\nCengkareng\nJakarta Barat 11750', '', 'Karen_Gloriane_Bunga_Piga1.pdf', '0819 9895 9393 ', 5, 'Koala.jpg', 0, 1, 'Anak Panah', 1),
-(356, '2018339', '0102589523', 'Richard Jordan Harjanto', 'L', 'Jakarta', '2010-02-11', 2, 'WNI', 'Jl. SMPN Satu Kemang no. 97 RT.003 RW.001 Desa Tegal Kampung Kandang Kec. Kemang Kab. Bogor 16310 \n', '123456@gmail.com', 'Richard_Jordan_Harjanto1.pdf', '12121212121', 5, 'Richard_Jordan_Harjanto_K.5_.jpg', 0, 1, 'Anak Panah', 1),
-(357, '2018322', '0091590495', 'Gabriel George Gaghana', 'L', 'Jakarta', '2009-09-09', 2, 'WNI', 'Taman Permata Parahyangan VII no 15 Lippo Karawaci \n', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '08118499590', 5, 'Tulips.jpg', 1, 2, 'PKBM Anak Panah', 1),
-(358, '2018340', '2099902122', 'Rr Rania Alinastra Saskiabela', 'P', 'Bogor', '2009-05-18', 1, 'WNI', 'Mutiara Sentul blok Q no 6 jl alternative sentul 88 Nanggewer Cibinong Kab Bogor', 'alinastra.saskiabela@gmail.com', 'Raden_Roro_Rania1.pdf', '081389679049', 5, 'RR_Rania_K.5_.jpg', 0, 2, 'SD CIpta Cendekia', 1),
-(359, '2018341', '0099829906', 'TImothy', 'L', 'Jakarta', '2009-02-28', 3, 'WNI', 'taman ratu cc 2 no 17 Jakarta Barat DKI Jakarta 52110\n', ' verenaerny@gmail.com', 'Timothy_Collin1.pdf', '0811 1101116', 5, 'Timothy_Collin_K.5_.jpg', 0, 3, 'Anak Panah', 1),
-(360, '2018342', '0094499146', 'Tisha Emmanuela Chandra', 'L', 'Jakarta', '2009-04-21', 2, 'WNI', ' Perumahan Garden Aryana Blok B3/15, Binong, kelurahan Sukabakti, Desa kadu, kecamatan curug, Tangerang 15810\n', 'tishahartono@gmail.com', 'Tisha_Emmanuella_Chandra.pdf', '0878 8373 0865', 5, 'Tisha_Immanuella_C_K5.jpg', 0, 2, 'SD Gracia', 1),
-(361, '2017151', '0065085319', 'Aditya Narayan', 'L', 'Jakarta', '2006-10-15', 5, 'WNI', 'jalan Duri.Selatan IA No. 26F\nKelurahan Duri Selatan\nKecamatan Tambora\nJakarta 11270', 'chessadora@rocketmail.com', 'Aditya_Narayan.pdf', '087886927034', 6, 'Aditya_Narayan_k6.jpg', 0, 2, 'Anak Panah', 1);
-INSERT INTO `tbl_siswa` (`siswa_id`, `siswa_nis`, `siswa_nisn`, `siswa_nama`, `siswa_jenkel`, `siswa_tempat`, `siswa_tgl_lahir`, `siswa_agama_id`, `siswa_kewarganegaraan`, `siswa_alamat`, `siswa_email`, `siswa_dokumen`, `siswa_no_telp`, `siswa_kelas_id`, `siswa_photo`, `soft_deleted`, `anak_ke`, `sekolah_asal`, `satelit`) VALUES
-(362, '2017159', '0086660040', 'Darren Dwitaja Yap', 'L', 'Jakarta', '2008-05-13', 5, 'WNI', 'Simprug poris e3 no 5  RT 02 RW 04 Tangerang\n', '12345@gmail.com', 'Darren_Dwijaya_Yap.pdf', '081281819173', 6, 'Darren_k6.jpg', 0, 2, 'PKBM Anak Panah', 1),
-(363, '2017165', '0082362154', 'Kenneth Robertson Lee', 'L', 'Jakarta', '2008-07-28', 3, 'WNI', 'JL MANGGA BESAR 1 NO 98 A rt.01/03,Desa / Kelurahan : Mangga Besar, Kode Pos  : 11180', 'k3nnethlee@gmail.com', 'Kenneth_Robertson_Lee1.pdf', '0810000000', 6, 'Kenneth_Robertoson_K6.jpg', 0, 1, 'Homeschooling Primagama', 1),
-(364, '2017160', '2086481441', 'El Zidane Yuska Rusman', 'L', 'Jakarta', '2008-01-31', 1, 'WNI', 'Jl Alle Raya No 54 Rt 006/008 Repoa, Tangerang Selatan', '12345@gmail.com', 'El_Zidane_Yuska_Rusman.pdf', '0', 6, 'Screenshot_6.png', 0, 2, 'PKBM Anak Panah', 1),
-(365, '2017152', '0083105064', 'Angela Beatrice Nichole Tenglewier', 'P', 'Bogor', '2008-09-11', 2, 'WNI', 'Jl.Layungsari I No 29', '123456@gmail.com', 'Angela_Beatrice.pdf', '12121212121', 6, 'Desert.jpg', 0, 1, 'Anak Panah', 1),
-(366, '2017166', '0097884774', 'Kho Richard Melvin', 'L', 'Jakarta', '2009-02-18', 2, 'WNI', 'Amerika latin blvd no 18 green lake city cipondoh  tangerang', '123@gmail.com', 'Kho_Richard_Melvin1.pdf', '08111258258', 6, 'Khoricard_Melvin_K6.jpg', 0, 2, 'SD Notre Dame', 1),
-(367, '2017161', '0086021828', 'Felix Maximillian Oey', 'L', 'Tangerang', '2008-03-08', 2, 'WNI', ' JL. TAMAN BUNGA V BLOK J. 3 NO. 14 MDL rt.03/03 , Kelapa Indah\n', 'ris_ka@hotmail.com', 'Felix_Maximillian_Oey.pdf', '08128283595', 6, 'Felix_k6.jpg', 0, 1, 'PKBM Anak Panah', 1),
-(368, '2017155', '0076155425', 'Calvin wijaya           ', 'L', 'Tangerang', '2007-11-11', 5, 'WNI', 'Perum Legok Permai Cluster Kaliandra Blok K2/A2 RT 04/08\nKecamatan Legok\nKabupaten Tangerang\n15821', 'calvinwijaya303@gmail.com', 'Calvin_WIjaya1.pdf', '12121212121', 6, 'Calvin_Wijaya_k6.jpg', 0, 1, 'Yayasan Bina Wirawan', 1),
-(369, '2017167', '0073574726', 'Lianutte Amevilla', 'P', 'Jakarta', '2007-11-10', 2, 'WNI', 'JL DR SEMERU RAYA NO 65 rt.10/10, Desa / Kelurahan : Grogol,Kode Pos  : 11450', '123@gmail.com', 'lianute.pdf', '081380687898', 6, 'Lianuette_Amevilla_k6.jpg', 0, 2, 'Anak Panah', 1),
-(370, '2017162', '0075074291', 'Gerard Anthony Syahlim', 'L', 'Jakarta', '2008-09-12', 3, 'WNI', 'Mitra Gading Vila Blok D1/19 Rt 001/007 Kelapa Gading Jakarta Utara', '12345@gmail.com', 'Gerard_Anthony_Syahlim.pdf', '087808878388', 6, 'Gerard_Anthony_Syahlim_K6.jpg', 0, 2, 'Satori monttessori school', 1),
-(371, '2017163', '0089184147', 'Gwenn Valerie Qiu', 'P', 'Jakarta', '0008-10-24', 2, 'WNI', 'JALAN TURQUIOSE TIMUR 1 NOMOR 22 - PHG rt.01/06 ,  Curug Sangereng\n', '12345@gmail.com', 'Gwen_Valeria_Qiu.pdf', '0', 6, 'Gwenn_K.6_.jpg', 0, 1, 'PKBM Anak Panah', 1),
-(372, '2017154', '2084930543', 'Cahaya saputra', 'L', 'Tangerang', '2008-07-12', 5, 'WNI', 'Sumareccon serpong, Perum Pondok Hijau Golf, Cluster topaz barat no.12 Gading serpong- Tangerang No telp : 08170988885.', 'cahayasaputra12@gmail.com', 'cahaya1.pdf', '082122620688', 6, 'Cahaya_Saputra_K6.jpg', 0, 2, 'SD PAHOA', 1),
-(373, '2017168', '0087691166', 'Naomi Adriel NG', 'P', 'Jakarta', '2008-11-11', 5, 'WNI', 'JL BANDENGAN UTARA 1 NOMOR 35 rt.05/12 Desa / Kelurahan : Pekojan,Kode Pos  : 11240', ' elviratasman@hotmail.com\'', 'Naomi_Adriel_Ng1.pdf', '087787770122', 5, 'Jellyfish.jpg', 0, 1, 'Bunda Mulia School', 1),
-(374, '2017164', '0073424703', 'Hananniel Rayheart Tarsley', 'L', 'Jakarta', '2007-11-25', 2, 'WNI', ' JL KEMANGGISAN PULO rt.08/17 , Palmerah,Kode Pos  : 11480\n', 'sisiliarayi@gmail.com', 'Hananniel.pdf', '081931062728', 6, 'Hananniel_K6.jpg', 0, 1, 'SDS Tunas Muda IKKT', 1),
-(375, '2017170', '0071666213', 'Ow Jia En Jocelyn ', 'P', 'Singapore', '2007-04-03', 2, 'WNI', 'JL UTAMA RAYA NO.21 rt.04/03, Desa / Kelurahan : Cengkareng Barat,Kode Pos  : 11730', '123@gmail.com', 'Ow_Jia_En_Jocelyn1.pdf', '081210272277', 6, 'Ow_Jia_En_Jocelyn_k6.jpg', 0, 1, 'Horizon School Singapore', 1),
-(376, '2017172', '0085368778', 'Phillip Rylan Tian', 'L', 'Jakarta', '2008-03-19', 5, 'WNI', ' JLN PARANG TRITIS IV/5 rt.03/11, : Ancol,14430\n', '12345@gmail.com', 'Phillip_Rylan_Tian.pdf', '081699083', 6, 'Phillips_Rylan_Tian_K6.jpg', 0, 1, 'SDS Bunda Mulia', 1),
-(377, '2018515', '2108821255', 'Vincent  Louis Wijaya', 'L', 'Jakarta', '2010-06-23', 3, 'WNI', 'Metro Permata 1, blok D5 no.12A, Karang Tengah. Karang Mulia-Ciledug Tangerang', 'wandavelina85@gmail.com', 'vincent_louis_.pdf', '0217332641', 3, 'Vincent_Louis.jpg', 0, 1, 'SDS Woodlands Montesori', 1),
-(378, '2017156', '0089445569', 'Carren Annabel Hendra', 'P', 'Bandung', '2008-08-14', 2, 'WNI', 'KOMP PARAHYANGAN PERMAI BLOK M NO 4 rt.02/08, Desa / Kelurahan : Ciwaruga,Kode Pos  : 40559\n', 'carren.annabel@gmail.com', 'carren.pdf', '08986443210', 6, 'Carren_Annabel_k6.jpg', 0, 2, 'SD Kristen 2 Bina Bakti', 1),
-(379, '2017173', '0088188413', 'Reynard Keyfas  Nathanel Sitohang', 'L', 'Jakarta', '2008-08-13', 3, 'WNI', 'TAMAN SARI PESONA BALI BA.8 PISANGAN rt.01/15 ,  Pisangan, Ciputat Timur, Tangerang Selatan', 'rknsitohang@gmail.com', 'Reynard_Keyfas.pdf', '08118071717', 6, 'Reynard_Keyfas_k6.jpg', 0, 1, 'PKBM Anak Panah', 1),
-(380, '2017171', '0071713235', 'Ow Jia Xuan Hasya ', 'P', 'Singapore', '2007-04-03', 2, 'WNI', 'JL UTAMA RAYA NO.21 rt.04/03, Desa / Kelurahan : Cengkareng Barat,Kode Pos  : 11730\n', '123@gmail.com', 'Ow_Jia_Xuan_Hasya1.pdf', '081210272277', 6, 'Ow_Jia_Xuan_Hasya_k6.jpg', 0, 2, 'Horizon School Singapore', 1),
-(381, '2017174', '0089757650', 'Richie Corvinus Tan', 'L', 'Jakarta', '2008-04-15', 2, 'WNI', 'Branz BSD Tower C Unit 2702\nJl. BSD Boulevard Parcel 55F\nTangerang 15339 Banten', 'richie.tan154@gmail.com', 'Richie_Corvinus_Tan.pdf', '0816289224', 6, 'Richie_Corvinus_k6.jpg', 0, 2, 'PKBM Anak Panah', 1),
-(382, '2018519', '0127813701', 'Allyn Beatrice Yang', 'P', 'Jakarta', '2012-01-13', 5, 'WNI', 'Taman Palem Lestari Blok B11 No.56 RT009/RW003 Cengkareng Jakarta Barat', 'hendriyoagusly@yahoo.co.id', 'alyn.pdf', '02155963829', 2, 'Allyn_Beatrice_Yang.jpg', 0, 2, 'SDS Woodlans Montessori', 1),
-(383, '2017157', '0082525779', 'Catherine Anastasia Roeroe', 'P', 'Manado', '2008-10-05', 2, 'WNI', 'Vila Nusa Indah 2 Blok AA1 nomor 86 Jatiasih Bekasi 17423', 'roeroe.cathrine@yahoo.com', 'roe_roe.pdf', '082292058899', 6, 'Catherine_Anastasia_Roeroe.jpg', 0, 0, 'Anak Panah', 1),
-(384, '2017182', '0076307783', 'Valiant Abnegatio Nostri Siahaan', 'L', 'Tangerang', '2007-10-16', 2, 'WNI', 'Griya Soka Blok U No 16 Cimahpar, Bogor Utara, Kota Bogor', 'beyoan01@gmail.com', 'Valiant_Abnegetio.pdf', '081219594041', 6, 'Valiant_Abnegatio_Nostri_S_K6.jpg', 0, 1, 'PKBM Anak Panah', 1),
-(385, '2017183', '0079539524', 'Zico Xavier Pradipta Chandra ', 'L', 'Jakarta', '2007-12-19', 1, 'WNI', 'Jalan Sapta Taruna 2 Dalam Nomor 7 RT 4 RW 10 Kelurahan Pondok Pinang Kecamatan Kebayoran Lama', 'zicoxavier19@gmail.com', 'Zico_Xavier.pdf', '085691172164', 6, 'Zico_k6.jpg', 0, 1, 'SDN Pondok Pinang 10 Pagi', 1),
-(386, '2017175', '0077442353', 'Salwaa Dhana Azalia', 'P', 'Surabaya', '2007-08-07', 1, 'WNI', 'TAMBAK SEGARAN NO. 66 rt.04/09. Desa / Kelurahan : Rangkah,Kode Pos  : 60135', 'salmaaaabidahazzahra@gmail.com', 'Salwaa1.pdf', '087853101981', 6, 'Salwa_k6.jpg', 0, 2, 'SD Muhammadiyah 3', 1),
-(387, '2017179', '0089036832', 'Tischka Naiara Priyanka Singh', 'P', 'Jakarta', '2008-04-24', 3, 'WNI', 'JL DELMAN ASRI III/18 rt.06/11, Kebayoran Lama Utara\n', '12345@gmail.com', 'Tishcka_Naira.pdf', '08128348488', 6, 'Tischa_k6.jpg', 0, 3, 'German School Jakarta', 1),
-(388, '2017180', '0076377430', 'Tobias Benedict Rawis', 'L', 'Jakarta', '2007-09-22', 2, 'WNI', 'JL DELMAN ASRI III/18 rt.06/11,kel.Kebayoran Lama Utara,12240\n', '12345@gmail.com', 'Tobias_Benedict_Rawis.pdf', '0', 6, 'Tobias_Benedict_Rawis.jpg', 0, 2, 'PKBM Anak Panah', 1),
-(389, '2017181', '0084182087', 'Trinita Elena Lumbantobing ', 'P', 'Jakarta', '2008-06-04', 2, 'WNI', 'CIPINANG BARU BUNDER VII/36 rt.05/01, Cipinang, 13240\n', '12345@gmail.com', 'Trinita_Elena_Lumbantobing.pdf', '081361625319', 6, 'Trinita_Elina_Lumban_Tobing_k6.jpg', 0, 3, 'PKBM Anak Panah', 1),
-(390, '2018518', '01201071802502', 'Aletha Joy Hana', 'P', 'Malinau', '2012-01-07', 2, 'WNI', 'Jl. Tandi Lorong Toke Haji no 5. Gampong Neusu Aceh. Kec. Baiturrahman. Kota Banda Aceh', 'josberlidaudupai32i@gmail.com', 'aletha.pdf', '081321445370', 2, 'Aleeha.jpg', 0, 2, 'PKBM Anak Panah HS', 1),
-(391, '2019535', '0', 'Ahmad Reza Fahlefi', 'L', 'Tangerang', '2008-06-14', 1, 'WNI', 'Jl. Tanah Manisan no.96 Rt03/Rw09 Cip Cemp Jatinegara, Jak Tim\n', 'aamingim73@gmail.com', 'Ahmad_Reza1.pdf', '08129231896', 1, 'Lighthouse1.jpg', 0, 2, '0', 1),
-(392, '2018517', '0118635224', 'Aiko Candyva Khairunnisa Basuki', 'P', 'Jakarta', '2011-01-23', 1, 'WNI', 'Taman Royal 2 Cluster Parahyangan 1 No.25 RT04 / RW 16 Poris Pelawad Indah Cipondoh Tangerang Banten 15141', 'triyo.basuki@gmail.com', 'aiko.pdf', '08119000393', 2, 'Aiko_Candyva.jpg', 0, 2, 'PKBM Anak Panah HS', 1),
-(393, '2019536', '2127987746', 'Akhtar Bagas Zahid Mustafid', 'L', 'Semarang', '2012-10-12', 1, 'WNI', 'Jl. Rawamangun Muka VIII no.6 RT 14/RW 12, Rawamangun, Jakarta Timur.', 'akhtarbagas1210@gmail.com', 'Akhtar.pdf', '081215933131', 1, 'Akhtar_Bagas.jpg', 0, 1, '0', 1),
-(394, '2019546', '0134070493', 'Lizzane Leanne Edelweiss Siregar', 'P', 'Surabaya', '2013-04-26', 2, 'WNI', 'Perumaham GPI Jl. Delima B no. 56 A, kec. MAPANGET, Kota Manado, SULUT, 95252\n', ' 	evaverawaty13@gmail.com', 'Lizzane_leanne.pdf', '081212587993', 1, 'Lizzane_Lianne.jpg', 0, 2, ' 	PAUD Glow Gerizim School', 1),
-(395, '2019548', '2133311215', 'Muhammad Ghaazi Allistair Madjid', 'L', 'illinois', '2013-02-18', 1, 'WNI', 'Jl. Swadaya no.58 RT06/RW02 Kelurahan Limo - Kecamatan Limo - Depok - Jawa Barat - 16515', 'riosplace@gmail.com', 'Ghazzi.pdf', '089603689694', 1, 'M._Gaazi_.jpg', 0, 3, 'PKBM Anak Panah', 1),
-(396, '2017176', '0052501489', 'Samuel Lie', 'L', 'Jakarta', '2005-11-23', 2, 'WNI', 'sektor 6 jl kelapa hibrida utara blok GC 3 no 7.tangerang gading serpong 15810.', '123@gmail.com', 'Samuel_Lie1.pdf', '0810000000', 6, 'Samuel_Lie.jpg', 0, 2, 'PKBM Alfa Omega', 1),
-(397, '2017177', '0084856376', 'Sebastian Dosey Ardy', 'L', 'Jakarta', '2008-09-24', 3, 'WNI', 'KAV. PORLI JL. A 7/37 rt.03/03, Desa / Kelurahan : Ragunan,Kode Pos  : 12550', '123@gmail.com', 'dosey.pdf', '0818904034', 6, 'Sebastian_Dosiy_Ardy.jpg', 0, 2, 'SD Strada Wiyatasana', 1),
-(398, '2017178', '0078243185', 'Sir Leon Alexander Bolang', 'L', 'Balikpapan', '2007-07-20', 2, 'WNI', 'Perum Kencana Loka 1 Blok F1/39 RT. 002/ RW.014  - BSD City; Kelurahan Rawa Buntu Kec. Serpong 15318', '123@gmail.com', 'sirleonalexanderbolang.pdf', '082254813348', 6, 'Sirleon_Alexando_K6.jpg', 0, 1, 'Kalimantan International School', 1),
-(399, '2017196', '0053872822', 'Christian samuel tanujaya', 'L', 'Jakarta', '2005-06-01', 2, 'WNI', 'Apartm the mansion jasmine tower capilano jc17b kemayoran jakpus', 'stevengmi@yahoo.com', '16-03-2020-16.36_.13_.pdf', '08129234233', 9, 'index.jpg', 0, 2, 'SMP Christen Calvin', 1),
-(400, '2018516', '01111011802556', 'Abriel Nathanael Tanadi', 'L', 'Manado', '2011-11-01', 2, 'WNI', 'Jl. Lingkungan 1 RT003/RW001 Kel. Bitung Timur Kota Bitung 9522 Sulawesi Utara', 'rudytanadi1811@gmail.com', 'abriel.pdf', '08128281885', 2, 'Abriel_N._Tahadi_.jpg', 0, 1, 'PKBM Anak Panah HS', 1),
-(401, '2019537', '2126361788', 'Atharizz Sakha Radiansyah ', 'L', 'Tangerang', '2012-05-05', 1, 'WNI', 'Perumahan dasana indah blok ub2 no.4 tangerang\n', 'dian.ratman@gmail.com', 'Atharizz1.pdf', '082211857079', 1, 'Atharizz.jpg', 0, 1, 'Tk insan aulia madani bekasi', 1),
-(402, '2017221', '0042611326', 'Rico Putra Hariyanto', 'L', 'Jakarta', '2004-01-20', 3, 'WNI', 'Jl. Abdul Muis No.96 RT 2/ RW 1 Perojo Selatan, Jakarta Pusat', 'as@dnet.net.id', 'Rico_Putra.pdf', '0811191163', 9, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SD Sint. Joseph', 1),
-(403, '2018520', '01201121802470', 'Annabelle Phoebe Prasetyo', 'P', 'Jakarta', '2012-01-12', 3, 'WNI', 'Perum Bukit Rivaria Sektor V Blok I5 No. 2 Bedahan Sawangan Depok Jawa Barat 16519', 'andre.aufklarung@gmail.com', 'annabelle.pdf', '085868223378', 2, 'Annabelle_Phoebe.jpg', 0, 2, 'TK Holy Faithful Obedient', 1),
-(404, '2017224', '0068122583', 'Shine Louislane Sanger', 'P', 'Bandung', '2006-09-01', 2, 'WNI', 'Alamat Jalan  : JL. RAWA SELATAN IV NO.3 rt.06/07 , Desa / Kelurahan : Kampung Rawa, Kode Pos  : 10560	\n', 'gwynne_m@yahoo.co.id', 'Shine_Louislane_Sanger.pdf', '08118822275', 9, 'Tulips.jpg', 0, 3, 'PKBM Anak Panah', 1),
-(405, '2019538', '0111392953', 'Bianca khansa putri', 'P', 'Tangerang', '2011-10-13', 1, 'WNI', 'Jl.sunset road no 39.C seminyak,kuta badung Bali 80361', 'ginta_windianty@yahoo.com', 'Bianca1.pdf', '081283236888', 1, 'Bianca_Khansa_Putri.jpg', 0, 2, 'Anak Panah', 1),
-(406, '2020730', '0122896664', 'Bella Marvelyn Elisabeth Tambunan', 'L', 'Tangerang Selatan', '2012-05-05', 2, 'WNI', 'Delatinos Cluster De Rio Blok B.8/16 BSD RT008/RW018 Kel. Rawa Buntu Kec. Serpong Kota Tangerang Selatan 15318 Banten', 'bellamarvelyn@gmail.com', 'bella_marvel.pdf', '081281126960', 2, 'Bella_Marvelyn_Tambunan.jpg', 0, 1, 'SD Kristen IPEKA', 1),
-(407, '2018521', '01203041802586', 'Erlangga Guevara Permata Perangin Angin Damanik', 'L', 'Jakarta', '2012-03-04', 2, 'WNI', 'Jl. Villa Melati Emas H16 No. 8A Serpong Tangerang Selatan Banten 51114', ' jppermata@gmail.com', 'erlangga_guevara.pdf', '08128841110', 2, 'Erlangga_Guevara_Permata._P_._D_.jpg', 0, 2, 'PKBM Anak Panah HS', 1),
-(408, '2017226', '0058604872', 'Vanessa Tiffany Santoso', 'P', 'Sydney', '2005-02-01', 2, 'WNI', 'Cluster Hylands FB 6/2 Greenwich Park ,BSD\nLengkong Kulon, Pagedangan, Tangerang\n15331', 'lusi_sant@yahoo.com', 'Vanessa_Tiffany_Santoso.pdf', '087885575475', 9, 'Tulips.jpg', 0, 1, 'SD Swasta Kristen 1 Penabur                                                                                                  ', 1),
-(409, '2017220', '0056649487', 'Reynard Wibowo', 'L', 'Tegal', '2005-03-31', 1, 'WNI', 'Jl. Jejeg RT 05/RW 01 Jejeg Tegal.', 'titiwibowo@gmail.com', 'Reynard_Wibowo.pdf', '083811137419', 9, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SD Spring Field', 1),
-(410, '2017223', '2043889440', 'Ruhul Jadid Al Mundzir', 'L', 'Jakarta', '2004-11-18', 1, 'WNI', 'Perumahan Vila Rizki Ilhami, Blok A1 no 26, RT 1 RW 35, kel Bojong Nangka, kec Kelapa Dua, Tangerang', 'ruhul.jadid.almundzirr@gmail.com', 'Ruhul1.pdf', '62 881-0246-36471', 9, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'PKBM Kak Seto', 1),
-(411, '2017222', '0054347179', 'Rodiah Hasan Alaydrus', 'P', 'Jakarta', '2005-04-19', 1, 'WNI', 'Perum Gardu Asri No.A4 Jl.Gardu Rt.007/003 Condet Jakarta Timur.', 'kittycake4@gmail.com', 'Rodiah_Hasan.pdf', '087783257705', 9, '96fb7d1f-fa8c-4445-9450-e63d7837c6a0.jpg', 0, 2, 'SDS Global Islamic School', 1),
-(413, '2017227', '0054141406', 'Victoria Angelica', 'P', 'Singapura', '2005-09-02', 2, 'WNI', 'JL. SEKOLAHAN INTER. I C-3/8 rt.06/09 , Sambikerep,  60217\n', 'joan.wu2@gmail.com', 'Victoria_Angelica.pdf', '085858119058', 9, 'Screenshot_6.png', 0, 1, 'SD Lentera Kasih Bali', 1),
-(414, '2019539', '0108472403', 'David Fernando', 'L', 'Serang', '2010-08-15', 5, 'WNI', 'Taman Lopang Indah Blok F8 No.19\n', 'yuliusbernadus@gmail.com', 'David_Fernando1.pdf', '081288681381', 1, 'David_Fernando.jpg', 0, 1, 'TK Harapan Bangsa, Serang - Banten', 1),
-(416, '2017228', '0052351482', 'Videlin Nikita Pracoyo', 'P', 'Jakarta', '2005-06-10', 3, 'WNI', 'Chrysocolla Utara 1 no 17 PHG - Gading Serpong\nKode Pos 15811', 'raf_siao@yahoo.com', 'Videlin_Nikita_Pracoyo.pdf', '085104677297', 9, 'Screenshot_6.png', 0, 1, 'SD Pahoa', 1),
-(417, '2017225', '0060178550', 'Vanes Tan', 'L', 'Tangerang', '2006-01-07', 5, 'WNI', 'JL MANGGA BESAR VI.C / 75 rt.02/04, Taman Sari, 11150', 'vanes@gmail.com', 'Vaness_Tan.pdf', '0811191163', 9, 'Screenshot_6.png', 0, 1, 'SD Sint Joseph', 1),
-(419, '2019542', '2146734874', 'Gabrian Nicholas Negoro', 'L', 'Jakarta', '2014-04-21', 2, 'WNI', 'Jl. Melati Indah CB/12A Harapan Indah\n', 'gunhong1912@gmail.com', 'gabrian_nicholas.pdf', '087878477454', 1, 'Gabrian_Nicholas.jpg', 0, 1, 'Anak Panah', 1),
-(420, '2017229', '0049948752', 'Vincent Delmora', 'L', 'Jakarta', '2004-09-15', 1, 'WNI', 'JL RAYA DURI KOSAMBI NO.2  rt.03/03 ,  Duri Kosambi, 11750\n', 'vincentdelmora04@gmail.com', 'Vincent_Delmora.pdf', '087886864426', 9, 'Screenshot_6.png', 0, 1, 'SDN Kebalenan', 1),
-(421, '2019544', '0139750665', 'Josiah Aidan Santoso', 'L', 'Jakarta', '2013-04-30', 2, 'WNI', 'Regency melati mas F3/37\n', 'josiahaidansantoso@gmail.com', 'Josiah1.pdf', '081283606082', 1, 'Josiah.jpg', 0, 1, 'Sekolah Athalia', 1),
-(422, '2017230', '0058455136', 'Yeremia aditya Kriscahyadi', 'L', 'Jakarta', '2005-06-27', 2, 'WNI', 'Jl.surya widuri 1 blok 3 k no.12\nSunrise garden\nJakarta 11520', 'tabitatifa@gmail.com', 'Yeremia_Aditya.pdf', '085781195540', 9, 'Screenshot_6.png', 0, 3, 'SMP Kristen BPK Penabur', 1),
-(425, '2019545', '0', 'Krishna Tejawijaya', 'L', 'Jakarta', '2013-02-06', 5, 'WNI', 'Green Lake City, Cluster Australia, Jl. Australia 1 No. 7  Tangerang Banten 15147\n', 'yunds@yahoo.com', 'Khrisna1.pdf', '081398980038', 1, 'Khrisna_Tejawijaya.jpg', 0, 2, 'Anak Panah', 1),
-(426, '2017197', '0', 'Darren wirawan', 'L', 'Jakarta', '2005-07-29', 2, 'WNI', 'apartement ruby tower 3#05. jl jendral sudirman no 47, balikpapan superblock', '12345@gmail.com', 'Darren_Wirawan.pdf', '0', 7, 'Screenshot_6.png', 0, 1, 'SD Kristen IPEKA Balikpapan', 1),
-(427, '2017198', '0054862275', 'Erlangga Maula Syahputra', 'L', 'Jakarta', '2005-05-18', 1, 'WNI', 'jln Delima Jaya rt 02/rw 08 nmer 5A', '12345@gmail.com', 'erlangga_maula.pdf', '0', 9, 'Screenshot_6.png', 0, 3, 'SDN Rempoa 1 Ciputat', 1),
-(429, '2017199', '0052715233', 'Evander Jefferey Genaro', 'L', 'Sukoharjo', '2005-01-24', 2, 'WNI', 'JL PAGEBANGAN  NO. 52 rt.03/10 ,  Jombang Wetan, 42111\n', 'evander@gmail.com', 'Evander_Jeffrey.pdf', '081296013334', 9, 'Screenshot_6.png', 0, 1, 'SD Mardi Yuana ', 1),
-(430, '2019547', '2117109144', 'Maria Stella Fortunata Satriatama', 'P', 'kediri', '2011-12-13', 3, 'WNI', 'Perumahan Puri Kedaton A-10 \n', 'eka.natalia.satriatama@gmail.com', 'maria_Stella1.pdf', '0856-0478-3891', 1, 'Maria_Stella.jpg', 0, 1, 'Anak Panah', 1),
-(432, '2017300', '189371293', 'Eliana Alfrada Eirene', 'P', 'Sukabumi', '2005-11-20', 2, 'WNI', 'Perum Dasana Indah Blok RA 4, No. 8-9, Kelapa Dua, Tangerang', 'davidapriandy@gmail.com', 'Eliana_Alfreda.pdf', '0', 9, 'Eliana_Alfreda.jpeg', 0, 1, 'SD Dian Harapan', 1),
-(433, '2017200', '0053898569', 'Gerald Pascalis Wicoady', 'L', 'Makasar', '2005-03-26', 3, 'WNI', ' JL YOS SUDARSO RUKO NO.300 A7 rt.04/05 , Tabaringan, 90165\n', 'nervelgravie@gmail.com', 'Contoh.pdf', '082190667766', 9, 'Screenshot_6.png', 1, 3, 'SD Zion GKKA-Up', 1),
-(435, '2017201', '0052590668', 'Gloria Angelina', 'P', 'Singapura', '2005-09-02', 2, 'WNI', 'JL. SEKOLAHAN INTER. I C-3/8 rt.06/09 , Sambikerep, 60217', 'joan.wu2@gmail.com', 'Gloria_Angelina.pdf', '085858119058', 9, 'Screenshot_6.png', 0, 1, 'SD Lentera Kasih Bali', 1),
-(437, '2019549', '0', 'Naradipha A. Sasongko', 'L', 'Jakarta', '2011-11-04', 1, 'WNI', 'Pondok Dukuh Indah 5 No. 14, Jakarta Timur\n', 'diah.arimurti@yahoo.com', 'Naradhipa1.pdf', '0811985432', 1, 'Naradipha_A_Sasangho.jpg', 0, 2, 'TK Mentari Montessori', 1),
-(439, '2019550', '0122557751', 'Raafi Aqila Zein', 'L', 'Jakarta', '2012-09-15', 1, 'WNI', 'Perum Nuansa Asri Cinangka Blok B10 Jl pendidikan cinangka sawangan\n', 'raafizein123@gmail.com', 'Raafi1.pdf', '081210833305', 1, 'Raali_Aqila.jpg', 0, 2, 'Anak Panah', 1),
-(440, '2018532', '2126421861', 'Maximilian Aldrich Mangiwa', 'L', 'Jakarta', '2012-10-04', 3, 'WNI', 'Kavling Kelinci 76 No. 22 Jl. Kelinci RT007/RW006 Jakarta Selatan 12630', 'aldrichmangiwa@gmail.com', 'maximillian.pdf', '081282151618', 2, 'tidur-dengan-kucing1.jpg', 0, 1, 'SD Strada Wiyatasana', 1),
-(441, '2019551', '2138293538', 'Richelle Everly Thu', 'P', 'Jakarta', '2013-08-13', 5, 'WNI', 'Jl. Duri mas 4a blok P no.340 Duri kepa\n', 'wwin94713@gmail.com', 'Richelle_everly.pdf', '12121212121', 1, 'Penguins.jpg', 0, 1, 'Anak Panah', 1),
-(442, '2018533', '0125448628', 'Raion Judah Ong', 'L', 'Tangerang Selatan', '2012-06-16', 2, 'WNI', 'Cimanggis RT003/RW002 Kel. Cipayung Kec. Ciputat Kota Tangerang Selatan 15411', 'suguy11@yahoo.co.id', 'Raion.pdf', '081311230305', 2, 'Raion_Judah_Ong.jpg', 0, 2, 'PKBM Anak Panah HS', 1),
-(443, '2018534', '2117527070', 'Steven Gunawan', 'L', 'Jakarta', '2011-12-30', 5, 'WNI', 'Jl. Darussalam Raya, Kompleks Griya Indah No.55 ', 'yudhi@gmail.com', 'steven_gunawan.pdf', '085217355259', 2, 'Steven_Gunawan.jpg', 0, 2, ' SDN 66', 1),
-(444, '2018531', '0122865914', 'Mahitala Darma Larasati', 'P', 'Kediri', '2012-08-02', 2, 'WNI', 'Villa Mutiara Serpong Jl. Cermai Blok D1 No.54 Pondok Jagung Timur Kec. Serpong Utara Tangerang Selatan 15326', 'mahitala.larasati@gmail.com', 'mahitala.pdf', '08118859399', 2, 'Mahitala.jpg', 0, 1, 'PKBM Anak Panah HS', 1),
-(445, '2018530', '2128579780', 'Ludwig Amazio Rumengan', 'L', 'Manado', '2012-04-23', 2, 'WNI', 'Apartemen Gading Nias, tower Emerald, Jl. Pegangsaan II no 3', 'ludwig.rumengan@gmail.com', 'ludwig.pdf', '081399058980', 2, 'Ludwig_Amazio.jpg', 0, 2, 'PKBM Anak Panah HS', 1),
-(446, '2019706', '0048081062', 'Nathanael Liantorin Chahyadi ', 'L', 'Jakarta', '2004-08-17', 2, 'WNI', 'Alamat Jalan  : JL H MALI rt.07/01 Desa / Kelurahan : Duri Kosambi Kode Pos  : 11750\n', 'rinas.nathan@gmail.com', 'Nathanael_Liantorin1.pdf', '0816750889', 10, 'Nathanael_Liantorin.jpeg', 0, 1, 'Anak Panah', 1),
-(447, '2020738', '248', 'Leica Madriani', 'P', 'Jakarta', '2004-03-02', 1, 'WNI', 'Kp Sanggrahan, Rt 10/03, Kembangan, Jakarta Barat', '12345@gmail.com', 'Leica.pdf', '0', 11, 'Screenshot_6.png', 0, 1, 'SMP Yaspen Tugu Ibu 1 Depok', 1),
-(448, '2019678', '2055050894', 'Lucas Salvacio Husada', 'L', 'Delft', '2006-10-25', 2, 'WNI', 'Jl Cempaka Putih Barat 2H/7E, Cempaka Putih, Jakarta Pusat', '12345@gmail.com', 'lucas_salvacio_husada.pdf', '0', 10, 'Screenshot_6.png', 0, 2, 'PKBM Alfa Omega', 1),
-(449, '2019705', '0049939476', 'Nabila Putri Kusbiantoro ', 'P', 'Jakarta', '2004-03-20', 1, 'WNI', 'Alamat Jalan  : JL. KARYA BAKTI rt.08/03 Desa / Kelurahan : Srengseng\n', 'nursukma29.ns@gmail.com', 'nabila1.pdf', '0811508638', 11, 'Lighthouse1.jpg', 0, 1, 'Anak Panah', 1),
-(450, '2019677', '0040518769', 'Luana Intan Rayisha Putri', 'P', 'Semarang', '2004-06-23', 1, 'WNI', 'Citra Indah Bukit Agave I-21/5, Bogor, Jawa Barat', '12345@gmail.com', 'Contoh.pdf', '0', 10, 'Luana_Intan.jpeg', 0, 1, 'SMP Adzkia Islamic School', 1),
-(451, '2019712', '0049139403', 'Ray Hambali ', 'L', 'Tangerang', '2004-05-04', 3, 'WNI', 'Alamat Jalan  : JL.S.W PRANOTO NO.11.R rt.11/03\n', '123456@gmail.com', NULL, '12121212121', 10, 'Ray_Hambali.jpeg', 0, 1, 'SMP Setia Bakhti', 1),
-(452, '2019675', '0032590719', 'Levin ', 'L', 'Jakarta', '2003-05-07', 3, 'WNI', 'JALAN CHALCEDONY TIMUR 6 NOMOR 8  rt.01/06, Kelapa Dua, Tangerang\n', 'levingregorius1@gmail.com', 'levin.pdf', '081806795608', 11, 'Levin.jpeg', 0, 2, 'SMP Pahoa', 1),
-(453, '2018529', '0127147870', 'Kirana Putri Anindita', 'P', 'Depok', '2012-03-08', 1, 'WNI', 'Taman Manggis Indah Blok L No. 1 Depok Timur Depok Jawa Barat 16415', 'kirana.niy@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '082111910117', 2, 'Kirana.jpg', 0, 3, 'TK Cita Persada', 1),
-(455, '2017209', '0043566185', 'Matthew Pratama Sutanto', 'L', 'Canada', '2004-10-08', 3, 'WNI', 'Jl. Duri Kencana Raya/13 RT 005/007', '0@gmail.com', 'Matthew_Pratama_Sutanto.pdf', '081280857919', 9, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SDS Pilar Bangsa', 1),
-(456, '2018527', '2115970648', 'Kevin Audric Rajata Elfrankarunya Girsang', 'L', 'Medan', '2011-10-06', 2, 'WNI', 'Villa Bulurukeng Indah Blok D4 Jl. Batu Tambung Pai Biringkanaya Makassar 90243', 'kevgirsang2003@gmail.com', 'kevin_audric.pdf', '081361700429', 2, 'Kevin_Audric_Girsang.jpg', 0, 1, 'PKBM Anak Panah HS', 1),
-(458, '2018525', '0125608786', 'Humayra Cetta Helsyanto', 'P', 'Jakarta', '2012-07-28', 1, 'WNI', 'Jl. Raden Sanim Grand Putra Mandiri Blok E11 Depok 16426', 'dedyhelsyan@gmail.com', 'humayra.pdf', '081290744894', 2, 'Humayra.jpg', 0, 2, 'PKBM Anak Panah HS', 6),
-(459, '2019653', '0043659352', 'Banu Agil', 'L', 'Jakarta', '2004-01-02', 1, 'WNI', 'GD Peluru Blok D/118 RT 001/003', 'banu_brothers@ymail.com', 'Banu_Agil.pdf', '081316450044', 10, 'Banu_Agil.jpeg', 0, 1, 'SMP Jakarta Islamic School', 1),
-(460, '2019654', '2046506924', 'Banu Wafi', 'L', 'Jakarta', '2020-03-18', 1, 'WNI', 'GD Peluru Blok D/118 RT/RW 001/003', 'banu_brothers@ymail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '08551091090', 11, 'Banu_Wafi.jpeg', 0, 2, 'SMP Jakarta Islamic School', 1),
-(461, '2019720', '0033433812', 'Sola Graciano ', 'L', 'Jakarta', '2003-03-19', 2, 'WNI', 'Alamat Jalan  : JALAN BINTARO PERMAI GG PONGTIKU NOMOR 2 rt.07/09\n', 'stefanus@gmail.com', NULL, '12121212121', 11, 'Penguins.jpg', 0, 1, 'Anak Panah', 1),
-(462, '2019655', '0037845929', 'Blessando Jeremia Chrishot Hasonangan Manalu', 'L', 'Jakarta', '2003-09-14', 1, 'WNI', 'Jl. H. Rijin No.5 RT 1/11 Tugu Kelapa Dua Cimanggis Depok', 'blessando.manalu@gmail.com', 'blesando.pdf', '081326560935', 10, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'PKBM Mashaghi', 1),
-(463, '2019658', '0048862639', 'Christoper Eleazar Aritonang', 'L', 'Tangerang', '2004-06-14', 2, 'WNI', ' PURI SERPONG 1 BLOK G 1 NOMOR 33 rt.05/02	\n', 'kiki.eleazar45@gmail.com', 'Christopher_Eleazar.pdf', '083819177081', 11, 'Christopher_Eleazar.jpeg', 0, 1, 'SMP Erenos, Kota Tangerang Selatan', 1),
-(464, '2019659', '0045069310', 'Darlane Sharon Princessa', 'P', 'Jakarta', '2004-09-29', 2, 'WNI', 'Jl. Prof. Dr. Latumenten V no.23 RT/RW 012/005', 'ekopriyono2000id@yahoo.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '081283770221', 11, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 2, 'BPK Penabur', 1),
-(465, '2019657', '0041771143', 'Christopher Andrew Steveson', 'L', 'Jakarta', '2004-06-13', 3, 'WNI', 'TAMAN MODERN BLOK G NOMOR 4 DAN 18 rt.14/06	\n', '573fen@gmail.com', 'Scan_Museum_Anatomi.pdf', '081218614548', 10, 'Tulips.jpg', 0, 1, 'SMP Pahoa', 1),
-(466, '2019726', '2049216092', 'Cecilia Miracella Setiawan', 'P', 'Jakarta', '2004-10-13', 2, 'WNI', 'Villa Kapuk Mas blok h no. 10-12 pejaringan, jakut	\n', 'ceciliamiracella1310@gmail.com', 'Cecilia_Miracella1.pdf', '081288757584', 11, 'Cecilia_Miracella.png', 0, 1, 'SMP Mutiara Bangsa 3', 1),
-(467, '2019722', '0042566308', 'Tristan Alif Naufal ', 'L', 'Jakarta', '2004-12-12', 1, 'WNI', 'Alamat Jalan  : JL RAYA KODAM NO.7 BINTARO rt.05/04\n', '123456@gmail.com', 'tristan.pdf', '081808880530', 11, 'Lighthouse.jpg', 0, 1, 'Mashaghi', 1),
-(468, '2019676', '0042591661', 'Livia Amelia', 'P', 'Jakarta', '2004-08-23', 3, 'WNI', 'JL. CHALDEONY TIMUR 5 NO.8 rt.01/08 Kelapa Dua, Tangerang', 'liviaamelia2404@gmail.com', 'Livia_Amelia.pdf', '085778269582', 11, 'Livia_Amelia.jpeg', 0, 3, 'SMP Pahoa', 1),
-(469, '2019685', '2044893880', 'Maria Yehezkiel Hedwig Indriyasari', 'P', 'Bekasi', '2004-12-23', 3, 'WNI', 'PERUM. LIA JL. LIA 5 BLOK A/5 NO.9  rt.03/15, Bekasi', '12345@gmail.com', 'maria_yehez.pdf', '0', 11, 'Screenshot_6.png', 0, 1, 'SMP Strada', 1),
-(470, '2019723', '0037483090', 'William Asido Hamonangan S.', 'L', 'Jakarta', '2003-10-23', 2, 'WNI', 'Alamat Jalan  : BSD KENCANA LOKA BLOK K.5/18 SEKT.XII rt.06/14\n', 'williamsitumeang14995@gmail.com', NULL, '08129635687', 11, 'Lighthouse.jpg', 0, 1, 'Anak Panah', 1),
-(471, '2019680', '0056003896', 'M Girhan Sardani', 'L', 'Ternate', '2005-04-03', 1, 'WNI', 'LINGK. CEMPAKA PUTIH  rt.03/04, Santiong, Ternate, 97722\n', '12345@gmail.com', 'Contoh.pdf', '0', 11, 'Screenshot_6.png', 0, 1, 'SMPN 18 Malang', 5),
-(472, '2019689', '0039068699', 'Michael Chen ', 'L', 'Bandung', '2003-03-16', 2, 'WNI', 'TAMAN KOPO INDAH 3 BLOK D 1 NOMOR 108 rt.04/16, Bandung, Jawa Barat\n', 'icchen808@gmail.com', 'michael_chen.pdf', '082127451520', 11, 'Screenshot_6.png', 0, 1, 'SMP Bina Bakti Plus', 1),
-(473, '2019701', '0049631643', 'Muhammad Rafif Taqi', 'L', 'Jakarta', '2004-10-27', 1, 'WNI', 'JALAN MANUNGGAL 2 NOMOR 312 rt.11/06, Cipinang Melayu, Jakarta Utara', 'Mutiara.eliza312@yahoo.com', 'rafif_taqi.pdf', '087786051527', 11, 'Muhammad_Rafif_Taqi.jpeg', 0, 2, 'PKBM Persada', 1),
-(474, '2019682', '2029974366', 'Made Dhaneswari Kinarya Adhi', 'P', 'Jakarta', '2002-09-28', 4, 'WNI', 'PERUM NERADA BLOK B 8 NOMOR 11 rt.02/10,Ciputat, Tangerang Selatan', '12345@gmail.com', 'Contoh.pdf', '0', 10, 'Screenshot_6.png', 0, 2, 'SMP Tarakanita 1', 1),
-(475, '2019725', '0025792910', 'Yohanes Immanuel Satya Pradana ', 'L', 'Magelang', '2002-12-20', 3, 'WNI', 'Alamat Jalan  : JATINEGARA INDAH BLOK AC NOMOR 33 rt.15/12\n', 'yust.heru@gmail.com', 'Yohanes_imanuele.pdf', '082141688359', 11, 'Yohanes_Imanuel.jpeg', 0, 1, 'SMPN 1 Tangerang', 1),
-(476, '2019728', '0037064420', 'Marc Maurice Laoh', 'L', 'Jakarta', '2003-01-05', 1, 'WNI', 'Jl Lempuyang VI E 24/25\nKomp Mega Cinere blok L\nCinere - Depok', 'marcmaurice490@gmail.com', 'Marc_Maurice_Laoh.pdf', '0881024542069', 11, 'Marc_Maurice.jpeg', 0, 1, 'SMP Madania', 1),
-(477, '2019686', '0045992318', 'Marvel Shallom Isaiah', 'L', 'Jakarta', '2004-07-28', 2, 'WNI', 'Alamat Jalan  : JL PULAU TIDUNG IV BLOK B-3/6 rt.18/09, Jakarta Barat', 'marvel@gmail.com', 'marvel.pdf', '085724086252', 11, 'Screenshot_6.png', 0, 2, 'PKBM Anak Panah', 1),
-(478, '2019683', '0046348657', 'Marcella Erin Damayanti', 'P', 'Jakarta', '2004-01-12', 3, 'WNI', 'KOMPLEK SEKNEG NOMOR 39 A rt.08/11, Kebayoran Lama, Jakarta Selatan\n', 'ignasia_maya@yahoo.co.id', 'marcela_erin.pdf', '08558116007', 11, 'Screenshot_6.png', 0, 2, 'PKBM Anak Panah', 1),
-(479, '2019702', '0041097764', 'Holiness Yeshua Inosky', 'L', 'Tangerang', '2004-10-20', 2, 'WNI', 'JL. Dato Tonggara RT RW 007/011, Kramat Jati, Jakarta Timur', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '087838682778', 11, 'Holliness.jpeg', 0, 7, 'PKBM Alfa Omega', 1),
-(480, '2019700', '0', 'Muhammad Nashiruddin Alalbani', 'L', 'Surakarta', '2002-07-04', 1, 'WNI', 'Jl Panorama No 7 Rt 03/05 Sidang Barang, Bogor', 'aaaldeo444@gmail.com', 'Contoh.pdf', '087835064836', 11, 'Screenshot_6.png', 0, 2, 'PKBM Anak Panah', 1),
-(481, '2019724', '0041296900', 'Yani Mulyani ', 'P', 'Tangerang', '2004-06-04', 1, 'WNI', 'Alamat Jalan  : TAMAN ELANG BLOK M NOMOR 25 rt.03/10\n', '123456@gmail.com', NULL, '12121212121', 10, 'Penguins.jpg', 0, 3, 'SMPN 1 Tangerang', 1),
-(482, '2019670', '2044219531', 'Ignatius Januar', 'L', 'Bekasi', '2004-01-11', 3, 'WNI', 'COMMERCIAL 3 BLOK B.1 NO 1-1A SEKTOR 1,5 BSD CITY	\n', '12345@gmail.com', 'Ignatius_Januar.pdf', '12345678', 11, 'Ignatius_Januar.jpeg', 0, 0, '0', 1),
-(483, '2019665', '0040831020', 'Felicita Odelia Louise Tambunan', 'P', 'Jakarta', '2004-10-30', 1, 'WNI', 'Jl. Kemuning Rt.002/004 Kel. Utan Kayu Selatan', 'bstambunan@yahoo.com', 'Felicita_Odelia.pdf', '08161950461', 10, 'Felicita_Odelia.jpeg', 0, 1, 'PKBM Homeschooling Tunas Karya Bangsa', 1),
-(484, '2019681', '2043705211', 'M. Agung Al-Ikhsan', 'L', 'Palembang', '2004-08-01', 1, 'WNI', 'KOMPLEK PASUNDAN PERMAI BLOK D 23 rt.01/02 , Kalidoni, Sumatera Selatan\n', 'hermansyah7576@gmail.com', 'M_agung_icksan.pdf', '081319057211', 10, 'M._Agung_Al_Ikhsan_.jpeg', 0, 2, 'PKBM Anak Panah', 1),
-(485, '2018523', '2115541383', 'Fawziya Khairunnisa Taqiyya', 'P', 'Tangerang', '2011-08-19', 1, 'WNI', 'Jl. Pondok Pinang 3 RT003/RW002 No. 51A Pondok Pinang Kebayoran Lama Jakarta Selatan', 'fawziya.19@gmail.com', 'fawziya.pdf', '08170017990', 2, 'Fawziya.jpg', 0, 2, 'PKBM Anak Panah', 1),
-(486, '2018524', '0103240974', 'Firdaus Catalina Azzahra', 'P', 'Malang', '2010-04-03', 1, 'WNI', 'Forest Hill A6 /12B, Citraland BSB City, Kelurahan Pesantren, Kecamatan Mijen, Kota Semarang, Jawa Tengah', 'azzahrafirdauscatalina@gmail.com', 'firdaus_catlina.pdf', '08977720002', 2, 'Firdaus_Catalina.jpg', 0, 1, 'PKBM Anak Panah', 1),
-(487, '2019729', '0044780946', 'Zulaikha Yaffa', 'L', 'Depok', '2004-03-31', 1, 'WNI', 'Bungur Emerald Town House blok A1 Jl Bungur 1 no.5 Rt 02 Rw 08, Kukusan Beji Depok 16425', 'evida.kartini@gmail.com', 'zulaika1.pdf', '021-77207342', 11, 'WhatsApp_Image_2020-04-22_at_11.05_.24_1.jpeg', 0, 1, 'Anak Panah', 1),
-(488, '2019674', '0033763549', 'Katharina Ailyn Wardojo', 'P', 'Jakarta', '2003-11-10', 1, 'WNI', 'Jelambar Fajar Jl.1 no.56 AL RT/RW 008/017', 'linantoivonne@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '087875172377', 10, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 2, 'PKBM Anak Panah', 1),
-(490, '2018522', '2122771142', 'Fadhilah', 'L', 'Jambi', '2012-03-08', 1, 'WNI', 'Cluster Virginia Village - Norton 09 Jl. Boulevard Gading Raya Serpong Kec. Kelapa Dua Kel. Curug Sangereng Tangerang Selatan Banten 15810', 'hermansyah7576@gmail.com', 'Fadhilah.pdf', '081283249733', 2, 'Fadillah.jpg', 0, 3, 'PKBM Anak Panah HS', 1),
-(491, '2017255', '0006213931', 'Geny Grecia', 'P', 'Jakarta', '2000-05-29', 3, 'WNI', 'Taman Cibodas JL Soka VI Blok J 1 no.15 RT/RW 09/07', 'bongoilang@gmail.com', 'genygrecia.pdf', '085591139836', 15, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 3, 'SMP Fajar Indah', 1),
-(492, '2017254', '2027774914', 'Gabriella Giselle', 'P', 'Jakarta', '2002-06-11', 2, 'WNI', 'Tmn. KB. Jeruk Blok U 9/10 004/006 Srengseng Kembangan, Jakarta Barat, 11630', '0@gmail.com', 'gabriela.pdf', '081333578888', 14, 'Gabriella_Giselle.jpeg', 0, 1, 'SMP Stella Maris', 1),
-(493, '2017274', '0015918320', 'Moh. Aqiel Aslam Assifa', 'L', 'Serang', '2001-07-31', 1, 'WNI', 'JL. Let U Sumadi No.10 RT 001/016 Kel. Sumur Pecung, Serang', 'rratnairmawati@gmail.com', 'moh_aqiel.pdf', '085283217646', 15, 'WhatsApp_Image_2020-03-19_at_11.17_.02_AM_.jpeg', 0, 1, 'SMPN 7 Kota Serang', 1),
-(494, '2017276', '0014554957', 'Muhammad Ramadhan Adzhar Somantri', 'L', 'Bandung', '2001-12-06', 1, 'WNI', 'Jl. Labu IV No.16 RT/RW 03/03 Cibodasari, Tangerang', 'indiramarthanangameka@gmail.com', 'MUHAMMAD_RAMADHAN_ADZHAR_SOMANTRI.pdf', '081318707230', 15, 'WhatsApp_Image_2020-03-20_at_11.23_.35_AM_.jpeg', 0, 1, 'SMPN 19 Tangerang', 1),
-(495, '2020737', '0092159898', 'Habibie Delumunata', 'L', 'Bengkulu', '2009-12-25', 1, 'WNI', 'Duri Kosambi RT 008 RW 005  Desa/Kelurahan Duri Kosambi Kecamatan  Cengkareng, Kota Jakarta Barat - DKI Jakarta 11750', 'lusi.delumunata@gmail.com', 'Habibie_Akta-merged.pdf', '082286709239', 4, 'Habibie_Delumunata.jpeg', 0, 1, '0', 1),
-(496, '2019727', '2037913266', 'Jessica Clarissa Lie ', 'P', 'Jakarta', '2003-06-24', 2, 'WNI', 'sektor 6 jl kelapa hibrida utara blok GC 3 no 7.tangerang gading serpong 15810.\n', 'jessicalie716@gmail.com', 'jessica_lie.pdf', '08119071888', 13, 'jessica_lie.jpg', 0, 2, '0', 1),
-(497, '2016040', '0041999368', 'Ron Jatiman Castillo', 'L', 'California', '2006-12-31', 1, 'WNI', 'Jl Kangkung No 59, RT 14/11 Grogol Selatan, Jakarta Selatan', 'yuliwidiati@yahoo.com', 'Contoh.pdf', '0818410476', 17, 'Screenshot_6.png', 0, 1, 'PKBM Anak Panah', 1),
-(498, '2016021', '0014554546', 'Eugenia Amanda Cherise', 'P', 'Tangerang', '2001-11-12', 2, 'WNI', 'JL Kelapa Sawit XI BG. 7 NO.3 RT RW 009/003', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SMP SWASTA PAHOA', 1),
-(499, '2016034', '0052351410', ' Mega Indira Rajan Putri', 'P', 'Medan', '2005-03-01', 4, 'WNI', 'Citra Raya , Cikupa Cluster Pesona Atlantis, Blok L16/17\n', 'leemegaa95@gmail.com', 'Contoh.pdf', '081212091367', 17, 'Screenshot_6.png', 0, 1, 'PKBM Anak Panah', 1),
-(500, '2016014', '0046662791', 'Christabella Martosoetjipto', 'P', 'Jakarta', '2004-11-12', 5, 'WNI', 'Jl. Kelapa Lilin Utara II Blok DF 4/3', 'ekopriyono2000id@yahoo.com', NULL, '0812837700221', 18, 'Screenshot_3.png', 0, 1, 'Anak Panah', 1),
-(501, '2016018', '1741254', 'Dede Lestari', 'P', 'Jakarta', '2006-12-02', 1, 'WNI', 'Kp. Panghalan', '12345@gmail.com', 'Contoh.pdf', '0', 18, 'Screenshot_6.png', 0, 2, 'PKBM Anak Panah', 1),
-(502, '2016019', '0042091075', 'Dominick Xavier Amadeus Soureka', 'L', 'Bogor', '2004-09-14', 3, 'WNI', 'Komplek Griya Loka BSD SKTR 1.4 Jl. Cempaka 6 Blok H2/54 RT004/RW005 Rawa Buntu Serpong Tangerang Selatan 15318', '12345689@gmail.com', 'Prediksi_UN_EKONOMI.pdf', '08127006639', 17, 'tidur-dengan-kucing.jpg', 0, 1, 'PKBM Anak Panah HS', 1),
-(503, '2016016', '3055691864', 'Daffa Ichsan Albana', 'L', 'Depok', '2005-04-20', 1, 'WNI', 'Lingkungan Cibuntu, Rt 004/008, Kertasari, Ciamis', 'yudistiravb@gmail.com', 'Contoh.pdf', '081220895093', 16, 'Screenshot_6.png', 0, 1, 'PKBM Anak Panah', 1),
-(504, '2016038', '0072430385', 'Patrick Azariel Wajiya', 'L', 'Jakarta', '2007-03-18', 1, 'WNI', 'Agung Permai III Blok C-10/12A, Sunter Agung, Jakarta Utara', 'dr.candra.wijaya@gmail.com', 'Contoh.pdf', '08158139206', 16, 'Screenshot_6.png', 0, 2, 'PKBM Anak Panah', 1),
-(505, '2016022', '0017098693', 'Evangeline Geovana', 'P', 'Jakarta', '2001-03-06', 3, 'WNI', 'Perumahan Scientia Garden. Cluster Newton, Jl. Newton Barat 2, Blok NB2/07, Gading Serpong, Tangerang\n', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 2, 'SMP Kristen 4 Penabur Jakarta', 1),
-(506, '2016028', '0050451955', 'Graceya Dana Sugi', 'P', 'Tangerang', '2005-02-11', 5, 'WNI', 'Jl. Beryl Timur 1/8 RT 1/17 Pakulonan Barat.', 'grakha88@yahoo.com', NULL, '08111730080', 17, 'Screenshot_7.png', 0, 2, 'Anak Panah', 1),
-(507, '2016053', '0044752259', 'Abisat Paskalis', 'L', 'Sidoarjo', '2004-12-25', 2, 'WNI', 'Griya Kartika B-43 RT018/RW005 Kel. Cemandi Kec. Sedati Kab. Sidoarjo Jawa Timur 61253', '12345689@gmail.com', 'Prediksi_UN_EKONOMI.pdf', '123456789', 18, 'tidur-dengan-kucing.jpg', 0, 2, 'SDN Cemandi 267', 1),
-(508, '2016006', '0042591561', 'Alvin Jovan Surjana', 'L', 'Tangerang', '2004-05-05', 5, 'WNI', '', '12345689@gmail.com', 'Prediksi_UN_EKONOMI.pdf', '123456789', 16, 'tidur-dengan-kucing.jpg', 0, 1, 'SD Swasta Pahoa', 1),
-(509, '2016033', '0041780463', 'Lucia Monica Angelyn', 'P', 'Jakarta', '2004-08-21', 3, 'WNI', 'Jl. Pademangan Timur VIII RT007/RW010 Kel. Pademangan Timur Jakarta Utara 14410', 'luciamonica21@gmail.com', 'Prediksi_UN_EKONOMI.pdf', '087782650990', 17, 'tidur-dengan-kucing.jpg', 0, 1, 'SD Swasta Vlanney', 1),
-(510, '2016004', '0042499461', 'Aisha Bella Ivan Hadar', 'P', 'Jakarta', '2004-10-19', 1, 'WNI', 'Teratai XIII Blok P8 Tanjung Barat Indah RT006/RW006 Kel. Rawajati Jakarta Selatan 12750', 'eviaryani6@yahoo.co.id', 'Prediksi_UN_EKONOMI.pdf', '082281819919', 17, 'tidur-dengan-kucing.jpg', 0, 1, 'PKBM Anak Panah HS', 1),
-(511, '2016012', '123456789', 'Bintang Hidayat Putra', 'L', 'Tangerang', '2004-11-10', 1, 'WNI', 'Jl. Flourite Timur No. 18 Gd. Serpong', '12345689@gmail.com', 'Prediksi_UN_EKONOMI.pdf', '123456789', 16, 'tidur-dengan-kucing.jpg', 0, 1, 'PKBM Anak Panah HS', 1),
-(512, '2016042', '0040673811', 'Yervant Vikesha', 'L', 'Jakarta', '2004-08-06', 3, 'WNI', 'Poris Indah Blok F7/39 RT013/RW001 Cipondoh Indah Tangerang 15148', 'ramelan29@yahoo.com', 'Prediksi_UN_EKONOMI.pdf', '081510905079', 17, 'tidur-dengan-kucing.jpg', 0, 1, 'PKBM Anak Panah HS', 1),
-(514, '2016003', '0043132006', 'Afifah Ahmad', 'P', 'Timika', '2004-06-08', 1, 'WNI', 'Jl. Panorama No.7 Bogor Barat RT003/RW005 Kel. Duri Selatan Jakarta Barat 11270', 'tammycahyo@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '081281283111', 17, 'tidur-dengan-kucing.jpg', 0, 1, 'SD YPJ Tembagapura', 1),
-(515, '2016007', '0041299406', 'Amannia Wika Ridho Putri', 'P', 'Karang Anyar', '2004-12-20', 1, 'WNI', 'Citra Raya Blok L.2/19 RT017/RW002 Kel. Dukuh Tangerang 15710', 'anto.kasw@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '081510000343', 17, 'tidur-dengan-kucing.jpg', 0, 2, 'SD Swasta Citra Islami', 1),
-(517, '2016005', '0003141808', 'Al Hafizh Ramadhan', 'L', 'Jakarta', '2000-12-11', 1, 'WNI', 'CITRA INDAH BUKTI AGAVE BLOK 1-25 NO. 09 RT 007 RW 009 DESA/KELURAHAN  SUKAMAJU KECAMATAN JONGGOL, BOGOR- JAWA BARAT 16830\n', '12345@gmail.com', 'Scan_Museum_Anatomi1.pdf', '0', 18, NULL, 0, 2, 'SMP Cikal Harapan II, Kab. Bogor', 1),
-(518, '2016025', '0012175601', 'Gayatri Candra Kusuma', 'P', 'Jakarta', '2001-05-22', 1, 'WNI', 'Jl. KH. Mukmin RT 003/009, Belendung, Benda, Tangerang Banten, 15123\n', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SMP 7 Tangerang', 1),
-(519, '2016002', '0015815399', 'Adnanuzzaki Arif Putra', 'L', 'Tangerang', '2001-07-21', 1, 'WNI', 'Komp. Taman Kedaung Jl. Mawar XIV Blok D-7/2 RT 005 RW 007 Desa/Kelurahan Kedaung Kecamatan Pamulang,  Kota Tangerang - Banten 15415', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '0', 18, 'Tulips.jpg', 0, 2, 'SMP Islam Al Syukro Universal', 1),
-(520, '2016008', '0', 'Ammarsyahdi Alhayandi Hamid', 'L', 'Jakarta', '2000-09-18', 1, 'WNI', 'Bumi Pesanggrahan Mas Blok K.1 RT 007 RW 008 Desa/Kelurahan Pesanggrahan, Jakarta Selatan - DKI Jakarta', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '12345678', 18, 'Tulips.jpg', 0, 1, '0', 1),
-(521, '2016039', '0019305568', 'Reyhan Amalatu Muskita', 'L', 'Tangerang', '2001-11-20', 3, 'WNI', 'River park GH. 1/9 Binjay RT 005 RW 002 Kelurahan/Desa JR. Mangu Barat Kecamatan Pondok Aren, Tangerang Selatan - Banten 15223', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '12345678', 18, 'Tulips.jpg', 0, 1, 'SMP Swasta Syafana Islamic School', 1),
-(522, '2016027', '9998589161', 'Gracea Linawati Sanjaya', 'P', 'Jakarta', '1999-11-24', 2, 'WNI', 'Jl. H Sanusi GG H. Rabbi RT/RW 2/13 Duri Kosambi, Jakarta Barat', 'febriyanti.sap@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SMP Yapindo', 1),
-(523, '2016044', '0012552590', 'Andra Maulana Syakur', 'L', 'Bekasi', '2001-10-26', 1, 'WNI', 'Perum Telaga Harapan blok D2 no.6 Cikarang Barat Kab.Bekasi Jawa Barat 17520 Indonesia\n', 'abdsyukur16@gmail.com', 'Scan_Museum_Anatomi.pdf', '0895349107748', 18, 'Tulips.jpg', 0, 1, 'SMP Islam Al- Munawwaroh, Cikarang Barat', 1),
-(524, '2016026', '0019167649', 'Grace Marlane', 'L', 'Jatibening Estate C-40 No.17', '2002-02-05', 2, 'WNI', 'Taman Sabilano. 9 Jl. Ratna Jatikramat, Jatiasih, Bekasi, 17421\n', 'gracemarlenepasaribu@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0811951150', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 3, 'PKBM Negeri 4 Tomang', 1),
-(525, '2016011', '0014436650', 'Arthur Audrian Natawirja', 'L', 'Jakarta', '2001-01-14', 2, 'WNI', 'Bogor Nirwana Residence Blok I No. 36 RT 001 RW 010 Kecamatan Kota Bogor Selatan, Kota Bogor - Jawa Barat 16135', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '0', 18, 'Tulips.jpg', 0, 3, 'SMP Kesatuan, Bogor', 1),
-(526, '2016017', '0021055174', 'Dea Paskah Jesie Erika Munaiseche', 'P', 'Manado', '2002-01-12', 2, 'WNI', 'Citraland Lingkungan III RT - RW 003 Desa/Kelurahan Winangun Satu Kecamatan Malalayang, Kota Manado - Sulawesi Utara', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '12345678', 18, 'Tulips.jpg', 0, 1, 'SMP Advent 1 Tikala', 1),
-(527, '2016029', '0028899749', 'Ikra Zaki Fadilah', 'L', 'Jakarta', '2000-12-13', 1, 'WNI', 'JL. Ros No.1 B RT RW  012/003 Cipete Selatan, Cilandak', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia1.pdf', '0', 18, NULL, 0, 2, 'SMP Swasta Bina Nusantara Serpong', 1),
-(528, '2016013', '0013878688', 'Catrice Kesley Kosasi', 'P', 'Medan', '2001-05-14', 5, 'WNI', 'Jl. Crystal Timur 2 No.15 RT 001 RW 018 Desa/Kelurahan Pakulonan Barat Kecamatan Kelapa Dua, Tangerang - Banten 15812', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '0', 18, 'Tulips.jpg', 0, 2, 'SMP Pahoa', 1),
-(529, '2016030', '0013637386', 'Jane Levina Suhendra', 'P', 'Jakarta', '2001-11-07', 2, 'WNI', 'Jl. Veteran 1 RT/RW 003/005', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SMAN 19 Jakarta', 1),
-(530, '2016015', '0022334375', 'Christian Tombiling', 'L', 'Denpasar', '2002-04-02', 2, 'WNI', 'Jaga X Desa/Kelurahan  Matungkas, Minahasa Utara  - Sulawesi Utara', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '0', 18, 'Tulips.jpg', 0, 1, 'SMP Negeri 1 Manado', 1),
-(531, '2016047', '9966492777', 'Jovin Halim', 'L', 'Jakarta', '1996-06-01', 2, 'WNI', 'Foresta Cluster Naturale M.3 No.10 BSD City RT RW  001/003 Pagedangan Tangerang Banten', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SMP Santa Ursula Bandung', 1),
-(532, '2016048', '0001243314', 'Benedicto Matthew Watulingas', 'L', 'Tangerang', '2020-03-20', 2, 'WNI', 'Jl. Bukit III No. 3 RT 005 RW 012 Desa/Kelurahan Mulyaharja Kecamatan Kota Bogor, Kota Bogor - Jawa Barat 16132', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '12345678', 18, 'Tulips.jpg', 0, 1, 'SMP Taruna Bangsa', 1),
-(533, '2016031', '0016098449', 'Kezia Dinara', 'P', 'Bandung', '2001-07-10', 2, 'WNI', 'Jl. Ibrahim Adji No. 418, Rt 01 Rw 09 Binong, Batununggal, Bandung Jawa barat 40275\n', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 3, 'SMP Santa Ursula Bandung', 1),
-(534, '2016032', '0017890388', 'Kyra Kiara', 'P', 'Jakarta', '2001-10-03', 1, 'WNI', 'JL. Camar V Blok AG.40 RT RW 004/008 Kel. Pondok Betung, Kec. Pondok Aren, Tangerang', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 2, 'SMP AN-NISA', 1),
-(535, '2016023', '9991909227', 'Faishal Haris', 'L', 'Jakarta', '2000-01-24', 1, 'WNI', 'Gading Serpong Sek.7A DC-2 No.10 RT RW 006/003 Kel. Curug Sngereng, Kelapa Dua Tangerang', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 2, 'SMP Islam Terpadu Insan Harapan', 1),
-(536, '2016001', '0017711463', 'Aditya Anugerah Akbar', 'L', 'Jakarta', '2001-04-29', 1, 'WNI', 'Pondok Sawah Indah Blok O No 4 RT 004 RW 002 Desa/Kelurahan Sawah Kecamatan Ciputat, Kota Tangerang Selatan - Banten', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '0', 18, 'Tulips.jpg', 0, 3, 'SMP Islam Al-Falah', 1),
-(537, '2016020', '0015855316', 'Eleon Angeleo', 'L', 'Tangerang', '2001-04-19', 2, 'WNI', 'Regensi Melati Mas Blok C4/07 RT RW 002/017 Pondok Jagung, Serpong Utara', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SMP Swasta Kristen Penabur Gading Serpong', 1),
-(538, '2016010', '0013144994', 'Anissa Maulia Shabine', 'P', 'Palembang', '2001-06-14', 1, 'WNI', 'Jl. Batu Merah III RT 007 RW 002 Desa/Kelurahan Pejaten Timur Kecamatan Pasar Minggu, Jakarta Selatan - DKI Jakarta 12510', '12345@gmail.com', 'Scan_Museum_Anatomi1.pdf', '0', 18, NULL, 0, 2, 'SMPS Harapan Utama', 1),
-(539, '2016024', '9990481077', 'Felicia Celine Triesha Martasuprana', 'P', 'Tangerang', '1999-02-10', 3, 'WNI', 'JL. Sukamulya Raya No.31 RT RW 004/005 Sukasari, Tangerang', '0@gmail.com', NULL, '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_15677814041.PNG', 0, 1, 'SMP Strada Santa Maria 2', 1),
-(540, '2016009', '2016009', 'Angelo Dana Sugi', 'L', 'Tangerang', '2001-02-27', 5, 'WNI', 'Jl. Beryl Timur 1/8 RT 001 RW 017 Desa/Kelurahan Pakulonan Barat Kecamatan Kelapa dua, Tangerang - Banten 15812', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '0', 18, 'Tulips.jpg', 0, 1, 'SMP Stella Maris School', 1),
-(541, '2016037', '20577110', 'Nicole Ellianne Risakotta', 'L', 'Surabaya', '2001-03-17', 2, 'WNI', 'Dusun Krajan RT RW 01/06 Sebaung Probolinggo', 'ne621312@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '087855530800', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 2, 'SMP KRISTEN ELIA', 1),
-(542, '2016036', '0010312055', 'Michael Alexander Budiman', 'L', 'Tarakan', '2001-11-24', 3, 'WNI', 'Cluster Fiore B7 no.8 Foresta BSD City, Serpong, Tangerang Banten, 15339\n', 'sandratjiu@gmail.com', 'Scan_Museum_Anatomi.pdf', '081346616600', 18, 'Tulips.jpg', 0, 1, 'SMP Swasta Athalia', 1),
-(543, '2016043', '0015835451', 'Zedric Immanuel Abetto', 'L', 'Jakarta', '2001-09-25', 1, 'WNI', 'Jl Amal No.7 RT RW 09/01 Cipadu Jaya Kota Tangerang', 'sjabetto@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '081290965349', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SMP Cendrawasih II', 1),
-(544, '2016035', '0', 'Metta Tjoa', 'P', 'Sydney', '2000-12-16', 5, 'WNI', 'Jl. Keagungan No. 8 RT 001 RW 008 Desa/Kelurahan Keagungan Kecamatan Taman Sari, Jakarta Barat - DKI Jakarta 11130', 'mettalim13@gmail.com', 'Scan_Museum_Anatomi.pdf', '08129811570', 18, 'Tulips.jpg', 0, 4, 'PKBM Bina Insani Kamil ', 1),
-(545, '2016041', '0001403047', 'Shabilla Rahma Johne', 'L', 'Cilegon', '2000-11-18', 1, 'WNI', 'Taman Ubud Cempaka Selatan 3-No.6, Curug, Tangerang.', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SMPTK Charisma Global School', 1);
-INSERT INTO `tbl_siswa` (`siswa_id`, `siswa_nis`, `siswa_nisn`, `siswa_nama`, `siswa_jenkel`, `siswa_tempat`, `siswa_tgl_lahir`, `siswa_agama_id`, `siswa_kewarganegaraan`, `siswa_alamat`, `siswa_email`, `siswa_dokumen`, `siswa_no_telp`, `siswa_kelas_id`, `siswa_photo`, `soft_deleted`, `anak_ke`, `sekolah_asal`, `satelit`) VALUES
-(546, '2016052', '0001353230', 'Mazaya Raina Habibie', 'L', 'Jakarta', '2000-07-24', 1, 'WNI', 'JL. Cipete V  No. 9 RT 008 RW 003 Desa/Kelurahan Cipete Selatan Kecamatan Cilandak, Jakarta Selatan - DKI Jakarta 12410', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '12345678', 18, 'Tulips.jpg', 0, 1, 'SMP Islam Al-ikhlas', 1),
-(547, '2016046', '0033316376', 'Siti Alifah Fayruz Nurwan Saputra ', 'P', 'Jakarta', '2003-05-02', 1, 'WNI', 'Jl. Flamboyan II No. 27 Desa/Kelurahan Menteng Dalam Kecamatan Tebet, Jakarta Selatan - DKI Jakarta 12870', 'endangp74@yahoo.com', 'Scan_Museum_Anatomi.pdf', '081808612323', 18, 'Tulips.jpg', 0, 1, '0', 1),
-(548, '2016050', '9999682879', 'Rico Sanjaya ', 'L', 'Jakarta', '1999-05-06', 3, 'WNI', 'Binong Permai Blok H 29/11  Desa/Kelurahan Binong Kecamatan Curug, Tangerang - Banten 15810', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '12345678', 18, 'Tulips.jpg', 0, 1, 'SMP Lentera Harapan Curug', 1),
-(549, '2016049', '0008298627', 'Raden Jesica Cassandra', 'P', 'Ciamis', '2000-10-15', 1, 'WNI', 'Jl. IR H Juanda No 120 RT 001 RW 007 Kelurahan/Desa  Ciamis Kecamatan Ciamis, Ciamis - Jawa Barat 046211', 'cassadrajessica9@gmail.com', 'Scan_Museum_Anatomi.pdf', '085322649805', 18, 'Tulips.jpg', 0, 2, 'SMP Negeri 1 Tasikmalaya', 1),
-(550, '2016051', '0006649771', 'Aurelia Annabelle ', 'P', 'Tangerang', '2000-11-17', 3, 'WNI', 'Kelapa Puan XXI AJ-8/23 RT 001 RW 012 Desa/Kelurahan Pakulonan Barat Kecamatan Kelapa dua, Tangerang - Banten 15812', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '12345678', 18, 'Tulips.jpg', 0, 1, 'SMP Swasta Kristen Penabur Gading Serpong', 1),
-(551, '2016045', '0012356489', 'William Sidharta Adi Wicaksono', 'L', 'Jakarta', '2001-11-19', 3, 'WNI', 'JL. Bojong Raya 24 RT 007 RW 004 Desa/Kelurahan Rawa Buaya Kecamatan Cengkareng, Jakarta Barat - DKI Jakarta 11740', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '08117779610', 18, 'Tulips.jpg', 0, 1, 'SMP Vianney', 1),
-(552, '2020788', '0020891020', 'Michael Christian', 'L', 'Tangerang ', '2002-09-02', 2, 'WNI', 'Jl. Rajawali Selt Blok B/4 Gunung Sahari Utara, Sawah Besar, Jakarta Pusat', 'michaelchristian2099@gmail.com', 'michael_christian.pdf', '0816761151', 14, 'Michael_Christian.jpeg', 0, 2, 'PKBM Anak Panah', 1),
-(553, '2020769', '0040454770', 'Ardian Bagus', 'L', '081297816549', '2004-07-05', 1, 'WNI', 'Jln. Gongseng raya rt 08 rw 09 no.50 kelurahan baru, kecamatan pasar rebo\nJakarta timur DKI Jakarta 13780\nIndonesia', 'ardianbagusan@gmail.com', 'Ardian_Bagus.pdf', '081297816549', 10, 'Ardian_Bagus.jpeg', 0, 2, 'SMAN 99 Jakarta', 1),
-(554, '2020743', '0034955273', 'Cut Safina Amanda Dhawi', 'P', 'Tangerang ', '2003-12-31', 1, 'WNI', 'kompl. paninggilan permai blok i no 7', 'cutsafinaa@gmail.com', 'Cut_Safina.pdf', '089686585616', 11, 'Cut_Safina.jpeg', 0, 1, 'sma 63 petukangan selatan', 1),
-(555, '2017278', '0022109043', 'Naura Farhana Shifa', 'P', 'Surabaya', '2002-03-12', 1, 'WNI', 'Jalan Widya Kencana Blok V.8 No.5 BSD', '12345@gmail.com', 'naura.pdf', '08979791978', 14, 'Naura_Farhana.jpeg', 0, 1, 'Alia Islamic School', 1),
-(556, '0000000', '0000000000000', 'Tri Wahyudi', 'L', 'Bogor', '2000-05-10', 1, 'WNI', 'Kp. Nanggela RT 004 RW 007, Sukmajaya, Tajurhalang, Bogor', '123@gmail.com', NULL, '0811111111', 11, 'Hydrangeas1.jpg', 0, 2, '-', 2),
-(557, '0000020', '0000000000', 'Ahmad Najmudin Palapi', 'L', 'Bogor', '2002-11-11', 1, 'WNI', 'Kp. Neglasari RT 009 RW 004 Mekarwangi, Cariu, Bogor', '123@gmail.com', NULL, '085624463700', 11, 'Desert.jpg', 0, 2, 'SMK Dharma Bakti Tonjong', 2),
-(558, '0000032', '0000000000', 'Fakih Pajar Tian', 'L', 'Bogor', '2003-06-03', 1, 'WNI', 'Kp. Nanggela 002/004, Sukmajaya, Tajurhalang, Bogor', '123@gmail.com', NULL, '089611542142', 11, 'Desert.jpg', 0, 3, '-', 2),
-(559, '0000021', '0000000000', 'Shandika', 'L', 'Bogor', '2002-03-05', 1, 'WNI', 'Kp. Nanggela 002/004 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Jellyfish.jpg', 0, 2, 'SMP Tunas Harapan', 2),
-(560, '0000022', '0000000000', 'Rahmat', 'L', 'Bogor', '1994-06-24', 1, 'WNI', 'Kp. Nanggela 002/003 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Desert.jpg', 0, 5, '-', 2),
-(561, '0000023', '0000000000', 'Muhamad Saepudin', 'L', 'Bogor', '2000-02-19', 1, 'WNI', 'Kp. Nanggela 004/003 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Desert.jpg', 0, 2, '-', 2),
-(562, '0000027', '0000000000', 'Dhia Uddin', 'L', 'Depok', '2002-04-22', 1, 'WNI', 'Kp. Nangggela 005/004 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Hydrangeas.jpg', 0, 5, '-', 2),
-(564, '0000025', '0000000000', 'Denis Darmais', 'L', 'Bogor', '1996-12-05', 1, 'WNI', 'Kp. Nanggela 003/001 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '081292496372', 13, 'Desert.jpg', 0, 2, 'SMP Tonjong', 2),
-(565, '0000026', '0000000000', 'Bagus Kuniawan', 'L', 'Bogor', '2000-01-15', 1, 'WNI', 'Kp Susukan 002/001 Susukan Bojonggede', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Jellyfish.jpg', 0, 6, '-', 2),
-(566, '0000028', '0000000000', 'Ahmad Fauzie', 'L', 'Jakarta', '1991-05-21', 1, 'WNI', 'Kp Nanggela 002/003 Sukmajaya Tajurhalang ', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 13, 'Hydrangeas.jpg', 0, 7, '-', 2),
-(567, '0000029', '0000000000', 'Mela Apri Yani', 'P', 'Bogor', '2001-04-10', 1, 'WNI', 'Kp. Nanggela 003/001 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Jellyfish.jpg', 0, 2, 'MTS Hidayatut Tholibin', 2),
-(568, '0000030', '0000000000', 'Ranika Despia', 'P', 'Jakarta', '1998-07-11', 1, 'WNI', 'Tanah Baru 002/007 beji  Depok', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '08994794149', 11, 'Desert.jpg', 0, 1, 'SMP Teladan', 2),
-(569, '0000031', '0000000000', 'Diyah', 'P', 'Bogor', '1999-03-12', 1, 'WNI', 'Kp Nanggela 002/004 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Hydrangeas.jpg', 0, 1, '-', 2),
-(570, '0000034', '00000000000', 'Ridwan', 'L', 'Bogor', '1999-12-12', 1, 'WNI', 'Kp Nanggela 002/006 Sukmajaya Tajurhalang ', '123@gmail.com', 'Soal_IPA_Kelas_1_SD_Bab_6_Benda_Langit_dan_Kunci_Jawaban_(www.bimbelbrilian_.com)_.pdf', '08987368007', 13, 'download.jpg', 0, 2, 'MTS Hidayatut Tholibin ', 2),
-(571, '0000054', '0000000000', 'Dini Sapitri', 'P', 'Bogor', '2004-11-20', 1, 'WNI', 'Kp Nanggela 002/002 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Hydrangeas.jpg', 0, 1, 'MTs Ar Roffiqy', 2),
-(572, '0000035', '00000000000000', 'Nursan', 'L', 'Bogor', '1984-04-04', 1, 'WNI', 'Kp.Nanggela RT 02/05 Desa Sukmajaya Kec.Tajurhalang Kab.Bogor', '123@gmail.com', 'document.pdf', '085718135348', 13, 'Chrysanthemum.jpg', 0, 2, 'SLTP Tunas Harapan', 2),
-(573, '0000024', '0000000000', 'Muhammad Ibnu Prakas', 'L', 'Bogor', '2002-07-21', 1, 'WNI', 'Kp Nanggela 003/007 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Chrysanthemum.jpg', 0, 1, '-', 2),
-(574, '0000016', '0000000000', 'Arman Maulana', 'L', 'Bogor', '2002-04-16', 1, 'WNI', 'Kp. Nanggela 004/003 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '089605241766', 11, 'Jellyfish.jpg', 0, 1, 'MTs Nurus Syafa\'ah', 2),
-(575, '0000036', '000000000000', 'Maulana M.Fikar', 'L', 'Bogor', '2007-04-08', 1, 'WNI', 'Kp.Bojonggede Rt 04/05 Desa Bojonggede Kec.Bojonggede Kab.Bogor', '123@gmail.com', 'document.pdf', '081111111111', 5, 'Desert.jpg', 0, 3, 'PKBM Anak Panah', 2),
-(576, '0000013', '0000000000', 'Fitri Nabilah', 'P', 'Bogor', '2003-11-30', 1, 'WNI', 'Kp. Nanggela 006/005 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Penguins.jpg', 0, 1, 'SMP Tunas Harapan', 2),
-(577, '0000037', '0000000000000', 'Panji Aryo Wibowa', 'L', 'Jakarta', '2005-01-04', 1, 'WNI', 'Kp.Perigi RT 02/02 Desa Bojonggede Kec.Bojonggede Kab.Bogor', '123@gmail.com', 'document.pdf', '081111111111', 5, 'Chrysanthemum.jpg', 0, 2, 'PKBM Anak Panah', 2),
-(578, '0000038', '0000000000000', 'Erdis liana Satiar', 'L', 'Bogor', '2000-04-03', 1, 'WNI', 'Kp.Kelapa Dua Rt 01/02 Desa Bojonggede Kec.Bojonggede Kab.Bogor', '123@gmail.com', 'document.pdf', '081111111111', 5, 'Desert.jpg', 0, 1, 'PKBM Anak Panah', 2),
-(579, '0000051', '00000000000000', 'Muhamad Aldi Agustian', 'L', 'Jakarta', '1999-08-02', 1, 'WNI', 'Jl.Kenari 1 no.21 Rt10/ 03 Jakarta', '123@gmail.com', 'document.pdf', '081111111111', 5, 'Chrysanthemum.jpg', 0, 3, 'PKBM Anak Panah', 2),
-(580, '0000011', '0000000000', 'Helda', 'P', 'Bogor', '2004-04-07', 1, 'WNI', 'Kp Nanggela 004/002 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Jellyfish.jpg', 0, 1, 'MTs Ar Roffiqy', 2),
-(581, '0000039', '000000000000', 'Mila Susilawati', 'P', 'Bekasi', '1993-01-18', 1, 'WNI', 'Kp.Nanggela  Rt 02/01 Desa Sukmajaya Kec tajurhalang Kab.Bogor', '123@gmail.com', 'document.pdf', '081111111111', 11, 'Hydrangeas.jpg', 0, 5, '-', 2),
-(582, '0000007', '0000000000', 'Muhammad Mulyadi', 'L', 'Bogor', '1996-03-03', 1, 'WNI', 'Kp Nanggela 001/006 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '089605823626', 13, 'Lighthouse.jpg', 0, 2, 'SMP Tunas Harapan', 2),
-(583, '0000040', '000000000000', 'Robi Sugara', 'L', 'Bogor', '1982-07-26', 1, 'WNI', 'Kp.Nanggela Rt 02/01 Desa Sukmajaya Kec. Tajurhalang Kab. Bogor', '123@gmail.com', 'document.pdf', '081111111111', 13, 'Chrysanthemum.jpg', 0, 1, '-', 2),
-(584, '0000041', '085778693225', 'Roji', 'L', 'Bogor', '1990-08-22', 1, 'WNI', 'Kp.Nanggela RT 06/03 Desa Sukmajaya  Kec.Tajurhalang Kab.Bogor', '123@gmail.com', 'document.pdf', '081111111111', 13, 'Chrysanthemum.jpg', 0, 1, 'SLTP Tunas Harapan', 2),
-(585, '0000002', '0000000000', 'Misnan', 'L', 'Bogor', '2001-08-02', 1, 'WNI', 'Kp Nanggela 004/003 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Desert.jpg', 0, 3, 'SMP Tunas Harapan', 2),
-(586, '0000042', '000000000000', 'Asnan', 'L', 'Bogor', '1977-03-20', 1, 'WNI', 'Kp.Nanggela RT 02/04 Desa Sukmajaya Kec.Tajurhalang Kab.Bogor', '123@gmail.com', 'document.pdf', '085811262707', 13, 'Chrysanthemum.jpg', 0, 4, 'PKBM Anak Panah', 2),
-(587, '0000019', '0000000000', 'Rini', 'P', 'Bogor', '1992-03-14', 1, 'WNI', 'Kp Nanggela 002/001 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '089662614089', 8, 'Penguins.jpg', 0, 3, 'MI Hidayatut Tholibin', 2),
-(588, '0000043', '0000000000000000', 'Muhamad Firly', 'L', 'Bogor', '2004-06-15', 1, 'WNI', 'Kp.Nanggela Rt 03/06 Desa Sukmajaya Kec.Tajurhalang Kab.Bogor', '123@gmail.com', 'document.pdf', '081111111111', 7, 'Chrysanthemum.jpg', 0, 1, '-', 2),
-(589, '0000017', '0000000000', 'Rendiyansah', 'L', 'Bogor', '2004-04-04', 1, 'WNI', 'Kp Mutiara Baru 002/011 Kedungwaringin Bojonggede', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 7, 'Penguins.jpg', 0, 7, '-', 2),
-(590, '0000044', '0000000000000', 'Abdullah Aziz', 'L', 'Jakarta', '2000-05-19', 1, 'WNI', 'Jl. Keramat Pulo GG. I/B.26 RT 02/03 Desa Kramat Kec.Senen Jakarta Pusat', '123@gmail.com', 'document.pdf', '081111111111', 7, 'Desert.jpg', 0, 5, '-', 2),
-(591, '0000018', '0000000000', 'Rizky Aditya', 'L', 'Bogor', '2003-12-01', 1, 'WNI', 'Bojonggede Timur 004/012 Bojonggede Bogor', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 7, 'Chrysanthemum.jpg', 0, 1, '-', 2),
-(592, '0000015', '0000000000', 'Syech Muhammad Risky', 'L', 'Depok', '2003-04-18', 1, 'WNI', 'Bojong Bambon 007/005 Bojong Pondok Terong, Cipayung, Depok', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 7, 'Penguins.jpg', 0, 1, 'SDN Pondok Terong 4', 2),
-(593, '0000045', '000000000000', 'Muhamad Lutpi Husain', 'L', 'Bogor', '2004-02-29', 1, 'WNI', 'Kp.Nanggela Rt 03/07 Desa Sukmajaya Kec.Tajurhalang kab.Bogor', '123@gmail.com', 'document.pdf', '081111111111', 7, 'Desert.jpg', 0, 1, '-', 2),
-(594, '0000010', '0000000000', 'Muhammad Husain', 'L', 'Tasikmalaya', '2004-02-15', 1, 'WNI', 'Kp Nanggela 002/006 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '085289639657', 7, 'Tulips.jpg', 0, 2, 'MI Ar Roffiqy', 2),
-(595, '0000046', '0000000000000', 'Muhamad Fajar', 'L', 'Bogor', '2004-04-07', 1, 'WNI', 'Kp.Perigi RT 02/02 Desa Bojonggede Kec.Tajurhalang Kab.Bogor', '123@gmail.com', 'document.pdf', '081111111111', 7, 'Chrysanthemum.jpg', 0, 2, 'SDN Bojonggede 4', 2),
-(596, '0000005', '0000000000', 'Audy Anastasya Putri', 'P', 'Bogor', '2004-08-05', 1, 'WNI', 'Bojonggede Dalam 003/012 Bojonggede Bogor', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 7, 'Desert.jpg', 0, 1, 'SDN Bojonggede 4', 2),
-(597, '0000047', '0000000000000', 'Mohamad Adam Apriyadi', 'L', 'Bogor', '2004-04-23', 1, 'WNI', 'Bojonggede', '123@gmail.com', 'document.pdf', '081111111111', 7, 'Chrysanthemum.jpg', 0, 3, '-', 2),
-(598, '0000009', '0000000000', 'Aidah', 'P', 'Bogor', '2002-12-28', 1, 'WNI', 'Kp Tajurhalang 001/002 Tajurhalang Bogor', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 7, 'Koala.jpg', 0, 2, 'SDN Kandang Panjang 3', 2),
-(599, '0000014', '0000000000', 'Muhammad Ridho Pratama', 'L', 'Jakarta', '2005-05-24', 1, 'WNI', 'Gg. Hidayah No 19 L 005/006 Lenteng Agung Jagakarsa ', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 7, 'Jellyfish.jpg', 0, 1, '-', 2),
-(600, '0000008', '0000000000', 'Guntur Ahmad Dani', 'L', 'Purbalingga', '2004-01-06', 1, 'WNI', 'Kp Nanggela 001/007 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '089651242089', 7, 'Tulips.jpg', 0, 2, 'SDN Bojonggede 3', 2),
-(601, '0000048', '000000000000', 'Tsanul Jamil', 'L', 'Bogor', '2004-04-19', 1, 'WNI', 'Kp.Mutiara Baru RT02/11 Desa Kedungwaringin Kec.Bojonggede Kab.Bogor', '123@gmail.com', 'document.pdf', '081111111111', 7, 'Chrysanthemum.jpg', 0, 1, '-', 2),
-(602, '0000001', '0000000000', 'Ferry Akbar', 'L', 'Bogor', '2001-02-15', 1, 'WNI', 'Kp Bojonggede 004/012 Bojonggede Bogor', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 7, 'Tulips.jpg', 0, 1, 'SDN Kedungwaringin 3', 2),
-(603, '0000003', '0000000000', 'Mohammad Rizki', 'L', 'Depok', '2004-09-03', 1, 'WNI', 'Gg Kingkit IX No 19 RT/RW 005/004 Kebon Kelapa Gambir ', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 7, 'Hydrangeas.jpg', 0, 3, '-', 2),
-(604, '0000049', '000000000000', 'Aan Sarnianto', 'L', 'Wonogiri', '1976-04-12', 1, 'WNI', 'Jl. Kp. Pulo Mangga No. 46 E RT 07/05 Desa Grogol Kec. Limo Kota Depok', '123@gmail.com', 'document.pdf', '081111111111', 8, 'Chrysanthemum.jpg', 0, 1, 'SDN Jeblogan 1', 2),
-(605, '0000004', '0000000000', 'Maulana Abdurrahim', 'L', 'Bogor', '2004-11-22', 1, 'WNI', 'Kp Tajurhalang 002/001 Tajurhalang Bogor', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '081286904264', 7, '81c333fd1c519d337a4bd2e71ad033ba.jpg', 0, 6, 'SDIT Al Hasanah', 2),
-(606, '0000006', '0000000000', 'Ripki Akbar Alfito', 'L', 'Bogor', '2004-11-26', 1, 'WNI', 'Jl. Kalibata Timur 003/001 Kalibata Pancoran Jakarta Selatan', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 7, '81c333fd1c519d337a4bd2e71ad033ba.jpg', 0, 2, 'SDN Surakarya 2', 2),
-(607, '0000050', '000000000000', 'Muhamad Alamsyah', 'L', 'Bogor', '2004-09-27', 1, 'WNI', 'Kp.Bojonggede Timur Jl. Curug Mas RT 04/12 Kec. Bojonggede Kab. Bojonggede', '123@gmail.com', 'document.pdf', '081111111111', 7, 'Chrysanthemum.jpg', 0, 1, '-', 2),
-(608, '0000053', '0000000000', 'Ajis Kurnia', 'L', 'Bogor', '2001-04-22', 1, 'WNI', 'Kp Nanggela 003/007 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 7, '81c333fd1c519d337a4bd2e71ad033ba.jpg', 0, 5, '-', 2),
-(609, '0000052', '0000000000', 'Hilal Ramadhan', 'L', 'Jakarta', '2004-10-23', 1, 'WNI', 'Jl. manggarai Utara 2 012/004 Manggarai Tebet ', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 7, '81c333fd1c519d337a4bd2e71ad033ba.jpg', 0, 3, '-', 2),
-(610, '0000012', '0000000000', 'Sahroni', 'L', 'Bogor', '1997-10-22', 1, 'WNI', 'Kp Nanggela 002/004 Sukmajaya Tajurhalang ', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, '81c333fd1c519d337a4bd2e71ad033ba.jpg', 0, 1, 'SMP Tunas Harapan', 2),
-(611, '2020745', '0121419541', 'Alexy Melvina Sharon Kurniawan', 'P', 'Jayapura', '2012-04-09', 2, 'WNI', 'Jayapura', 'alexymelvina@gmail.com', 'Alexy_Melvina.pdf', '082238517175', 1, 'Koala.jpg', 0, 1, 'Tidak Ada', 1),
-(612, '2020733', '3124159729', 'Andrew Christian Prabowo', 'L', 'Tangerang', '2011-01-04', 2, 'WNI', 'Jalan Porto 2 Nomor 1 Gading Serpong Sektor 8A', 'alexanderprabowo@gmail.com', 'Andrew_Prabowo.pdf', '087877047795', 1, 'Desert.jpg', 0, 2, 'TIdak Ada', 1),
-(613, '2020791', '1234', 'Adine Jani Kartika', 'P', 'Kota Batam ', '2012-11-16', 1, 'WNI', 'Binong 1 Residence Blok H 05\nTangerang Tangerang 15810', 'agshue12@gmail.com', 'Adine_Jani.pdf', '081287277590', 1, 'Adine_Jani.jpeg', 0, 3, 'SD Plus Islamic Village', 1),
-(614, '2019554', '2121449533', 'Valdis Ibrahim Ardhinov Putra', 'L', 'Jakarta ', '2012-10-28', 1, 'WNI', ' 	Perumahan Serpong Garden Cluster Green River Blok D5 No. 14\nKabupaten Tangerang Banten 15344', 'ardhie_777@yahoo.com', 'valdis_2.pdf', '085694319731', 1, 'Valdis.jpeg', 0, 2, 'Sekolah Anak Panah', 1),
-(615, '2019540', '2138795738', 'Dennis Setiawan', 'L', 'Jakarta ', '2013-05-05', 3, 'WNI', 'Kemanggisan komplek DPR RI no.34 rt.03 rw.13\nJakarta Jakarta Barat 11480\nIndonesia', 'angnovie82@gmail.com', 'denis_setiawan.pdf', 'angnovie82@gmail.com', 1, 'Dennis_Setiawan.jpeg', 0, 2, 'TK Mitra Penabur', 1),
-(616, '2019543', '0134018697', 'Haskell Benedict Oentoro', 'L', 'Tangerang', '2013-08-10', 2, 'WNI', 'Jl. Kelapa Puan XIII blok AF6/ 18 sektor 1 A Gading Serpong Tangerang 15810', 'richard.oentoro@gmail.com', 'Hazkel.pdf', '081297970085', 1, 'Haskel.jpeg', 0, 2, 'TKK Penabur', 1),
-(617, '2020731', '2133199525', 'Joseph Alvin Benyamin', 'L', 'Tangerang', '2013-10-03', 2, 'WNI', 'Botania Lake Residence Blok C No. 1 Sawangan Depok\nDepok Depok 1651', 'bennybenyamin77@gmail.com', 'Joseph_.pdf', '085776584478', 1, 'Joseph_Alvin.jpeg', 0, 4, 'Sekolah Anak Panah', 1),
-(618, '2019552', '2125949897', 'Rr Radya Aaliyah Salwanabila', 'P', 'Bogor', '2012-04-17', 1, 'WNI', 'Mutiara Sentul blok Q no 6 jl alternatif sentul baru 88 Nanggewer Cibinong Kab Bogor', 'rikaetriyani@gmail.com', 'raden_roro_radya.pdf', '087888444341', 1, 'RR_Radya.jpeg', 0, 3, 'Sekolah Anak Panah', 1),
-(619, '2020742', '0121470526', 'Tamera Alana Nagara ', 'P', 'Bekasi ', '2012-09-06', 1, 'WNI', 'Allura 2 Residence No.9c Jl.Caman Raya Utara 2, Jakasampurna, Bekasi Barat\nBekasi Jawa Barat 17145', 'rangga.nagara@gmail.com', 'tamera.pdf', '081586800688', 2, 'Tamera.jpeg', 0, 2, 'Global Prestasi School', 1),
-(620, '2020793', '000000000000', 'Al Muqmin Ziqrullah', 'L', 'Jakarta', '2001-01-21', 1, 'WNI', 'Meruya Utara No 13 RT/RW 004/011 Kembangan Jakarta Barat', 'ganesha@persija.ac.id', 'al_muqmin_ziqurullah.pdf', '08123456789', 11, 'Untitled.jpg', 0, 1, 'SMP Negeri 4 Pasarkemis', 5),
-(621, '2020794', '000000000000', 'Aditya Ramadhan', 'L', 'Bekasi', '2003-11-14', 1, 'WNI', 'Villa Mutiara Cikarang 2 Blok N 1 No 15 RT/RW 001/008 Suka Sejati Cikarang Selatan', 'ganesha@persija.ac.id', 'aditya_ramadhhan(1).pdf', '08123456789', 11, 'Untitled.jpg', 0, 1, '-', 5),
-(622, '2020736', '0084931005', 'Tristan Zachely Famador', 'L', 'Jakarta', '2008-12-17', 1, 'WNI', 'Jl. Pondok Surya Blok D No.1 Karang tengah-Tangerang', 'keira.handayani@gmail.com', 'tristan_zachel.pdf', '08118072828', 3, 'Tristan_Zack.jpeg', 0, 1, 'Sekolah Mutiara Harapan International School', 1),
-(623, '2019601', '0069087759', 'Michael Praditya Sutanto', 'L', 'Jakarta', '2006-08-23', 3, 'WNI', 'Jl. Duri Kencana Raya', '123@gmail.com', 'michael.pdf', '0', 7, 'WhatsApp_Image_2020-04-22_at_14.52_.48_.jpeg', 0, 2, 'Anak Panah', 1),
-(624, '2020790', '12345', 'Boonsak adrian satrianto', 'L', 'Kota Batam', '2009-11-03', 1, 'WNI', 'Binong 1 Residence Blok H 05\nTangerang Tangerang 15810', 'agshue12@gmail.com', 'boonsak.pdf', '081287277590', 3, 'BOONSAK.jpeg', 0, 2, 'SDN BINONG II', 1),
-(625, '2018345', '0093351471', 'Edeline Daxilia Pramono', 'P', 'PALU', '2009-04-09', 2, 'WNI', 'Teluk Gong jl.Lele Blok H3 No.1\nJakarta Utara Pejagalan 14450\nIndonesia', 'daxilia.fam@gmail.com', 'Edeline_Daxilia.pdf', '082298285856', 5, 'Edeline.jpeg', 0, 2, 'SD Stella Maris', 1),
-(626, '2017158', '0049722633', 'Christianus janoko', 'L', 'Jakarta ', '2004-11-29', 3, 'WNI', 'Jl. Pane no.37 Cihideung Gambir Jakarta Pusat', 'meiskevisoka2@gmail.com', 'Christianus_Janoko_compressed.pdf', '08111774527', 5, 'Christianus_Janoko.jpeg', 0, 3, 'SD TARSISIUS 1', 1),
-(627, '2018315', '2094539607', 'Elleasha Jovanca Patricia maloring', 'P', 'Manado ', '2009-12-02', 2, 'WNI', 'kompleks Fiordini gading serpong kec.curug ', 'elleashamaloring@gmail.com', 'Elleasha.pdf', '0896-3031-9831', 5, 'index.jpg', 0, 3, 'Sekolah Anak Panah', 1),
-(628, '2020741', '3102766355', 'Yasyavardi Prabu Nagara', 'L', 'Bekasi', '2010-02-02', 1, 'WNI', 'Allura 2 Residence No.9c Jl.Caman Raya Utara 2, Jakasampurna, Bekasi Barat\nBekasi Jawa Barat 17145', 'rangga.nagara@gmail.com', 'Yasyavardi_Prabu.pdf', '081586800688', 5, 'YAsyavardi.jpeg', 0, 1, ' 	Global Prestasi School Bekasi', 1),
-(629, '2018457', '0103159981', 'Adriel Mark Steven Yantoro', 'L', 'Jakarta', '2010-04-20', 2, 'WNI', 'Jl AR HAKIM NO 69 Tegal Jawa Tengah 52123', 'stevany2084@gmail.com', 'Adriel_mark_k4.pdf', '081902501623', 4, 'Untitled.jpg', 0, 1, 'Anak Panah', 1),
-(630, '2018365', '2066484492', 'Muhammad Zulfan Djiaulhaq Mukti', 'L', 'Bogor', '2006-12-09', 1, 'WNI', 'Kampung  Pemagarsari RT 1 RW 1  Parung ', '123@gmail.com', 'muhammad_zulfan_compressed.pdf', '0', 8, 'Untitled.jpg', 0, 2, 'SD Negeri Parung 3', 5),
-(631, '2020795', '2020205', 'Valencia Samatha Indrawan', 'P', 'Jakarta', '2007-11-07', 5, 'WNI', 'Teluk Gong Timur Nomor 50 RT 04 RW 09 Pejagalan Jakarta Utara', 'hensyur@yahoo.co.id', 'Valencia_Samatha_Indrawan.pdf', '082136080808', 7, 'WhatsApp_Image_2020-04-30_at_15.15_.35_.jpeg', 0, 2, '-', 1),
-(632, '2018344', '2088930446', 'Zidane Khalid Wibowo', 'L', 'Jakarta', '2008-12-02', 1, 'WNI', 'Rajawali Timur IX No 15 RT 05 Rw 08 Pancoran Jakarta Selatan', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 5, 'Untitled.jpg', 0, 2, '-', 1),
-(633, '2019602', '0076311754', 'Michelle Gabrielle Otniella Berhitoe', 'P', 'Jakarta', '2007-04-01', 2, 'WNI', 'Jl. Pulo Mas Utara No 2 RT 03 Rw 13 Kayu Putih, Pulo Gadung, Jakarta Timur', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 7, 'Untitled.jpg', 0, 1, 'Anak Panah', 1),
-(634, '2020740', '0071058641', 'Naomi Patricia Adi Nugraha', 'P', 'Jakarta', '2007-05-14', 2, 'WNI', 'Jl. Hang Jebat III RT 04 RW 08 Gunung Kebayoran Baru Jakarta Selatan', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 7, 'Untitled.jpg', 0, 2, 'SD Negeri Durenseribu 04', 1),
-(635, '2017190', '0059266754', 'Ancella Jovfelly Wijaya', 'P', 'Jakarta', '2005-07-05', 2, 'WNI', 'Daan Mogot Baru Blok LB No 22 RT/RW 001/017, Kalideres, Jakarta Barat', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 7, 'Untitled.jpg', 0, 1, 'IPEKA', 1),
-(636, '2017208', '0042995719', 'Maria Audrey Helena', 'P', 'Jakarta', '2004-06-14', 3, 'WNI', 'Jl. Gading X Blok Z No 914 RT/RW 14/10 Pondok Bambu Duren Sawit Jakarta Timur', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 7, 'Untitled.jpg', 0, 2, 'SD Santa Ursula BSD', 1),
-(637, '2019553', '0133041451', 'Sharleen Jemima Hoo', 'P', 'Tangerang Selatan', '2013-06-03', 2, 'WNI', 'Jl.Flourite Timur No 02 RT/RW 001/019 Pakulonan Barat Kelapa Dua Tangerang', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 1, 'Untitled.jpg', 0, 3, '-', 1),
-(638, '2019634', '2076527828', 'Wesley Jericho Nugroho Hoo', 'L', 'Semarang', '2007-08-02', 2, 'WNI', 'Jl.Flourite Timur No 02 RT/RW 001/019 Pakulonan Barat Kelapa Dua Tangerang', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 7, 'Untitled.jpg', 0, 2, '-', 1),
-(639, '2018370', '2066154812', 'Muhammad Farraz Al Hanif', 'L', 'Jakarta', '2006-03-10', 1, 'WNI', 'jl Damai No 26 RT/RW 003/002 Kunciran Pinang Kota Tangerang', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 8, 'Untitled.jpg', 0, 1, 'SD Islam Baitturachman', 1),
-(640, '2017184', '0048517448', 'Abil Daffansyah', 'L', 'Jakarta', '2004-08-29', 1, 'WNI', 'Kedoya Selatan RT/RW 013/001 Kebon Jeruk Jakarta Barat', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 8, 'Untitled.jpg', 0, 1, 'SDN Pondok Kacang Barat 04', 1),
-(641, '2018382', '0051210355', 'Tara Kaifa Hayyunisa', 'P', 'Sleman', '2005-06-01', 1, 'WNI', 'Bausasran DN 3/950 RT/RW 047/012 Danurejan Kota Yogyakarta', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 8, 'Untitled.jpg', 0, 1, '-', 1),
-(642, '2019721', '0022144239', 'Stefanus Alfares', 'L', 'Jakarta', '2002-09-21', 3, 'WNI', 'Jl.Kramat Raya No 134 RT/RW 001/009 Kenari Senen Jakarta Pusat', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 11, 'Untitled.jpg', 0, 4, 'Anak Panah', 1),
-(643, '2018452', '0022435988', 'Valen Basel', 'P', 'Bandung', '2002-09-11', 2, 'WNI', '-', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 13, 'Untitled.jpg', 0, 1, 'SMP Mardi Waluya 2', 1);
+INSERT INTO `tbl_siswa` (`siswa_id`, `siswa_nis`, `siswa_nisn`, `nik_siswa`, `siswa_nama`, `siswa_jenkel`, `siswa_tempat`, `siswa_tgl_lahir`, `siswa_agama_id`, `siswa_kewarganegaraan`, `siswa_alamat`, `siswa_email`, `siswa_dokumen`, `siswa_no_telp`, `siswa_kelas_id`, `siswa_photo`, `soft_deleted`, `anak_ke`, `sekolah_asal`, `satelit`, `oc`) VALUES
+(1, '2019638', '2049966773', '0000000000000400', 'Adyakhansa Mustika Jagatwanata', 'P', 'Jakarta', '2004-09-06', 1, 'WNI', 'JALAN RINJANI BLOK A/24 KOMPLEK SERUA PERMAI\r\n', 'emailadyakansha@gmail.com', 'adyakansa-dikompresi.pdf', '08567400617', 11, 'adyakansaphoto.jpg', 0, 3, 'SMP Negri 9 Kota Tangerang Selatan', 1, 0),
+(2, '2019637', '0043056211', '0000000000000000', 'Advent Roan Widiyono', 'L', 'Tangerang ', '2004-12-05', 3, 'WNI', 'regensi melati mas blok E6 no.17 regensi melati mas blok E6 no.17\ntangerang banten 15323\nIndonesia', 'adventroan.w@gmail.com', '03-05-2020-16.28_.29_.pdf', '08871847067', 10, 'WhatsApp_Image_2020-03-05_at_4.21_.00_PM_.jpeg', 0, 2, 'PKBM Alfa Omega', 1, 1),
+(3, '2019558', '2079628928', '0000000000000000', 'Adeline Callista Maurren', 'P', 'Jakarta ', '2007-11-24', 5, 'WNI', 'Green Lake City Asia 15 Nomor 37 Cipondoh Tangerang', 'mieyung11@yahoo.com', 'adelin_calista.pdf', '0895322475001', 7, 'WhatsApp_Image_2020-03-05_at_15.58_.18_.jpeg', 0, 2, 'Hope for Generations ', 1, 0),
+(4, '2019565', '0086194139', '0000000000000000', 'Amazing Grace Danielle Prakoso', 'P', 'Jakarta', '2008-09-01', 2, 'WNI', 'Panorama serpong D10 No.20 Jl. Raya Puspiptek Serpong ', 'anakpanah200@gmail.com', 'amazing.pdf', '0817777673', 7, 'WhatsApp_Image_2020-03-05_at_16.25_.09_.jpeg', 0, 1, 'Sekolah Anak Panah ', 1, 0),
+(5, '2019644', '0045421810', '0000000000000000', 'Alfarezha Prasetya V', 'L', 'Yogyakarta', '2004-07-24', 1, 'WNI', 'Apartemen Kebagusan City Tower C lt 19 no 20,Jl Baung,RT.2/RW.3,Kebagusan,Kec Ps.Minggu,Kota Jakarta Selatan,Daerah Khusus Ibu Kota Jakarta 12520', 'rezcam24@gmail.com', 'alfares.pdf', '087787241700', 11, 'WhatsApp_Image_2020-03-05_at_4.38_.04_PM_.jpeg', 0, 1, 'SMP Pesat Kota Bogor', 1, 1),
+(6, '2019573', '2074888707', '0000000000000000', 'Cheyshammah Chalysta Putra', 'P', 'Jakarta', '2007-10-24', 2, 'WNI', 'Kompleks Pendidikan, Jl. Melati No. 42 Cilandak Barat, Cilandak\nJakarta Selatan DKI Jakarta 12430\nIndonesia', 'cheyshammah.putra@gmail.com', 'cheyshammah.pdf', '08112994305', 7, 'WhatsApp_Image_2020-03-05_at_16.45_.24_.jpeg', 0, 3, 'Sekolah Harapan Bangsa ', 1, 0),
+(7, '2019639', '0041012123', '0000000000000000', 'Afnan Al Kautzar', 'L', 'Tangerang ', '2004-05-24', 1, 'WNI', 'Nusa Loka blok T9 no 16 Sektor XIV - 5 Rawamekar Jaya, Serpong', 'afnankautzar@gmail.com', 'afnan1.pdf', '081387990729', 11, 'WhatsApp_Image_2020-03-05_at_5.06_.03_PM_.jpeg', 0, 2, 'PKBM Anak Panah', 1, 0),
+(8, '2019574', '2072395994', '0000000000000000', 'Chris Johannes Ammer', 'L', 'Sorong', '2007-03-31', 2, 'WNI', 'Jalan Gunung Tidar No. 1 Kampung Baru\nSorong Papua Barat 98413\nIndonesia', 'anita.e.matahari@gmail.com', 'chris_john_amer.pdf', '081247289903', 7, 'WhatsApp_Image_2020-03-05_at_17.16_.02_.jpeg', 0, 3, 'SD Advent', 1, 0),
+(9, '2019575', '0079408138', '0000000000000000', 'Danish Arfa Indrawan', 'L', 'Karawang ', '2007-05-19', 1, 'WNI', 'Perumahan Citra Raya Cluster Parkview Y25/28 kelurahan mekar bakti kecamatan panongan kabupaten tangerang', 'vinta.gunasti@gmail.com', '05-03-2020-17.28_.01(1)_.pdf', '081315458727', 7, 'WhatsApp_Image_2020-03-05_at_17.30_.57_.jpeg', 0, 1, 'SD Negeri 03 Madiun Lor ', 1, 0),
+(10, '2019570', '2062172832', '0000000000000000', 'Benedictus Benfilio Prihadi', 'L', 'Jakarta', '2006-10-08', 3, 'WNI', 'Jl Alicante Barat 3 No 12 Cluster Alicante, Gading Serpong\nTangerang Selatan Banten 15810', 'yurinasofiarni@gmail.com', '06-03-2020-09.26_.20_.pdf', '081294632297', 7, 'WhatsApp_Image_2020-03-06_at_09.28_.32_.jpeg', 0, 1, 'SD Tarakanita Gading Serpong', 1, 0),
+(11, '2019571', '0069337219', '0000000000000000', 'Benita Videline Aprillia', 'P', 'perempuan ', '2006-04-30', 2, 'WNI', 'Jl. Kesatrian IX 27G, RT03/RW03 Keb. Manggis, Matraman, Jakarta Timur ', 'benitavideline@gmail.com', 'benitta_videlin.pdf', '081717441007', 7, 'WhatsApp_Image_2020-03-06_at_09.53_.02_.jpeg', 0, 1, 'Sekolah Anak Panah', 1, 0),
+(12, '2019636', '0042591635', '0000000000000000', 'Abigail Calista', 'P', 'Tangerang ', '2004-07-29', 5, 'WNI', 'Jl. Kelapa Sawit XVII BH 5/7 Kelapa Dua, Tangerang', 'abigail.lista29@gmail.com', 'abigail.pdf', '081219838006', 11, 'WhatsApp_Image_2020-03-06_at_10.05_.16_AM_.jpeg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(13, '2019572', '0078287605', '0000000000000000', 'Bennett Sean Nugroho ', 'L', 'Padang', '2007-03-23', 2, 'WNI', 'Jl. Mangga 24 Blok F No. 140A Duri Kepa, Kebun\nJeruk, DKI Jakarta 11510 ', 'sheroctav@gmail.com', 'benette.pdf', '0818857755', 7, 'WhatsApp_Image_2020-03-06_at_10.20_.48_.jpeg', 0, 2, 'Sekolah Anak Panah', 1, 0),
+(14, '2019646', '2045784036', '0000000000000000', 'Ananda Meisya', 'P', 'Jakarta', '2004-05-27', 2, 'WNI', 'Jl. Pulo Harapan Indah No.220 Cengkareng, Jakarta Barat', 'ananda27meysia@gmail.com', 'ananda_mesya.pdf', '088210612329', 11, 'WhatsApp_Image_2020-03-06_at_11.06_.48_AM_.jpeg', 0, 1, 'PKBM Anak Panah', 1, 1),
+(15, '2019650', '2048219109', '0000000000000000', 'Aryoscha Prashantivari Herynanto', 'P', 'Jakarta', '2004-03-11', 3, 'WNI', 'DE LATINOS BRAZILLIA FLAMENGO BLOK D5 NO 3\nBSD CITY TANGERANG SELATAN 15318\nIndonesia', 'aryoscha.herynanto@gmail.com', 'KK_Aryoscha-converted.pdf', '087885407448', 11, 'WhatsApp_Image_2020-03-06_at_11.51_.45_AM_.jpeg', 0, 1, 'SMP Anderson', 1, 0),
+(16, '2017270', '0022361972', '0000000000000000', 'Livia Natasha Denise Tunggul Rahardiyo', 'P', 'Tegal', '2002-12-13', 2, 'WNI', 'Villa Melati Mas Blok G 4/32', 'livianatasha71@gmail.com', 'Livia_Natasha1.pdf', '0818880399', 15, 'WhatsApp_Image_2020-03-19_at_11.26_.11_AM_1.jpeg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(17, '2017277', '0020476861', '0000000000000000', 'Naiffa Nurrahma Untsa', 'P', 'Tangerang', '2002-07-13', 1, 'WNI', 'Jl Kecipir 11 No 158 Rt. 004/014. Cibodasari, Cibodas, Kota Tangerang', 'herumput@gmail.com', 'naifa.pdf', '087718770707', 15, 'WhatsApp_Image_2020-03-20_at_3.39_.58_PM_.jpeg', 0, 1, 'SMPN 9 Kota Tangerang', 1, 0),
+(18, '2017279', '0022151032', '0000000000000000', 'Pearliani Fatima Harum', 'P', 'Surabaya', '2002-04-29', 1, 'WNI', 'Jl. Papandayan No.16 Mediterania 1 Sentul City', 'dadank.premier@gmail.com', 'Pearliani_Fatima.pdf', '087888220635', 15, 'WhatsApp_Image_2020-03-19_at_10.57_.10_AM_.jpeg', 0, 3, 'SMP Bina Insani', 1, 0),
+(19, '2017272', '0025273797', '0000000000000000', 'Manuel Apriadi', 'L', 'Jakarta ', '2002-04-16', 3, 'WNI', 'JL. RUBY II B 4/17 RT 005 RW 001', 'lalala@gmail.com', 'manuel.pdf', '000', 14, 'Manuel_Apriadi.jpeg', 0, 2, 'SMP NOTRE DAME', 1, 0),
+(21, '2017262', '0030074956', '0000000000000000', 'Jonathan Kindangan', 'L', 'Manado', '2003-02-09', 2, 'WNI', 'Malendeng Lingkungan V RT 024 RW 005 Kecamatan Tikala Kelurahan Malendeng , Kota Manado. Sulawesi Utara 95128', '12345@gmail.com', 'jonathan.pdf', '085394999210', 14, 'Jonathan_Kindangen.jpeg', 0, 3, 'MTS.NEGERI 4 JAKARTA', 1, 0),
+(22, '2017286', '9993447464', '0000000000000000', 'Rinaldi Syahputra Pratama', 'L', 'Jakarta', '1999-02-14', 1, 'WNI', 'Bank I/9, 007/007, Pela mampang, mampang prapatan, Jakarta Selatan', '123456@gmail.com', 'rinaldi.pdf', '081314228068', 13, 'Screenshot_7.png', 0, 2, 'Cognitive Challenge', 1, 1),
+(23, '2017280', '0028578014', '0000000000000000', 'Putri Amalia Rahmayani Sinaga', 'P', 'Bekasi', '2002-11-18', 1, 'WNI', 'Citra Raya Cluster Taman Raya Jl. Musik 8 Blok M No.35 RT21/RW05 Dukuh Tangerang', 'sng_donni@yahoo.co.id', 'putri.pdf', '081266663737', 15, 'WhatsApp_Image_2020-03-20_at_9.56_.45_AM_.jpeg', 0, 2, 'SMP Citra Berkat', 1, 1),
+(24, '2017281', '9988749707', '0000000000000000', 'Raden Monica Silvia', 'P', 'Ciamis', '1998-05-21', 1, 'WNI', 'Jl. IR. H Juanda', 'radenmonicasilvia@gmail.com', 'raden_monica.pdf', '085322649805', 14, 'Raden_Monica1.jpeg', 0, 1, 'Anak Panah', 1, 1),
+(25, '2017291', '0001106687', '0000000000000000', 'Sheryn Rose', 'P', 'Surabaya', '2000-11-30', 2, 'WNI', 'KP. Gebang RT001 RW006', '123456@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '', 15, 'tidur-dengan-kucing.jpg', 0, 1, 'SMP Stella Maris ', 1, 1),
+(26, '2017271', '0025475041', '0000000000000000', 'Maansie Shaguffta Kaur', 'P', 'Jakarta', '2002-06-21', 4, 'WNI', 'Jl. Bungur Raya No.5 RT/RW 01/01 Kebayoran Lama Selatan, Jakarta Selatan', 'lalala@gmail.com', 'shaguftah.pdf', '081291282794', 14, 'Maansie_Shaguffa.jpeg', 0, 2, 'SMP BINA NUSANTARA', 1, 1),
+(28, '2017284', '0024966861', '0000000000000000', 'Raka Rasendriya Reswara', 'L', 'Tangerang', '2002-05-22', 1, 'WNI', 'Jl. Darma Putra VI No 24 Komp. Kostrad RT 07/07, Kebayoran lama', 'melayenkawati@gmail.com', 'Raka_Rasendriya_Reswara.pdf', '085893222415', 15, 'Raka_Rasendriya1.jpeg', 0, 1, 'SMP Islam Plus Baitul Maal Kota Tangerang', 1, 1),
+(29, '2017292', '9986274415', '0000000000000000', 'Siti Fatimah', 'P', 'Jakarta', '1998-03-07', 1, 'WNI', 'Jl. Kebon Pala II RT11/RW004 Kampung Melayu Jatinegara Jakarta Timur', '123456@gmail.com', 'Siti_Fatimah.pdf', '085788587982', 15, 'Siti_Fatimah.jpeg', 0, 2, 'SMPN 26 Jakarta Timur', 1, 1),
+(30, '2017264', '0024240588', '0000000000000000', 'Justin Andean Sunardi', 'L', 'Jakarta', '2002-06-07', 2, 'WNI', 'Jl. Jamblang Indah II/12 RT 013 RW 002 Kelurahan Duri Selatan Kecamatan Tambora, Kota Jakarta Barat DKI Jakarta 11270', '12345@gmail.com', 'justin.pdf', '12345678', 15, 'Justin_Andean.jpeg', 0, 1, 'Smp Kristen 2 Penabur', 1, 0),
+(31, '2017297', '0029369713', '0000000000000000', 'Tirza Theophilia', 'P', 'Bandung', '2002-06-21', 2, 'WNI', 'Jl Wakeke 24 Lingkungan II Rt 002/002 Wenang Utara, Kota Manado', '12345@gmail.com', 'Tirza_Theophilia.pdf', '0817436626', 14, 'WhatsApp_Image_2020-03-17_at_3.04_.50_PM_.jpeg', 0, 2, 'SMP Kristen Ebenhaezar 2 Manado', 1, 1),
+(32, '2017285', '0025984039', '0000000000000000', 'Rendy Juliansyah', 'L', 'Tangerang', '2002-07-27', 1, 'WNI', 'Jl. Beruang II No 82 RT 01/02, Ciputat timur, Kota Tangerang Selatan ', 'ratnaindriatna@gmail.com', 'rendy_juliansah.pdf', '0817162449', 15, 'Rendy_Juliansyah1.jpeg', 0, 4, 'Anak Panah', 1, 1),
+(33, '2017275', '0015875755', '0000000000000000', 'Muhammad Ikraam Mahendra', 'L', 'Bandung', '2001-07-26', 2, 'WNI', 'Jl. Babakan Periuk I No.8 RT/RW 001/006', 'lalala@gmail.com', 'ikraam.pdf', '08122008947', 14, 'WhatsApp_Image_2020-03-20_at_2.42_.07_PM_.jpeg', 0, 1, 'SMP MUTIARA BUNDA', 1, 0),
+(34, '2017293', '0020994122', '0000000000000000', 'Stanley Nathanael', 'L', 'Tangerang', '2002-05-27', 2, 'WNI', 'Jl. Pal Merah Barat No. 21 RT001/RW005 Grogol Utara Kebayoran Lama Jakarta Selatan', 'stanleynathanael277@gmail.com', 'stanley_nathanael.pdf', '083875200857', 14, 'Stanley_Nathanael.jpeg', 0, 2, 'SMP Swasta Athalia Kota Tangerang Selatan', 1, 0),
+(35, '2017296', '0015845787', '0000000000000000', 'Theresa Zevanya', 'P', 'Jakarta', '2001-06-28', 2, 'WNI', 'Bukit Pamulang Indah Blok E 16 No.3 Rt. 002/005 Pamulang Timur, Kota Tangerang Selatan', 'tytha@icloud.com', 'Theresa_Zevanya.pdf', '089636949886', 15, 'WhatsApp_Image_2020-03-19_at_10.50_.06_AM_.jpeg', 0, 2, 'PKBM Kak Seto', 1, 0),
+(36, '2017295', '0023094252', '0000000000000000', 'Steven Chen', 'L', 'Pematang Siantar', '2002-09-22', 3, 'WNI', 'Bukit Serpong Mas Blok D-1/20 RT003/RW007 Pakulonan Serpong Utara Kota Tangerang Selatan', '123456@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '', 14, 'tidur-dengan-kucing.jpg', 1, 1, 'SMP Menara Tirza', 1, 0),
+(37, '2017282', '0017661202', '0000000000000000', 'Raisha Hapsari', 'P', 'Tangerang', '2001-10-18', 1, 'WNI', 'Kp.Parabon RT 02/03 Ciloto, Cipanas, Cianjur', 'monika.eleska@gmail.com', 'Raisha_Hapsari1.pdf', '081221747891', 15, 'Raisha_Hapsari1.jpeg', 0, 1, 'SMPIT Daarul Hasan', 1, 0),
+(38, '2017298', '0012694762', '0000000000000000', 'Valencia Anggi Putri', 'P', 'Tangerang', '2001-02-15', 2, 'WNI', 'Jl Danau Toba Raya No. 40 Rt.004/008 Bencongan Kelapa Dua Tangerang', 'valenjoestar@yahoo.com', 'valencia_angi1.pdf', '081218327657', 14, 'Valencia2.jpeg', 0, 3, 'SMP Strada Slamet Riyadi Kota Tangerang', 1, 1),
+(39, '2017287', '0016469246', '0000000000000000', 'Ryo Adrian Pangestu', 'L', 'Jakarta', '2001-12-16', 2, 'WNI', 'Cluster IL Rosa Jl. Rosa 5 Blok O 52', 'ryu33661@gmail.com', 'ryo_adrian.pdf', '081314039006', 15, 'Ryo_Adrian.jpeg', 0, 1, 'SMA Kristen IPEKA BSD', 1, 0),
+(40, '2017299', '0002885795', '0000000000000000', 'Vardian Veronico', 'L', 'Bireuen ', '2000-05-01', 2, 'WNI', 'Jl. Kh Moch Mansyur Blok 15F No 18 Rt 10/02 Duri Pulo, Gambir', 'vardianveronicoliva@yahoo.co.id', 'Vardian_Veronico.pdf', '08111651905', 14, 'Vardian_Veronico.jpeg', 0, 3, 'SMP Kristen Samaria Grogol', 1, 0),
+(41, '2017288', '0013071953', '0000000000000000', 'Salsabila Zaahidiyah Azzahra', 'P', 'Surabaya', '2001-01-20', 1, 'WNI', 'Kedung Banteng RT002/RW001 Kedung Banteng Tanggulangin Sidoarjo 61272 Jawa Timur', 'salsabilazaadiyahazzahra@gmail.com', 'salsabila1.pdf', '081311736295', 14, 'Salsabilla_Zaadiyah.jpeg', 0, 1, 'PKBM 25 Kuningan', 1, 0),
+(42, '2017191', '0057673276', '0000000000000000', 'Andillie Wiliady', 'L', 'Jakarta ', '2005-02-11', 3, 'WNI', 'BATUJAYA SELATAN rt1/1 Desa / Kelurahan : Batujaya Kode Pos  : 15121', 'susana.bong@yahoo.com', '09-03-2020-15.57_.29_.pdf', '0817738830', 9, 'Andilie.jpeg', 0, 3, 'SD Mutiara Bangsa ', 1, 0),
+(43, '2017283', '0022442795', '0000000000000000', 'Raissa Cleodora Junia', 'P', 'Tangerang', '2002-06-18', 2, 'WNI', 'Perum tm Adiyasa Ruko L1-2 Cikasungka Solear ', 'raissa.cleodora@gmail.com', 'Raissa_Cleodora_Junia1.pdf', '081382652555', 14, 'WhatsApp_Image_2020-03-20_at_5.36_.08_PM_1.jpeg', 0, 3, 'SMP Strada Tunas Harapan', 1, 0),
+(44, '2017235', '2991925707', '0000000000000000', 'Anandeiva Amanda', 'P', 'Jakarta', '1999-09-18', 1, 'WNI', 'Jl.Guntur Blok A/24 RT 004 RW 014 Kelurahan Jati Makmur Kecamatan  Pondok Gede, Kota Bekasi Jawa Barat 17413', 'anandeiva.a@gmail.com', 'anandeiva1.pdf', '08881029642', 14, 'Anandeiva.jpeg', 0, 1, 'Smp Negeri 9 Kota Bekasi', 1, 0),
+(45, '2017273', '0022282338', '0000000000000000', 'Michelle Zevinca', 'P', 'Jakarta', '2002-03-15', 3, 'WNI', 'Komp. Delta Kedoya Blok G/9 RT/RW 05/03', 'hartono72@gmail.com', 'michele_zevincha.pdf', '08557535995', 15, 'Michelle_Zevinca.jpeg', 0, 1, 'SMP KATOLIK SANG TIMUR', 1, 0),
+(46, '2017192', '0046961156', '0000000000000000', 'Andrea Christabella Darmadji', 'P', 'Tangerang ', '2004-08-03', 2, 'WNI', 'Banara Serpong Ambara D2/11\nTangerang Tangerang Selatan 15314\n', 'deadarmadji@gmail.com', '09-03-2020-17.10_.10_.pdf', '081210105209', 9, 'Andrea_Darmaji.jpeg', 0, 1, 'PKBM Geliat Bocah Kampoeng Program', 1, 0),
+(47, '2017241', '0023689300', '0000000000000000', 'Carolline ', 'P', 'Jakarta', '2002-11-06', 3, 'WNI', 'gang masjid III RT 005/007 Angke, Tambora, Jakarta Barat', 'carollinehalim@icloud.com', 'caroline.pdf', '081882005085', 15, 'WhatsApp_Image_2020-03-20_at_5.28_.32_PM_.jpeg', 0, 1, 'PKBM Hasanah Ilmu', 1, 0),
+(48, '2017249', '2093204937', '0000000000000000', 'Emmanuela Louis', 'P', 'Bogor', '2002-10-10', 2, 'WNI', 'Jl. DR. Angka Komp. Ruko PD 2/15-16 001/011, Purwokerto utara, Banyumas', 'emmanuellalouis@gmail.com', 'emanuela_louis.pdf', '08176695510', 15, 'Emmanuela_Louis1.jpeg', 0, 2, 'SMPN 3 Bahasa Putera Harapan', 1, 0),
+(50, '2017240', '0021878678\r\n', '0000000000000000', 'Ashwin Vijay Sarkar', 'L', 'Jakarta', '2002-08-09', 1, 'WNI', 'Talagasari RT 007 RW 003  Kelurahan Talagasari Kecamatan Cikupa, Kota Tangerang. Banten 15710', 'rajashwin222@gmaill.com', 'ashwin-compressed.pdf', '081295261118', 15, 'WhatsApp_Image_2020-03-20_at_5.19_.58_PM_.jpeg', 0, 1, 'Sekolah Citra Berkat', 1, 0),
+(51, '2017242', '0028519836', '0000000000000000', 'Christi Stefani Arita', 'P', 'Jambi', '2002-09-17', 2, 'WNI', 'Jl Cipinang Cempedak IV No 47 RT 11 RW 03 Cipinang Jakarta Timur', 'susanto@gmail.com', 'chisty_final.pdf', '08117297000', 14, 'WhatsApp_Image_2020-03-17_at_3.20_.16_PM_.jpeg', 0, 1, 'SMP Kristen BPK Penabur', 6, 0),
+(52, '2017251', '0022640803', '0000000000000000', 'Faradisha Lailatul Azari Azhar', 'P', 'Pekan Baru', '2002-12-20', 1, 'WNI', 'Jl. Sultan Syarif Qasim Gang keluarga No 09 Rintis, Limapuluh', 'violetdelure@hotmail.com', 'faradisha.pdf', '085156303546', 15, 'Faradisha1.jpeg', 0, 1, 'SMP Swasta Sains Tahfizh Islamic Center', 1, 0),
+(54, '2017243', '0018578372', '0000000000000000', 'Dave Adriel', 'L', 'Jakarta', '2001-12-20', 3, 'WNI', 'Villa Melati Mas Blok Vista II/42 Rt 003/006 Jelupang Serpong Utara', '12345@gmail.com', 'dave_adriel.pdf', '081316022081', 14, 'Dave_Adriel.jpeg', 0, 3, 'PKBM Alfa Omega', 1, 0),
+(55, '2017253', '0029858432', '0000000000000000', 'Fatimah Azzahra ', 'P', 'Riau', '2002-05-05', 1, 'WNI', 'Jl. Sukajadi No 7 RT 07/03 Sukabungah, Kota Bandung', 'fatimahazzahra55bandung@gmail.com', 'fatimah_azzahra.pdf', '082386069190', 15, 'WhatsApp_Image_2020-03-20_at_2.33_.10_PM_1.jpeg', 0, 2, 'SMPN 12 Bandung', 1, 0),
+(58, '2017248', '0018581452', '0000000000000000', 'Dzaki Alkamal', 'L', 'Tasikmalaya', '2001-05-08', 1, 'WNI', 'Cluster Syailendra No 73, Perumahan Grantaruma, Kab, Karawang', 'lia.dewi21@gmail.com', 'dzaki_akmal.pdf', '085717768666', 15, 'Dzaki_Alkamal.jpg', 0, 1, 'PKBM Cepat Tepat', 1, 0),
+(59, '2017234', '0028328936', '0000000000000000', 'Aloysius Giorgio', 'L', 'Tangerang', '2002-02-18', 3, 'WNI', 'Bsd Blok N-7 sektor 1-2 RT 002 RW 004 Kelurahan/ Desa Rawabuntu Kecamatan Serpong, Kota Tangerang. Banten 15318', 'jorujo.suzanto99@gmail.com', 'aloysius.pdf', '08811054834', 14, 'Aloysius_Giorgio.jpeg', 0, 1, 'SMP Santa Laurensia', 1, 0),
+(60, '2017247', '0021076548', '0000000000000000', 'Dyssa Chysilla Cathlin', 'P', 'Jakarta', '2002-01-26', 1, 'WNI', 'Jl Tenis IV No 101 Rt 06/08 Kapuk Jakarta Utara', 'eddy_hermanto@yahoo.co.id', 'dyasa.pdf', '089661554012', 15, 'Dyssa.jpeg', 0, 1, 'SMPN 273 Jakarta Pusat', 1, 0),
+(61, '2017250', '0022499109', '0000000000000000', 'Faiza Piatunisa', 'P', 'Jakarta', '2002-03-31', 1, 'WNI', 'Kp. Pondok Randu RT 13/02 Duri kosambi, Jakarta barat', 'sjafjan@gmail.com', 'faiza.pdf', '089602568884', 15, 'WhatsApp_Image_2020-03-17_at_3.08_.14_PM_1.jpeg', 0, 1, 'SMPN 176 Jakarta', 6, 0),
+(62, '2017257', '0023962777', '0000000000000000', 'Hansen Anthony Hose Wijaya', 'L', 'Bandung', '2002-11-13', 2, 'WNI', 'Lingk Cimenyan I RT02/RW01 Mekar Sari Banjar', 'hansen69anthony@gmail.com', 'hansen_antony.pdf', '081323381999', 15, 'WhatsApp_Image_2020-03-20_at_5.23_.45_PM_.jpeg', 0, 3, 'SMPN 1 Banjar', 1, 0),
+(63, '2017258', '0022036530', '0000000000000000', 'Helen Evelyn', 'P', 'Tangerang', '2002-10-10', 5, 'WNI', 'Jl. Pademangan III GG.12 RT003/RW007 Pademangan Jakarta Utara DKI Jakarta', 'helen.evelyn1010@gmail.com', 'helen_final.pdf', '081271477489', 14, 'Helen_Evelyn.jpeg', 0, 1, 'SMP Tarakanita Citra Raya', 1, 0),
+(64, '2017238', '0015799774', '0000000000000000', 'Andre Alvino Siauw Ko Peng', 'L', 'Tangerang', '2001-10-13', 3, 'WNI', 'JL. Janur Kuning I BF 15/17 RT 002 RW 013 Kelurahan Pakulonan Barat Kecamatan Kelapa Dua, Kota Tangerang. Banten 15812', 'dreskp2@gmail.com', 'andre_alvino.pdf', '08111540113', 14, 'WhatsApp_Image_2020-03-19_at_11.46_.44_AM_.jpeg', 0, 1, 'SMP Pahoa', 1, 0),
+(65, '2017252', '0024801233', '0000000000000000', 'Fath Fazzu Fahim', 'L', 'Jakarta', '2002-03-20', 1, 'WNI', 'Komplek Wisuda Mas Blok C1 No 11 RT 03/10 ', 'fazzufahim@gmail.com', 'fath.pdf', '0811174857', 15, 'WhatsApp_Image_2020-03-20_at_9.41_.59_AM_1.jpeg', 0, 1, 'PKBM KAK SETO', 1, 0),
+(66, '2017246', '0029380007', '0000000000000000', 'Dizza Azahra Tanuwijaya', 'P', 'Jakarta', '2002-05-02', 1, 'WNI', 'Jl Nurul Yaqin Rt 04/04 Poris Palawad Indah Tangerang', 'ms.dahlia.s@gmail.com', 'dizza_final.pdf', '081911005380', 14, 'Dizza_Azzahra.jpeg', 0, 1, 'SMP Batavia Kota Tangerang', 1, 0),
+(67, '2017259', '0011154949', '0000000000000000', 'Intan Kirana Wulandari', 'P', 'Jakarta', '2001-09-23', 1, 'WNI', 'Jl. Bambu Betung 5 No.9 RT03/RW011 Cilendek Bogor', 'intankirana230901@gmail.com', 'intant_kirana_final.pdf', '085880455467', 15, 'WhatsApp_Image_2020-03-20_at_3.22_.53_PM_.jpeg', 0, 3, 'SMPN 14 Bogor', 1, 0),
+(68, '2017260', '0021723776', '0000000000000000', 'Jason Joserio', 'L', 'Jakarta', '2002-11-05', 5, 'WNI', 'Jl. Samarosa III 06/05, Angke, Tambora, Jakarta Barat', 'jasonjoserio11@gmail.com', 'jason.pdf', '081296903133', 15, 'WhatsApp_Image_2020-03-19_at_2.09_.04_PM_1.jpeg', 0, 2, 'SMP Tunas Mulia', 1, 0),
+(69, '2017244', '0020476035', '0000000000000000', 'Dian Sugandha', 'P', 'Jakarta', '2002-07-08', 2, 'WNI', 'Bojong Larang Rt 01/04, Bojong Jaya Tangerang', 'jsobhita@yahoo.com', 'diansuganda.pdf', '08970007661', 14, 'WhatsApp_Image_2020-03-20_at_11.47_.41_AM_.jpeg', 0, 1, 'SMP Kristen Kanaan', 1, 0),
+(70, '2017233', '0024628111', '0000000000000000', 'Ahmad Shofwan Nizhomi ', 'L', 'Tangerang', '2002-03-01', 1, 'WNI', 'Taman Mangu Indah E.13/2 RT 003 RW 006 Kelurahan Pondok Aren Kecamatan Pondok Aren, Kota Tangerang Selatan. Banten 15424', 'ahmadnimu@gmail.com', 'ahmad_sofwan-compressed.pdf', '081296903490', 15, 'Ahmad_Sofwan.jpeg', 0, 1, 'SMP Islam Plus Baitul Maal', 1, 0),
+(71, '2017256', '0023978051', '0000000000000000', 'Haezel Wahyudya Perdana', 'L', 'Magelang', '2002-01-30', 2, 'WNI', 'Dusun Bulu Lor RT004/RW002 Podosoko Sawangan Magelang Jawa Tengah 56481', '123456@gmail.com', 'haezel1.pdf', '', 15, 'Haezel.jpeg', 0, 1, 'SMPN 3 Sleman', 1, 0),
+(72, '2017245', '0020450340', '0000000000000000', 'Dinda Nurlaela Rahma', 'P', 'Tasikmalaya', '2002-01-29', 1, 'WNI', 'Jl Taruna Jaya No 28 Rt 04/03', '12345@gmail.com', 'Dinda_Nurlela_Rahma.pdf', '0', 15, 'Dinda_Nurlaela.jpeg', 0, 1, 'SMA Quantum Indonesia', 1, 0),
+(73, '2017261', '2029069865', '0000000000000000', 'Jonah Levi', 'L', 'Bogor', '2002-04-10', 2, 'WNI', 'Jl. Bukit Nirwana Raya No. 27 RT 02/12 Kota Bogor selatan', 'joexsigo@gmail.com', 'jonah_levi.pdf', '082111526297', 15, 'WhatsApp_Image_2020-03-20_at_3.27_.29_PM_1.jpeg', 0, 1, 'SMA Regina Pacis', 1, 0),
+(74, '2018346', '0061528273', '0000000000000000', 'Alodie Kayley Azalia', 'P', 'Tangerang', '2006-05-07', 1, 'WNI', 'Jln Taman Legian 3 Nomor 3 Lippo Karawaci Tangerang', 'azalialodie@gmail.com', 'Contoh.pdf', '089622222606', 8, 'Alodie.jpeg', 0, 2, 'SD Hilaris Kecamatan Kelapa Dua', 1, 0),
+(76, '2017268', '0024383209', '0000000000000000', 'Khansa Nazla Syahirah', 'P', 'Pekan Baru', '2002-05-22', 1, 'WNI', 'Griya Jakarta Jl. Kemang 7 Blok B 1 No 58 05/08, Pamulang, Kota tangerang', 'khansasyahirah4@gmail.com', 'khansa.pdf', '081289832490', 14, 'Khansa_Nazla1.jpeg', 0, 1, 'SMA Al-Wildan Islamic School Gading Serpong', 1, 0),
+(77, '2017231', '0015816493', '0000000000000000', 'Agatha Putri Adiningtyas ', 'P', 'Tangerang', '2001-03-04', 3, 'WNI', 'Permata Pamulang Blok G-14/12 RT 006 RW 005 Kelurahan Bakti Jaya Kecmatan Setu, Kota Tangerang.Banten 15315', '12345@gmail.com', 'aghata.pdf', '12345678', 15, 'Agatha_Putri.jpeg', 0, 1, 'SMP Mater Dei', 1, 0),
+(78, '2017290', '2021801696', '0000000000000000', 'Seno Bayu Aji Arinanto', 'L', 'Giriklopo Mulyo', '2002-05-09', 1, 'WNI', 'Demangan, 001/003, Ngunggahan, Eromoko, Wonogiri, 57663. Jawa Tengah', 'ganesha@persija.ac.id', 'seno_aji.pdf', '082260050574', 14, 'WhatsApp_Image_2020-03-19_at_10.11_.56_AM_.jpeg', 0, 2, 'SMA WIDYA GAMA', 5, 0),
+(79, '2018347', '0063041634', '0000000000000000', 'Alvin Arwoon', 'L', 'Jakarta', '2006-03-06', 5, 'WNI', 'Apartement City Park Tower A Lantai 8 No 1\nCengkareng Timur\nJakarta Barat', 'ffebriyanti.sap@gmail.com ', 'alvin_arwoon.pdf', '089604282632', 8, 'Screenshot_6.png', 0, 2, 'SDS Impian Bunda', 1, 0),
+(80, '2017269', '0025603737', '0000000000000000', 'Kheyla ramadhani hakim', 'P', 'Jakarta', '2002-12-04', 1, 'WNI', 'Jl. H. Saabun Kav. 15 RT 09/05, Jati Padang, Pasar Minggu, Jakarta Selatan', 'kheylaramadhani@gmail.com', 'kheyla.pdf', '0812 8716 0761', 14, 'WhatsApp_Image_2020-03-19_at_1.51_.31_PM_1.jpeg', 0, 2, 'SMP HighScope Indonesia Bintaro', 1, 0),
+(82, '2017237', '0001527686', '0000000000000000', 'Anastasia Natalia', 'P', 'Jakarta', '2000-12-26', 2, 'WNI', 'Komplek Sekneg RT 001 RW 006 Kelurahan Grogol Selatan Kecamatan Kebayoran Lama, Kota Jakarta Selatan. DKI Jakarta', 'anastasiandtz@gmail.com', 'anastasia.pdf', '081806035566', 15, 'Anastasia_Natalia.jpeg', 0, 1, 'SMP Pangudi Luhur', 1, 0),
+(83, '2018349', '0068298168', '0000000000000000', 'Andrew Christian Sinaga', 'L', 'Jakarta', '2006-03-01', 2, 'WNI', 'Taman Surya 3 Blok K1 No.3 Jakarta Barat', 'andrew06sinaga@gmail.com', 'andres_sinaga.pdf', '087886472065', 8, 'Andrew_Christian.jpeg', 0, 1, 'SD Kasih Immanuel', 1, 0),
+(84, '2017267', '0023796353', '0000000000000000', 'Khairun Nisa Saliha', 'P', 'Balikpapan', '2002-02-18', 1, 'WNI', 'Jl. sumatra Blok H.1 No 4 Nusa Loka BSD RT 02/05 Rawamekar Jaya', 'sallysaliha0000@gmail.com', 'khairunisa_saliha.pdf', '081399284599', 14, 'Khairun_Nisa1.jpeg', 0, 2, 'SMP Sinar Cendekia', 1, 0),
+(85, '2017289', '0017234792', '0000000000000000', 'Samuel', 'L', 'Jakarta', '2001-03-03', 2, 'WNI', 'Jl. Kp. Rawa Seli No.21 RT/RW 10/04 Kel. Kampung Rawa, Jakarta Pusat', 'diana.imelda@id.pwc.com', 'Samuel.pdf', '08986876958', 14, 'Samuel.jpeg', 0, 2, 'SMP MAHANAIM BEKASI', 1, 0),
+(86, '2020744', '0030675573', '0000000000000000', 'Anastasia Amanda', 'P', 'JAKARTA', '2003-03-18', 3, 'WNI', 'Kemuning Utama II Blok A10/10 Kosambi Jakarta Barat', 'theresia.henny@ymail.com', 'Anastasia_Amanda_Doc.pdf', '087877376510', 12, 'Anastasia_Amanda.jpg', 0, 2, 'SMP Santo Leo II Cengkareng', 1, 0),
+(87, '2018350', '2057947803', '0000000000000000', 'Andrew Julian Fawazza Permana', 'L', 'Balikpapan', '2006-07-27', 1, 'WNI', 'Apartemen Waterplace Residences Tower F 1810 JL Pakuwon Indah Lakarsantri 60213', 'permanabcr@gmail.com ', 'andrew_julian_permana.pdf', '082195953388', 8, 'Andrew_Julian.jpeg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(88, '2017265', '0022550751', '0000000000000000', 'Kanaesya Putri Wijaya', 'P', 'Sukaharjo', '2002-10-14', 1, 'WNI', 'Pemuda Residence I, Jl Pemuda II no 1 Rt 08/09 Srengseng sawah, Jakarta Selatan', 'taufik.esmawa@gmail.com', 'khanaesa.pdf', '081296948000', 15, 'Kanaesya_Putri1.jpeg', 0, 1, 'Anak Panah', 1, 0),
+(89, '2020734', '0033360061', '0000000000000000', 'Alif Ariel Ramadhan', 'L', 'Surabaya', '2003-11-22', 1, 'WNI', 'Cluster Riviera No.28 Palemsemi Bencongan Kelapa Dua Tangerang', 'adam.shafei@gmail.com', 'Alif_Ariel_Ramadhan.pdf', '08111342030', 13, 'tidur-dengan-kucing.jpg', 0, 1, 'SMP Plus Islamic Village', 1, 0),
+(90, '2018351', '0067867138', '0000000000000000', 'Arthur Christian Anderson', 'L', 'Tangerang', '2006-04-24', 2, 'WNI', 'Jl Tanah Sereal I/14A-74 Tambora Jakarta Barat', 'amansaid@yahoo.com', 'arthur_anderson.pdf', '0818754388', 8, 'Arthur_Christian.jpeg', 0, 1, 'SD Kristen Tunas Bangsa', 1, 0),
+(91, '2017232', '0030138860', '0000000000000000', 'Ahmad Rusadi', 'L', 'Samarinda', '2003-04-04', 1, 'WNI', 'Jl. KH. Harun Nafsi No.09 RT12/- Kelurahan Rapak Dalam Kecamatan Loa Janan Ilir, Kota Samarinda. Kalimantan Timur 75132', 'ahmadrusadi0404@gmail.com', 'ahmad_rusadi-compressed.pdf', '081805896745', 15, 'Ahmad_Rusadi.jpeg', 0, 2, 'SMP Negeri 36 Samarinda', 1, 0),
+(92, '2017266', '0024387626', '0000000000000000', 'Kenny sumihardjo', 'L', 'Jakarta', '2002-06-15', 3, 'WNI', 'Jl.Cimanuk No 43 RT 08/01 Cideng Jakarta Pusat', 'minceong9@gmail.com', 'Kenny_Sumihardjo1.pdf', '0811153533', 15, 'Kenny_Sumihardjo1.jpeg', 0, 2, 'Cambidge International School', 1, 0),
+(93, '2018352', '0064483907', '0000000000000000', 'Azzam Alifiandra Kosandi', 'L', 'Kyoto', '2006-11-13', 1, 'WNI', 'Jl PLN Duren Tiga Pancoran Jakarta Selatan', 'evida.kartini@yahoo.com ', 'azzam_kosandi.pdf', '0', 8, 'Azzam.jpeg', 0, 2, 'PKBM Bina Insan Mandiri', 1, 0),
+(94, '2018394', '2039284861', '0000000000000000', 'Ammar Attamimi', 'L', 'Solo', '2003-03-22', 1, 'WNI', 'PSSI National Youth Tranning Centre', '123456@gmail.com', 'Ammar_Attamimi_doc.pdf', '', 13, 'Ammar.JPG', 0, 1, 'SMPN 18 Malang', 1, 0),
+(95, '2017294', '0021351689', '0000000000000000', 'Stefhany Helga Anjelin', 'P', 'Bandar Lampung', '2002-02-06', 3, 'WNI', 'Taman Puspita Blok I.17/18 RT/RW 008/002 Kel. Cikupa, Tangerang Banten.', 'helgastefhany@gmail.com', 'Stefhany_helga_anjelin_IPS_baru.pdf', '085213152935', 15, 'Stefhany_Helga.jpeg', 0, 3, 'SMP STRADA PELITA II ', 1, 0),
+(96, '2017239', '2018925618', '0000000000000000', 'Annethe Viriya Ksanti', 'P', 'Magelang', '2001-02-03', 5, 'WNI', 'Jl. Diponegoro 30 A RT 001 RW 005 Kelurahan Temanggung 1 Kecamatan Temanggung, Kota Temanggung. Jawa Tengah 56212', 'astrid.yeung@yahoo.com', 'annet-compressed.pdf', '08119993989', 14, 'WhatsApp_Image_2020-03-20_at_4.52_.18_PM_.jpeg', 0, 1, 'PKBM Anugrah Bangsa', 1, 0),
+(97, '2020748', '0030095908', '0000000000000000', 'Amira Fathia Putriansyah', 'P', 'Jakarta', '2003-03-07', 1, 'WNI', 'Jl. Carita Blok AB No. 4 Depok Mulya II RT001/RW016 Kel. Beji Kota Depok', ') 	amira.ptrsyh@gmail.com', 'amira.pdf', '087776522907', 13, 'amira_fatha.jpg', 0, 2, 'SMP Santa Theresia', 1, 0),
+(98, '2017202', '0053565887', '0000000000000000', 'Jeanice Tyshia Fayola', 'P', 'Jakarta', '2005-10-12', 3, 'WNI', 'Poris Indah Blok F7 No 39 Cipondoh Tangerang', 'jeanice.thysia2008@gmail.com', 'Jeanice_Tyshia.pdf', '082128602985', 9, '159472fd-9af0-4f18-a3b8-d2afb517087b.jpg', 0, 2, 'SD Maria Immaculata', 1, 0),
+(99, '2018353', '0061728771', '0000000000000000', 'Brandon Clifford Shawn', 'L', 'Jakarta', '2006-01-05', 2, 'WNI', 'Perumahan Green lake City, Cluster Europe 9  no 68, rt 002  010, kelurahan ketapang, kecamatan Cipondoh, Kota Tangerang, Banten 15147', 'brandoncs2006@gmail.com ', 'brandon.pdf', '089512081115', 8, 'Brandon_Clifford.jpeg', 0, 3, 'PKBM Anak Panah', 1, 0),
+(100, '2018398', '0023133947', '0000000000000000', 'Arya Ramadhana', 'L', 'Sidoarjo', '2002-11-14', 1, 'WNI', 'Jl. Sri Endah No.1 RT008/RW008 Ancol Regol Kota Bandung', 'fent.pri@gmail.com', 'Arya_Ramadhan_Doc.pdf', '0811339308', 12, 'arya_ramadhan.jpg', 0, 1, 'SMP Taruna Bakti', 1, 0),
+(101, '2018354', '0068519464', '0000000000000000', 'Bungamas Ghania Manai', 'P', 'Tangerang', '2006-07-25', 1, 'WNI', 'De Latinos Cluser Brazilia D6/02', 'mbungamas@gmail.com', 'Contoh.pdf', '085778373151', 8, 'Bunga_mas.jpeg', 0, 1, 'PKBM Technosa', 1, 0),
+(103, '2017236', '0020133029', '0000000000000000', 'Anastasia Dinda Prasetya Utami', 'P', 'Palembang ', '2002-01-31', 3, 'WNI', 'Balikpapan baru Blok L3/21 Kelurahan Damai Baru Kecamatan Balikpapan Selatan, Kota Balikpapan. Kalimantan Timur', 'adputami@gmail.com', 'anastasia_dinda.pdf', '082148687040', 15, 'Anastasia_Dinda_Prasetya.jpeg', 0, 2, 'SMP Negeri 1 Balikpapan', 1, 0),
+(104, '2017204', '0058543814', '0000000000000000', 'Justyn Aurelius Khong', 'L', 'Jakarta', '2005-10-28', 5, 'WNI', 'Jalan Starling Timur 3 Nomor 9 Cluster Starling Perumahan Gading Serpong Tangerang Selatan', 'justyn1818@gmail.com', 'Justyn_Aurelius_Khong.pdf', '082114426141', 9, 'WhatsApp_Image_2020-03-10_at_11.41_.20_AM_.jpeg', 0, 2, 'SD Swasta Stella Maris', 1, 0),
+(106, '2018392', '0023602623\r\n', '0000000000000000', 'Amadeus Justin Farrell', 'L', 'Jakarta', '2003-12-03', 5, 'WNI', 'Grand Grisenda Blok 60 RT007/RW003 Kapuk Muara Penjaringan Jakarta Utara', 'mieyung11@yahoo.com', 'amadeus_justine_.pdf', '087883300816', 13, 'amadeus_justin.jpg', 0, 1, 'SMPK 6 Penabur', 1, 0),
+(107, '2018386', '3273191407020001', '0000000000000000', 'Andrian Ernest Prawira Putra', 'L', 'Bandung', '2002-07-14', 3, 'WNI', 'Jl. Sunda 6 No.93 RT001/RW001 Merdeka Sumur Bandung Kota Bandung', '123456@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '', 12, 'tidur-dengan-kucing.jpg', 1, 2, 'Unknown', 1, 0),
+(109, '2018400', '0033646287', '0000000000000000', 'Audrick Liko Tanjaya', 'L', 'Jakarta', '2003-08-16', 5, 'WNI', 'Jl. Kemenangan II No. 26 RT004/RW002 Glodok Taman Sari Jakarta Barat', 'audrick1liko@gmail.com', 'Audrick_Liko_Tanjaya.pdf', '08556688000', 12, 'Audrick_liko.jpeg', 0, 1, 'PKBMN 16 Rawa Sari', 1, 0),
+(110, '2018355', '0061071011', '0000000000000000', 'Christine Sugandha', 'P', 'Jakarta', '2006-03-21', 2, 'WNI', 'Bojong Larang RT 001 RW 004 Kelurahan  Bojong Jaya Kecamatan Karawaci, Kota Tangerang. Banten 15115', 'christinesugandha@gmail.com', 'Christine_Sugandha.pdf', '08970007661', 8, 'Christien_Sugandha.jpeg', 0, 2, 'SD Swasta Hilaris Nasional Plus', 1, 0),
+(113, '2018387', '2033929116', '0000000000000000', 'Agung Dharmawan', 'L', 'Bau Bau', '2003-09-30', 1, 'WNI', 'Jl. Sao-sao No.222F RT009/RW003 Bandu Kodia Kota Kendari', '123456@gmail.com', 'agung_darmawan_akta-converted.pdf', '', 13, 'agung_darmawan.JPG', 0, 2, 'SMPN 1 Kendari', 1, 0),
+(114, '2020735', '0059129142', '0000000000000000', 'Erika Sophia Lumban Tobing', 'P', 'Jakarta', '2006-05-02', 2, 'WNI', 'JL. Delima 1 No.21 RT 003 RW 003 Kelurahan Malaka Sari Kecamatan Duren Sawit, Kota Jakarta Timur. DKI Jakarta 13460', ' 	erikatobing05@gmail.com', 'erika_IJazah-converted.pdf', '08118873576', 8, 'Erika_Sophia.jpeg', 0, 2, 'SMP Negeri 27 Jakarta', 1, 0),
+(115, '2018397', '0032590631', '0000000000000000', 'Angel Kurniawan', 'P', 'Tangerang', '2003-01-23', 2, 'WNI', 'Jl. Crystal Timur A No.18 RT001/RW003 Pakulonan Barat Kelapa Dua Tangerang', 'angelkurniawan126@gmail.com', 'angel_kurniawan1.pdf', '', 13, 'angel_kurniawan.jpg', 0, 2, 'SMP Pahoa', 1, 0),
+(116, '2018399', '0039920235', '0000000000000000', 'Arya Tejawijaya', 'L', 'Makassar', '2003-11-06', 5, 'WNI', 'Jl. Mangga 27 No.1/A RT05/RW03 Duri Kepa Jakarta Barat', 'ashta.kontraktor@gmail.com', 'Arya_Tejawijaya.pdf', '081808082136', 12, 'arya_teja.jpg', 0, 1, 'SMP Narada', 1, 0),
+(118, '2018391', '0027319487', '0000000000000000', 'Almaida Salwa Putra Rais', 'P', 'Jakarta', '2002-04-02', 1, 'WNI', 'Griya Serpong Asri Anyelir 5/9 Suradita RT05/RW08 Suradita Tangerang 15343', 'guguslegal@gmail.com', 'ALmaida_Salwa.pdf', '081311012319', 13, 'almaida_salwa.jpg', 0, 2, 'PKBM Bina Mandiri', 1, 0),
+(119, '2018356', '0061935570', '0000000000000000', 'Fachry Ghulam Arodana', 'L', 'Jakarta', '2006-09-19', 1, 'WNI', 'Cendana Residence blok C8/2 Pondok Benda, Pamulang, Tangsel 15416', '12345@gmail.com', 'Fachry_Ghulam_Aradana.pdf', '12345678', 8, 'Fachry_ghulam,.JPG', 0, 1, 'SD Al-Zahra Indonesia', 1, 0),
+(120, '2018390', '0030695397', '0000000000000000', 'Alfath Kemal Pasya', 'L', 'Jakarta', '2003-05-03', 1, 'WNI', 'Jl. Bangka VIII A/23 RT01/RW12 Pela Mampang Jakarta Selatan', 'salma.ilyass29@gmail.com', 'alfath.pdf', '081280129318', 13, 'alfath_kemal.jpg', 0, 1, 'MI Al-Hikmah', 1, 0),
+(122, '2018361', '0034368486', '0000000000000000', 'Jonathan Ansell Prasetya', 'L', 'Tangerang', '2003-11-28', 3, 'WNI', 'Jade Selatan no.3 Pondok Hijau Golf Summarecon Serpong Gading Serpong Tangerang 15810', 'heribertusparjoko@gmail.com', 'Jonathan_ansel.pdf', '081222372247', 8, 'Jonathan_Ansell.JPG', 0, 1, 'SD Kristen Penabur Gading Serpong', 1, 0),
+(123, '2018393', '0017378026', '0000000000000000', 'Amalia Ramadhaniyah ADP', 'P', 'Sukabumi', '2001-12-07', 1, 'WNI', 'KP. Kadudampit RT12/RW03 Sukabumi Jawa Barat 43153', 'amalia.ramadhaniyah@gmail.com', 'Amalia_Ramadhaniyah.pdf', '085720812520', 12, 'amalia_ramadaniah.jpg', 0, 2, 'SMPN 1 Cisaat', 1, 0),
+(124, '2018357', '0055147497', '0000000000000000', 'Gavin Amos Junior', 'L', 'Tangerang', '2005-10-14', 2, 'WNI', 'KP. Buaran Barat RT 015 RW 005 Kelurahan Jelupang Kecamatan Serpong Utara, Kota Tangerang Selatan. Banten', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '12345678', 8, 'Chrysanthemum.jpg', 1, 2, 'PKBM Sukses', 1, 0),
+(125, '2018396', '2024011212', '0000000000000000', 'Andiny Shausan Arifin', 'P', 'Jakarta', '2002-08-06', 1, 'WNI', 'Perum Serpong Jaya Cluster The Garden Blok GD 11', 'andinyshausan5@gmail.com', 'Andiny_shausan.pdf', '', 12, 'andiny.jpg', 0, 1, 'SMPK Penabur Bintaro Jaya', 1, 0),
+(126, '2018364', '0058323854', '0000000000000000', 'Lourencius Natanael Sumargo', 'L', 'Tangerang', '2005-12-28', 2, 'WNI', 'l. Permai 35 No.21\nKomplek margahayu permai\nBandung', 'navanna07@gmail.com', 'Laurensius1.pdf', '087889008311', 8, 'Lourencius_Sumargo.jpeg', 0, 1, 'Tunas Bina Bangsa', 1, 0),
+(127, '2018389', '0031137651', '0000000000000000', 'Alessandro Bernard Santoso', 'L', 'Jakarta', '2003-07-14', 3, 'WNI', 'Taman Brawijaya Jl. Kemang No.5 Lippo Karawaci', 'sinar_bintang_jaya@yahoo.com', 'Alesandri_Bernard.pdf', '087878855757', 12, 'alessandro_benard.jpg', 0, 2, 'SMP Mardi Yuana Cirebon', 1, 0),
+(128, '2018362', '0062849436', '0000000000000000', 'Joshua Miracle Thomas', 'L', 'Manado', '2006-03-27', 2, 'WNI', 'Lingkungan III -/003 Kel. Bahu, Manado', 'erni_th2504@yahoo.co.id ', 'joshua_miracle.pdf', '0812934711975', 8, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 2, 'PKBM Anak Panah', 1, 0),
+(129, '2020765', '0057140981', '0000000000000000', 'Muhammad Darrel Hugo Rabbani', 'L', 'Depok', '2005-11-03', 1, 'WNI', 'Jl. Swadaya no.58 RT06/RW02 Kel.Limo, Kec.Limo, Depok, Jawa Barat 16515', 'riosplace@gmail.com', 'muhammad_darel.pdf', '', 8, 'Darrel_Hugo.jpeg', 0, 2, 'SD Islam Sinar Cendekia', 1, 0),
+(130, '2018388', '0014826161\r\n', '0000000000000000', 'Agustinus Friki', 'L', 'Cibinong', '2001-05-20', 3, 'WNI', 'Commercial III Blok B1 No.1-1A Sektor1.5 BSD City RT07/RW08 Lengkong Gudang Timur Tangerang Selatan 15318', 'as@dnet.net.id', 'agustinus_fikri.pdf', '081290744894', 13, 'agustinus_friki.jpg', 0, 1, 'SMP Sint Joseph', 1, 0),
+(131, '2018366', '2065030126', '0000000000000000', 'Muhammad Ghana Hadi', 'L', 'Depok', '2006-07-08', 1, 'WNI', 'Komp Poin Mas Blok E No 2 Pancoran Mas, Kota Depok', '123456@gmail.com', 'muhammad_ghana_hadi1.pdf', '087881848300', 8, 'Screenshot_8.png', 0, 2, 'SD Perjuangan Terpadu Kecamatan Pancoran mas', 1, 0),
+(132, '2018402', '0012667213', '0000000000000000', 'Bilqistha Maysah M.', 'P', 'Surabaya', '2001-05-09', 1, 'WNI', 'Jl. H. Mochtar KP. Pondok Randu RT13/RW02 Duri Kosambi Jakarta Barat 11750', 'bilqistham09@gmail.com', 'BIlqistha1.pdf', '08994366822', 13, 'bilaista.jpg', 0, 1, 'SDI Al-Ikhwan', 1, 0),
+(133, '2018381', '0066892835', '0000000000000000', 'Stacy Queency Pandean', 'P', 'Manado', '2006-06-25', 2, 'WNI', 'BTN Puskopad Blok A16 Perkamil Manado', 'stacypandean@gmail.com ', 'stacy_quency.pdf', '081356656342', 8, 'Stacy_Qeency.jpeg', 0, 3, 'SD Katolik 3 Frater ', 1, 0),
+(134, '2018367', '0069062468', '0000000000000000', 'Matthew Claudius', 'L', 'Jakarta', '2005-04-03', 3, 'WNI', 'Villa Resort Mediterania no. A9i. ', 'devysagita@gmail.com ', NULL, '085718888337', 8, 'Matthew_Claudius.jpeg', 0, 1, 'SD The Woodlands Montessori Primary School', 1, 0),
+(135, '2018363', '0054981753', '0000000000000000', 'Kenji Dallas Hong', 'L', 'Medan', '2005-02-24', 5, 'WNI', 'jL.R. Junjungan Lubis no.35 Sibolga, Sumatera Utara', '12345@gmail.com', 'kenji1.pdf', '085261273534', 8, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SD Tri Ratna ', 1, 0),
+(136, '2018358', '0066651217', '0000000000000000', 'Georgiena Raissa Martana', 'P', 'Surabaya', '2006-08-09', 2, 'WNI', 'Jalan  : TAMAN KEBON JERUK BLOK U 9 NOMOR 10 rt.04/06	\n', 'eastjava_26@yahoo.com', 'Scan_Museum_Anatomi.pdf', '12345678', 8, 'Geogina_raissa.jpeg', 0, 2, 'SD Swasta Stella Maris', 1, 0),
+(137, '2018383', '0064469202', '0000000000000000', 'Theresia Regitha Halim', 'P', 'Jakarta', '2006-08-12', 3, 'WNI', 'Jl Dr. Muwardi Raya No 22 Grogol Jakarta Barat', 'huatwang@gmail.com', 'theresia.pdf', '08161158187', 8, 'Theresia_Regita.jpeg', 0, 3, 'SMP Kemurnian II', 1, 0),
+(138, '2018401', '2035965400', '0000000000000000', 'Bianca Alaasya Putri Nugraha', 'P', 'Tangerang', '2003-05-09', 1, 'WNI', 'Perumahan Alam Sutera, Jl. Sutera Elok 1/6 Serpong Tangerang', 'biancaalaasya.mowat@gmail.com', 'BIANCA_ALASYA.pdf', '081288826533', 12, 'bianca.jpg', 0, 1, 'SDN Ngelempong Sleman', 1, 0),
+(139, '2018384', '0057912761', '0000000000000000', 'Viona Gwyn Victor', 'P', 'Jakarta', '2005-06-03', 2, 'WNI', 'Gelong Baru Tengah No 19 Tomang Jakarta Barat', 'harisratna@gmail.com ', 'viona.pdf', '081383155554', 8, 'Viona_Gwyn.jpeg', 0, 1, 'SDS Woodlands Montessori', 1, 0),
+(140, '2018372', '0057562625', '0000000000000000', 'Nicholas Septhian', 'L', 'Jakarta', '2005-09-11', 2, 'WNI', 'Jl. Kerukunan 1 blok F2 no 15 Jak Bar', 'iinemil2@gmail.com ', 'nicholas.pdf', '081216877782', 8, 'Nichiolas_Septian.jpeg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(141, '2018368', '0065158415', '0000000000000000', 'Michelle Gracielle Karnadi', 'P', 'Jakarta', '2006-12-24', 2, 'WNI', 'Jl.Kembang Sepatu No 27 11/01 Kel Kramat, Jakarta pusat', 'graciellemichelle24@gmail.com ', 'Michelle_Graciella_K81.pdf', '', 8, 'Michelle_graciella.jpeg', 0, 3, 'SMPK 2 Penabur', 1, 0),
+(142, '2018404', '0034377502', '0000000000000000', 'Danisha Sofie Tanuwidjaja', 'P', 'Tangerang', '2003-11-29', 1, 'WNI', 'Jl. Peta Selatan Blok I No.32 Jakarta Kalideres 11840', 'hendri.0701@gmail.com ', 'Danisha_ijazah-converted.pdf', '081383447006', 12, 'danisha_safie.jpg', 0, 2, 'SMP Bonavita', 1, 0),
+(143, '2018369', '0065556998', '0000000000000000', 'Mohammad Akhtar Amarthya M D', 'L', 'Jakarta', '2006-09-25', 1, 'WNI', 'Taman Permata I Bintaro HG 16 no 7. Bintaro Jaya Sektor 9. Tangerang Selatan 15227', 'reeve1001@gmail.com', 'M_akhtar1.pdf', '087876127345', 8, 'Screenshot_4.png', 0, 2, 'Anak Panah', 1, 0),
+(144, '2018379', '2084182271', '0000000000000000', 'Sintha Edlyn Chung', 'P', 'Jakarta', '2006-08-24', 3, 'WNI', 'Bukit Serpong Mas Blok D 6 no 20', 'skhamdari81@gmail.com', 'shinta_.pdf', '089651961041', 8, 'Sintha_Edelyn.jpeg', 0, 2, 'PAHOA', 1, 0),
+(145, '2018371', '0054490800', '0000000000000000', 'Muhammad Zaki Ikbaar Ramadhan', 'L', 'Surabaya', '2005-10-08', 1, 'WNI', 'Tambak Seragan No 66 04/09 Kel Rangkah, Surabaya', 'salmaaaabidahazzhra@gmail.com', 'zaki1.pdf', '087853101981', 8, 'M_zaki.jpeg', 0, 1, 'Anak Panah', 1, 0),
+(146, '2018418', '2778520858', '0000000000000000', 'Jasson Owen Lipriatna', 'L', 'Jakarta', '2002-08-15', 2, 'WNI', 'Jl Prof Dr Latumelen V No.23 Jakarta Barat', '12345@gmail.com', 'jasseon_owen.pdf', '0', 13, 'Screenshot_6.png', 0, 1, 'SMPK 2 Penabur', 1, 0),
+(147, '2018405', '0033591757', '0000000000000000', 'David Rivendell Walalangi', 'L', 'Makassar', '2003-05-10', 3, 'WNI', 'Jl. Boulevard Tulip C1/5 RT03/RW05 Panakkukang Masale Makassar', 'rudysw@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '0811469690', 13, 'david_rivendell.jpg', 0, 1, 'SMP Dian Harapan', 1, 0),
+(148, '2018421', '0035756509', '0000000000000000', 'Joshua Torkis Gultom', 'L', 'Tangerang', '2003-06-09', 2, 'WNI', 'Villa Melati Mas Blok V.10/16 Rt. 57/08 Jelupang, Serpong Utara, Tangerang Selatan', 'jtorkis@gmail.com', 'josua_torkis.pdf', '0', 15, 'joshua_torkis.jpg', 0, 2, 'SMP Efata Serpong', 1, 0),
+(149, '2018427', '0036911321', '0000000000000000', 'Leonardus Billy Adindra', 'L', 'Jakarta', '2001-01-23', 3, 'WNI', 'Commercial III blok B1 No 1 Sekt 1,5 RT 07/08 Lengkang Gudang TImur, Serpong', '123456@gmail.com', NULL, '', 13, 'leonardus_billy.jpg', 0, 7, 'Anak Panah', 1, 0),
+(150, '2018374', '0068577354', '0000000000000000', 'Rhenata Hanisa Putri', 'P', 'Depok', '2006-06-08', 1, 'WNI', 'Jalan  : PERUM BCI BLOKA 6 NO.22 rt.04/26	\n', 'kirana.niy@gmail.com ', 'Scan_Museum_Anatomi.pdf', '087781413293', 8, 'Rhenata.jpeg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(151, '2018407', '0035747350', '0000000000000000', 'Enjelita Suwandi', 'P', 'Jakarta', '2003-08-21', 5, 'WNI', 'APT Mansion Blok JD28/K RT007/RW011 Pademangan Timur Jakarta Timur', 'enjelitasuwandi@gmail.com', 'enjelita_sumandi.pdf', '0816889890', 13, 'enejlita_suwadi.jpg', 0, 1, 'SMP Universal School', 1, 0),
+(152, '2018419', '0031873789', '0000000000000000', 'Johannes Evan Budiman', 'L', 'Jakarta', '2003-06-18', 2, 'WNI', 'Apartemen Green Palm lt. 7/A05 Jl Kresek Raya Duri Kosambi Jakarta Barat', '12345@gmail.com', 'evan_budiman.pdf', '08998371190', 13, 'Screenshot_6.png', 0, 3, 'SMP Efata Serpong', 1, 0),
+(153, '2018380', '0068527055', '0000000000000000', 'Siti Aulia Gemilang Maulana', 'P', 'Jakarta', '2006-04-26', 1, 'WNI', 'perumahan sakura regency 1 Blok G 14 jatiasih bekasi 17423', 'qq_padri@yahoo.com ', 'siti_aulia.pdf', '089683064839', 8, 'Siti_Aulia.jpeg', 0, 1, 'SD Tunas Jakasampurna', 1, 0),
+(154, '2018406', '0032497573', '0000000000000000', 'Eda Akman', 'P', 'Tangerang', '2003-07-15', 3, 'WNI', 'Taman Ubud Loka VII No.16 Lippo Karawaci Kelurahan Binong Tangerang', 'ssoenanta@yahoo.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '', 12, 'tidur-dengan-kucing.jpg', 0, 1, 'PKBMN 29 Cempaka Baru', 1, 0),
+(155, '2018433', '0031930834', '0000000000000000', 'Michelle Roan Widiyono', 'P', 'Jakarta', '2003-07-23', 3, 'WNI', 'Regensi Melati Mas Blok E6/17 Tangerang Selatan', '123456@gmail.com', 'michelle_roan1.pdf', '', 12, 'michelle_roan_w.jpg', 0, 1, 'PKBM Alfa Omega', 1, 0),
+(156, '2018375', '2061375954', '0000000000000000', 'Rianna Callysta Nadien', 'P', 'Serang', '2005-09-18', 1, 'WNI', 'ln Adhyaksa VI RT 04/05 Karang Tengah- Karang Mulya. Tangerang.', 'enenghidayati68@gmail.com', 'rianna_nadien.pdf', '0813 1847 8268', 8, 'Tulips.jpg', 0, 3, 'SDN Begeg', 1, 0),
+(157, '2018413', '2014659446', '0000000000000000', 'Frederico Antonius Mario Labina', 'L', 'Tangerang', '2001-10-20', 3, 'WNI', 'Medang Lestari Blok C IV/A71 RT007/RW009 Medang Pagedangan Tangerang', '123456@gmail.com', 'fredrico.pdf', '', 13, 'tidur-dengan-kucing.jpg', 0, 1, 'SMP Bendemper Secondary School', 1, 0),
+(158, '2018428', '2034556976', '0000000000000000', 'M Alfarel Ferdi ', 'L', 'Padang', '2003-02-20', 1, 'WNI', 'Perum Mutiara Putih R/7 Padang', '123456@gmail.com', 'Muhammad_Alfarel_Ferdi1.pdf', '', 13, 'Screenshot_4.png', 0, 2, 'Plus Marhamah padang', 1, 0),
+(159, '2018408', '0033319808', '0000000000000000', 'Fanes Timothy', 'L', 'Jakarta', '2003-12-19', 2, 'WNI', 'Centro Havana M3/10 De Latinos BSD RT005/RW018 Rawa Buntu Serpong Tangerang', 'fanes.timothy@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '081806398766', 12, 'fanes_timothy.jpg', 0, 3, 'SMPK IPEKA BSD', 1, 0),
+(160, '2018429', '0034717225', '0000000000000000', 'Malika Hasna Syafira', 'P', 'Pekalongan', '2003-08-24', 1, 'WNI', 'Jl. Manunggal XVII No 103 Jakarta Timur', '123456@gmail.com', NULL, '', 12, 'Screenshot_6.png', 0, 1, 'SMAN 113 Jakarat', 1, 0),
+(161, '2018376', '0068130310', '0000000000000000', 'Salma Alfira', 'P', 'Tangerang', '2006-01-28', 1, 'WNI', ' Jalan Akasia Raya K. 4-5 rt.07/12	\n', 'renoyusfira@gmail.com', 'salma_alfira.pdf', '0811909311', 8, 'Tulips.jpg', 0, 2, 'PKBM Anak Panah', 1, 0),
+(162, '2018409', '0034378710', '0000000000000000', 'Felisia Agata', 'P', 'Tangerang', '2003-09-27', 3, 'WNI', 'Jl. Jamblang III No.75 RT003/RW015 Cibodas Tangerang', '123456@gmail.com', 'felicis_agata.pdf', '', 13, 'felisia_agata.jpg', 0, 3, 'SMP Citra Kasih Kota Tangerang', 1, 0),
+(163, '2018385', '0', '0000000000000000', 'Yasmin Mumtaz Lantu', 'P', 'Jakarta', '2006-09-28', 1, 'WNI', 'Prumpung Tengah RT/RW 004/006 Cipinang besar utara, Jatinegara, Jakarta Timur', 'noermarisa@yahoo.com ', 'yasmin.pdf', '081210447044', 8, 'Yasmin_Mumtaz.jpeg', 0, 2, 'MI Tunas Mulia', 1, 0),
+(164, '2018432', '0032496407', '0000000000000000', 'Michael Marvin IP', 'L', 'Jakarta', '2003-10-05', 3, 'WNI', 'BRBJ Cluster Fedura Blok J 20/16 RT 06/15, Pakujaya, Serpong Utara', '123456@gmail.com', 'marvin1.pdf', '', 12, 'Screenshot_81.png', 0, 1, 'SMP Tarakanita Gading Serpong', 1, 0),
+(165, '2018422', '0020887761', '0000000000000000', 'Justine Anthony Efendy', 'L', 'Jakarta', '2002-03-12', 5, 'WNI', 'Villa Gading Indah Blok I No 26, Rt 05/14 Kelapa Gading Jakarta Utara', 'cenni1476@gmail.com', 'justine_anthony1.pdf', '081808377688', 13, 'justine.jpg', 0, 2, 'SMP Tunas Karya', 1, 0),
+(166, '2018411', '0021130115', '0000000000000000', 'Feyla Moira', 'P', 'Denpasar', '2002-06-26', 1, 'WNI', 'Jl. Gunung Lempuyangan V No.04 BR/LINK. Bhuana Sari Tegal Karta Denpasar 80119', 'yudi.hart@yahoo.co.id', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '081933113037', 13, 'feyla_moira.jpg', 0, 1, 'SMP Muhammadiyah 2 Denpasar', 1, 0),
+(167, '2019673', '0031268621', '0000000000000000', 'Jessica Priscillia Kim', 'P', 'Bogor', '2003-11-11', 1, 'WNI', 'Grand Cilegon Residence Jl Bougenville Raya No 19', 'oeylingling77@gmail.com', 'Contoh.pdf', '085218071448', 11, 'Screenshot_6.png', 0, 1, 'SMP 1 Cilegon', 1, 0),
+(168, '2018431', '0033491559', '0000000000000000', 'Michael Jan', 'L', 'Jakarta', '2003-10-27', 3, 'WNI', 'Taman Kebon Jeruk B 1/43 02/09 Srengseng, Kembangan, Jakarta Barat', '123456@gmail.com', 'michael_jan1.pdf', '', 12, 'michae_jan.jpg', 0, 1, 'SMP Katolik Abdi siswa 11', 1, 0),
+(169, '2018410', '0025158149', '0000000000000000', 'Ferdy Raihan', 'L', 'Jakarta', '2002-10-20', 1, 'WNI', 'Jl. Panca Warga 1 RT011/RW03 No.5 Jakarta Timur 13410', 'aisatriawati1@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '087775774200', 13, 'ferdy.jpg', 0, 2, 'SMPN 149 Jakarta Timur', 1, 0),
+(170, '2018423', '2033400023', '0000000000000000', 'Katrina Samantha Lastra Mangahas', 'P', 'Filipina', '2003-03-03', 2, 'WNI', 'Jl Danau Batur Raya 40B Taman Griya Jimbaran', '12345@gmail.com', 'katrina.pdf', '0', 12, 'katrina_samanta.jpg', 0, 2, 'SMP Cipta Dharma Denpasar', 1, 0),
+(171, '2018435', '0024743884', '0000000000000000', 'Muhammad ThohaBangun', 'L', 'Berastogi', '2002-06-04', 1, 'WNI', 'Alamat Jalan  : DOLAT RAYAT Desa / Kelurahan : Dolat Rayat Kode Pos  : 22171\n', '123456@gmail.com', 'toha_bangun1.pdf', '', 12, 'm_thoha_bangun.jpg', 0, 2, 'SMPN 1 Berastogi', 1, 0),
+(172, '2018420', '0031657261', '0000000000000000', 'Jonathan Jason Junianto', 'L', 'Palangkaraya', '2003-09-05', 3, 'WNI', 'Jl Raya BD Utara Ruko Paramount Blue No 19 Rt 001/020 Kelapa Dua', '12345@gmail.com', 'jason_junianto1.pdf', '0', 12, 'jonatha_jason.jpg', 0, 1, 'SMP Pahoa', 1, 0),
+(173, '2018412', '0038550861', '0000000000000000', 'Firyal Aisyah Zalfa', 'P', 'Jakarta', '2003-03-22', 1, 'WNI', 'Jl. Paradise Rasamala I Blok16/22 RT02/RW07 Babakan Serpong City Tangerang Selatan 15315', 'firyalaisyah2203@gmail.com', 'Firyal_Aisyah.pdf', '0895344091315', 13, 'firyal_aisyah.jpg', 0, 2, 'SMP Taruna Mandiri', 1, 0);
+INSERT INTO `tbl_siswa` (`siswa_id`, `siswa_nis`, `siswa_nisn`, `nik_siswa`, `siswa_nama`, `siswa_jenkel`, `siswa_tempat`, `siswa_tgl_lahir`, `siswa_agama_id`, `siswa_kewarganegaraan`, `siswa_alamat`, `siswa_email`, `siswa_dokumen`, `siswa_no_telp`, `siswa_kelas_id`, `siswa_photo`, `soft_deleted`, `anak_ke`, `sekolah_asal`, `satelit`, `oc`) VALUES
+(174, '2018377', '0063064077', '0000000000000000', 'Sebastian Hans Purnomo', 'L', 'Jakarta', '2006-01-04', 3, 'WNI', ' JLN.KRISTAL PERMATA HIJAU BLOK G/6 rt.08/13	\n', 'sebastianhanspurnomo@gmail.com', 'Sebastian_Hans.pdf', '08161988876', 8, 'Sebastian_Hans.jpeg', 0, 1, 'SD Swasta Regina Pacis', 1, 0),
+(175, '2018436', '0029886675', '0000000000000000', 'Muhammad Tsaqif Hilmy Asy Syatri', 'L', 'Jakarta', '2002-09-18', 1, 'WNI', 'Alamat Jalan  : JL. NUH RAYA NO.8 rt.05/05 Desa / Kelurahan : Sukabumi Utara Kode Pos  : 11540\n', '123456@gmail.com', NULL, '089688494641', 12, 'muhammad_tsaqif_hilmy.jpg', 0, 2, 'SMPN 127 Jakarta', 1, 0),
+(176, '2018424', '2133893769', '0000000000000000', 'Kea Adinda Hari', 'P', 'Jakarta', '2003-06-25', 3, 'WNI', 'Jl Banyuwangi No 5 Rt 04/05 Menteng Jakarta Pusat', 'as@dnet.net.id', 'kea1.pdf', '081290744894', 13, 'hea_adinda_itari.jpg', 0, 2, 'PKBM Anak Panah', 1, 0),
+(177, '2018434', '0036306956', '0000000000000000', 'Mohammed Shaquelle A', 'L', 'Dubai', '2003-10-29', 1, 'WNI', 'Alamat Jalan  : CLUSTER MICHELIA JL. MICHELIA 10 NO.5 GADING SERPONG rt.03/08\n', '123456@gmail.com', NULL, '', 12, 'm_shaquelle.jpg', 0, 1, 'SMPS SYafana Islamis School', 1, 0),
+(178, '2018425', '0031930823', '0000000000000000', 'Kevin Antonius', 'L', 'Jakarta', '2003-07-09', 3, 'WNI', 'Jl Tangki Lio Timur 46B', '12345@gmail.com', 'kevin_antonius.pdf', '0', 12, 'Screenshot_6.png', 0, 1, 'Binus School Serpong', 1, 0),
+(179, '2018378', '2055723917', '0000000000000000', 'Shafadinda Rizkya Ramadanhy', 'P', 'Jakarta', '2005-09-06', 1, 'WNI', 'JALAN PALMERAH BARAT 1 NOMOR 38 rt.07/07	\n', 'novelialokasasmita@gmail.com', 'Shafadinda.pdf', '087822949393', 8, 'Shafadinda.jpeg', 0, 4, 'SD Negeri Palmerah 07 Pagi', 1, 0),
+(180, '2018430', '0038216337', '0000000000000000', 'Matthew Alexander Panggabean', 'L', 'Jakarta', '2003-06-04', 2, 'WNI', 'Alamat Jalan  : JL DUREN TIGA BARAT NO 11 rt.04/01 Desa / Kelurahan : Duren Tiga\n', '123456@gmail.com', NULL, '', 13, 'matthew_alex.jpg', 0, 1, '', 1, 0),
+(181, '2020747', '0033616136', '0000000000000000', 'Gabriella Ranti', 'P', 'Tangerang', '2003-01-15', 2, 'WNI', 'Jl. Empu Kanwa II No.36 RT006/RW006 Cibodas Baru Cibodas Kota Tangerang 15138', 'tary74@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '081213966659', 12, 'tidur-dengan-kucing.jpg', 0, 1, 'SMP Swasta Surya Bangsa', 1, 0),
+(182, '2018416', '2031472634', '0000000000000000', 'Grace Abdiella Husada', 'P', 'Delft', '2003-12-29', 2, 'WNI', 'Jl. Cempaka Putih Barat 2H/7E RT010/RW003 Kel. Cempaka Putih Barat Kec. Cempaka Putih Jakarta Pusat DKI Jakarta', '123456@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '', 12, 'tidur-dengan-kucing.jpg', 1, 2, 'PKBM Alfa Omega', 1, 0),
+(183, '2018414', '0038290298', '0000000000000000', 'Giacinta mitchelia dharma', 'P', 'Samarinda', '2003-10-19', 3, 'WNI', 'Jl. Dewi Sartika RT008 Kel. Bontang Baru Kec. Bontang Utara Kota Bontang 75313 Kalimantan Timur', '123456@gmail.com', 'giacinta.pdf', '0811581003', 12, 'tidur-dengan-kucing.jpg', 0, 1, 'SMPN 1 Bontang', 1, 0),
+(184, '2018415', '0018698649', '0000000000000000', 'Gisela Olga Kurniawan', 'P', 'Tangerang', '2001-12-31', 3, 'WNI', 'Jl. Kelapa Puan XX AH.6 No.9 RT08/RW12 Kel. Pakulonan Barat Kota Tangerang 15812', 'thomas.skudo@gmail.com', 'Gisela_Olga_Kurniawan.pdf', '082122221163', 13, 'gisela_olga.jpg', 0, 2, 'SMP Swasta Pahoa', 1, 0),
+(185, '2019668', '2043584770', '0000000000000000', 'Gracia  Listiana Rahayu', 'P', 'Ungaran', '2004-04-30', 2, 'WNI', 'Br. Sorongga Kelod Sorongga Gianyar Bali 80561', '123456@gmail.com', 'Gracia_Listiana_Rahayu.pdf', '', 11, 'tidur-dengan-kucing.jpg', 0, 2, '', 1, 0),
+(186, '2018417', '2038949816', '0000000000000000', 'Iqbal Maulana Abrori ', 'L', 'Situbondo', '2003-03-23', 1, 'WNI', 'Unknown', '123456@gmail.com', 'iqbal_maulana_abrori.pdf', '', 13, 'tidur-dengan-kucing.jpg', 0, 1, 'SMPN 1 Kendit', 1, 0),
+(187, '2019672', '9931453504\r\n', '0000000000000000', 'Indra Lesmana', 'L', 'Bogor', '1993-11-07', 1, 'WNI', 'KP. Nanggela RT003/RW006 Kel. Sukamaja Kec. Tajurhalang Kota Bogor 16320', '123456@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '089611421793', 13, 'tidur-dengan-kucing.jpg', 1, 1, 'SMPN 1 Bojong Gede', 1, 0),
+(189, '2018437', '0012742564', '0000000000000000', 'Patricia Ysabel', 'P', 'Salatiga', '2001-12-08', 2, 'WNI', 'Jl. Alpukat Blok XB No 19 Harapan Indah RT 2/20 Pejuang, Medan Satria, Kota Bekasi', '123456@gmail.com', 'patricia_ysabel1.pdf', '1212121212121', 13, 'patricia_xsabel.jpg', 0, 2, 'PKBM Negeri 29 Cempaka', 1, 0),
+(190, '2018447', '0027507801', '0000000000000000', 'Sintia Putri Fajar', 'P', 'Purbalingga', '2002-04-30', 1, 'WNI', 'Karangbanjar rt 1/1, Bojongsari, Purbalingga, Jawa Tengah	\n', '12345@gmail.com', 'sintia_putri.pdf', '0895379048664', 12, 'sintia_putri_fajar.jpg', 0, 2, 'SMP Negeri 2 Kutasari', 1, 0),
+(191, '2018486', '0094905047', '0000000000000000', 'Abel Cicero Markam ', 'L', 'Jakarta ', '2009-06-06', 1, 'WNI', 'KP. Pondok Randu RT013/RW002 Kel. Duri Kosambi Kec. Cengkareng Jakarta Barat 11750', 'febriyanti.sap@gmail.com ', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '082310742720', 3, 'Abel._C_._M_.jpg', 0, 5, 'PKBM Anak Panah HS', 1, 0),
+(192, '2018442', '2108820179', '0000000000000000', 'Raihan Addar Quthni ', 'L', 'Bondowoso', '2000-03-29', 1, 'WNI', 'Alamat Jalan  : JALAN HEBRAS NOMOR 245 rt.02/06 Desa / Kelurahan : Jatimulya\n', 'ganesha@persija.ac.id', 'Raihan_Addar_quthni1.pdf', '12121212121', 13, 'raihan_addar1.JPG', 0, 2, 'MI Negeri Malang I', 1, 0),
+(193, '2018448', '0038120642', '0000000000000000', 'Sisilia Jonta', 'P', 'Makassar', '2003-05-29', 5, 'WNI', 'Alamat Jalan  : CLUSTER BOSTON VILLAGE JALAN BOSTON BARAT rt.01/33 Desa / Kelurahan : Kelebet Kode Pos  : 15334	\n', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '12345678', 12, 'sisilia_jantra.jpg', 0, 1, 'SMP Katolik Rajawali Makassar', 1, 0),
+(194, '2018491', '0111560833', '0000000000000000', 'Audrey Aulia Anindhita Permana', 'P', 'Jakarta', '2011-06-12', 1, 'WNI', 'Dolok Merangir Simalungun Sumatera Utara', 'permanabcr@gmail.com', 'audrey.pdf', '08116244664', 3, 'Audrey_Aulia_Anindita_Permana.jpg', 0, 2, 'PKBM Anak Panah HS', 1, 0),
+(195, '2018439', '0034638769', '0000000000000000', 'Rafaesa Devani Azzahra', 'P', 'Jakarta', '2003-03-17', 1, 'WNI', 'Alamat Jalan  : CLUSTER SEVILLA BLOK AK/21 BSD CITY rt.01/13 Desa / Kelurahan : Rawa Mekar\n', '123456@gmail.com', 'rafaesa_21.pdf', '12121212121', 12, 'Screenshot_7.png', 0, 1, 'SMP Sinar Cendekia', 1, 0),
+(196, '2018488', '0113375235', '0000000000000000', 'Alexander Christian Prabowo', 'L', 'Tangerang', '2011-01-04', 2, 'WNI', 'Jl. Porto 2 No.1 Sektor 6 Gading Serpong', 'lily.chris12@gmail.com', 'Alexander_Christian_.pdf', '081212623322', 3, 'Alexander_Christian.jpg', 0, 2, 'PKBM Anak Panah HS', 1, 0),
+(197, '2018450', '2032819203', '0000000000000000', 'Sulthan Dandhy  Alfito', 'L', 'Jakarta', '2003-07-12', 1, 'WNI', 'Alamat Jalan  : JALAN PALMERAH BARAT 1 NOMOR 38 rt.07/07 Desa / Kelurahan : Palmerah Kode Pos  : 11480	\n', '12345@gmail.com', 'sulthan_akta-converted.pdf', '12345678', 13, 'sultan_dandry.jpg', 0, 3, 'SMP Negeri 88 Jakarta', 1, 0),
+(198, '2018445', '0020456571', '0000000000000000', 'Rifka Dwi Octavia', 'P', 'Tangerang', '2002-10-08', 1, 'WNI', 'Alamat Jalan  : BUANA PERMAI BLOK 1-14 rt.03/09 Desa / Kelurahan : Cipondoh Kode Pos  : 15148\n', 'rudyarnowo15@gmail.com', NULL, '08174860558', 13, 'rifka_dwi_oktavia.jpg', 0, 2, 'SMPN 1 Tangerang', 1, 0),
+(199, '2018487', '0113951432', '0000000000000000', 'Ahsan Khairyansyah Adhyatmika', 'L', 'Jakarta', '2011-07-05', 1, 'WNI', 'Jl. Raya Malaka No.54 RT002/RW008 Kel. Malaka Sari Kec. Duren Sawit Jakarta Timur 13460', 'endra_adhyatmika@yahoo.co.id', 'ahsan.pdf', '087877047795', 3, 'Ahsan.jpg', 0, 1, 'PKBM Anak Panah HS', 1, 0),
+(200, '2018443', '0022239581', '0000000000000000', 'Reaven Shabian Himawan', 'L', 'Jakarta', '2002-04-26', 2, 'WNI', 'Alamat Jalan  : JL LONTAR TMR NO.17A rt.10/06 Desa / Kelurahan : Tanjung Duren Utara\n', 'hhimawan24@yahoo.com', NULL, '083876302788', 13, 'reaven.jpg', 0, 3, 'Anak Panah', 1, 0),
+(201, '2018490', '0104191940', '0000000000000000', 'Ardean Arwoon', 'L', 'Jakarta', '2010-05-19', 5, 'WNI', 'Apartement City Park Tower A Lantai 8 No 1', 'febriyanti.sap@gmail.com', 'arden_arwon.pdf', '082123928889', 3, 'Ardean._A_.jpg', 0, 4, 'PKBM Anak Panah HS', 1, 0),
+(202, '2018446', '0032013694', '0000000000000000', 'Shilla Aprodhita', 'P', 'Bogor', '2003-01-10', 1, 'WNI', 'JALAN KELAPA SAWIT 12 BLOK BF-8 NO 02 rt.04/13 Desa / Kelurahan : Pakulonan Barat Kode Pos  : 15812	\n', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '12345678', 13, 'Tulips.jpg', 1, 2, 'SMA Tunas Mulia', 1, 0),
+(203, '2018441', '0022777473', '0000000000000000', 'Rafiqa Imani', 'P', 'Tangerang', '2002-11-11', 1, 'WNI', 'Alamat Jalan  : KP.PARABON rt.02/03 Desa / Kelurahan : Ciloto Kode Pos  : 43255\n', 'bundararaty.traderfx@yahoo.co.id', 'Rafiqa_Imani.pdf', '081388097227', 12, 'rariqa.jpg', 0, 2, 'SMPIT Daarul Hasan', 1, 0),
+(204, '2018489', '0101892013', '0000000000000000', 'Angela Prudence Prasetyo', 'P', 'Jakarta', '2010-11-29', 3, 'WNI', 'Bukit Rivaria sektor 5 blok i5 no 2 Sawangan Depok', 'angela.prudence.prasetyo@gmail.com', 'anggela_prudence.pdf', '081228094179', 3, 'Angela_Prudence_Prasetyo.jpg', 0, 1, 'PKBM Anak Panah HS', 1, 0),
+(205, '2018449', '0028707324', '0000000000000000', 'Stefanie Lauw', 'P', 'Tangerang', '2002-06-21', 2, 'WNI', 'Jalan  : KP. BUARAN BARAT rt.15/05 Desa / Kelurahan : Jelupang Kode Pos  : 15323	\n', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '081399113322', 13, 'Tulips.jpg', 1, 2, 'PKBM 21 Tebet Timur', 1, 0),
+(206, '2018492', '0108365292', '0000000000000000', 'Bryan Nathanael Abednego H.', 'L', 'Denpasar', '2010-12-15', 2, 'WNI', 'Perum. Graha Bagasasi Blok G4 No 1. Sindang Mulya. Cibarusah. Kab. Bekasi.', 'dancingclown9@gmail.com ', 'bryan_hutasoit.pdf', '081237812868', 3, 'Bryan_Nathanael_Abednego.jpg', 0, 2, 'PKBM Anak Panah HS', 1, 0),
+(207, '2018451', '0029268268', '0000000000000000', 'Tony Candra Wijaya', 'L', 'Tangerang', '2002-09-17', 5, 'WNI', 'CLUSTER ANGELONIA BLOK A.I/H.27 rt.05/15 Desa / Kelurahan : Medang	\n', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '087741617276', 13, 'tony_candra_wajaya.jpg', 0, 2, 'SMP Perguruan Budhi', 1, 0),
+(208, '2018444', '0020128256', '0000000000000000', 'Rifda Agustin', 'P', 'Tangerang', '2002-08-13', 1, 'WNI', 'Alamat Jalan  : JL.FALAQI 1 BLOK C NO.85 VILA ILHAMI rt.08/13\n', '123456@gmail.com', 'rifda1.pdf', '12121212121', 13, 'rifda_agustin_auliani.jpg', 0, 2, 'SMPN 1 Tenjolya', 1, 0),
+(209, '2017205', '0045192463', '0000000000000000', 'Kevin Kartono', 'L', 'Jakarta', '2004-10-17', 3, 'WNI', 'Jl. Teuku Cik Ditiro no 76 PAV , Jakarta Pusat, Menteng', 'robertkartono7@gmail.com', 'Kevin_Kartono.pdf', '085691099817', 9, 'WhatsApp_Image_2020-03-11_at_11.26_.28_AM_.jpeg', 0, 2, 'SD Swasta Santo Ignatius', 1, 0),
+(210, '2018493', '0107457991', '0000000000000000', 'Cheryl Valerie Hasjim', 'P', 'Jakarta', '2010-10-06', 2, 'WNI', 'Taman Ratu Indah Blok A. 1 No.38 RT001/RW013 Kel. Duri Kepa Kec. Kebon Jeruk Jakarta Pusat', 'mariamagdalena1184@gmail.com', 'cherryl.pdf', '02129020651', 3, 'Cheryl_Valete.jpg', 0, 1, 'SDS Woodlands Montessori', 1, 0),
+(211, '2018440', '2037083314', '0000000000000000', 'Raffi Hilmi Hidayat ', 'L', 'Tasik malaya', '2003-03-28', 1, 'WNI', 'Alamat Jalan  : JL. CEMPAKAWARNA NO.4/55  rt.01/08 Desa / Kelurahan : Cilembang Kode Pos  : 46123\n', '123456@gmail.com', NULL, '12121212121', 13, 'Screenshot_7.png', 0, 1, 'MTs Negeri 1 Tasik Malaya', 1, 0),
+(212, '2018453', '0034494946', '0000000000000000', 'Vanessa Febry', 'P', 'Pontianak', '2003-02-28', 3, 'WNI', 'TAMAN SEMANAN INDAH BLOK E7 NOMOR 39 rt.13/12	\n', 'vanessafebry@gmail.com ', 'vanesa_ferby.pdf', '087789281666', 13, 'Vannesa_febri.jpg', 0, 2, 'SMP Kristen Kasih Kemuliaan', 1, 0),
+(213, '2018494', '0106022436', '0000000000000000', 'Ekranio Khowarizmi', 'L', 'Jakarta', '2010-02-17', 1, 'WNI', 'Lorong O No.7 \nRT/RW: 011 / 005 KOJA\nJakarta Utara', 'enny.pzia@gmail.com', 'ekraino_2.pdf', '085219344344', 3, 'Ekranio_Khowarismi.jpg', 0, 1, 'PKBM Anak Panah HS', 1, 0),
+(214, '2017210', '0060130788', '0000000000000000', 'Melvern Deannova Vimanta', 'L', 'Jakarta', '2005-04-28', 2, 'WNI', 'Jl. Kelapa Lilin Utara IV Blok DF - 6 No 07, Kelapa Dua, Tangerang', 'keiven77@yahoo.com', 'Melvern_Deannova.pdf', '08159005217', 9, 'WhatsApp_Image_2020-03-11_at_11.53_.05_AM_.jpeg', 0, 1, 'SD Surya Bangsa', 1, 0),
+(215, '2017207', '2058811854', '0000000000000000', 'Marc Ryanheart Laoh', 'L', 'Jakarta', '2005-03-18', 2, 'WNI', 'Jl. Lempuyang VI E. 24/25. Komp.  Mega Cinere blok L\nCinere - Depok', 'marcryanlaoh@gmail.com', 'Marc_Ryanheart.pdf', '081314097339', 9, 'WhatsApp_Image_2020-03-11_at_12.08_.59_PM_.jpeg', 0, 2, 'SMP Madania', 1, 0),
+(216, '2019541', '12345678', '0000000000000000', 'Francesco Enzo De Ernesto Puimara', 'L', 'Lampung Tengah', '2012-05-24', 3, 'WNI', 'Komp. Puri Serpong I Blok D-7/2 RT008/RW002 Kel. Setu Kec. Setu Kota Tangerang Selatan 15343', 'yuliana.erniyusnita@yahoo.com', 'enzo.pdf', '081282670682', 3, 'Francesco_Erzo.jpg', 0, 1, 'PKBM Anak Panah HS', 1, 0),
+(217, '2018455', '0047239265', '0000000000000000', 'Vincenzo Matalino', 'L', 'Jakarta', '2004-03-21', 3, 'WNI', 'TELUK GONG TIMUR NO.50 rt.04/09 , Pejagalan', '12345@gmail.com', 'Doc1.docx', '0', 13, NULL, 0, 1, 'SMP Narada', 1, 0),
+(218, '2018495', '0094684840', '0000000000000000', 'Fabian Galih Wibowo', 'L', 'Jakarta', '2009-06-07', 1, 'WNI', 'Grand Kahuripan Cluster Sumeru Blok HL-10 RT008/RW006 Cileungsi Bogor', 'ellyzuaniarti@gmail.com', 'fabian_galih.pdf', '085881250610', 3, 'Fabian_Galih.jpg', 0, 1, 'MI Muhammdiyah II', 1, 0),
+(219, '2018454', '0020128255', '0000000000000000', 'Vania Agustin', 'P', 'Jakarta', '2002-08-13', 1, 'WNI', 'JL.FALAQI 1 BLOK C NO.85 VILA ILHAMI rt.08/13\n', '12345@gmail.com', 'vania.pdf', '0817894056', 13, 'vania_agustin_auliani.jpg', 0, 1, 'SMP IC Magnet', 1, 0),
+(220, '2018456', '3023860910', '0000000000000000', 'Wedatama Pambudi ', 'P', 'Bogor', '2002-04-23', 1, 'WNI', ' JALAN SERDANG BARU NOMOR 2 rt.14/05, Serdang', '12345@gmail.com', 'wedatama_IJAZAH-converted1.pdf', '0811261532', 13, 'wedatama.jpg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(221, '2018496', '0116271265', '0000000000000000', 'Gregory Damar Jibben', 'L', 'Sukabumi', '2011-10-27', 2, 'WNI', 'Perum Dasana Indah Blok RA.4 No. 8-9 RT001/RW017 Kel. Bojong Nangka Kec. Kelapa Dua Kota Tangerang 15812', 'gregoryjibben@gmail.com', 'gregory.pdf', '123456', 3, 'Gregory_Damar.jpg', 0, 2, 'SD Yuwati Bhakti', 1, 0),
+(222, '2020746', '1', '0000000000000000', 'Antonia Emmanuelle Acirathasa Wibowo', 'P', 'Jakarta', '2009-01-18', 3, 'WNI', 'kompleks pamulang permai 1, jalan matoa, blok A37 no 5', 'veronikahepy@gmail.com', 'Antonia_Emmanuelle1.pdf', '087878724282', 4, 'Antonio_Emmanuella_K4.jpg', 0, 1, 'PKBM Aluna', 1, 0),
+(223, '2018497', '0119022113', '0000000000000000', 'Hannah Felicia Given Lauw', 'P', 'Bekasi', '2011-08-31', 2, 'WNI', 'Foresta Naturale Blok M.9/6 BSD City RT002/RW003 Kec. Pagedangan Kab. Tangerang Tangerang 15850', 'louise.halim@gmail.com ', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '081283456244', 3, 'tidur-dengan-kucing.jpg', 0, 2, 'PKBM Anak Panah HS', 1, 0),
+(225, '2018498', '0113389133', '0000000000000000', 'Izzati Khansa Hefrizal Putra', 'P', 'Tangerang', '2011-02-17', 1, 'WNI', 'Fortune Breeze D5/F10 RT005/RW001 Kel. Tajur Kota Tangerang 15152', 'nani.mh75@yahoo.com', 'izzati.pdf', '082119567599', 3, 'Izzati.jpg', 0, 2, 'PKBM Anak Panah HS', 1, 0),
+(226, '2020751', '9879', '0000000000000000', 'Ale Febio Andreansyyah', 'L', 'Bogor', '2009-02-02', 1, 'WNI', 'Kp. Nanggela Tajurhalang Bogor', '12345@gmail.com', 'kolom soal.docx', '085739686988', 11, 'Screenshot_6.png', 0, 1, 'SMP Tunas Harapan', 1, 0),
+(227, '2018461', '2094667873', '0000000000000000', 'Aqila dhawy setyaki', 'L', 'Tangerang', '2009-07-09', 1, 'WNI', 'Jl.sunset road no 39 C seminyak kuta badung Bali  Kuta badung Bali 80361\n', 'ginta_windianty@yahoo.com', 'Aqila_Dhawy_Setyaki.pdf', '081283236888', 4, 'Aqila_Dhawy.jpeg', 0, 1, 'SD Al Madinah Islamic Center', 1, 0),
+(229, '2017206', '0050679559', '0000000000000000', 'Marc Raynerheart Laoh', 'L', 'Jakarta', '2005-03-18', 2, 'WNI', 'Jl. Lempuyang VI E. 24/25. Komp.  Mega Cinere blok L\nCinere - Depok', 'marcraynerlaoh@gmail.com', '03-10-2020-10.58_.28(8)_.pdf', '081311989793', 9, 'WhatsApp_Image_2020-03-11_at_2.32_.09_PM_.jpeg', 0, 2, 'SMP Madania', 1, 0),
+(230, '2018464', '0091673268', '0000000000000000', 'Clyde yvette kho', 'L', 'Jakarta', '2009-05-31', 3, 'WNI', 'Galeri Niaga Mediterania D/8J', 'Irvan_kho@yahoo.com', 'Clyde_KK-merged.pdf', '081283221926', 4, 'Clyde.jpeg', 0, 2, 'SDS Woodlands Montessori', 4, 0),
+(232, '2017211', '0052618748', '0000000000000000', 'Mikha Aurelia Wiranata', 'P', 'Jakarta', '2005-03-20', 2, 'WNI', 'JL. KR Kwitang I H No 52, Kwitang, Senen, Jakarta Pusat', 'mikha.aurelia@gmail.com', 'Mikha_Aurelia.pdf', '087786374841', 9, 'WhatsApp_Image_2020-03-11_at_11.38_.04_AM_.jpeg', 0, 1, 'SMP Kristen 3 Penabur', 1, 0),
+(233, '2018463', '0107020518', '0000000000000000', 'Christopher Andrew Sinaga', 'L', 'Kisaran', '2010-06-20', 2, 'WNI', 'Angsana Hijau IV Blok G6/21 Rt. 003/009 Duri Kosambi Jakarta Barat', 'christopherandrew@gmail.com', 'Christopher_andrew_sinaga.pdf', '087886472065', 4, 'Christoper_Andrew_K4.jpg', 0, 2, '-', 1, 0),
+(234, '2018465', '0104686731', '0000000000000000', 'Darlene Evangeline Lay', 'P', 'Makassar', '2010-01-16', 2, 'WNI', 'perumahan Taman Metropolitan,  jl Green Garden Utara no 30 Tanjung Bunga Makassar 90224', 'sunshine.lau@bubutech.com ', 'Darlene_Evangeline_Lay.pdf', '081234625280', 4, 'Darlane_evangeline_lay.jpeg', 0, 1, 'Sekolah Dian Harapan Makassar.', 1, 0),
+(235, '2017212', '0034858025', '0000000000000000', 'Muhammad Hadi', 'L', 'Jakarta', '2003-08-13', 1, 'WNI', 'JL. Berdikari GG. Rayong, Kebon Jeruk, Jakarta Barat', 'hadimuhammad129@gmail.com', 'Muhammad_Hadi.pdf', '081290487782', 9, 'WhatsApp_Image_2020-03-11_at_2.57_.46_PM_.jpeg', 0, 2, 'PKBM Anak Panah', 1, 0),
+(236, '2018462', '0097883249', '0000000000000000', 'Caroline Roseanne Pramadhwari M.', 'P', 'Sleman', '2009-11-19', 1, 'WNI', 'Pramanditya Andi Wardhana\n\nJalan Ramin 3 \nGang Demak no: 1B\nKel.Panarung\nKec. Pahandut\nPalangkaraya\nKalimantan Tengah \nKode pos 73111\nNo hp: 08562770666', 'aisgirl_90210@yahoo.com', 'Carolline_Roseanne.pdf', '08156870583', 4, 'CAroline_Roseane.jpeg', 0, 1, '-', 1, 0),
+(237, '2018459', '0093481206', '0000000000000000', 'Andi Danendra Daffa Alief', 'L', 'Jakarta', '2009-10-26', 1, 'WNI', 'Jl. Falaqi 2 C 97, Villa Ilhami - Tangerang\n', 'ranada0208@gmail.com', 'Andi_Danendra_Daffa_Alief.pdf', '0818909628', 4, 'Andi_Danendra.jpeg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(238, '2020732', '34567', '0000000000000000', 'Carlson Constantine Lay', 'L', 'Jakarta', '2010-05-22', 5, 'WNI', 'Perum Permata Buana Jl Pantara Blok P4/63', 'grow.beyondacademy@gmail.com', 'Carlson_Constantine_Lay.pdf', '0', 4, 'Carlson.jpeg', 0, 2, 'SDS Woodlands Montessori', 4, 0),
+(239, '2018503', '2094490729', '0000000000000000', 'Kevin Chen ', 'L', 'Tasikmalaya', '2009-08-15', 2, 'WNI', 'Taman Kopo Indah III Blok D.1 No.108 Kel. Rahayu Kec. Margaasih Bandung 40218', ' 	kongming2014@gmail.com', 'Kevin_Chen.pdf', '082116858889', 3, 'Kevin_Chen.jpeg', 0, 2, 'SD Joy Kids Nasional Plus', 1, 0),
+(240, '2018468', '0107543306', '0000000000000000', 'Gita Permata Kristi Perangin.D', 'P', 'Jakarta', '2010-04-25', 2, 'WNI', 'Vila Melati Mas H 16 no. 8A Serpong Tangerang Selatan Banten 51114 \n', 'csetyadi@yahoo.com', 'Gita_Permata_Kristi_Perangin_Angin_Damanik1.pdf', '081319632718', 4, 'Gita_Permata_Kristi_K4.jpg', 0, 1, 'Anak Panah', 1, 0),
+(241, '2018460', '0099526365', '0000000000000000', 'Andreas Rama Suresh Sitorus', 'L', 'Bekasi', '2009-06-22', 2, 'WNI', 'Perumahan Taman Century 2 blok D no 19. Pekayon - Bekasi		\n', 'rames.sitorus@gmail.com ', 'Andreas_Rama_Suresh_Sitorus.pdf', '08881880028', 4, 'Andreas_Rama_Sitorus.jpeg', 0, 3, 'TK Permata Preschool-Bekasi', 1, 0),
+(242, '2018467', '2123129518', '0000000000000000', 'Ezar Ilmi Khairan', 'L', '0', '2009-11-25', 1, 'WNI', 'GG Mawar No.90 003/004, Tanjung Barat Jagakarsa, Jakarta Selatan', 'ezarcool@gmail.com', 'Ezar_Ilmi_Khairan.pdf', '081213171338', 4, 'Ezar_Ilmi.jpeg', 0, 1, '0', 1, 0),
+(243, '2017214', '0056434465', '0000000000000000', 'Nathanael Clementino Rawis', 'L', 'Jakarta', '2005-12-28', 2, 'WNI', 'Apartemen City Garden Jl. Kamal Raya Cengkareng Jakarta Barat', 'Rawis.ario@gmail.com', 'Nathannael_Clementino_Rawis.pdf', '083897005155', 9, 'Nathanael_Clementino_Rawis.jpeg', 0, 1, 'Homeschooling Primagama', 1, 0),
+(244, '2018470', '2104183430', '0000000000000000', 'Isaac Rafael Rawis ', 'L', 'Jakarta', '2010-09-06', 2, 'WNI', 'Apartment city garden Unit 1510. Kapuk Cengkareng Jakarta Barat\n', 'marlinda.tjhie@gmail.com', 'Isaac_Rafael_Rawis1.pdf', '12121212121', 4, 'Isaac1.jpeg', 0, 3, 'Homeschooling Primagama', 1, 0),
+(245, '2018499', '0117478232', '0000000000000000', 'Jennifer Jasonnita Toembelaka', 'P', 'Jakarta', '2011-06-10', 5, 'WNI', 'Jl. Samarasa I Dalam No.2 RT012/RW005 Kel. Angke Kec. Tambora Jakarta Barat 11330', 'isabellaliem1981@gmail.com ', 'jenifer.pdf', '081514350527', 3, 'Jennifer_Jasonnita_Toembelaka.jpg', 0, 1, 'PKBM Anak Panah HS', 1, 0),
+(246, '2018469', '0083395739', '0000000000000000', 'I Gusti Bagus Devarananda M', 'L', 'Denpasar', '2008-11-23', 4, 'WNI', 'Jl.Kenanga No.11 Tabanan - Bali \n', 'udsepakat@yahoo.co.id ', 'IGB_Devarananda1.pdf', '081338991115', 4, 'I_gusti_bagus1.jpeg', 0, 2, 'Anak Panah', 1, 0),
+(247, '2018528', '0124494947', '0000000000000000', 'Khadeeja Prisa Azzahra', 'P', 'Jakarta', '2012-05-11', 1, 'WNI', 'Jl. Pinang Suasa 4 Blok UZ 6-7 RT014/RW003 Kel. Pondok Pinang Jakarta Selatan', 'annisabhi@gmail.com', 'khadeeja_.pdf', '08070003390', 2, 'Khadeeja.jpg', 0, 2, 'PKBM Anak Panah HS', 1, 0),
+(248, '2018471', '0101772335', '0000000000000000', 'Jane Emelia Veruschka', 'P', 'Semarang', '2010-07-23', 2, 'WNI', 'JL. PERINTIS KEMERDEKAAN. PERUMAHAN PALM TOWN HOUSE NO. C9 TEGAL JAWA TENGAH 52125 ', 'JaneEmeliaVe@gmail.com', 'akte_n_KK_Jane_Emelia_Veruschka_(_kelas_4_DL_)(2).pdf', '081911608099', 4, 'Jane_Emelia.jpeg', 0, 2, 'PKBM Kak Seto ', 1, 0),
+(249, '2018472', '0121645132', '0000000000000000', 'Jovanna Alexandria Gumulya', 'P', 'Jakarta', '2010-06-25', 3, 'WNI', 'Jl. Tambora I No. 21 C, RT 009/002, Tambora, Jakarta Barat 11220 \n', ' jovanna.seva@gmail.com', 'Jovanna_Alexandria.pdf', '08111767567', 4, 'Jovanna_Alexandria_Gumulya_K.4_.jpg', 0, 1, 'SD St. Leo', 1, 0),
+(250, '2018458', '0111206030', '0000000000000000', 'Amadeo Jova Paundralingga', 'L', 'Davis', '2011-06-28', 2, 'WNI', 'The Boulevard Apartment Unit 17M Jl. Fachruddin Raya No. 5 Tanah Abang Jakarta Pusat 10250 						\n', 'sketsavia@gmail.com', 'Amadeo_Jova.pdf', '082143197230', 4, 'Amadeo_Jova_Paundra_L_K4.jpg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(251, '2018500', '0115704336', '0000000000000000', 'John Arthur Benyamin', 'L', 'Jakarta', '2011-09-27', 2, 'WNI', 'Jl. Cipayung RT005/RW003 Kel. Cipayung Kec. Cipayung Jakarta Timur 15152', 'bennybenyamin77@gmail.com', 'john_arthur.pdf', '082119567599', 3, 'John_Arthur.jpg', 0, 2, 'PKBM Anak Panah HS', 1, 0),
+(252, '2018474', '0104939824', '0000000000000000', 'Livana Yo Belia Sumargo', 'P', 'Tangerang', '2010-03-09', 2, 'WNI', 'Jl. Permai 35 no 21\nKomplek Margahayu Permai\nBandung', 'Yobelialivana@gmail.com', 'Livana_Yo_Belia_Sumargo1.pdf', '087889008311', 4, 'Livana_Yo_Belia_Sumargo_K4.jpg', 0, 3, 'SD Tunas Bina Bangsa', 1, 0),
+(253, '2018466', '0107788697', '0000000000000000', 'Eirene Agallia Siregar', 'P', 'Surabaya', '2010-03-30', 2, 'WNI', 'Bluru Permai C-21 RT/RW 006/009, Kel. Bluru Kidul, Sidoarjo', 'marsal.siregar@rentokil-initial.com', 'Eirene_Agalia_Siregar.pdf', '082336063222', 4, 'Eirene.jpeg', 0, 1, 'TK Providensia', 1, 0),
+(254, '2018473', '0107052192', '0000000000000000', 'Kayla Azrina Hanania', 'P', 'Jakarta', '2010-03-27', 1, 'WNI', 'Jl Sabar No 25 Rt. 009/ 004 Petukangan Jakarta', 'nana.asiautama@yahoo.com', 'Kayla_Azrina_Hanania.pdf', '0818675172', 4, 'Kayla_Azrina_Hanania_K4.jpg', 0, 2, 'PKBM Anak Panah', 1, 0),
+(255, '2018475', '0097485024', '0000000000000000', 'Marcos Chenata', 'L', 'Medan', '2009-12-04', 5, 'WNI', 'Foresta fiore blok B7 no. 23 bsd city  Tangerang Banten 15311\n', 'eltien_chen22@yahoo.com', 'Marcos_Chenata1.pdf', '081361518538', 4, 'Marcos1.jpeg', 0, 2, 'IPEKA', 1, 0),
+(256, '2018526', '0121725956', '0000000000000000', 'Keiko Laquisha Gumulya', 'P', 'Jakarta', '2012-01-25', 3, 'WNI', 'Jl Tambora I No 21 C Rt 009/002, Tambora Jakarta Barat', ' keiko.seva@gmail.com', 'keikko.pdf', '081295744255', 2, 'Keiko_Laauisha.jpg', 0, 2, 'TK St Leo 2', 1, 0),
+(257, '2017193', '0051556768', '0000000000000000', 'Anna Marie Lynn', 'P', 'Jakarta', '2005-06-25', 3, 'WNI', 'Komp. Dept. Hub Jl. Elang No. 26 RT 006/ RW\n010, Kebayoran Lama, Jakarta Selatan 12240 ', 'theresia8210@gmail.com', 'anne_marie.pdf', '000', 9, 'index.jpg', 0, 1, 'SD Swasta Pangudi Luhur ', 1, 0),
+(258, '2018502', '2108412467', '0000000000000000', 'Kaylen yehonala christivend', 'P', 'Jambi', '2010-04-03', 3, 'WNI', 'Jl. Permata Medang  Cluster Barleria B1 G33', 'kaykay.yehonala@gmail.com', 'Kayleen.pdf', '081254066066', 3, 'Kaylen.jpg', 0, 2, 'PKBM Anak Panah HS', 1, 0),
+(259, '2017187', '0073585671', '0000000000000000', 'Agnes davita putri dahana', 'P', 'Depok', '2004-11-16', 2, 'WNI', 'Griya lembah depok Blok G4 no 7\nDepok Jawa Barat 16411\nIndonesia', 'tasyadavito@gmail.com', 'Agnes_Davita1.pdf', '082213139722', 9, 'index.jpg', 0, 1, 'SD Holy Faithful Obedient', 1, 0),
+(260, '2018501', '0103071878', '0000000000000000', 'Kaylee yehonala christivend', 'L', 'Jambi', '2010-04-03', 3, 'WNI', 'Jl. Permata Medang Cluster Barleria B1 G33', 'kaykay.yehonala@gmail.com', 'Kaylee.pdf', '081254066066', 3, 'Kaylen.jpg', 0, 1, 'PKBM Anak Panah HS', 1, 0),
+(261, '2018504', '0117779290', '0000000000000000', 'Leonard Nathanael Lee', 'L', 'Jakarta', '2011-02-01', 3, 'WNI', 'Jl. Mangga Besar I No. 98 A RT001/RW003 Kel. Mangga Besar Kec. Taman Sari Jakarta Barat', 'l3onardlee@gmail.com', 'Leonard_Nathanael_Lee.pdf', '0818768867', 3, 'Leonard_Nathanael_Lee.jpg', 0, 2, 'PKBM HSPG Meruya', 1, 0),
+(262, '2018505', '0105342004', '0000000000000000', 'Luiza Aaliyah Wicaksono', 'P', 'Jakarta', '2010-07-07', 1, 'WNI', 'Pulo Asem Utara III No. 6A Jakarta Timur', 'chakapriambudi@gmail.com', 'Luiza_Akta-converted.pdf', '081294993233', 3, 'Luiza_Aliyah_Wicaksono.jpg', 0, 1, 'PKBM Anak Panah HS', 1, 0),
+(263, '2018478', '0107189150', '0000000000000000', 'Olivia Roan Widiyono', 'P', 'Tangerang', '2009-11-17', 3, 'WNI', 'Regensi Melati Mas Blok E-6/17 002/011 Jelupang', 'vrauw@yahoo.com', 'Olivia_Roan_Widiyono.pdf', '08170174817', 4, 'Olivia_Roan.jpeg', 0, 3, 'PKBM Alfa Omega', 1, 0),
+(264, '2018481', '0099227013', '0000000000000000', 'Richard Orlando Casterson', 'L', 'Jakarta', '2009-07-07', 5, 'WNI', 'Jl Mangga 16BB No 22 B Duri Kepa  Jakarta Barat Jakarta 11510\n', ' 	deny.globalart@gmail.com', 'RIchard_Orlando_Casterson.pdf', '082112484012', 4, 'Richard_Orlando.jpeg', 0, 1, 'Ichthus School', 1, 0),
+(265, '2018506', '0113717869', '0000000000000000', 'Meaghan De Maria Rastana', 'P', 'Surabaya', '2010-05-22', 2, 'WNI', 'Bukit Duri Tanjakan Gang SD No. 54 A Bukit Duri Tanjakan Tebet', ' 	parisdelamodeparisdelamode21@gmail.com', 'meghan.pdf', '081385935295', 3, 'tidur-dengan-kucing.jpg', 0, 2, 'PKBM Anak Panah HS', 1, 0),
+(266, '2018480', '0104166740', '0000000000000000', 'Revand Wijaya', 'L', 'Tangerang', '2010-03-13', 5, 'WNI', 'Perum Legok permai..Cluster Kaliandra Blok : K2 No.A2\nLegok - Tangsel', 'camelliaw83@gmail.com', 'Revand_Wijaya.pdf', '08562225533', 4, 'Revan_Wijaya_K.4_.jpg', 0, 2, 'TK Mutiara Bangsa', 1, 0),
+(267, '2017189', '0043068358', '0000000000000000', 'Ananda Noah Nathanael ', 'L', 'Jakarta', '2004-11-14', 2, 'WNI', 'Melati Mas Vista V9/21, Melati Mas Residence,\nJelupang. ', 'sonsi04@yahoo.com', 'Ananda_Noah1.pdf', '08159926033', 9, 'WhatsApp_Image_2020-03-12_at_13.47_.27_.jpeg', 0, 1, 'SD Stella Maris ', 1, 0),
+(268, '2018479', '0107189150', '0000000000000000', 'Raphael William Suganda', 'L', 'Jakarta', '2010-10-06', 2, 'WNI', 'Jalan Vanda 3 nomor 5 \n', 'nike_s_99@yahoo.com', 'Raphael.pdf', '08176895195', 4, 'Rafael_William_K4.jpg', 0, 1, 'SDK Penabur Gading Serpong', 1, 0),
+(269, '2018507', '0115807852', '0000000000000000', 'Michael Jayden Oentoro', 'L', 'Tangerang', '2011-09-30', 2, 'WNI', 'Jl. Kelapa Puan XIII AF - 6/18 RT005/RW012 Pakulonan Barat Tangerang\n', 'richard.oentoro@gmail.com', 'michael_jayden.pdf', '0818855149', 3, 'Michael_Jayden.jpg', 0, 1, 'PKBM Anak Panah HS', 1, 0),
+(270, '2017185', '0042649156', '0000000000000000', 'Abraham Dominic Nugroho', 'L', 'Padang', '2004-11-14', 2, 'WNI', 'Jl. Mangga 24 Blok F No.140a. Duri Kepa Kebun\nJeruk Jakarta Barat 11510 Indonesia ', 'abrahamdnug@gmail.com', 'Abraham_Dominic_Nugroho1.pdf', '087820041411', 9, 'WhatsApp_Image_2020-03-12_at_14.08_.40_.jpeg', 0, 1, 'SMP Widuri Jaya ', 1, 0),
+(271, '2018482', '0103327655', '0000000000000000', 'Sir Leon Maximilllianus Bolang', 'L', 'Balikpapan', '2010-06-17', 2, 'WNI', 'Perum Kencana Loka 1 Blok F1/39 RT. 002/ RW.014  - BSD City; Kelurahan Rawa Buntu Kec. Serpong 15318', 'leonard.bolang@gmail.com', 'Sir_Leon_Maximillianus_Bolang.pdf', '082254813348', 4, 'Sir_leon.jpeg', 0, 1, 'Kalimantan International christian School', 1, 0),
+(272, '2018509', '0108242901', '0000000000000000', 'Muhammad Khalid', 'L', 'Bantul', '2010-12-04', 1, 'WNI', 'Jl. Pendustrian I No. 64 Lr. Jati RT001/RW001 Kel. Kebun Bunga Palembang', 'meindraeko@gmail.com', 'M_khalid.pdf', '085740631858', 3, 'Muhammad_Khalid.jpg', 0, 1, 'PKBM Anak Panah HS', 1, 0),
+(273, '2019564', '2065231130', '0000000000000000', 'Alicia', 'P', 'Jakarta', '2006-09-17', 2, 'WNI', 'Taman ubud cendana 2 no.10 lippo karawaci  Tanggerang Banten 15810\n', 'liaong7524@gmail.com', 'alicia.pdf', '0', 7, 'Screenshot_6.png', 0, 2, 'SD Strada', 1, 0),
+(274, '2018477', '0072600857', '0000000000000000', 'Narendra Fattaah Ari Kusuma', 'L', 'Yogyakarta', '2007-03-26', 1, 'WNI', 'The Mansion Jasmine Tower Bellavista Unit JB36B Jl Trembesi Blok D Pademangan Kemayoran Jakarta Utara 14410							\n', ' 	citra.kusumastuti@gmail.com', 'Narendra_Fattah.pdf', '081228971477', 5, 'Narendra_Fattah.jpeg', 0, 2, 'Tumbuh Primary School', 7, 0),
+(275, '2017186', '0046575938', '0000000000000000', 'Adonis Tandal', 'L', 'Jakarta', '2004-05-05', 5, 'WNI', 'Perumahan Citra Garden 5 blok E6 no. 11 Jakarta\nBarat 11840 ', 'lenny.sujanto14@gmail.com', 'Adonis_Tandal1.pdf', '08161147336', 9, 'WhatsApp_Image_2020-03-12_at_14.25_.21_.jpeg', 0, 1, 'Sekolah Mahabodhi Vidya', 1, 0),
+(276, '2018508', '0108176319', '0000000000000000', 'Michelle Prameswari Sutanto', 'P', 'Jakarta', '2010-07-01', 3, 'WNI', 'Jl. Duri Kencana Raya 13 RT005/RW007 Kel. Duri Kepa Jakarta Barat', 'markust75@gmail.com', 'michelle_prameswari.pdf', '082211764575', 3, 'Michelle_Prameswari_Sutanto.jpg', 0, 3, 'Sekolah Pilar Bangsa', 1, 0),
+(278, '2017215', '0053072362', '0000000000000000', 'Nicholas Zubel Ebenhezer Hutasoit', 'L', 'Denpasar', '2005-04-21', 2, 'WNI', 'PRM Balangan Pratama BB VI. No 10 Lingk. Cengiling , Jimbaran, Kuta Selatan', 'samuraibali46@gmail.com', 'Nicholas_Zubel.pdf', '082118803182', 9, 'WhatsApp_Image_2020-03-12_at_2.22_.54_PM_.jpeg', 0, 1, 'SD Tunas Bangsa', 1, 0),
+(279, '2017195', '2047651208', '0000000000000000', 'Bunga Azalia Fauzia Shafa', 'P', 'Surakarta', '2004-11-06', 1, 'WNI', 'Vila Dago Cluster Maribaya E06/24 RT004/020, Benda Baru, Pamulang\nTangerang Selatan Banten 15416\nIndonesia', 'vasilissazalia@gmail.com', '12-03-2020-14.37_.19_.pdf', '088233984003', 9, 'WhatsApp_Image_2020-03-12_at_14.41_.22_.jpeg', 0, 1, 'SD Al-Zahra Indonesia', 1, 0),
+(280, '2018483', '0102748768', '0000000000000000', 'Valerie Nightingale', 'P', 'Jakarta', '2010-01-19', 2, 'WNI', 'JL. DR. Semeru Rays No.65 RT/RW 010/010 Kel. Grogol, Jakarta Barat', 'natalie.visca@gmail.com', 'valerie1.pdf', '081380687898', 4, 'Valerie_Nightingale_k4.jpg', 0, 1, '0', 1, 0),
+(281, '2019566', '0', '0000000000000000', 'Andrew Fabian Prawira Putra', 'L', 'Bandung', '2007-01-06', 2, 'WNI', 'Jl Sunda No 93 Rt 001/001 Kel. Merdeka, Kec. Sumur Bandung\n', '12345@gmail.com', 'Contoh.pdf', '0', 7, 'Screenshot_6.png', 0, 3, 'PKBM Anak Panah', 1, 0),
+(282, '2018510', '0118984129', '0000000000000000', 'Nathanael Joseph Wijaya', 'L', 'New York', '2011-06-19', 2, 'WNI', 'jalan sumatera nomor 3 medan belawan sumatera utara 20411', 's_0308885@yahoo.com', 'Nathanael_J_Akta-converted.pdf', '081210566533', 3, 'Nathanael_Joseph_Wijaya.jpg', 0, 1, 'PKBM Anak Panah HS', 1, 0),
+(283, '2019569', '0073592295', '0000000000000000', 'Baswara Abi Satria', 'L', 'Yogyakarta', '2007-02-28', 1, 'WNI', 'apartement Mediterania Palace, Kemayoran \n', 'dnd_satrio@yahoo.com ', 'baswara_adi.pdf', '0', 7, 'Baswara.jpeg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(284, '2018476', '0104030197', '0000000000000000', 'Naomi Allicia Benyamin', 'P', 'Jakarta', '2010-04-06', 2, 'WNI', 'Perum Jati Asih Indah Blok D6 / 110 Bekasi Selatan 	\n', 'bennybenyamin77@gmail.com', 'Joseph_Alvin_Benyamin.pdf', '08561776052', 4, 'Naomi_Alicia_K4.jpg', 0, 2, 'PKBM Anak Panah', 1, 0),
+(285, '2018484', '0107712392', '0000000000000000', 'Violeta Eunike Seancho', 'P', 'Jakarta', '2010-10-08', 2, 'WNI', 'Taman Palem Lestari Blok E 16 no. 11', 'willymicco@yahoo.com', 'Violeta_Eunike_Seancho.pdf', '08998884569', 4, 'Violeta_Eunike_K4.jpg', 0, 1, '0', 1, 0),
+(286, '2018512', '2095325924', '0000000000000000', 'Princeton Darion Zein', 'L', 'Jakarta', '2009-03-06', 2, 'WNI', 'City Resort APT Tower Alamanda Lt.11/16', 'edzein71@gmail.com', 'princenton.pdf', '0818172961', 3, 'Princeton.jpg', 0, 2, 'sds woodlands', 1, 0),
+(287, '2017213', '0055732850', '0000000000000000', 'Nathan Naufal Wardani', 'L', 'Tangerang ', '2005-01-27', 1, 'WNI', 'Jl. Labu I Blok G3 No 3 Sektor I.6 Griya Loka BSD, Rawabuntu', 'aliwardani@gmail.com', 'nathan_nauval.pdf', '081386317168', 9, 'WhatsApp_Image_2020-03-12_at_3.06_.42_PM_.jpeg', 0, 1, 'SMP Islam Cikal Harapan 1', 1, 0),
+(288, '2018511', '0113291398', '0000000000000000', 'Petra William Lay ', 'L', 'Makassar', '2011-06-08', 2, 'WNI', 'perumahan Taman Metropolitan,  jl Green Garden Utara no 30 Tanjung Bunga Makassar 90224', 'shanecarolina777@gmail.com', 'petra_lay.pdf', '082192909989', 3, 'Petra_William_Lay.jpg', 0, 2, 'PKBM Anak Panah HS', 1, 0),
+(289, '2019578', '0075542191', '0000000000000000', 'Felix Alexandro Yap', 'L', 'Tangerang', '2007-02-03', 5, 'WNI', 'Simprug poris e3 no 5 RT 6 Rw 3 Poris jaya \n', 'chyztraa@gmail.com', 'felix.pdf', '081281819173', 7, 'WhatsApp_Image_2020-04-22_at_13.51_.55_.jpeg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(290, '2017194', '0043056156', '0000000000000000', 'Brigitta Gwyneth Xaviera ', 'P', 'Jakarta', '2004-08-10', 3, 'WNI', 'Taman Aries A-5/3 Rt. 04/Rw. 09 Meruya Utara,\nJakarta Barat ', 'brigittagwyneth@gmail.com', '12-03-2020-15.30_.18_.pdf', '08111097802', 9, 'WhatsApp_Image_2020-03-12_at_15.33_.10_.jpeg', 0, 5, 'Sekolah Harapan Bangsa', 1, 0),
+(291, '2019580', '0077805529', '0000000000000000', 'Flora Chenita', 'P', 'Medan', '2007-02-19', 2, 'WNI', 'Komplek foresta - fiore blok B7 no.23 bsd city Tangerang Banten 15311 \n', 'eltien_chen22@yahoo.com', 'FLORA.pdf', '081519616318', 7, 'Screenshot_6.png', 0, 1, 'SD Ipeka BSD', 1, 0),
+(292, '2018513', '2108820179', '0000000000000000', 'Rayhana Zulfa Bachmid', 'P', 'Bacan ', '2010-10-10', 1, 'WNI', 'Jalan Hebras desa jatimulya nomor 245 rt 02 rw 06 kecamatan tambun selatan kabupaten bekasi 17510', 'rana.rzb@gmail.com', 'rayhana.pdf', '085885665886', 3, 'Rayhana.jpg', 0, 1, 'SDAT TAMAN FIRDAUS', 1, 0),
+(293, '2018485', '0092506771', '0000000000000000', 'Winston Alden Widjaja', 'L', 'Jakarta', '2009-05-19', 2, 'WNI', 'JL. Graha Sunter Pratama Blok F No.6', 'widjajasandy72@gmail.com', 'Winston_Alden.pdf', '08118800072', 4, 'Winston_Alden_K4.jpg', 0, 2, 'Stars School', 1, 0),
+(294, '2019582', '0065532969', '0000000000000000', 'Gunawan Wahyu ', 'L', 'Tangerang', '2006-11-22', 1, 'WNI', 'JALAN SWADAYA DALAM Rt 11 RW 2kel Wijaya kusuma 11460\n', 'ganesha@persija.id ', 'gunawan_wahyu_widodo.pdf', '0', 7, 'gunawan_wahyu.JPG', 0, 1, 'SD Negeri Wijaya Kusuma 05', 1, 0),
+(295, '2019584', '2077314594', '0000000000000000', 'Hanifah Chandra Kurniawati', 'P', 'Cilegon', '2007-03-29', 1, 'WNI', 'Lingkungan Pagebangan Rt 012/03 Desa Ketileng Cilegon ', '12345@gmail.com', 'Contoh.pdf', '0', 7, 'Screenshot_6.png', 1, 7, 'SDN 1 Cilegon', 1, 0),
+(296, '2019587', '2074493332', '0000000000000000', 'Jacqueline Venessa Leifon', 'P', 'Tangerang', '2007-02-26', 2, 'WNI', 'canary timur 3 no.42 gading serpong 15810\n', '12345@gmail.com', 'Jacqueline.pdf', '12345678', 7, 'WhatsApp_Image_2020-03-20_at_11.41_.23_.jpeg', 0, 1, 'SD Pahoa', 1, 0),
+(297, '2019591', '0078142885', '0000000000000000', 'Jeremy Giovanni', 'L', 'Jakarta', '2007-03-02', 2, 'WNI', 'Taman Palem Lestari Blok E13 Nomor 2 RT 02 RW 15 Cengkareng Barat', 'ytn2110@gmail.com', 'JEREMY.pdf', '08176355598', 7, 'WhatsApp_Image_2020-03-20_at_13.53_.51_.jpeg', 0, 2, 'SD Kasih Imannuel School', 1, 0),
+(298, '2019594', '0', '0000000000000000', 'Justin Odilo', 'L', 'Medan', '2005-12-29', 2, 'WNI', 'APE Green Palm Lt 9 Blok A No 7 Rt 05/013 Jakarta', 'da1717ys@yahoo.com', 'justin_odilo.pdf', '0', 7, 'WhatsApp_Image_2020-04-22_at_14.27_.33_.jpeg', 0, 3, 'PKBM Anak Panah', 1, 0),
+(299, '2019592', '0075381236', '0000000000000000', 'Jovan Farrel Sumargo', 'L', 'Tangerang', '2007-07-07', 2, 'WNI', 'Jalan Permai 35 nomor 21 Komplek Margahayu Permai Bandung', 'jovanfarrel507@gmail.com', 'jovan_farrel1.pdf', '083140639024', 7, 'WhatsApp_Image_2020-04-22_at_14.12_.35_.jpeg', 0, 2, 'PKBM Anak Panah', 1, 0),
+(300, '2020749', '123', '0000000000000000', 'Kenonwayne Wijaya', 'L', 'Banyuwangi', '2006-04-23', 5, 'WNI', 'Ruby Utara 1 no 7 Kelapa Dua Tangerang', '12345@gmail.com', 'Contoh.pdf', '0', 7, 'Screenshot_6.png', 0, 1, 'SD Bina Nusantara Serpong', 1, 0),
+(301, '2019595', '0075547739', '0000000000000000', 'Kaisar Ivan Shalimar', 'L', 'Jakarta', '2007-05-06', 2, 'WNI', 'Pulo Asem Timur I No. 10 A,  Rt 001/ Rw 002, Jak-Tim', 'yoanatantriyadie@gmail.com', 'kaisar_ivan.pdf', '081382079555', 7, 'WhatsApp_Image_2020-03-20_at_14.24_.57_.jpeg', 0, 1, 'SDS Global Sevilla Pulo Mas', 1, 0),
+(302, '2019589', '0072931917', '0000000000000000', 'Jasmine Lian Juskiw', 'P', 'Denpasar', '2007-01-26', 3, 'WNA', 'Jalan tukad badung 17 no 27, Renon Denpasar Bali 80226 Indonesia \n', 'kadeayu@gmail.com', 'Scan_Museum_Anatomi.pdf', '08999029128', 7, 'WhatsApp_Image_2020-03-20_at_14.27_.12_.jpeg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(303, '2018514', '12345678', '0000000000000000', 'Reinhard Rich Reagan', 'L', 'Tangerang', '2011-09-17', 2, 'WNI', 'Cikahuripan RT005/RW006 Kel. Neglasari Kec. Neglasari Tangerang 15129', 'mkt_rajawalimuda@yahoo.com', 'reinhard_rich.pdf', '081213700888', 3, 'Reinard_Rich_Reagan.jpg', 0, 3, 'SDK Plus Penabur Cirebon', 1, 0),
+(304, '2019593', '0076959153', '0000000000000000', 'Juanito Mannuel Halim', 'L', 'Jakarta', '2007-02-28', 2, 'WNI', 'Puri Bintaro PB.33/123 RT.009 RW.009 Sawah Baru Ciputat, Tangerang Selatan', 'yuszhy@yahoo.com', 'juanito.pdf', '0811936402', 7, 'WhatsApp_Image_2020-03-20_at_11.54_.48(1)_.jpeg', 0, 1, 'SD Highscope Indonesia Bintaro', 1, 0),
+(305, '2017217', '0052536602', '0000000000000000', 'Orceola Primo Edriatama', 'L', 'Jakarta', '2005-01-14', 3, 'WNI', 'JL PETOJO VTY V NO. 22 rt.13/06, Desa / Kelurahan : Cideng,Kode Pos  : 10150\n', 'orceola.14@gmail.com', 'Orceola_Primo.pdf', '08118991245', 9, 'Orceola.jpeg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(306, '2017216', '0058712499', '0000000000000000', 'Omar Ari Olafsoon', 'L', 'Jakarta', '2005-07-31', 1, 'WNI', 'Cluster alicante  blok ABT nomor 100 gading serpong Tangerang', 'omarari.olafsson@yahoo.com', 'Omar_Ari.pdf', '081296465032', 9, 'WhatsApp_Image_2020-03-12_at_5.06_.15_PM_.jpeg', 0, 1, 'Junior High School Stella Maris', 1, 0),
+(307, '2019590', '0069592027', '0000000000000000', 'Jennifer Gracia Leunura', 'P', 'Serang', '2006-12-24', 2, 'WNI', 'Taman Lopang Indah, Jl. Anyelir, Block C 38 No.1  Serang Banten 42112\n', 'yuliusbernadus@gmail.com', 'Jennifer_Gracia_Leunura1.pdf', '081288681381', 7, 'Jennifer_gracia.jpeg', 0, 1, 'SD Swasta Evfia land', 1, 0),
+(308, '2019599', '0071074442', '0000000000000000', 'Maleeka Kendra Adhitia', 'P', 'Jakarta', '2007-11-15', 1, 'WNI', 'Apartemen Taman Rasuna. Tower 9 unit 14C. Jl HR Rasuna Said. Jakarta Selatan', 'maleekakendra@gmail.com', 'maleeka1.pdf', '085892595985', 7, 'WhatsApp_Image_2020-03-20_at_14.13_.05_.jpeg', 0, 1, 'Al Azhar Syifa Budi, Kemang Jakarta Selatan.', 1, 0),
+(309, '2019600', '2073769566', '0000000000000000', 'Marciano Emmanuel Chandra', 'L', 'Jakarta', '2007-03-26', 2, 'WNI', 'Perumahan Garden Aryana Blok B3/15, Binong, kelurahan Sukabakti, Desa kadu, kecamatan curug, Tangerang 15810 \n', 'tweenty_toety@yahoo.com', 'marciano.pdf', '081319838652', 7, 'Marciano.jpeg', 0, 1, 'Anak Panah', 1, 0),
+(310, '2019603', '2073582542', '0000000000000000', 'Mohammad Satria Jannatan', 'L', 'Surabaya', '2007-04-20', 1, 'WNI', 'JL. PAPANDAYAN NO. 16, MEDITERANIA 1, SENTUL CITY Jl. Papandayan no. 16, Mediterania Golf 1, Kecamatan Babakan Madang, Sentul City\n', '123456@gmail.com', NULL, '12121212121', 7, 'Penguins.jpg', 0, 4, 'SD Bina Insani', 1, 0),
+(311, '2019606', '0061671015', '0000000000000000', 'Muhammad Sholahuddin Ulya', 'L', 'Berebes', '2006-07-15', 1, 'WNI', 'Jl. H muri salim raya no 2 Rt 6 Rw 2 Pondok Bulak, Pisangan, Ciputat Tangsel\n', 'aliyahaqna@gmail.com', 'ulya1.pdf', '081260680019', 7, 'WhatsApp_Image_2020-03-20_at_11.43_.59_.jpeg', 0, 1, 'PPS Daarul Quran', 1, 0),
+(312, '2019598', '0062052551', '0000000000000000', 'Laura Fei Susanto', 'P', 'Purworejo', '2006-07-14', 2, 'WNI', 'JL GN PUTRI NO 12, TAMAN RT 002 RW 008 BROMO, LIPPO VILLAGE SENTRAL , KELAPA DUA\n', 'da1717ys@yahoo.com', 'laura_fei1.pdf', '081905057650', 7, 'WhatsApp_Image_2020-04-22_at_14.40_.25_.jpeg', 0, 1, 'SD Mutiara Ibu', 1, 0),
+(313, '2019619', '0072402150', '0000000000000000', 'Sekar Humaera Putranto', 'P', 'Jakarta', '2006-04-10', 1, 'WNI', 'Jalan Pejaten Indah 1 F11 Pancoran Jakarta Selatan', '123456@gmail.com', 'sekar1.pdf', '085695778373', 7, 'Penguins1.jpg', 0, 1, 'Anak Panah', 1, 0),
+(314, '2019621', '0074880389', '0000000000000000', 'Sherina Thu Tiwanie ', 'P', 'Tangerang', '2007-07-10', 1, 'WNI', 'GADING SERPONG 7B DD 5 NOMOR 22 RT 4 RW 3 Curug sangereng \n', 'thusherin@gmail.com ', 'sherina1.pdf', '12121212121', 7, 'WhatsApp_Image_2020-03-20_at_14.19_.11_.jpeg', 0, 1, '0', 1, 0),
+(315, '2019622', '0071761102', '0000000000000000', 'Siti Afraisyah', 'P', 'Balikpapan', '2007-10-18', 1, 'WNI', 'Ahmad yani karang jawa dalam Karang jawa dalma no 2 rt 11 rw 4 Balikpapan Balikpapan tengah 76123 \n', 'mirantimachmud46@gmail.com', 'siti_af1.pdf', '081912341998', 7, 'WhatsApp_Image_2020-03-20_at_14.08_.40_.jpeg', 0, 2, 'Anak Panah', 1, 0),
+(316, '2019623', '0071742259', '0000000000000000', 'Siti Zahra Izzati Maulana ', 'P', 'Jakarta', '2007-10-24', 1, 'WNI', 'perumahan sakura regency 1 Blok G 14 jatiasih bekasi 17423', '123456@gmail.com', 'SITI_ZAHRA1.pdf', '089683064839', 7, 'Siti_zahra.JPG', 0, 2, '0', 1, 0),
+(318, '2019607', '0072085374', '0000000000000000', 'Nadine Aureora Anzany', 'P', 'Tangerang', '2007-04-05', 1, 'WNI', 'Komp Amarapura Blok C1 No.7, Kel Kademangan, Kec Setu Tangerang Selatan 	\n', 'novanrizany@gmail.com', 'nadine.pdf', '081908346700', 7, 'WhatsApp_Image_2020-04-22_at_14.58_.01_.jpeg', 0, 2, 'PKBM Anak Panah', 1, 0),
+(319, '2017218', '0052351507', '0000000000000000', 'Patrick Hermansyah Wihardja', 'L', 'Jakarta', '2005-07-25', 2, 'WNI', 'Jl. Kelapa Puan XXVI Blok AK 6/1 Sektor 1 G. RT 06/RW.010 \nKecamatan Pakulonan Barat \nKelurahan Kelapa Dua\nGading Serpong Tangerang 15811', 'lilypsusanto@gmail.com', 'Pradipta_Daffa.pdf', '08111998089', 9, 'WhatsApp_Image_2020-03-13_at_9.32_.47_AM_.jpeg', 0, 1, 'Sekolah Anak Panah', 1, 0),
+(320, '2019596', '0077105460', '0000000000000000', 'Khatira Nahiza Suharta', 'P', 'Jakarta', '2007-04-04', 1, 'WNI', 'Griya Jakarta, Jl. Kemang 7 Blok B1 No.58', '12345@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 7, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 1, 3, 'SDIT Nur Fatahillah', 1, 0),
+(321, '2019608', '0074520693', '0000000000000000', 'Padhang Moncar  Bagus Nalar Pekerti', 'L', 'Depok', '2007-12-24', 1, 'WNI', 'Jl. Pembangunan No 6. Hankam RT 003 RW 002 Desa/Kelurahan Pasir Gunung Selatan Kecamatan Cimanggis, Kota Depok. Jawa Barat 16951', '12345@gmail.com', 'padhang.pdf', '12345678', 7, 'WhatsApp_Image_2020-04-22_at_15.00_.41_.jpeg', 0, 1, 'Sekolah Musik Yayasan Pendidikan Musik', 1, 0),
+(322, '2019597', '0079240801', '0000000000000000', 'Kyla Petahia', 'P', 'Jakarta', '2007-01-10', 2, 'WNI', 'jalan s kemanggisan pulo nomor 6b rt 07 rw 17 palmerah jakarta barat 11480', 'kylapetahia@gmail.com', 'kyla.pdf', '081383767084', 7, 'WhatsApp_Image_2020-03-20_at_14.10_.24_.jpeg', 0, 1, 'SDS Tunas Muda IKKT', 1, 0),
+(323, '2019628', '0078586176', '0000000000000000', 'Taufiq Husein Bachsin', 'L', 'Jakarta', '2007-07-17', 1, 'WNI', 'Jln Putri tunggal no 8A,Harjamukti,cimanggis,Depok', 'riezafir@gmail.com', 'Taufik_Husein.pdf', '0818101747', 7, 'WhatsApp_Image_2020-03-20_at_14.29_.11_.jpeg', 0, 2, 'Sd Semut-Semut', 1, 0),
+(324, '2019609', '0074481342', '0000000000000000', 'Putri Alyssa Manggarsari', 'P', 'Depok', '2007-08-23', 1, 'WNI', 'Perum BCI Blok A 6 No.22 RT 004 RW 026  Desa/Kelurahan Sukatani Kecamatan Tapos, Kota Depok. Jawa Barat 16454', '12345@gmail.com', 'putri_alisya.pdf', '12345678', 7, 'Tulips.jpg', 0, 2, 'sekolah dasar cita persada', 1, 0),
+(325, '2019617', '0', '0000000000000000', 'Ryan Putra Dwidanda Sutiono', 'L', 'Jakarta', '2005-11-12', 2, 'WNI', 'Tebet Timur Dlm VE/6 RT 004 RW 005 Desa/Kelurahan Tebet Timur Kecamatan Tebet, Kota Jakarta Selatan. DKI Jakarta ', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '081218444711', 7, 'Tulips.jpg', 0, 3, 'SDS Notre Dame', 1, 0),
+(326, '2017219', '0050832649', '0000000000000000', 'Pradipta Daffa', 'L', 'Tangerang ', '2005-03-22', 1, 'WNI', 'DUTA BINTARO KINTAMANI BLOK B10/1 rt.03/07, Desa / Kelurahan : Kunciran, Kode Pos  : 15144\n', 'sawnetham21@gmail.com', '03-13-2020-09.27_.11(1)_.pdf', '089668329234', 9, 'WhatsApp_Image_2020-03-13_at_11.30_.23_AM_.jpeg', 0, 2, 'SMP Islam Az Zamir', 1, 0),
+(327, '2019629', '0073834616', '0000000000000000', 'Theresia Elizabeth Lumban Tobing', 'P', 'Jakarta', '2007-01-10', 2, 'WNI', 'Bukit Cengkeh Berbunga Blok C4 No.9 Baktijaya RT 4 RW 24, Kecamatan Sukmajaya Depok, Jawa Barat 16418', 'friedasinaga@yahoo.com', 'theresia.pdf', '081361625319', 7, 'WhatsApp_Image_2020-03-20_at_12.03_.22_.jpeg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(328, '2019611', '0063794543', '0000000000000000', 'RanggaBiya Ichiro Sahaja Wijaksono', 'L', 'Jakarta', '2006-10-24', 2, 'WNI', 'Griya Suradita Indah, Blok O12/3, Suradita Cisauk - Tangerang	\n', 'yanuarpersonal@gmail.com', 'Ranggabiya_Ichiro.pdf', '081219743998', 7, 'WhatsApp_Image_2020-03-20_at_14.23_.33_.jpeg', 0, 1, 'SD Waskito', 1, 0),
+(329, '2018300', '0987654', '0000000000000000', 'Adlu Ahmad Fahrezy', 'L', 'Jakarta', '2008-01-31', 1, 'WNI', 'Kota wisata cluster Belleveu blok SF 6 No 15 kel Ciangsana  kec gunung putri Bogor Jawa barat 16968', 'zyasorayya@gmail.com', 'Adlu_Ahmad_Fahrezi.pdf', '081293132781', 5, 'adlu.jpg', 0, 2, 'SDN Penggilingan 9', 1, 0),
+(330, '2019630', '0071769877', '0000000000000000', 'Timothy Emmanuel Lumban Tobing', 'L', 'Jakarta', '2007-01-10', 2, 'WNI', 'Bukit Cengkeh Berbunga Blok C4 No.9 Baktijaya RT 4 RW 24, Kecamatan Sukmajaya Depok, Jawa Barat 16418', 'friedasinaga@yahoo.com', 'timoty.pdf', '081319305777', 7, 'WhatsApp_Image_2020-03-20_at_14.11_.40_.jpeg', 0, 2, 'PKBM Anak Panah', 1, 0),
+(331, '2018301', '0096370511', '0000000000000000', 'Alden Ely Pniel ', 'L', 'Gampong Cot', '2009-05-05', 2, 'WNI', 'Desa Neusu Aceh, Ulee Jurong: Tuan Meunasah, Jln.Tandi, Toke Haji. Kecamatan: Baiturrahman, Kota Banda Aceh. Kode Pos. 23244', 'josberlidaudupai321@gmail.com', 'Alden_Ely_Peniel.pdf', '081321445370', 5, 'Alden_K.5_.jpg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(332, '2018317', '2095903197', '0000000000000000', 'Efania Sumanadevi', 'P', 'Jakarta', '2009-07-14', 5, 'WNI', 'jl KH syahdan no 40A , Palmerah, Jakarta Barat\n', 'efaniasumanadevi@gmail.com', 'Efania_Sumanadevi.pdf', '089503687168', 5, 'Efania_Sumanadevi_K.5_.jpg', 0, 1, 'Global Sevilla Puri Indah', 1, 0),
+(333, '2018302', '0099366486', '0000000000000000', 'Aliqqa Kayyisa Noverry', 'P', 'Jakarta', '2009-04-02', 1, 'WNI', 'JL.. Rasamala VII No.25 RT 001/010 Menteng Dalam Tebet Jakarta Selatan\n', '12345@gmail.com', 'Aliqqa_Kayissa.pdf', '0', 5, 'Aliqqa_Kayyisa_K.5_.jpg', 0, 2, 'SD Kupu Kupu', 1, 0),
+(334, '2018304', '0087654550', '0000000000000000', 'Amelia Arwoon', 'P', 'Jakarta', '2008-05-18', 5, 'WNI', 'Apartement City Park Tower A Lantai 8 No 1', 'Arwoonamel@gmail.com', 'Amelia_Arwoon.pdf', '089604282632', 5, 'Amelia_A._K_.5_.jpg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(335, '2018305', '0091060058', '0000000000000000', 'Anastasya Cantika Kuswijaya', 'P', 'Tangerang', '2009-06-21', 1, 'WNI', 'Komp citra raya. Taman puspa blok D 1 no 19 cikupa tangerang \n', 'anastasyacantikakuswijaya@gmail.com', 'Anastasia_Cantika_Kuswijaya.pdf', '081212949481', 5, 'Anastasya_Cantika_K.5_.jpg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(336, '2018330', '2092055913', '0000000000000000', 'Marco emmanuel rudtio', 'L', 'Jakarta', '2009-08-22', 2, 'WNI', 'Green lake city, cluster East Asia 2 no. 26 Tangerang\n\n', '123456@gmail.com', 'Marco_Emmanuel_Ruditio1.pdf', '12121212121', 5, 'Marco_Em_K.5_.jpg', 0, 1, 'Grow Beyond Academy', 1, 0);
+INSERT INTO `tbl_siswa` (`siswa_id`, `siswa_nis`, `siswa_nisn`, `nik_siswa`, `siswa_nama`, `siswa_jenkel`, `siswa_tempat`, `siswa_tgl_lahir`, `siswa_agama_id`, `siswa_kewarganegaraan`, `siswa_alamat`, `siswa_email`, `siswa_dokumen`, `siswa_no_telp`, `siswa_kelas_id`, `siswa_photo`, `soft_deleted`, `anak_ke`, `sekolah_asal`, `satelit`, `oc`) VALUES
+(337, '2018320', '0082163268', '0000000000000000', 'Ethan Vincent Pranata', 'L', 'Jakarta', '2008-11-22', 2, 'WNI', 'Jl. Pascal Barat 1 No. 1 Cluster Pascal Scientia Garden Summarecon Serpong Tangerang \n', 'winardi.tj@gmail.com', 'Ethan_Vincent_Pranata.pdf', '0818783880', 5, 'Ethan_Vincent_P._K5_.jpg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(338, '2018306', '0092129043', '0000000000000000', 'Angelyn Callista Sucipto', 'P', 'Jakarta', '2009-08-05', 2, 'WNI', 'claster faraday selatan 3 No.9 sumarecon serpong tanggerang banten 15811\n', 'harcourts.tjipto@gmail.com', 'Angelyn_Callista_Sucipto.pdf', '082114999777', 5, 'Angelyn_Callista_Sucipto_K.5_.jpg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(339, '2018308', '0084648120', '0000000000000000', 'Aurellia Jesslyn', 'P', 'Jember', '2008-09-08', 2, 'WNI', 'Porto2 No.1 sektor 6 Gading Serpong \n', 'aurellia@gmail.com', 'Aurellia_Jesslyn_21.pdf', '081212623322', 5, 'Aurellia_Jesslyn_K.5_.jpg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(340, '2018314', '0083837954', '0000000000000000', 'Delroy Kumara Djuwono', 'L', 'Jakarta', '2008-12-18', 2, 'WNI', 'taman ratu blok dd 6 no 21-23  jakarta barat DKI Jakarta 11520\n', '12345@gmail.com', 'Delroy_Kumara_Djuwono.pdf', '0', 5, 'Delroy_Kumara_K.5_.jpg', 0, 1, 'SDK 11 Penabur', 1, 0),
+(341, '2018326', '0082904932', '0000000000000000', 'James Alexander Benyamin', 'L', 'Jakarta', '2008-06-16', 2, 'WNI', 'Botania Lake Residence Blok C 1 Sawangan Depok', 'bennybenyamin77@gmail.com', 'James_Alexander_Benyamin1.pdf', '081298881986', 5, 'James_Alexander_Benyamin_K5.jpg', 0, 1, 'Anak Panah', 1, 0),
+(342, '2018332', '2096846334', '0000000000000000', 'Michael Joshua Leunura', 'L', 'Serang', '2009-01-18', 2, 'WNI', 'Taman Lopang Indah, Jl. Anyelir, Block C38, No. 1  Serang Banten 42112\n', '123456@gmail.com', 'Michael_Joshua_Leunura1.pdf', '12121212121', 5, 'Michael_Josua_K.5_1.jpg', 0, 2, 'EvFIA LAND School', 1, 0),
+(343, '2019631', '0067404372', '0000000000000000', 'Tobiano Rikie Nathanael', 'L', 'Jakarta', '2006-04-08', 2, 'WNI', 'Fiordini F2 No.70 Gading serpong, RT 001/RW 010, Curug Sangereng, Tangerang', '12345@gmail.com', 'tobiano.pdf', '0', 7, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 2, 'PKBM Anak Panah', 1, 0),
+(344, '2018310', '0092838157', '0000000000000000', 'Daniel Bep Junior', 'L', 'Tangerang', '2009-12-28', 1, 'WNI', 'Jl. Jomas Rt.2 rw. 5 meruya utara \n', '12345@gmail.com', 'Daniel_BEP_Junior.pdf', '08119222467', 5, 'Daniel_Bep_Junior.jpg', 0, 2, 'PKBM Anak Panah', 1, 0),
+(345, '2018327', '2094954053', '0000000000000000', 'Jason Hanan', 'L', 'Tangerang', '2009-04-21', 2, 'WNI', 'Jl.chadna utama blok F1 no 17, cluster chadna, the avani, BSD', 'marietantri12@gmail.com', 'Jason_Hanan1.pdf', '087871111922', 5, 'Koala.jpg', 0, 1, 'SD Hosana Ranca Bungur', 1, 0),
+(346, '2018311', '0093475301', '0000000000000000', 'Daniel Oliver Wijaya', 'L', 'Jambi', '2009-06-15', 3, 'WNI', 'Jl. Dr. Sumbiyono no 19 Kecamatan Jelutung Jambi 36136 \n', 'graceherman@gmail.com', 'Daniel_Oliver_Wijaya.pdf', '081274996899', 5, 'Screenshot_6.png', 0, 1, 'PKBM Anak Panah', 1, 0),
+(347, '2018333', '0008522566', '0000000000000000', 'Michelle Callista Romauli P.', 'L', 'Jakarta', '2009-07-29', 2, 'WNI', 'Cluster Beryl. Jln Beryl Timur 1 no.1 Gading Serpong Tangerang selatan Banten 15811 \n', '123456@gmail.com', 'Michelle_Callista1.pdf', '12121212121', 5, 'Koala.jpg', 0, 2, 'Anak Panah', 1, 0),
+(348, '2018312', '0097741908', '0000000000000000', 'Darnel Hadrian', 'L', 'Jakarta', '2009-07-17', 1, 'WNI', 'Emerald Terrace A-18, Bintaro Jaya, Tangerang Selatan', 'fifiaufarda@gmail.com', 'darnel.pdf', '081314390999', 5, 'Darnel_Hadrian_K.5_.jpg', 0, 3, 'PKBM Anak Panah', 1, 0),
+(349, '2018321', '0093056854', '0000000000000000', 'Federico Tjen', 'L', 'Jakarta', '2009-03-30', 2, 'WNI', 'Gg manggis 14 no 4 rt.007/04 Tanjung duren \n', 'dewiwulan888@gmail.com', 'Federico_Tjen.pdf', '081288880131', 5, 'Federico_Tjen_K.5_.jpg', 0, 1, 'Sekolah Kristen Rahmani II', 1, 0),
+(350, '2018328', '0099197143', '0000000000000000', 'Jemimah Ayumi', 'P', 'Tangerang', '2009-08-26', 2, 'WNI', 'Jl.pasar serpong no.77 \n', 'suguy11@yahoo.co.id', 'Jemimah_Ayumi1.pdf', '0811883270', 5, 'Jemimah_Ayumi_K.5_.jpg', 0, 1, 'IPEKA', 1, 0),
+(351, '2018316', '0088547093', '0000000000000000', 'Drupadi Putri Kurniadi', 'P', 'Jakarta', '2008-09-18', 2, 'WNI', 'Kav DKI blok 142 no. 8, Kembangan, Meruya Selatan, Jakarta Barat', 'dyan.lohana@gmail.com', 'Drupadi_Putri_Kurniadi.pdf', '0', 5, 'Screenshot_6.png', 0, 2, 'PKBM Anak Panah', 1, 0),
+(352, '2018336', '0092805248', '0000000000000000', 'Nizellia Alisya', 'P', 'Tangerang', '2009-02-28', 1, 'WNI', 'Green leaf Residence jl.Raya cadas kec.Rajeg kel.Mekarsari kab.Tangerang 15540 \n', 'nspestudio@gmail.com', 'Nizellia_Alisya_2.pdf', '087778501670', 5, 'Nizelia_Aisyah_K.5_.jpg', 0, 1, 'SDN SUKATANI III', 1, 0),
+(353, '2019632', '0071696806', '0000000000000000', 'Tristan Evan Aditia', 'L', 'Jakarta', '2007-06-12', 2, 'WNI', 'JL. Pulau Sebaru VIII Blok L-7/21 Jakarta Barat', '12345@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia1.pdf', '0', 7, NULL, 1, 1, 'Springfield School', 1, 0),
+(354, '2018338', '0098718592', '0000000000000000', 'Princesca Daniella', 'P', 'Jakarta', '2009-05-10', 3, 'WNI', 'Jl puyuh barat blok EF 4 no 15 Bintaro Jaya sektor 5 Tangerang selatan Banten 15224\n', 'zesca_x@yahoo.com', 'princesca1.pdf', '087775071705', 5, 'Princesca_Daniella_K.5_.jpg', 0, 1, 'Anak Panah', 1, 0),
+(355, '2018329', '0109646426', '0000000000000000', 'Karen Glorianne Bunga Piga', 'P', 'Jakarta', '2010-06-04', 2, 'WNI', 'Perumahan Kosambi Baru\nJl.  Flamboyan Jingga 1A Blok C15 No. 20 \nDuri Kosambi\nCengkareng\nJakarta Barat 11750', '', 'Karen_Gloriane_Bunga_Piga1.pdf', '0819 9895 9393 ', 5, 'Koala.jpg', 0, 1, 'Anak Panah', 1, 0),
+(356, '2018339', '0102589523', '0000000000000000', 'Richard Jordan Harjanto', 'L', 'Jakarta', '2010-02-11', 2, 'WNI', 'Jl. SMPN Satu Kemang no. 97 RT.003 RW.001 Desa Tegal Kampung Kandang Kec. Kemang Kab. Bogor 16310 \n', '123456@gmail.com', 'Richard_Jordan_Harjanto1.pdf', '12121212121', 5, 'Richard_Jordan_Harjanto_K.5_.jpg', 0, 1, 'Anak Panah', 1, 0),
+(357, '2018322', '0091590495', '0000000000000000', 'Gabriel George Gaghana', 'L', 'Jakarta', '2009-09-09', 2, 'WNI', 'Taman Permata Parahyangan VII no 15 Lippo Karawaci \n', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '08118499590', 5, 'Tulips.jpg', 1, 2, 'PKBM Anak Panah', 1, 0),
+(358, '2018340', '2099902122', '0000000000000000', 'Rr Rania Alinastra Saskiabela', 'P', 'Bogor', '2009-05-18', 1, 'WNI', 'Mutiara Sentul blok Q no 6 jl alternative sentul 88 Nanggewer Cibinong Kab Bogor', 'alinastra.saskiabela@gmail.com', 'Raden_Roro_Rania1.pdf', '081389679049', 5, 'RR_Rania_K.5_.jpg', 0, 2, 'SD CIpta Cendekia', 1, 0),
+(359, '2018341', '0099829906', '0000000000000000', 'TImothy', 'L', 'Jakarta', '2009-02-28', 3, 'WNI', 'taman ratu cc 2 no 17 Jakarta Barat DKI Jakarta 52110\n', ' verenaerny@gmail.com', 'Timothy_Collin1.pdf', '0811 1101116', 5, 'Timothy_Collin_K.5_.jpg', 0, 3, 'Anak Panah', 1, 0),
+(360, '2018342', '0094499146', '0000000000000000', 'Tisha Emmanuela Chandra', 'L', 'Jakarta', '2009-04-21', 2, 'WNI', ' Perumahan Garden Aryana Blok B3/15, Binong, kelurahan Sukabakti, Desa kadu, kecamatan curug, Tangerang 15810\n', 'tishahartono@gmail.com', 'Tisha_Emmanuella_Chandra.pdf', '0878 8373 0865', 5, 'Tisha_Immanuella_C_K5.jpg', 0, 2, 'SD Gracia', 1, 0),
+(361, '2017151', '0065085319', '0000000000000000', 'Aditya Narayan', 'L', 'Jakarta', '2006-10-15', 5, 'WNI', 'jalan Duri.Selatan IA No. 26F\nKelurahan Duri Selatan\nKecamatan Tambora\nJakarta 11270', 'chessadora@rocketmail.com', 'Aditya_Narayan.pdf', '087886927034', 6, 'Aditya_Narayan_k6.jpg', 0, 2, 'Anak Panah', 1, 0),
+(362, '2017159', '0086660040', '0000000000000000', 'Darren Dwitaja Yap', 'L', 'Jakarta', '2008-05-13', 5, 'WNI', 'Simprug poris e3 no 5  RT 02 RW 04 Tangerang\n', '12345@gmail.com', 'Darren_Dwijaya_Yap.pdf', '081281819173', 6, 'Darren_k6.jpg', 0, 2, 'PKBM Anak Panah', 1, 0),
+(363, '2017165', '0082362154', '0000000000000000', 'Kenneth Robertson Lee', 'L', 'Jakarta', '2008-07-28', 3, 'WNI', 'JL MANGGA BESAR 1 NO 98 A rt.01/03,Desa / Kelurahan : Mangga Besar, Kode Pos  : 11180', 'k3nnethlee@gmail.com', 'Kenneth_Robertson_Lee1.pdf', '0810000000', 6, 'Kenneth_Robertoson_K6.jpg', 0, 1, 'Homeschooling Primagama', 1, 0),
+(364, '2017160', '2086481441', '0000000000000000', 'El Zidane Yuska Rusman', 'L', 'Jakarta', '2008-01-31', 1, 'WNI', 'Jl Alle Raya No 54 Rt 006/008 Repoa, Tangerang Selatan', '12345@gmail.com', 'El_Zidane_Yuska_Rusman.pdf', '0', 6, 'Screenshot_6.png', 0, 2, 'PKBM Anak Panah', 1, 0),
+(365, '2017152', '0083105064', '0000000000000000', 'Angela Beatrice Nichole Tenglewier', 'P', 'Bogor', '2008-09-11', 2, 'WNI', 'Jl.Layungsari I No 29', '123456@gmail.com', 'Angela_Beatrice.pdf', '12121212121', 6, 'Desert.jpg', 0, 1, 'Anak Panah', 1, 0),
+(366, '2017166', '0097884774', '0000000000000000', 'Kho Richard Melvin', 'L', 'Jakarta', '2009-02-18', 2, 'WNI', 'Amerika latin blvd no 18 green lake city cipondoh  tangerang', '123@gmail.com', 'Kho_Richard_Melvin1.pdf', '08111258258', 6, 'Khoricard_Melvin_K6.jpg', 0, 2, 'SD Notre Dame', 1, 0),
+(367, '2017161', '0086021828', '0000000000000000', 'Felix Maximillian Oey', 'L', 'Tangerang', '2008-03-08', 2, 'WNI', ' JL. TAMAN BUNGA V BLOK J. 3 NO. 14 MDL rt.03/03 , Kelapa Indah\n', 'ris_ka@hotmail.com', 'Felix_Maximillian_Oey.pdf', '08128283595', 6, 'Felix_k6.jpg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(368, '2017155', '0076155425', '0000000000000000', 'Calvin wijaya           ', 'L', 'Tangerang', '2007-11-11', 5, 'WNI', 'Perum Legok Permai Cluster Kaliandra Blok K2/A2 RT 04/08\nKecamatan Legok\nKabupaten Tangerang\n15821', 'calvinwijaya303@gmail.com', 'Calvin_WIjaya1.pdf', '12121212121', 6, 'Calvin_Wijaya_k6.jpg', 0, 1, 'Yayasan Bina Wirawan', 1, 0),
+(369, '2017167', '0073574726', '0000000000000000', 'Lianutte Amevilla', 'P', 'Jakarta', '2007-11-10', 2, 'WNI', 'JL DR SEMERU RAYA NO 65 rt.10/10, Desa / Kelurahan : Grogol,Kode Pos  : 11450', '123@gmail.com', 'lianute.pdf', '081380687898', 6, 'Lianuette_Amevilla_k6.jpg', 0, 2, 'Anak Panah', 1, 0),
+(370, '2017162', '0075074291', '0000000000000000', 'Gerard Anthony Syahlim', 'L', 'Jakarta', '2008-09-12', 3, 'WNI', 'Mitra Gading Vila Blok D1/19 Rt 001/007 Kelapa Gading Jakarta Utara', '12345@gmail.com', 'Gerard_Anthony_Syahlim.pdf', '087808878388', 6, 'Gerard_Anthony_Syahlim_K6.jpg', 0, 2, 'Satori monttessori school', 1, 0),
+(371, '2017163', '0089184147', '0000000000000000', 'Gwenn Valerie Qiu', 'P', 'Jakarta', '0008-10-24', 2, 'WNI', 'JALAN TURQUIOSE TIMUR 1 NOMOR 22 - PHG rt.01/06 ,  Curug Sangereng\n', '12345@gmail.com', 'Gwen_Valeria_Qiu.pdf', '0', 6, 'Gwenn_K.6_.jpg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(372, '2017154', '2084930543', '0000000000000000', 'Cahaya saputra', 'L', 'Tangerang', '2008-07-12', 5, 'WNI', 'Sumareccon serpong, Perum Pondok Hijau Golf, Cluster topaz barat no.12 Gading serpong- Tangerang No telp : 08170988885.', 'cahayasaputra12@gmail.com', 'cahaya1.pdf', '082122620688', 6, 'Cahaya_Saputra_K6.jpg', 0, 2, 'SD PAHOA', 1, 0),
+(373, '2017168', '0087691166', '0000000000000000', 'Naomi Adriel NG', 'P', 'Jakarta', '2008-11-11', 5, 'WNI', 'JL BANDENGAN UTARA 1 NOMOR 35 rt.05/12 Desa / Kelurahan : Pekojan,Kode Pos  : 11240', ' elviratasman@hotmail.com''', 'Naomi_Adriel_Ng1.pdf', '087787770122', 5, 'Jellyfish.jpg', 0, 1, 'Bunda Mulia School', 1, 0),
+(374, '2017164', '0073424703', '0000000000000000', 'Hananniel Rayheart Tarsley', 'L', 'Jakarta', '2007-11-25', 2, 'WNI', ' JL KEMANGGISAN PULO rt.08/17 , Palmerah,Kode Pos  : 11480\n', 'sisiliarayi@gmail.com', 'Hananniel.pdf', '081931062728', 6, 'Hananniel_K6.jpg', 0, 1, 'SDS Tunas Muda IKKT', 1, 0),
+(375, '2017170', '0071666213', '0000000000000000', 'Ow Jia En Jocelyn ', 'P', 'Singapore', '2007-04-03', 2, 'WNI', 'JL UTAMA RAYA NO.21 rt.04/03, Desa / Kelurahan : Cengkareng Barat,Kode Pos  : 11730', '123@gmail.com', 'Ow_Jia_En_Jocelyn1.pdf', '081210272277', 6, 'Ow_Jia_En_Jocelyn_k6.jpg', 0, 1, 'Horizon School Singapore', 1, 0),
+(376, '2017172', '0085368778', '0000000000000000', 'Phillip Rylan Tian', 'L', 'Jakarta', '2008-03-19', 5, 'WNI', ' JLN PARANG TRITIS IV/5 rt.03/11, : Ancol,14430\n', '12345@gmail.com', 'Phillip_Rylan_Tian.pdf', '081699083', 6, 'Phillips_Rylan_Tian_K6.jpg', 0, 1, 'SDS Bunda Mulia', 1, 0),
+(377, '2018515', '2108821255', '0000000000000000', 'Vincent  Louis Wijaya', 'L', 'Jakarta', '2010-06-23', 3, 'WNI', 'Metro Permata 1, blok D5 no.12A, Karang Tengah. Karang Mulia-Ciledug Tangerang', 'wandavelina85@gmail.com', 'vincent_louis_.pdf', '0217332641', 3, 'Vincent_Louis.jpg', 0, 1, 'SDS Woodlands Montesori', 1, 0),
+(378, '2017156', '0089445569', '0000000000000000', 'Carren Annabel Hendra', 'P', 'Bandung', '2008-08-14', 2, 'WNI', 'KOMP PARAHYANGAN PERMAI BLOK M NO 4 rt.02/08, Desa / Kelurahan : Ciwaruga,Kode Pos  : 40559\n', 'carren.annabel@gmail.com', 'carren.pdf', '08986443210', 6, 'Carren_Annabel_k6.jpg', 0, 2, 'SD Kristen 2 Bina Bakti', 1, 0),
+(379, '2017173', '0088188413', '0000000000000000', 'Reynard Keyfas  Nathanel Sitohang', 'L', 'Jakarta', '2008-08-13', 3, 'WNI', 'TAMAN SARI PESONA BALI BA.8 PISANGAN rt.01/15 ,  Pisangan, Ciputat Timur, Tangerang Selatan', 'rknsitohang@gmail.com', 'Reynard_Keyfas.pdf', '08118071717', 6, 'Reynard_Keyfas_k6.jpg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(380, '2017171', '0071713235', '0000000000000000', 'Ow Jia Xuan Hasya ', 'P', 'Singapore', '2007-04-03', 2, 'WNI', 'JL UTAMA RAYA NO.21 rt.04/03, Desa / Kelurahan : Cengkareng Barat,Kode Pos  : 11730\n', '123@gmail.com', 'Ow_Jia_Xuan_Hasya1.pdf', '081210272277', 6, 'Ow_Jia_Xuan_Hasya_k6.jpg', 0, 2, 'Horizon School Singapore', 1, 0),
+(381, '2017174', '0089757650', '0000000000000000', 'Richie Corvinus Tan', 'L', 'Jakarta', '2008-04-15', 2, 'WNI', 'Branz BSD Tower C Unit 2702\nJl. BSD Boulevard Parcel 55F\nTangerang 15339 Banten', 'richie.tan154@gmail.com', 'Richie_Corvinus_Tan.pdf', '0816289224', 6, 'Richie_Corvinus_k6.jpg', 0, 2, 'PKBM Anak Panah', 1, 0),
+(382, '2018519', '0127813701', '0000000000000000', 'Allyn Beatrice Yang', 'P', 'Jakarta', '2012-01-13', 5, 'WNI', 'Taman Palem Lestari Blok B11 No.56 RT009/RW003 Cengkareng Jakarta Barat', 'hendriyoagusly@yahoo.co.id', 'alyn.pdf', '02155963829', 2, 'Allyn_Beatrice_Yang.jpg', 0, 2, 'SDS Woodlans Montessori', 1, 0),
+(383, '2017157', '0082525779', '0000000000000000', 'Catherine Anastasia Roeroe', 'P', 'Manado', '2008-10-05', 2, 'WNI', 'Vila Nusa Indah 2 Blok AA1 nomor 86 Jatiasih Bekasi 17423', 'roeroe.cathrine@yahoo.com', 'roe_roe.pdf', '082292058899', 6, 'Catherine_Anastasia_Roeroe.jpg', 0, 0, 'Anak Panah', 1, 0),
+(384, '2017182', '0076307783', '0000000000000000', 'Valiant Abnegatio Nostri Siahaan', 'L', 'Tangerang', '2007-10-16', 2, 'WNI', 'Griya Soka Blok U No 16 Cimahpar, Bogor Utara, Kota Bogor', 'beyoan01@gmail.com', 'Valiant_Abnegetio.pdf', '081219594041', 6, 'Valiant_Abnegatio_Nostri_S_K6.jpg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(385, '2017183', '0079539524', '0000000000000000', 'Zico Xavier Pradipta Chandra ', 'L', 'Jakarta', '2007-12-19', 1, 'WNI', 'Jalan Sapta Taruna 2 Dalam Nomor 7 RT 4 RW 10 Kelurahan Pondok Pinang Kecamatan Kebayoran Lama', 'zicoxavier19@gmail.com', 'Zico_Xavier.pdf', '085691172164', 6, 'Zico_k6.jpg', 0, 1, 'SDN Pondok Pinang 10 Pagi', 1, 0),
+(386, '2017175', '0077442353', '0000000000000000', 'Salwaa Dhana Azalia', 'P', 'Surabaya', '2007-08-07', 1, 'WNI', 'TAMBAK SEGARAN NO. 66 rt.04/09. Desa / Kelurahan : Rangkah,Kode Pos  : 60135', 'salmaaaabidahazzahra@gmail.com', 'Salwaa1.pdf', '087853101981', 6, 'Salwa_k6.jpg', 0, 2, 'SD Muhammadiyah 3', 1, 0),
+(387, '2017179', '0089036832', '0000000000000000', 'Tischka Naiara Priyanka Singh', 'P', 'Jakarta', '2008-04-24', 3, 'WNI', 'JL DELMAN ASRI III/18 rt.06/11, Kebayoran Lama Utara\n', '12345@gmail.com', 'Tishcka_Naira.pdf', '08128348488', 6, 'Tischa_k6.jpg', 0, 3, 'German School Jakarta', 1, 0),
+(388, '2017180', '0076377430', '0000000000000000', 'Tobias Benedict Rawis', 'L', 'Jakarta', '2007-09-22', 2, 'WNI', 'JL DELMAN ASRI III/18 rt.06/11,kel.Kebayoran Lama Utara,12240\n', '12345@gmail.com', 'Tobias_Benedict_Rawis.pdf', '0', 6, 'Tobias_Benedict_Rawis.jpg', 0, 2, 'PKBM Anak Panah', 1, 0),
+(389, '2017181', '0084182087', '0000000000000000', 'Trinita Elena Lumbantobing ', 'P', 'Jakarta', '2008-06-04', 2, 'WNI', 'CIPINANG BARU BUNDER VII/36 rt.05/01, Cipinang, 13240\n', '12345@gmail.com', 'Trinita_Elena_Lumbantobing.pdf', '081361625319', 6, 'Trinita_Elina_Lumban_Tobing_k6.jpg', 0, 3, 'PKBM Anak Panah', 1, 0),
+(390, '2018518', '01201071802502', '0000000000000000', 'Aletha Joy Hana', 'P', 'Malinau', '2012-01-07', 2, 'WNI', 'Jl. Tandi Lorong Toke Haji no 5. Gampong Neusu Aceh. Kec. Baiturrahman. Kota Banda Aceh', 'josberlidaudupai32i@gmail.com', 'aletha.pdf', '081321445370', 2, 'Aleeha.jpg', 0, 2, 'PKBM Anak Panah HS', 1, 0),
+(391, '2019535', '0', '0000000000000000', 'Ahmad Reza Fahlefi', 'L', 'Tangerang', '2008-06-14', 1, 'WNI', 'Jl. Tanah Manisan no.96 Rt03/Rw09 Cip Cemp Jatinegara, Jak Tim\n', 'aamingim73@gmail.com', 'Ahmad_Reza1.pdf', '08129231896', 1, 'Lighthouse1.jpg', 0, 2, '0', 1, 0),
+(392, '2018517', '0118635224', '0000000000000000', 'Aiko Candyva Khairunnisa Basuki', 'P', 'Jakarta', '2011-01-23', 1, 'WNI', 'Taman Royal 2 Cluster Parahyangan 1 No.25 RT04 / RW 16 Poris Pelawad Indah Cipondoh Tangerang Banten 15141', 'triyo.basuki@gmail.com', 'aiko.pdf', '08119000393', 2, 'Aiko_Candyva.jpg', 0, 2, 'PKBM Anak Panah HS', 1, 0),
+(393, '2019536', '2127987746', '0000000000000000', 'Akhtar Bagas Zahid Mustafid', 'L', 'Semarang', '2012-10-12', 1, 'WNI', 'Jl. Rawamangun Muka VIII no.6 RT 14/RW 12, Rawamangun, Jakarta Timur.', 'akhtarbagas1210@gmail.com', 'Akhtar.pdf', '081215933131', 1, 'Akhtar_Bagas.jpg', 0, 1, '0', 1, 0),
+(394, '2019546', '0134070493', '0000000000000000', 'Lizzane Leanne Edelweiss Siregar', 'P', 'Surabaya', '2013-04-26', 2, 'WNI', 'Perumaham GPI Jl. Delima B no. 56 A, kec. MAPANGET, Kota Manado, SULUT, 95252\n', ' 	evaverawaty13@gmail.com', 'Lizzane_leanne.pdf', '081212587993', 1, 'Lizzane_Lianne.jpg', 0, 2, ' 	PAUD Glow Gerizim School', 1, 0),
+(395, '2019548', '2133311215', '0000000000000000', 'Muhammad Ghaazi Allistair Madjid', 'L', 'illinois', '2013-02-18', 1, 'WNI', 'Jl. Swadaya no.58 RT06/RW02 Kelurahan Limo - Kecamatan Limo - Depok - Jawa Barat - 16515', 'riosplace@gmail.com', 'Ghazzi.pdf', '089603689694', 1, 'M._Gaazi_.jpg', 0, 3, 'PKBM Anak Panah', 1, 0),
+(396, '2017176', '0052501489', '0000000000000000', 'Samuel Lie', 'L', 'Jakarta', '2005-11-23', 2, 'WNI', 'sektor 6 jl kelapa hibrida utara blok GC 3 no 7.tangerang gading serpong 15810.', '123@gmail.com', 'Samuel_Lie1.pdf', '0810000000', 6, 'Samuel_Lie.jpg', 0, 2, 'PKBM Alfa Omega', 1, 0),
+(397, '2017177', '0084856376', '0000000000000000', 'Sebastian Dosey Ardy', 'L', 'Jakarta', '2008-09-24', 3, 'WNI', 'KAV. PORLI JL. A 7/37 rt.03/03, Desa / Kelurahan : Ragunan,Kode Pos  : 12550', '123@gmail.com', 'dosey.pdf', '0818904034', 6, 'Sebastian_Dosiy_Ardy.jpg', 0, 2, 'SD Strada Wiyatasana', 1, 0),
+(398, '2017178', '0078243185', '0000000000000000', 'Sir Leon Alexander Bolang', 'L', 'Balikpapan', '2007-07-20', 2, 'WNI', 'Perum Kencana Loka 1 Blok F1/39 RT. 002/ RW.014  - BSD City; Kelurahan Rawa Buntu Kec. Serpong 15318', '123@gmail.com', 'sirleonalexanderbolang.pdf', '082254813348', 6, 'Sirleon_Alexando_K6.jpg', 0, 1, 'Kalimantan International School', 1, 0),
+(399, '2017196', '0053872822', '0000000000000000', 'Christian samuel tanujaya', 'L', 'Jakarta', '2005-06-01', 2, 'WNI', 'Apartm the mansion jasmine tower capilano jc17b kemayoran jakpus', 'stevengmi@yahoo.com', '16-03-2020-16.36_.13_.pdf', '08129234233', 9, 'index.jpg', 0, 2, 'SMP Christen Calvin', 1, 0),
+(400, '2018516', '01111011802556', '0000000000000000', 'Abriel Nathanael Tanadi', 'L', 'Manado', '2011-11-01', 2, 'WNI', 'Jl. Lingkungan 1 RT003/RW001 Kel. Bitung Timur Kota Bitung 9522 Sulawesi Utara', 'rudytanadi1811@gmail.com', 'abriel.pdf', '08128281885', 2, 'Abriel_N._Tahadi_.jpg', 0, 1, 'PKBM Anak Panah HS', 1, 0),
+(401, '2019537', '2126361788', '0000000000000000', 'Atharizz Sakha Radiansyah ', 'L', 'Tangerang', '2012-05-05', 1, 'WNI', 'Perumahan dasana indah blok ub2 no.4 tangerang\n', 'dian.ratman@gmail.com', 'Atharizz1.pdf', '082211857079', 1, 'Atharizz.jpg', 0, 1, 'Tk insan aulia madani bekasi', 1, 0),
+(402, '2017221', '0042611326', '0000000000000000', 'Rico Putra Hariyanto', 'L', 'Jakarta', '2004-01-20', 3, 'WNI', 'Jl. Abdul Muis No.96 RT 2/ RW 1 Perojo Selatan, Jakarta Pusat', 'as@dnet.net.id', 'Rico_Putra.pdf', '0811191163', 9, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SD Sint. Joseph', 1, 0),
+(403, '2018520', '01201121802470', '0000000000000000', 'Annabelle Phoebe Prasetyo', 'P', 'Jakarta', '2012-01-12', 3, 'WNI', 'Perum Bukit Rivaria Sektor V Blok I5 No. 2 Bedahan Sawangan Depok Jawa Barat 16519', 'andre.aufklarung@gmail.com', 'annabelle.pdf', '085868223378', 2, 'Annabelle_Phoebe.jpg', 0, 2, 'TK Holy Faithful Obedient', 1, 0),
+(404, '2017224', '0068122583', '0000000000000000', 'Shine Louislane Sanger', 'P', 'Bandung', '2006-09-01', 2, 'WNI', 'Alamat Jalan  : JL. RAWA SELATAN IV NO.3 rt.06/07 , Desa / Kelurahan : Kampung Rawa, Kode Pos  : 10560	\n', 'gwynne_m@yahoo.co.id', 'Shine_Louislane_Sanger.pdf', '08118822275', 9, 'Tulips.jpg', 0, 3, 'PKBM Anak Panah', 1, 0),
+(405, '2019538', '0111392953', '0000000000000000', 'Bianca khansa putri', 'P', 'Tangerang', '2011-10-13', 1, 'WNI', 'Jl.sunset road no 39.C seminyak,kuta badung Bali 80361', 'ginta_windianty@yahoo.com', 'Bianca1.pdf', '081283236888', 1, 'Bianca_Khansa_Putri.jpg', 0, 2, 'Anak Panah', 1, 0),
+(406, '2020730', '0122896664', '0000000000000000', 'Bella Marvelyn Elisabeth Tambunan', 'L', 'Tangerang Selatan', '2012-05-05', 2, 'WNI', 'Delatinos Cluster De Rio Blok B.8/16 BSD RT008/RW018 Kel. Rawa Buntu Kec. Serpong Kota Tangerang Selatan 15318 Banten', 'bellamarvelyn@gmail.com', 'bella_marvel.pdf', '081281126960', 2, 'Bella_Marvelyn_Tambunan.jpg', 0, 1, 'SD Kristen IPEKA', 1, 0),
+(407, '2018521', '01203041802586', '0000000000000000', 'Erlangga Guevara Permata Perangin Angin Damanik', 'L', 'Jakarta', '2012-03-04', 2, 'WNI', 'Jl. Villa Melati Emas H16 No. 8A Serpong Tangerang Selatan Banten 51114', ' jppermata@gmail.com', 'erlangga_guevara.pdf', '08128841110', 2, 'Erlangga_Guevara_Permata._P_._D_.jpg', 0, 2, 'PKBM Anak Panah HS', 1, 0),
+(408, '2017226', '0058604872', '0000000000000000', 'Vanessa Tiffany Santoso', 'P', 'Sydney', '2005-02-01', 2, 'WNI', 'Cluster Hylands FB 6/2 Greenwich Park ,BSD\nLengkong Kulon, Pagedangan, Tangerang\n15331', 'lusi_sant@yahoo.com', 'Vanessa_Tiffany_Santoso.pdf', '087885575475', 9, 'Tulips.jpg', 0, 1, 'SD Swasta Kristen 1 Penabur                                                                                                  ', 1, 0),
+(409, '2017220', '0056649487', '0000000000000000', 'Reynard Wibowo', 'L', 'Tegal', '2005-03-31', 1, 'WNI', 'Jl. Jejeg RT 05/RW 01 Jejeg Tegal.', 'titiwibowo@gmail.com', 'Reynard_Wibowo.pdf', '083811137419', 9, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SD Spring Field', 1, 0),
+(410, '2017223', '2043889440', '0000000000000000', 'Ruhul Jadid Al Mundzir', 'L', 'Jakarta', '2004-11-18', 1, 'WNI', 'Perumahan Vila Rizki Ilhami, Blok A1 no 26, RT 1 RW 35, kel Bojong Nangka, kec Kelapa Dua, Tangerang', 'ruhul.jadid.almundzirr@gmail.com', 'Ruhul1.pdf', '62 881-0246-36471', 9, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'PKBM Kak Seto', 1, 0),
+(411, '2017222', '0054347179', '0000000000000000', 'Rodiah Hasan Alaydrus', 'P', 'Jakarta', '2005-04-19', 1, 'WNI', 'Perum Gardu Asri No.A4 Jl.Gardu Rt.007/003 Condet Jakarta Timur.', 'kittycake4@gmail.com', 'Rodiah_Hasan.pdf', '087783257705', 9, '96fb7d1f-fa8c-4445-9450-e63d7837c6a0.jpg', 0, 2, 'SDS Global Islamic School', 1, 0),
+(413, '2017227', '0054141406', '0000000000000000', 'Victoria Angelica', 'P', 'Singapura', '2005-09-02', 2, 'WNI', 'JL. SEKOLAHAN INTER. I C-3/8 rt.06/09 , Sambikerep,  60217\n', 'joan.wu2@gmail.com', 'Victoria_Angelica.pdf', '085858119058', 9, 'Screenshot_6.png', 0, 1, 'SD Lentera Kasih Bali', 1, 0),
+(414, '2019539', '0108472403', '0000000000000000', 'David Fernando', 'L', 'Serang', '2010-08-15', 5, 'WNI', 'Taman Lopang Indah Blok F8 No.19\n', 'yuliusbernadus@gmail.com', 'David_Fernando1.pdf', '081288681381', 1, 'David_Fernando.jpg', 0, 1, 'TK Harapan Bangsa, Serang - Banten', 1, 0),
+(416, '2017228', '0052351482', '0000000000000000', 'Videlin Nikita Pracoyo', 'P', 'Jakarta', '2005-06-10', 3, 'WNI', 'Chrysocolla Utara 1 no 17 PHG - Gading Serpong\nKode Pos 15811', 'raf_siao@yahoo.com', 'Videlin_Nikita_Pracoyo.pdf', '085104677297', 9, 'Screenshot_6.png', 0, 1, 'SD Pahoa', 1, 0),
+(417, '2017225', '0060178550', '0000000000000000', 'Vanes Tan', 'L', 'Tangerang', '2006-01-07', 5, 'WNI', 'JL MANGGA BESAR VI.C / 75 rt.02/04, Taman Sari, 11150', 'vanes@gmail.com', 'Vaness_Tan.pdf', '0811191163', 9, 'Screenshot_6.png', 0, 1, 'SD Sint Joseph', 1, 0),
+(419, '2019542', '2146734874', '0000000000000000', 'Gabrian Nicholas Negoro', 'L', 'Jakarta', '2014-04-21', 2, 'WNI', 'Jl. Melati Indah CB/12A Harapan Indah\n', 'gunhong1912@gmail.com', 'gabrian_nicholas.pdf', '087878477454', 1, 'Gabrian_Nicholas.jpg', 0, 1, 'Anak Panah', 1, 0),
+(420, '2017229', '0049948752', '0000000000000000', 'Vincent Delmora', 'L', 'Jakarta', '2004-09-15', 1, 'WNI', 'JL RAYA DURI KOSAMBI NO.2  rt.03/03 ,  Duri Kosambi, 11750\n', 'vincentdelmora04@gmail.com', 'Vincent_Delmora.pdf', '087886864426', 9, 'Screenshot_6.png', 0, 1, 'SDN Kebalenan', 1, 0),
+(421, '2019544', '0139750665', '0000000000000000', 'Josiah Aidan Santoso', 'L', 'Jakarta', '2013-04-30', 2, 'WNI', 'Regency melati mas F3/37\n', 'josiahaidansantoso@gmail.com', 'Josiah1.pdf', '081283606082', 1, 'Josiah.jpg', 0, 1, 'Sekolah Athalia', 1, 0),
+(422, '2017230', '0058455136', '0000000000000000', 'Yeremia aditya Kriscahyadi', 'L', 'Jakarta', '2005-06-27', 2, 'WNI', 'Jl.surya widuri 1 blok 3 k no.12\nSunrise garden\nJakarta 11520', 'tabitatifa@gmail.com', 'Yeremia_Aditya.pdf', '085781195540', 9, 'Screenshot_6.png', 0, 3, 'SMP Kristen BPK Penabur', 1, 0),
+(425, '2019545', '0', '0000000000000000', 'Krishna Tejawijaya', 'L', 'Jakarta', '2013-02-06', 5, 'WNI', 'Green Lake City, Cluster Australia, Jl. Australia 1 No. 7  Tangerang Banten 15147\n', 'yunds@yahoo.com', 'Khrisna1.pdf', '081398980038', 1, 'Khrisna_Tejawijaya.jpg', 0, 2, 'Anak Panah', 1, 0),
+(426, '2017197', '0', '0000000000000000', 'Darren wirawan', 'L', 'Jakarta', '2005-07-29', 2, 'WNI', 'apartement ruby tower 3#05. jl jendral sudirman no 47, balikpapan superblock', '12345@gmail.com', 'Darren_Wirawan.pdf', '0', 7, 'Screenshot_6.png', 0, 1, 'SD Kristen IPEKA Balikpapan', 1, 0),
+(427, '2017198', '0054862275', '0000000000000000', 'Erlangga Maula Syahputra', 'L', 'Jakarta', '2005-05-18', 1, 'WNI', 'jln Delima Jaya rt 02/rw 08 nmer 5A', '12345@gmail.com', 'erlangga_maula.pdf', '0', 9, 'Screenshot_6.png', 0, 3, 'SDN Rempoa 1 Ciputat', 1, 0),
+(429, '2017199', '0052715233', '0000000000000000', 'Evander Jefferey Genaro', 'L', 'Sukoharjo', '2005-01-24', 2, 'WNI', 'JL PAGEBANGAN  NO. 52 rt.03/10 ,  Jombang Wetan, 42111\n', 'evander@gmail.com', 'Evander_Jeffrey.pdf', '081296013334', 9, 'Screenshot_6.png', 0, 1, 'SD Mardi Yuana ', 1, 0),
+(430, '2019547', '2117109144', '0000000000000000', 'Maria Stella Fortunata Satriatama', 'P', 'kediri', '2011-12-13', 3, 'WNI', 'Perumahan Puri Kedaton A-10 \n', 'eka.natalia.satriatama@gmail.com', 'maria_Stella1.pdf', '0856-0478-3891', 1, 'Maria_Stella.jpg', 0, 1, 'Anak Panah', 1, 0),
+(432, '2017300', '189371293', '0000000000000000', 'Eliana Alfrada Eirene', 'P', 'Sukabumi', '2005-11-20', 2, 'WNI', 'Perum Dasana Indah Blok RA 4, No. 8-9, Kelapa Dua, Tangerang', 'davidapriandy@gmail.com', 'Eliana_Alfreda.pdf', '0', 9, 'Eliana_Alfreda.jpeg', 0, 1, 'SD Dian Harapan', 1, 0),
+(433, '2017200', '0053898569', '0000000000000000', 'Gerald Pascalis Wicoady', 'L', 'Makasar', '2005-03-26', 3, 'WNI', ' JL YOS SUDARSO RUKO NO.300 A7 rt.04/05 , Tabaringan, 90165\n', 'nervelgravie@gmail.com', 'Contoh.pdf', '082190667766', 9, 'Screenshot_6.png', 1, 3, 'SD Zion GKKA-Up', 1, 0),
+(435, '2017201', '0052590668', '0000000000000000', 'Gloria Angelina', 'P', 'Singapura', '2005-09-02', 2, 'WNI', 'JL. SEKOLAHAN INTER. I C-3/8 rt.06/09 , Sambikerep, 60217', 'joan.wu2@gmail.com', 'Gloria_Angelina.pdf', '085858119058', 9, 'Screenshot_6.png', 0, 1, 'SD Lentera Kasih Bali', 1, 0),
+(437, '2019549', '0', '0000000000000000', 'Naradipha A. Sasongko', 'L', 'Jakarta', '2011-11-04', 1, 'WNI', 'Pondok Dukuh Indah 5 No. 14, Jakarta Timur\n', 'diah.arimurti@yahoo.com', 'Naradhipa1.pdf', '0811985432', 1, 'Naradipha_A_Sasangho.jpg', 0, 2, 'TK Mentari Montessori', 1, 0),
+(439, '2019550', '0122557751', '0000000000000000', 'Raafi Aqila Zein', 'L', 'Jakarta', '2012-09-15', 1, 'WNI', 'Perum Nuansa Asri Cinangka Blok B10 Jl pendidikan cinangka sawangan\n', 'raafizein123@gmail.com', 'Raafi1.pdf', '081210833305', 1, 'Raali_Aqila.jpg', 0, 2, 'Anak Panah', 1, 0),
+(440, '2018532', '2126421861', '0000000000000000', 'Maximilian Aldrich Mangiwa', 'L', 'Jakarta', '2012-10-04', 3, 'WNI', 'Kavling Kelinci 76 No. 22 Jl. Kelinci RT007/RW006 Jakarta Selatan 12630', 'aldrichmangiwa@gmail.com', 'maximillian.pdf', '081282151618', 2, 'tidur-dengan-kucing1.jpg', 0, 1, 'SD Strada Wiyatasana', 1, 0),
+(441, '2019551', '2138293538', '0000000000000000', 'Richelle Everly Thu', 'P', 'Jakarta', '2013-08-13', 5, 'WNI', 'Jl. Duri mas 4a blok P no.340 Duri kepa\n', 'wwin94713@gmail.com', 'Richelle_everly.pdf', '12121212121', 1, 'Penguins.jpg', 0, 1, 'Anak Panah', 1, 0),
+(442, '2018533', '0125448628', '0000000000000000', 'Raion Judah Ong', 'L', 'Tangerang Selatan', '2012-06-16', 2, 'WNI', 'Cimanggis RT003/RW002 Kel. Cipayung Kec. Ciputat Kota Tangerang Selatan 15411', 'suguy11@yahoo.co.id', 'Raion.pdf', '081311230305', 2, 'Raion_Judah_Ong.jpg', 0, 2, 'PKBM Anak Panah HS', 1, 0),
+(443, '2018534', '2117527070', '0000000000000000', 'Steven Gunawan', 'L', 'Jakarta', '2011-12-30', 5, 'WNI', 'Jl. Darussalam Raya, Kompleks Griya Indah No.55 ', 'yudhi@gmail.com', 'steven_gunawan.pdf', '085217355259', 2, 'Steven_Gunawan.jpg', 0, 2, ' SDN 66', 1, 0),
+(444, '2018531', '0122865914', '0000000000000000', 'Mahitala Darma Larasati', 'P', 'Kediri', '2012-08-02', 2, 'WNI', 'Villa Mutiara Serpong Jl. Cermai Blok D1 No.54 Pondok Jagung Timur Kec. Serpong Utara Tangerang Selatan 15326', 'mahitala.larasati@gmail.com', 'mahitala.pdf', '08118859399', 2, 'Mahitala.jpg', 0, 1, 'PKBM Anak Panah HS', 1, 0),
+(445, '2018530', '2128579780', '0000000000000000', 'Ludwig Amazio Rumengan', 'L', 'Manado', '2012-04-23', 2, 'WNI', 'Apartemen Gading Nias, tower Emerald, Jl. Pegangsaan II no 3', 'ludwig.rumengan@gmail.com', 'ludwig.pdf', '081399058980', 2, 'Ludwig_Amazio.jpg', 0, 2, 'PKBM Anak Panah HS', 1, 0),
+(446, '2019706', '0048081062', '0000000000000000', 'Nathanael Liantorin Chahyadi ', 'L', 'Jakarta', '2004-08-17', 2, 'WNI', 'Alamat Jalan  : JL H MALI rt.07/01 Desa / Kelurahan : Duri Kosambi Kode Pos  : 11750\n', 'rinas.nathan@gmail.com', 'Nathanael_Liantorin1.pdf', '0816750889', 10, 'Nathanael_Liantorin.jpeg', 0, 1, 'Anak Panah', 1, 0),
+(447, '2020738', '248', '0000000000000000', 'Leica Madriani', 'P', 'Jakarta', '2004-03-02', 1, 'WNI', 'Kp Sanggrahan, Rt 10/03, Kembangan, Jakarta Barat', '12345@gmail.com', 'Leica.pdf', '0', 11, 'Screenshot_6.png', 0, 1, 'SMP Yaspen Tugu Ibu 1 Depok', 1, 0),
+(448, '2019678', '2055050894', '0000000000000000', 'Lucas Salvacio Husada', 'L', 'Delft', '2006-10-25', 2, 'WNI', 'Jl Cempaka Putih Barat 2H/7E, Cempaka Putih, Jakarta Pusat', '12345@gmail.com', 'lucas_salvacio_husada.pdf', '0', 10, 'Screenshot_6.png', 0, 2, 'PKBM Alfa Omega', 1, 0),
+(449, '2019705', '0049939476', '0000000000000000', 'Nabila Putri Kusbiantoro ', 'P', 'Jakarta', '2004-03-20', 1, 'WNI', 'Alamat Jalan  : JL. KARYA BAKTI rt.08/03 Desa / Kelurahan : Srengseng\n', 'nursukma29.ns@gmail.com', 'nabila1.pdf', '0811508638', 11, 'Lighthouse1.jpg', 0, 1, 'Anak Panah', 1, 0),
+(450, '2019677', '0040518769', '0000000000000000', 'Luana Intan Rayisha Putri', 'P', 'Semarang', '2004-06-23', 1, 'WNI', 'Citra Indah Bukit Agave I-21/5, Bogor, Jawa Barat', '12345@gmail.com', 'Contoh.pdf', '0', 10, 'Luana_Intan.jpeg', 0, 1, 'SMP Adzkia Islamic School', 1, 0),
+(451, '2019712', '0049139403', '0000000000000000', 'Ray Hambali ', 'L', 'Tangerang', '2004-05-04', 3, 'WNI', 'Alamat Jalan  : JL.S.W PRANOTO NO.11.R rt.11/03\n', '123456@gmail.com', NULL, '12121212121', 10, 'Ray_Hambali.jpeg', 0, 1, 'SMP Setia Bakhti', 1, 0),
+(452, '2019675', '0032590719', '0000000000000000', 'Levin ', 'L', 'Jakarta', '2003-05-07', 3, 'WNI', 'JALAN CHALCEDONY TIMUR 6 NOMOR 8  rt.01/06, Kelapa Dua, Tangerang\n', 'levingregorius1@gmail.com', 'levin.pdf', '081806795608', 11, 'Levin.jpeg', 0, 2, 'SMP Pahoa', 1, 0),
+(453, '2018529', '0127147870', '0000000000000000', 'Kirana Putri Anindita', 'P', 'Depok', '2012-03-08', 1, 'WNI', 'Taman Manggis Indah Blok L No. 1 Depok Timur Depok Jawa Barat 16415', 'kirana.niy@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '082111910117', 2, 'Kirana.jpg', 0, 3, 'TK Cita Persada', 1, 0),
+(455, '2017209', '0043566185', '0000000000000000', 'Matthew Pratama Sutanto', 'L', 'Canada', '2004-10-08', 3, 'WNI', 'Jl. Duri Kencana Raya/13 RT 005/007', '0@gmail.com', 'Matthew_Pratama_Sutanto.pdf', '081280857919', 9, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SDS Pilar Bangsa', 1, 0),
+(456, '2018527', '2115970648', '0000000000000000', 'Kevin Audric Rajata Elfrankarunya Girsang', 'L', 'Medan', '2011-10-06', 2, 'WNI', 'Villa Bulurukeng Indah Blok D4 Jl. Batu Tambung Pai Biringkanaya Makassar 90243', 'kevgirsang2003@gmail.com', 'kevin_audric.pdf', '081361700429', 2, 'Kevin_Audric_Girsang.jpg', 0, 1, 'PKBM Anak Panah HS', 1, 0),
+(458, '2018525', '0125608786', '0000000000000000', 'Humayra Cetta Helsyanto', 'P', 'Jakarta', '2012-07-28', 1, 'WNI', 'Jl. Raden Sanim Grand Putra Mandiri Blok E11 Depok 16426', 'dedyhelsyan@gmail.com', 'humayra.pdf', '081290744894', 2, 'Humayra.jpg', 0, 2, 'PKBM Anak Panah HS', 6, 0),
+(459, '2019653', '0043659352', '0000000000000000', 'Banu Agil', 'L', 'Jakarta', '2004-01-02', 1, 'WNI', 'GD Peluru Blok D/118 RT 001/003', 'banu_brothers@ymail.com', 'Banu_Agil.pdf', '081316450044', 10, 'Banu_Agil.jpeg', 0, 1, 'SMP Jakarta Islamic School', 1, 0),
+(460, '2019654', '2046506924', '0000000000000000', 'Banu Wafi', 'L', 'Jakarta', '2020-03-18', 1, 'WNI', 'GD Peluru Blok D/118 RT/RW 001/003', 'banu_brothers@ymail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '08551091090', 11, 'Banu_Wafi.jpeg', 0, 2, 'SMP Jakarta Islamic School', 1, 0),
+(461, '2019720', '0033433812', '0000000000000000', 'Sola Graciano ', 'L', 'Jakarta', '2003-03-19', 2, 'WNI', 'Alamat Jalan  : JALAN BINTARO PERMAI GG PONGTIKU NOMOR 2 rt.07/09\n', 'stefanus@gmail.com', NULL, '12121212121', 11, 'Penguins.jpg', 0, 1, 'Anak Panah', 1, 0),
+(462, '2019655', '0037845929', '0000000000000000', 'Blessando Jeremia Chrishot Hasonangan Manalu', 'L', 'Jakarta', '2003-09-14', 1, 'WNI', 'Jl. H. Rijin No.5 RT 1/11 Tugu Kelapa Dua Cimanggis Depok', 'blessando.manalu@gmail.com', 'blesando.pdf', '081326560935', 10, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'PKBM Mashaghi', 1, 0),
+(463, '2019658', '0048862639', '0000000000000000', 'Christoper Eleazar Aritonang', 'L', 'Tangerang', '2004-06-14', 2, 'WNI', ' PURI SERPONG 1 BLOK G 1 NOMOR 33 rt.05/02	\n', 'kiki.eleazar45@gmail.com', 'Christopher_Eleazar.pdf', '083819177081', 11, 'Christopher_Eleazar.jpeg', 0, 1, 'SMP Erenos, Kota Tangerang Selatan', 1, 0),
+(464, '2019659', '0045069310', '0000000000000000', 'Darlane Sharon Princessa', 'P', 'Jakarta', '2004-09-29', 2, 'WNI', 'Jl. Prof. Dr. Latumenten V no.23 RT/RW 012/005', 'ekopriyono2000id@yahoo.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '081283770221', 11, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 2, 'BPK Penabur', 1, 0),
+(465, '2019657', '0041771143', '0000000000000000', 'Christopher Andrew Steveson', 'L', 'Jakarta', '2004-06-13', 3, 'WNI', 'TAMAN MODERN BLOK G NOMOR 4 DAN 18 rt.14/06	\n', '573fen@gmail.com', 'Scan_Museum_Anatomi.pdf', '081218614548', 10, 'Tulips.jpg', 0, 1, 'SMP Pahoa', 1, 0),
+(466, '2019726', '2049216092', '0000000000000000', 'Cecilia Miracella Setiawan', 'P', 'Jakarta', '2004-10-13', 2, 'WNI', 'Villa Kapuk Mas blok h no. 10-12 pejaringan, jakut	\n', 'ceciliamiracella1310@gmail.com', 'Cecilia_Miracella1.pdf', '081288757584', 11, 'Cecilia_Miracella.png', 0, 1, 'SMP Mutiara Bangsa 3', 1, 0),
+(467, '2019722', '0042566308', '0000000000000000', 'Tristan Alif Naufal ', 'L', 'Jakarta', '2004-12-12', 1, 'WNI', 'Alamat Jalan  : JL RAYA KODAM NO.7 BINTARO rt.05/04\n', '123456@gmail.com', 'tristan.pdf', '081808880530', 11, 'Lighthouse.jpg', 0, 1, 'Mashaghi', 1, 0),
+(468, '2019676', '0042591661', '0000000000000000', 'Livia Amelia', 'P', 'Jakarta', '2004-08-23', 3, 'WNI', 'JL. CHALDEONY TIMUR 5 NO.8 rt.01/08 Kelapa Dua, Tangerang', 'liviaamelia2404@gmail.com', 'Livia_Amelia.pdf', '085778269582', 11, 'Livia_Amelia.jpeg', 0, 3, 'SMP Pahoa', 1, 0),
+(469, '2019685', '2044893880', '0000000000000000', 'Maria Yehezkiel Hedwig Indriyasari', 'P', 'Bekasi', '2004-12-23', 3, 'WNI', 'PERUM. LIA JL. LIA 5 BLOK A/5 NO.9  rt.03/15, Bekasi', '12345@gmail.com', 'maria_yehez.pdf', '0', 11, 'Screenshot_6.png', 0, 1, 'SMP Strada', 1, 0),
+(470, '2019723', '0037483090', '0000000000000000', 'William Asido Hamonangan S.', 'L', 'Jakarta', '2003-10-23', 2, 'WNI', 'Alamat Jalan  : BSD KENCANA LOKA BLOK K.5/18 SEKT.XII rt.06/14\n', 'williamsitumeang14995@gmail.com', NULL, '08129635687', 11, 'Lighthouse.jpg', 0, 1, 'Anak Panah', 1, 0),
+(471, '2019680', '0056003896', '0000000000000000', 'M Girhan Sardani', 'L', 'Ternate', '2005-04-03', 1, 'WNI', 'LINGK. CEMPAKA PUTIH  rt.03/04, Santiong, Ternate, 97722\n', '12345@gmail.com', 'Contoh.pdf', '0', 11, 'Screenshot_6.png', 0, 1, 'SMPN 18 Malang', 5, 0),
+(472, '2019689', '0039068699', '0000000000000000', 'Michael Chen ', 'L', 'Bandung', '2003-03-16', 2, 'WNI', 'TAMAN KOPO INDAH 3 BLOK D 1 NOMOR 108 rt.04/16, Bandung, Jawa Barat\n', 'icchen808@gmail.com', 'michael_chen.pdf', '082127451520', 11, 'Screenshot_6.png', 0, 1, 'SMP Bina Bakti Plus', 1, 0),
+(473, '2019701', '0049631643', '0000000000000000', 'Muhammad Rafif Taqi', 'L', 'Jakarta', '2004-10-27', 1, 'WNI', 'JALAN MANUNGGAL 2 NOMOR 312 rt.11/06, Cipinang Melayu, Jakarta Utara', 'Mutiara.eliza312@yahoo.com', 'rafif_taqi.pdf', '087786051527', 11, 'Muhammad_Rafif_Taqi.jpeg', 0, 2, 'PKBM Persada', 1, 0),
+(474, '2019682', '2029974366', '0000000000000000', 'Made Dhaneswari Kinarya Adhi', 'P', 'Jakarta', '2002-09-28', 4, 'WNI', 'PERUM NERADA BLOK B 8 NOMOR 11 rt.02/10,Ciputat, Tangerang Selatan', '12345@gmail.com', 'Contoh.pdf', '0', 10, 'Screenshot_6.png', 0, 2, 'SMP Tarakanita 1', 1, 0),
+(475, '2019725', '0025792910', '0000000000000000', 'Yohanes Immanuel Satya Pradana ', 'L', 'Magelang', '2002-12-20', 3, 'WNI', 'Alamat Jalan  : JATINEGARA INDAH BLOK AC NOMOR 33 rt.15/12\n', 'yust.heru@gmail.com', 'Yohanes_imanuele.pdf', '082141688359', 11, 'Yohanes_Imanuel.jpeg', 0, 1, 'SMPN 1 Tangerang', 1, 0),
+(476, '2019728', '0037064420', '0000000000000000', 'Marc Maurice Laoh', 'L', 'Jakarta', '2003-01-05', 1, 'WNI', 'Jl Lempuyang VI E 24/25\nKomp Mega Cinere blok L\nCinere - Depok', 'marcmaurice490@gmail.com', 'Marc_Maurice_Laoh.pdf', '0881024542069', 11, 'Marc_Maurice.jpeg', 0, 1, 'SMP Madania', 1, 0),
+(477, '2019686', '0045992318', '0000000000000000', 'Marvel Shallom Isaiah', 'L', 'Jakarta', '2004-07-28', 2, 'WNI', 'Alamat Jalan  : JL PULAU TIDUNG IV BLOK B-3/6 rt.18/09, Jakarta Barat', 'marvel@gmail.com', 'marvel.pdf', '085724086252', 11, 'Screenshot_6.png', 0, 2, 'PKBM Anak Panah', 1, 0),
+(478, '2019683', '0046348657', '0000000000000000', 'Marcella Erin Damayanti', 'P', 'Jakarta', '2004-01-12', 3, 'WNI', 'KOMPLEK SEKNEG NOMOR 39 A rt.08/11, Kebayoran Lama, Jakarta Selatan\n', 'ignasia_maya@yahoo.co.id', 'marcela_erin.pdf', '08558116007', 11, 'Screenshot_6.png', 0, 2, 'PKBM Anak Panah', 1, 0),
+(479, '2019702', '0041097764', '0000000000000000', 'Holiness Yeshua Inosky', 'L', 'Tangerang', '2004-10-20', 2, 'WNI', 'JL. Dato Tonggara RT RW 007/011, Kramat Jati, Jakarta Timur', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '087838682778', 11, 'Holliness.jpeg', 0, 7, 'PKBM Alfa Omega', 1, 0),
+(480, '2019700', '0', '0000000000000000', 'Muhammad Nashiruddin Alalbani', 'L', 'Surakarta', '2002-07-04', 1, 'WNI', 'Jl Panorama No 7 Rt 03/05 Sidang Barang, Bogor', 'aaaldeo444@gmail.com', 'Contoh.pdf', '087835064836', 11, 'Screenshot_6.png', 0, 2, 'PKBM Anak Panah', 1, 0),
+(481, '2019724', '0041296900', '0000000000000000', 'Yani Mulyani ', 'P', 'Tangerang', '2004-06-04', 1, 'WNI', 'Alamat Jalan  : TAMAN ELANG BLOK M NOMOR 25 rt.03/10\n', '123456@gmail.com', NULL, '12121212121', 10, 'Penguins.jpg', 0, 3, 'SMPN 1 Tangerang', 1, 0),
+(482, '2019670', '2044219531', '0000000000000000', 'Ignatius Januar', 'L', 'Bekasi', '2004-01-11', 3, 'WNI', 'COMMERCIAL 3 BLOK B.1 NO 1-1A SEKTOR 1,5 BSD CITY	\n', '12345@gmail.com', 'Ignatius_Januar.pdf', '12345678', 11, 'Ignatius_Januar.jpeg', 0, 0, '0', 1, 0),
+(483, '2019665', '0040831020', '0000000000000000', 'Felicita Odelia Louise Tambunan', 'P', 'Jakarta', '2004-10-30', 1, 'WNI', 'Jl. Kemuning Rt.002/004 Kel. Utan Kayu Selatan', 'bstambunan@yahoo.com', 'Felicita_Odelia.pdf', '08161950461', 10, 'Felicita_Odelia.jpeg', 0, 1, 'PKBM Homeschooling Tunas Karya Bangsa', 1, 0),
+(484, '2019681', '2043705211', '0000000000000000', 'M. Agung Al-Ikhsan', 'L', 'Palembang', '2004-08-01', 1, 'WNI', 'KOMPLEK PASUNDAN PERMAI BLOK D 23 rt.01/02 , Kalidoni, Sumatera Selatan\n', 'hermansyah7576@gmail.com', 'M_agung_icksan.pdf', '081319057211', 10, 'M._Agung_Al_Ikhsan_.jpeg', 0, 2, 'PKBM Anak Panah', 1, 0),
+(485, '2018523', '2115541383', '0000000000000000', 'Fawziya Khairunnisa Taqiyya', 'P', 'Tangerang', '2011-08-19', 1, 'WNI', 'Jl. Pondok Pinang 3 RT003/RW002 No. 51A Pondok Pinang Kebayoran Lama Jakarta Selatan', 'fawziya.19@gmail.com', 'fawziya.pdf', '08170017990', 2, 'Fawziya.jpg', 0, 2, 'PKBM Anak Panah', 1, 0),
+(486, '2018524', '0103240974', '0000000000000000', 'Firdaus Catalina Azzahra', 'P', 'Malang', '2010-04-03', 1, 'WNI', 'Forest Hill A6 /12B, Citraland BSB City, Kelurahan Pesantren, Kecamatan Mijen, Kota Semarang, Jawa Tengah', 'azzahrafirdauscatalina@gmail.com', 'firdaus_catlina.pdf', '08977720002', 2, 'Firdaus_Catalina.jpg', 0, 1, 'PKBM Anak Panah', 1, 0),
+(487, '2019729', '0044780946', '0000000000000000', 'Zulaikha Yaffa', 'L', 'Depok', '2004-03-31', 1, 'WNI', 'Bungur Emerald Town House blok A1 Jl Bungur 1 no.5 Rt 02 Rw 08, Kukusan Beji Depok 16425', 'evida.kartini@gmail.com', 'zulaika1.pdf', '021-77207342', 11, 'WhatsApp_Image_2020-04-22_at_11.05_.24_1.jpeg', 0, 1, 'Anak Panah', 1, 0),
+(488, '2019674', '0033763549', '0000000000000000', 'Katharina Ailyn Wardojo', 'P', 'Jakarta', '2003-11-10', 1, 'WNI', 'Jelambar Fajar Jl.1 no.56 AL RT/RW 008/017', 'linantoivonne@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '087875172377', 10, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 2, 'PKBM Anak Panah', 1, 0),
+(490, '2018522', '2122771142', '0000000000000000', 'Fadhilah', 'L', 'Jambi', '2012-03-08', 1, 'WNI', 'Cluster Virginia Village - Norton 09 Jl. Boulevard Gading Raya Serpong Kec. Kelapa Dua Kel. Curug Sangereng Tangerang Selatan Banten 15810', 'hermansyah7576@gmail.com', 'Fadhilah.pdf', '081283249733', 2, 'Fadillah.jpg', 0, 3, 'PKBM Anak Panah HS', 1, 0),
+(491, '2017255', '0006213931', '0000000000000000', 'Geny Grecia', 'P', 'Jakarta', '2000-05-29', 3, 'WNI', 'Taman Cibodas JL Soka VI Blok J 1 no.15 RT/RW 09/07', 'bongoilang@gmail.com', 'genygrecia.pdf', '085591139836', 15, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 3, 'SMP Fajar Indah', 1, 0),
+(492, '2017254', '2027774914', '0000000000000000', 'Gabriella Giselle', 'P', 'Jakarta', '2002-06-11', 2, 'WNI', 'Tmn. KB. Jeruk Blok U 9/10 004/006 Srengseng Kembangan, Jakarta Barat, 11630', '0@gmail.com', 'gabriela.pdf', '081333578888', 14, 'Gabriella_Giselle.jpeg', 0, 1, 'SMP Stella Maris', 1, 0),
+(493, '2017274', '0015918320', '0000000000000000', 'Moh. Aqiel Aslam Assifa', 'L', 'Serang', '2001-07-31', 1, 'WNI', 'JL. Let U Sumadi No.10 RT 001/016 Kel. Sumur Pecung, Serang', 'rratnairmawati@gmail.com', 'moh_aqiel.pdf', '085283217646', 15, 'WhatsApp_Image_2020-03-19_at_11.17_.02_AM_.jpeg', 0, 1, 'SMPN 7 Kota Serang', 1, 0),
+(494, '2017276', '0014554957', '0000000000000000', 'Muhammad Ramadhan Adzhar Somantri', 'L', 'Bandung', '2001-12-06', 1, 'WNI', 'Jl. Labu IV No.16 RT/RW 03/03 Cibodasari, Tangerang', 'indiramarthanangameka@gmail.com', 'MUHAMMAD_RAMADHAN_ADZHAR_SOMANTRI.pdf', '081318707230', 15, 'WhatsApp_Image_2020-03-20_at_11.23_.35_AM_.jpeg', 0, 1, 'SMPN 19 Tangerang', 1, 0),
+(495, '2020737', '0092159898', '0000000000000000', 'Habibie Delumunata', 'L', 'Bengkulu', '2009-12-25', 1, 'WNI', 'Duri Kosambi RT 008 RW 005  Desa/Kelurahan Duri Kosambi Kecamatan  Cengkareng, Kota Jakarta Barat - DKI Jakarta 11750', 'lusi.delumunata@gmail.com', 'Habibie_Akta-merged.pdf', '082286709239', 4, 'Habibie_Delumunata.jpeg', 0, 1, '0', 1, 0),
+(496, '2019727', '2037913266', '0000000000000000', 'Jessica Clarissa Lie ', 'P', 'Jakarta', '2003-06-24', 2, 'WNI', 'sektor 6 jl kelapa hibrida utara blok GC 3 no 7.tangerang gading serpong 15810.\n', 'jessicalie716@gmail.com', 'jessica_lie.pdf', '08119071888', 13, 'jessica_lie.jpg', 0, 2, '0', 1, 0),
+(497, '2016040', '0041999368', '0000000000000000', 'Ron Jatiman Castillo', 'L', 'California', '2006-12-31', 1, 'WNI', 'Jl Kangkung No 59, RT 14/11 Grogol Selatan, Jakarta Selatan', 'yuliwidiati@yahoo.com', 'Contoh.pdf', '0818410476', 17, 'Screenshot_6.png', 0, 1, 'PKBM Anak Panah', 1, 0),
+(498, '2016021', '0014554546', '0000000000000000', 'Eugenia Amanda Cherise', 'P', 'Tangerang', '2001-11-12', 2, 'WNI', 'JL Kelapa Sawit XI BG. 7 NO.3 RT RW 009/003', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SMP SWASTA PAHOA', 1, 0),
+(499, '2016034', '0052351410', '0000000000000000', ' Mega Indira Rajan Putri', 'P', 'Medan', '2005-03-01', 4, 'WNI', 'Citra Raya , Cikupa Cluster Pesona Atlantis, Blok L16/17\n', 'leemegaa95@gmail.com', 'Contoh.pdf', '081212091367', 17, 'Screenshot_6.png', 0, 1, 'PKBM Anak Panah', 1, 0),
+(500, '2016014', '0046662791', '0000000000000000', 'Christabella Martosoetjipto', 'P', 'Jakarta', '2004-11-12', 5, 'WNI', 'Jl. Kelapa Lilin Utara II Blok DF 4/3', 'ekopriyono2000id@yahoo.com', NULL, '0812837700221', 18, 'Screenshot_3.png', 0, 1, 'Anak Panah', 1, 0),
+(501, '2016018', '1741254', '0000000000000000', 'Dede Lestari', 'P', 'Jakarta', '2006-12-02', 1, 'WNI', 'Kp. Panghalan', '12345@gmail.com', 'Contoh.pdf', '0', 18, 'Screenshot_6.png', 0, 2, 'PKBM Anak Panah', 1, 0),
+(502, '2016019', '0042091075', '0000000000000000', 'Dominick Xavier Amadeus Soureka', 'L', 'Bogor', '2004-09-14', 3, 'WNI', 'Komplek Griya Loka BSD SKTR 1.4 Jl. Cempaka 6 Blok H2/54 RT004/RW005 Rawa Buntu Serpong Tangerang Selatan 15318', '12345689@gmail.com', 'Prediksi_UN_EKONOMI.pdf', '08127006639', 17, 'tidur-dengan-kucing.jpg', 0, 1, 'PKBM Anak Panah HS', 1, 0),
+(503, '2016016', '3055691864', '0000000000000000', 'Daffa Ichsan Albana', 'L', 'Depok', '2005-04-20', 1, 'WNI', 'Lingkungan Cibuntu, Rt 004/008, Kertasari, Ciamis', 'yudistiravb@gmail.com', 'Contoh.pdf', '081220895093', 16, 'Screenshot_6.png', 0, 1, 'PKBM Anak Panah', 1, 0),
+(504, '2016038', '0072430385', '0000000000000000', 'Patrick Azariel Wajiya', 'L', 'Jakarta', '2007-03-18', 1, 'WNI', 'Agung Permai III Blok C-10/12A, Sunter Agung, Jakarta Utara', 'dr.candra.wijaya@gmail.com', 'Contoh.pdf', '08158139206', 16, 'Screenshot_6.png', 0, 2, 'PKBM Anak Panah', 1, 0),
+(505, '2016022', '0017098693', '0000000000000000', 'Evangeline Geovana', 'P', 'Jakarta', '2001-03-06', 3, 'WNI', 'Perumahan Scientia Garden. Cluster Newton, Jl. Newton Barat 2, Blok NB2/07, Gading Serpong, Tangerang\n', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 2, 'SMP Kristen 4 Penabur Jakarta', 1, 0),
+(506, '2016028', '0050451955', '0000000000000000', 'Graceya Dana Sugi', 'P', 'Tangerang', '2005-02-11', 5, 'WNI', 'Jl. Beryl Timur 1/8 RT 1/17 Pakulonan Barat.', 'grakha88@yahoo.com', NULL, '08111730080', 17, 'Screenshot_7.png', 0, 2, 'Anak Panah', 1, 0),
+(507, '2016053', '0044752259', '0000000000000000', 'Abisat Paskalis', 'L', 'Sidoarjo', '2004-12-25', 2, 'WNI', 'Griya Kartika B-43 RT018/RW005 Kel. Cemandi Kec. Sedati Kab. Sidoarjo Jawa Timur 61253', '12345689@gmail.com', 'Prediksi_UN_EKONOMI.pdf', '123456789', 18, 'tidur-dengan-kucing.jpg', 0, 2, 'SDN Cemandi 267', 1, 0),
+(508, '2016006', '0042591561', '0000000000000000', 'Alvin Jovan Surjana', 'L', 'Tangerang', '2004-05-05', 5, 'WNI', '', '12345689@gmail.com', 'Prediksi_UN_EKONOMI.pdf', '123456789', 16, 'tidur-dengan-kucing.jpg', 0, 1, 'SD Swasta Pahoa', 1, 0),
+(509, '2016033', '0041780463', '0000000000000000', 'Lucia Monica Angelyn', 'P', 'Jakarta', '2004-08-21', 3, 'WNI', 'Jl. Pademangan Timur VIII RT007/RW010 Kel. Pademangan Timur Jakarta Utara 14410', 'luciamonica21@gmail.com', 'Prediksi_UN_EKONOMI.pdf', '087782650990', 17, 'tidur-dengan-kucing.jpg', 0, 1, 'SD Swasta Vlanney', 1, 0),
+(510, '2016004', '0042499461', '0000000000000000', 'Aisha Bella Ivan Hadar', 'P', 'Jakarta', '2004-10-19', 1, 'WNI', 'Teratai XIII Blok P8 Tanjung Barat Indah RT006/RW006 Kel. Rawajati Jakarta Selatan 12750', 'eviaryani6@yahoo.co.id', 'Prediksi_UN_EKONOMI.pdf', '082281819919', 17, 'tidur-dengan-kucing.jpg', 0, 1, 'PKBM Anak Panah HS', 1, 0);
+INSERT INTO `tbl_siswa` (`siswa_id`, `siswa_nis`, `siswa_nisn`, `nik_siswa`, `siswa_nama`, `siswa_jenkel`, `siswa_tempat`, `siswa_tgl_lahir`, `siswa_agama_id`, `siswa_kewarganegaraan`, `siswa_alamat`, `siswa_email`, `siswa_dokumen`, `siswa_no_telp`, `siswa_kelas_id`, `siswa_photo`, `soft_deleted`, `anak_ke`, `sekolah_asal`, `satelit`, `oc`) VALUES
+(511, '2016012', '123456789', '0000000000000000', 'Bintang Hidayat Putra', 'L', 'Tangerang', '2004-11-10', 1, 'WNI', 'Jl. Flourite Timur No. 18 Gd. Serpong', '12345689@gmail.com', 'Prediksi_UN_EKONOMI.pdf', '123456789', 16, 'tidur-dengan-kucing.jpg', 0, 1, 'PKBM Anak Panah HS', 1, 0),
+(512, '2016042', '0040673811', '0000000000000000', 'Yervant Vikesha', 'L', 'Jakarta', '2004-08-06', 3, 'WNI', 'Poris Indah Blok F7/39 RT013/RW001 Cipondoh Indah Tangerang 15148', 'ramelan29@yahoo.com', 'Prediksi_UN_EKONOMI.pdf', '081510905079', 17, 'tidur-dengan-kucing.jpg', 0, 1, 'PKBM Anak Panah HS', 1, 0),
+(514, '2016003', '0043132006', '0000000000000000', 'Afifah Ahmad', 'P', 'Timika', '2004-06-08', 1, 'WNI', 'Jl. Panorama No.7 Bogor Barat RT003/RW005 Kel. Duri Selatan Jakarta Barat 11270', 'tammycahyo@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '081281283111', 17, 'tidur-dengan-kucing.jpg', 0, 1, 'SD YPJ Tembagapura', 1, 0),
+(515, '2016007', '0041299406', '0000000000000000', 'Amannia Wika Ridho Putri', 'P', 'Karang Anyar', '2004-12-20', 1, 'WNI', 'Citra Raya Blok L.2/19 RT017/RW002 Kel. Dukuh Tangerang 15710', 'anto.kasw@gmail.com', 'Soal_Ujian_SD_Bahasa_Indonesia_2018.pdf', '081510000343', 17, 'tidur-dengan-kucing.jpg', 0, 2, 'SD Swasta Citra Islami', 1, 0),
+(517, '2016005', '0003141808', '0000000000000000', 'Al Hafizh Ramadhan', 'L', 'Jakarta', '2000-12-11', 1, 'WNI', 'CITRA INDAH BUKTI AGAVE BLOK 1-25 NO. 09 RT 007 RW 009 DESA/KELURAHAN  SUKAMAJU KECAMATAN JONGGOL, BOGOR- JAWA BARAT 16830\n', '12345@gmail.com', 'Scan_Museum_Anatomi1.pdf', '0', 18, NULL, 0, 2, 'SMP Cikal Harapan II, Kab. Bogor', 1, 0),
+(518, '2016025', '0012175601', '0000000000000000', 'Gayatri Candra Kusuma', 'P', 'Jakarta', '2001-05-22', 1, 'WNI', 'Jl. KH. Mukmin RT 003/009, Belendung, Benda, Tangerang Banten, 15123\n', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SMP 7 Tangerang', 1, 0),
+(519, '2016002', '0015815399', '0000000000000000', 'Adnanuzzaki Arif Putra', 'L', 'Tangerang', '2001-07-21', 1, 'WNI', 'Komp. Taman Kedaung Jl. Mawar XIV Blok D-7/2 RT 005 RW 007 Desa/Kelurahan Kedaung Kecamatan Pamulang,  Kota Tangerang - Banten 15415', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '0', 18, 'Tulips.jpg', 0, 2, 'SMP Islam Al Syukro Universal', 1, 0),
+(520, '2016008', '0', '0000000000000000', 'Ammarsyahdi Alhayandi Hamid', 'L', 'Jakarta', '2000-09-18', 1, 'WNI', 'Bumi Pesanggrahan Mas Blok K.1 RT 007 RW 008 Desa/Kelurahan Pesanggrahan, Jakarta Selatan - DKI Jakarta', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '12345678', 18, 'Tulips.jpg', 0, 1, '0', 1, 0),
+(521, '2016039', '0019305568', '0000000000000000', 'Reyhan Amalatu Muskita', 'L', 'Tangerang', '2001-11-20', 3, 'WNI', 'River park GH. 1/9 Binjay RT 005 RW 002 Kelurahan/Desa JR. Mangu Barat Kecamatan Pondok Aren, Tangerang Selatan - Banten 15223', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '12345678', 18, 'Tulips.jpg', 0, 1, 'SMP Swasta Syafana Islamic School', 1, 0),
+(522, '2016027', '9998589161', '0000000000000000', 'Gracea Linawati Sanjaya', 'P', 'Jakarta', '1999-11-24', 2, 'WNI', 'Jl. H Sanusi GG H. Rabbi RT/RW 2/13 Duri Kosambi, Jakarta Barat', 'febriyanti.sap@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SMP Yapindo', 1, 0),
+(523, '2016044', '0012552590', '0000000000000000', 'Andra Maulana Syakur', 'L', 'Bekasi', '2001-10-26', 1, 'WNI', 'Perum Telaga Harapan blok D2 no.6 Cikarang Barat Kab.Bekasi Jawa Barat 17520 Indonesia\n', 'abdsyukur16@gmail.com', 'Scan_Museum_Anatomi.pdf', '0895349107748', 18, 'Tulips.jpg', 0, 1, 'SMP Islam Al- Munawwaroh, Cikarang Barat', 1, 0),
+(524, '2016026', '0019167649', '0000000000000000', 'Grace Marlane', 'L', 'Jatibening Estate C-40 No.17', '2002-02-05', 2, 'WNI', 'Taman Sabilano. 9 Jl. Ratna Jatikramat, Jatiasih, Bekasi, 17421\n', 'gracemarlenepasaribu@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0811951150', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 3, 'PKBM Negeri 4 Tomang', 1, 0),
+(525, '2016011', '0014436650', '0000000000000000', 'Arthur Audrian Natawirja', 'L', 'Jakarta', '2001-01-14', 2, 'WNI', 'Bogor Nirwana Residence Blok I No. 36 RT 001 RW 010 Kecamatan Kota Bogor Selatan, Kota Bogor - Jawa Barat 16135', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '0', 18, 'Tulips.jpg', 0, 3, 'SMP Kesatuan, Bogor', 1, 0),
+(526, '2016017', '0021055174', '0000000000000000', 'Dea Paskah Jesie Erika Munaiseche', 'P', 'Manado', '2002-01-12', 2, 'WNI', 'Citraland Lingkungan III RT - RW 003 Desa/Kelurahan Winangun Satu Kecamatan Malalayang, Kota Manado - Sulawesi Utara', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '12345678', 18, 'Tulips.jpg', 0, 1, 'SMP Advent 1 Tikala', 1, 0),
+(527, '2016029', '0028899749', '0000000000000000', 'Ikra Zaki Fadilah', 'L', 'Jakarta', '2000-12-13', 1, 'WNI', 'JL. Ros No.1 B RT RW  012/003 Cipete Selatan, Cilandak', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia1.pdf', '0', 18, NULL, 0, 2, 'SMP Swasta Bina Nusantara Serpong', 1, 0),
+(528, '2016013', '0013878688', '0000000000000000', 'Catrice Kesley Kosasi', 'P', 'Medan', '2001-05-14', 5, 'WNI', 'Jl. Crystal Timur 2 No.15 RT 001 RW 018 Desa/Kelurahan Pakulonan Barat Kecamatan Kelapa Dua, Tangerang - Banten 15812', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '0', 18, 'Tulips.jpg', 0, 2, 'SMP Pahoa', 1, 0),
+(529, '2016030', '0013637386', '0000000000000000', 'Jane Levina Suhendra', 'P', 'Jakarta', '2001-11-07', 2, 'WNI', 'Jl. Veteran 1 RT/RW 003/005', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SMAN 19 Jakarta', 1, 0),
+(530, '2016015', '0022334375', '0000000000000000', 'Christian Tombiling', 'L', 'Denpasar', '2002-04-02', 2, 'WNI', 'Jaga X Desa/Kelurahan  Matungkas, Minahasa Utara  - Sulawesi Utara', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '0', 18, 'Tulips.jpg', 0, 1, 'SMP Negeri 1 Manado', 1, 0),
+(531, '2016047', '9966492777', '0000000000000000', 'Jovin Halim', 'L', 'Jakarta', '1996-06-01', 2, 'WNI', 'Foresta Cluster Naturale M.3 No.10 BSD City RT RW  001/003 Pagedangan Tangerang Banten', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SMP Santa Ursula Bandung', 1, 0),
+(532, '2016048', '0001243314', '0000000000000000', 'Benedicto Matthew Watulingas', 'L', 'Tangerang', '2020-03-20', 2, 'WNI', 'Jl. Bukit III No. 3 RT 005 RW 012 Desa/Kelurahan Mulyaharja Kecamatan Kota Bogor, Kota Bogor - Jawa Barat 16132', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '12345678', 18, 'Tulips.jpg', 0, 1, 'SMP Taruna Bangsa', 1, 0),
+(533, '2016031', '0016098449', '0000000000000000', 'Kezia Dinara', 'P', 'Bandung', '2001-07-10', 2, 'WNI', 'Jl. Ibrahim Adji No. 418, Rt 01 Rw 09 Binong, Batununggal, Bandung Jawa barat 40275\n', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 3, 'SMP Santa Ursula Bandung', 1, 0),
+(534, '2016032', '0017890388', '0000000000000000', 'Kyra Kiara', 'P', 'Jakarta', '2001-10-03', 1, 'WNI', 'JL. Camar V Blok AG.40 RT RW 004/008 Kel. Pondok Betung, Kec. Pondok Aren, Tangerang', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 2, 'SMP AN-NISA', 1, 0),
+(535, '2016023', '9991909227', '0000000000000000', 'Faishal Haris', 'L', 'Jakarta', '2000-01-24', 1, 'WNI', 'Gading Serpong Sek.7A DC-2 No.10 RT RW 006/003 Kel. Curug Sngereng, Kelapa Dua Tangerang', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 2, 'SMP Islam Terpadu Insan Harapan', 1, 0),
+(536, '2016001', '0017711463', '0000000000000000', 'Aditya Anugerah Akbar', 'L', 'Jakarta', '2001-04-29', 1, 'WNI', 'Pondok Sawah Indah Blok O No 4 RT 004 RW 002 Desa/Kelurahan Sawah Kecamatan Ciputat, Kota Tangerang Selatan - Banten', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '0', 18, 'Tulips.jpg', 0, 3, 'SMP Islam Al-Falah', 1, 0),
+(537, '2016020', '0015855316', '0000000000000000', 'Eleon Angeleo', 'L', 'Tangerang', '2001-04-19', 2, 'WNI', 'Regensi Melati Mas Blok C4/07 RT RW 002/017 Pondok Jagung, Serpong Utara', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SMP Swasta Kristen Penabur Gading Serpong', 1, 0),
+(538, '2016010', '0013144994', '0000000000000000', 'Anissa Maulia Shabine', 'P', 'Palembang', '2001-06-14', 1, 'WNI', 'Jl. Batu Merah III RT 007 RW 002 Desa/Kelurahan Pejaten Timur Kecamatan Pasar Minggu, Jakarta Selatan - DKI Jakarta 12510', '12345@gmail.com', 'Scan_Museum_Anatomi1.pdf', '0', 18, NULL, 0, 2, 'SMPS Harapan Utama', 1, 0),
+(539, '2016024', '9990481077', '0000000000000000', 'Felicia Celine Triesha Martasuprana', 'P', 'Tangerang', '1999-02-10', 3, 'WNI', 'JL. Sukamulya Raya No.31 RT RW 004/005 Sukasari, Tangerang', '0@gmail.com', NULL, '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_15677814041.PNG', 0, 1, 'SMP Strada Santa Maria 2', 1, 0),
+(540, '2016009', '2016009', '0000000000000000', 'Angelo Dana Sugi', 'L', 'Tangerang', '2001-02-27', 5, 'WNI', 'Jl. Beryl Timur 1/8 RT 001 RW 017 Desa/Kelurahan Pakulonan Barat Kecamatan Kelapa dua, Tangerang - Banten 15812', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '0', 18, 'Tulips.jpg', 0, 1, 'SMP Stella Maris School', 1, 0),
+(541, '2016037', '20577110', '0000000000000000', 'Nicole Ellianne Risakotta', 'L', 'Surabaya', '2001-03-17', 2, 'WNI', 'Dusun Krajan RT RW 01/06 Sebaung Probolinggo', 'ne621312@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '087855530800', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 2, 'SMP KRISTEN ELIA', 1, 0),
+(542, '2016036', '0010312055', '0000000000000000', 'Michael Alexander Budiman', 'L', 'Tarakan', '2001-11-24', 3, 'WNI', 'Cluster Fiore B7 no.8 Foresta BSD City, Serpong, Tangerang Banten, 15339\n', 'sandratjiu@gmail.com', 'Scan_Museum_Anatomi.pdf', '081346616600', 18, 'Tulips.jpg', 0, 1, 'SMP Swasta Athalia', 1, 0),
+(543, '2016043', '0015835451', '0000000000000000', 'Zedric Immanuel Abetto', 'L', 'Jakarta', '2001-09-25', 1, 'WNI', 'Jl Amal No.7 RT RW 09/01 Cipadu Jaya Kota Tangerang', 'sjabetto@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '081290965349', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SMP Cendrawasih II', 1, 0),
+(544, '2016035', '0', '0000000000000000', 'Metta Tjoa', 'P', 'Sydney', '2000-12-16', 5, 'WNI', 'Jl. Keagungan No. 8 RT 001 RW 008 Desa/Kelurahan Keagungan Kecamatan Taman Sari, Jakarta Barat - DKI Jakarta 11130', 'mettalim13@gmail.com', 'Scan_Museum_Anatomi.pdf', '08129811570', 18, 'Tulips.jpg', 0, 4, 'PKBM Bina Insani Kamil ', 1, 0),
+(545, '2016041', '0001403047', '0000000000000000', 'Shabilla Rahma Johne', 'L', 'Cilegon', '2000-11-18', 1, 'WNI', 'Taman Ubud Cempaka Selatan 3-No.6, Curug, Tangerang.', '0@gmail.com', 'Latihan_Pra_USBN_Bahasa_Indonesia.pdf', '0', 18, '296899_Harpindo-Bunga-Mawar-Biru-79-CM_SnxMDcx96Dd32QMM_1567781404.PNG', 0, 1, 'SMPTK Charisma Global School', 1, 0),
+(546, '2016052', '0001353230', '0000000000000000', 'Mazaya Raina Habibie', 'L', 'Jakarta', '2000-07-24', 1, 'WNI', 'JL. Cipete V  No. 9 RT 008 RW 003 Desa/Kelurahan Cipete Selatan Kecamatan Cilandak, Jakarta Selatan - DKI Jakarta 12410', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '12345678', 18, 'Tulips.jpg', 0, 1, 'SMP Islam Al-ikhlas', 1, 0),
+(547, '2016046', '0033316376', '0000000000000000', 'Siti Alifah Fayruz Nurwan Saputra ', 'P', 'Jakarta', '2003-05-02', 1, 'WNI', 'Jl. Flamboyan II No. 27 Desa/Kelurahan Menteng Dalam Kecamatan Tebet, Jakarta Selatan - DKI Jakarta 12870', 'endangp74@yahoo.com', 'Scan_Museum_Anatomi.pdf', '081808612323', 18, 'Tulips.jpg', 0, 1, '0', 1, 0),
+(548, '2016050', '9999682879', '0000000000000000', 'Rico Sanjaya ', 'L', 'Jakarta', '1999-05-06', 3, 'WNI', 'Binong Permai Blok H 29/11  Desa/Kelurahan Binong Kecamatan Curug, Tangerang - Banten 15810', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '12345678', 18, 'Tulips.jpg', 0, 1, 'SMP Lentera Harapan Curug', 1, 0),
+(549, '2016049', '0008298627', '0000000000000000', 'Raden Jesica Cassandra', 'P', 'Ciamis', '2000-10-15', 1, 'WNI', 'Jl. IR H Juanda No 120 RT 001 RW 007 Kelurahan/Desa  Ciamis Kecamatan Ciamis, Ciamis - Jawa Barat 046211', 'cassadrajessica9@gmail.com', 'Scan_Museum_Anatomi.pdf', '085322649805', 18, 'Tulips.jpg', 0, 2, 'SMP Negeri 1 Tasikmalaya', 1, 0),
+(550, '2016051', '0006649771', '0000000000000000', 'Aurelia Annabelle ', 'P', 'Tangerang', '2000-11-17', 3, 'WNI', 'Kelapa Puan XXI AJ-8/23 RT 001 RW 012 Desa/Kelurahan Pakulonan Barat Kecamatan Kelapa dua, Tangerang - Banten 15812', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '12345678', 18, 'Tulips.jpg', 0, 1, 'SMP Swasta Kristen Penabur Gading Serpong', 1, 0),
+(551, '2016045', '0012356489', '0000000000000000', 'William Sidharta Adi Wicaksono', 'L', 'Jakarta', '2001-11-19', 3, 'WNI', 'JL. Bojong Raya 24 RT 007 RW 004 Desa/Kelurahan Rawa Buaya Kecamatan Cengkareng, Jakarta Barat - DKI Jakarta 11740', '12345@gmail.com', 'Scan_Museum_Anatomi.pdf', '08117779610', 18, 'Tulips.jpg', 0, 1, 'SMP Vianney', 1, 0),
+(552, '2020788', '0020891020', '0000000000000000', 'Michael Christian', 'L', 'Tangerang ', '2002-09-02', 2, 'WNI', 'Jl. Rajawali Selt Blok B/4 Gunung Sahari Utara, Sawah Besar, Jakarta Pusat', 'michaelchristian2099@gmail.com', 'michael_christian.pdf', '0816761151', 14, 'Michael_Christian.jpeg', 0, 2, 'PKBM Anak Panah', 1, 0),
+(553, '2020769', '0040454770', '0000000000000000', 'Ardian Bagus', 'L', '081297816549', '2004-07-05', 1, 'WNI', 'Jln. Gongseng raya rt 08 rw 09 no.50 kelurahan baru, kecamatan pasar rebo\nJakarta timur DKI Jakarta 13780\nIndonesia', 'ardianbagusan@gmail.com', 'Ardian_Bagus.pdf', '081297816549', 10, 'Ardian_Bagus.jpeg', 0, 2, 'SMAN 99 Jakarta', 1, 0),
+(554, '2020743', '0034955273', '0000000000000000', 'Cut Safina Amanda Dhawi', 'P', 'Tangerang ', '2003-12-31', 1, 'WNI', 'kompl. paninggilan permai blok i no 7', 'cutsafinaa@gmail.com', 'Cut_Safina.pdf', '089686585616', 11, 'Cut_Safina.jpeg', 0, 1, 'sma 63 petukangan selatan', 1, 0),
+(555, '2017278', '0022109043', '0000000000000000', 'Naura Farhana Shifa', 'P', 'Surabaya', '2002-03-12', 1, 'WNI', 'Jalan Widya Kencana Blok V.8 No.5 BSD', '12345@gmail.com', 'naura.pdf', '08979791978', 14, 'Naura_Farhana.jpeg', 0, 1, 'Alia Islamic School', 1, 0),
+(556, '0', '0000000000000', '0000000000000000', 'Tri Wahyudi', 'L', 'Bogor', '2000-05-10', 1, 'WNI', 'Kp. Nanggela RT 004 RW 007, Sukmajaya, Tajurhalang, Bogor', '123@gmail.com', NULL, '0811111111', 11, 'Hydrangeas1.jpg', 0, 2, '-', 2, 0),
+(557, '0000020', '0000000000', '0000000000000000', 'Ahmad Najmudin Palapi', 'L', 'Bogor', '2002-11-11', 1, 'WNI', 'Kp. Neglasari RT 009 RW 004 Mekarwangi, Cariu, Bogor', '123@gmail.com', NULL, '085624463700', 11, 'Desert.jpg', 0, 2, 'SMK Dharma Bakti Tonjong', 2, 0),
+(558, '0000032', '0000000000', '0000000000000000', 'Fakih Pajar Tian', 'L', 'Bogor', '2003-06-03', 1, 'WNI', 'Kp. Nanggela 002/004, Sukmajaya, Tajurhalang, Bogor', '123@gmail.com', NULL, '089611542142', 11, 'Desert.jpg', 0, 3, '-', 2, 0),
+(559, '0000021', '0000000000', '0000000000000000', 'Shandika', 'L', 'Bogor', '2002-03-05', 1, 'WNI', 'Kp. Nanggela 002/004 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Jellyfish.jpg', 0, 2, 'SMP Tunas Harapan', 2, 0),
+(560, '0000022', '0000000000', '0000000000000000', 'Rahmat', 'L', 'Bogor', '1994-06-24', 1, 'WNI', 'Kp. Nanggela 002/003 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Desert.jpg', 0, 5, '-', 2, 0),
+(561, '0000023', '0000000000', '0000000000000000', 'Muhamad Saepudin', 'L', 'Bogor', '2000-02-19', 1, 'WNI', 'Kp. Nanggela 004/003 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Desert.jpg', 0, 2, '-', 2, 0),
+(562, '0000027', '0000000000', '0000000000000000', 'Dhia Uddin', 'L', 'Depok', '2002-04-22', 1, 'WNI', 'Kp. Nangggela 005/004 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Hydrangeas.jpg', 0, 5, '-', 2, 0),
+(564, '0000025', '0000000000', '0000000000000000', 'Denis Darmais', 'L', 'Bogor', '1996-12-05', 1, 'WNI', 'Kp. Nanggela 003/001 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '081292496372', 13, 'Desert.jpg', 0, 2, 'SMP Tonjong', 2, 0),
+(565, '0000026', '0000000000', '0000000000000000', 'Bagus Kuniawan', 'L', 'Bogor', '2000-01-15', 1, 'WNI', 'Kp Susukan 002/001 Susukan Bojonggede', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Jellyfish.jpg', 0, 6, '-', 2, 0),
+(566, '0000028', '0000000000', '0000000000000000', 'Ahmad Fauzie', 'L', 'Jakarta', '1991-05-21', 1, 'WNI', 'Kp Nanggela 002/003 Sukmajaya Tajurhalang ', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 13, 'Hydrangeas.jpg', 0, 7, '-', 2, 0),
+(567, '0000029', '0000000000', '0000000000000000', 'Mela Apri Yani', 'P', 'Bogor', '2001-04-10', 1, 'WNI', 'Kp. Nanggela 003/001 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Jellyfish.jpg', 0, 2, 'MTS Hidayatut Tholibin', 2, 0),
+(568, '0000030', '0000000000', '0000000000000000', 'Ranika Despia', 'P', 'Jakarta', '1998-07-11', 1, 'WNI', 'Tanah Baru 002/007 beji  Depok', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '08994794149', 11, 'Desert.jpg', 0, 1, 'SMP Teladan', 2, 0),
+(569, '0000031', '0000000000', '0000000000000000', 'Diyah', 'P', 'Bogor', '1999-03-12', 1, 'WNI', 'Kp Nanggela 002/004 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Hydrangeas.jpg', 0, 1, '-', 2, 0),
+(570, '0000034', '00000000000', '0000000000000000', 'Ridwan', 'L', 'Bogor', '1999-12-12', 1, 'WNI', 'Kp Nanggela 002/006 Sukmajaya Tajurhalang ', '123@gmail.com', 'Soal_IPA_Kelas_1_SD_Bab_6_Benda_Langit_dan_Kunci_Jawaban_(www.bimbelbrilian_.com)_.pdf', '08987368007', 13, 'download.jpg', 0, 2, 'MTS Hidayatut Tholibin ', 2, 0),
+(571, '0000054', '0000000000', '0000000000000000', 'Dini Sapitri', 'P', 'Bogor', '2004-11-20', 1, 'WNI', 'Kp Nanggela 002/002 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Hydrangeas.jpg', 0, 1, 'MTs Ar Roffiqy', 2, 0),
+(572, '0000035', '00000000000000', '0000000000000000', 'Nursan', 'L', 'Bogor', '1984-04-04', 1, 'WNI', 'Kp.Nanggela RT 02/05 Desa Sukmajaya Kec.Tajurhalang Kab.Bogor', '123@gmail.com', 'document.pdf', '085718135348', 13, 'Chrysanthemum.jpg', 0, 2, 'SLTP Tunas Harapan', 2, 0),
+(573, '0000024', '0000000000', '0000000000000000', 'Muhammad Ibnu Prakas', 'L', 'Bogor', '2002-07-21', 1, 'WNI', 'Kp Nanggela 003/007 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Chrysanthemum.jpg', 0, 1, '-', 2, 0),
+(574, '0000016', '0000000000', '0000000000000000', 'Arman Maulana', 'L', 'Bogor', '2002-04-16', 1, 'WNI', 'Kp. Nanggela 004/003 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '089605241766', 11, 'Jellyfish.jpg', 0, 1, 'MTs Nurus Syafa''ah', 2, 0),
+(575, '0000036', '000000000000', '0000000000000000', 'Maulana M.Fikar', 'L', 'Bogor', '2007-04-08', 1, 'WNI', 'Kp.Bojonggede Rt 04/05 Desa Bojonggede Kec.Bojonggede Kab.Bogor', '123@gmail.com', 'document.pdf', '081111111111', 5, 'Desert.jpg', 0, 3, 'PKBM Anak Panah', 2, 0),
+(576, '0000013', '0000000000', '0000000000000000', 'Fitri Nabilah', 'P', 'Bogor', '2003-11-30', 1, 'WNI', 'Kp. Nanggela 006/005 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Penguins.jpg', 0, 1, 'SMP Tunas Harapan', 2, 0),
+(577, '0000037', '0000000000000', '0000000000000000', 'Panji Aryo Wibowa', 'L', 'Jakarta', '2005-01-04', 1, 'WNI', 'Kp.Perigi RT 02/02 Desa Bojonggede Kec.Bojonggede Kab.Bogor', '123@gmail.com', 'document.pdf', '081111111111', 5, 'Chrysanthemum.jpg', 0, 2, 'PKBM Anak Panah', 2, 0),
+(578, '0000038', '0000000000000', '0000000000000000', 'Erdis liana Satiar', 'L', 'Bogor', '2000-04-03', 1, 'WNI', 'Kp.Kelapa Dua Rt 01/02 Desa Bojonggede Kec.Bojonggede Kab.Bogor', '123@gmail.com', 'document.pdf', '081111111111', 5, 'Desert.jpg', 0, 1, 'PKBM Anak Panah', 2, 0),
+(579, '0000051', '00000000000000', '0000000000000000', 'Muhamad Aldi Agustian', 'L', 'Jakarta', '1999-08-02', 1, 'WNI', 'Jl.Kenari 1 no.21 Rt10/ 03 Jakarta', '123@gmail.com', 'document.pdf', '081111111111', 5, 'Chrysanthemum.jpg', 0, 3, 'PKBM Anak Panah', 2, 0),
+(580, '0000011', '0000000000', '0000000000000000', 'Helda', 'P', 'Bogor', '2004-04-07', 1, 'WNI', 'Kp Nanggela 004/002 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Jellyfish.jpg', 0, 1, 'MTs Ar Roffiqy', 2, 0),
+(581, '0000039', '000000000000', '0000000000000000', 'Mila Susilawati', 'P', 'Bekasi', '1993-01-18', 1, 'WNI', 'Kp.Nanggela  Rt 02/01 Desa Sukmajaya Kec tajurhalang Kab.Bogor', '123@gmail.com', 'document.pdf', '081111111111', 11, 'Hydrangeas.jpg', 0, 5, '-', 2, 0),
+(582, '0000007', '0000000000', '0000000000000000', 'Muhammad Mulyadi', 'L', 'Bogor', '1996-03-03', 1, 'WNI', 'Kp Nanggela 001/006 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '089605823626', 13, 'Lighthouse.jpg', 0, 2, 'SMP Tunas Harapan', 2, 0),
+(583, '0000040', '000000000000', '0000000000000000', 'Robi Sugara', 'L', 'Bogor', '1982-07-26', 1, 'WNI', 'Kp.Nanggela Rt 02/01 Desa Sukmajaya Kec. Tajurhalang Kab. Bogor', '123@gmail.com', 'document.pdf', '081111111111', 13, 'Chrysanthemum.jpg', 0, 1, '-', 2, 0),
+(584, '0000041', '085778693225', '0000000000000000', 'Roji', 'L', 'Bogor', '1990-08-22', 1, 'WNI', 'Kp.Nanggela RT 06/03 Desa Sukmajaya  Kec.Tajurhalang Kab.Bogor', '123@gmail.com', 'document.pdf', '081111111111', 13, 'Chrysanthemum.jpg', 0, 1, 'SLTP Tunas Harapan', 2, 0),
+(585, '0000002', '0000000000', '0000000000000000', 'Misnan', 'L', 'Bogor', '2001-08-02', 1, 'WNI', 'Kp Nanggela 004/003 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, 'Desert.jpg', 0, 3, 'SMP Tunas Harapan', 2, 0),
+(586, '0000042', '000000000000', '0000000000000000', 'Asnan', 'L', 'Bogor', '1977-03-20', 1, 'WNI', 'Kp.Nanggela RT 02/04 Desa Sukmajaya Kec.Tajurhalang Kab.Bogor', '123@gmail.com', 'document.pdf', '085811262707', 13, 'Chrysanthemum.jpg', 0, 4, 'PKBM Anak Panah', 2, 0),
+(587, '0000019', '0000000000', '0000000000000000', 'Rini', 'P', 'Bogor', '1992-03-14', 1, 'WNI', 'Kp Nanggela 002/001 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '089662614089', 8, 'Penguins.jpg', 0, 3, 'MI Hidayatut Tholibin', 2, 0),
+(588, '0000043', '0000000000000000', '0000000000000000', 'Muhamad Firly', 'L', 'Bogor', '2004-06-15', 1, 'WNI', 'Kp.Nanggela Rt 03/06 Desa Sukmajaya Kec.Tajurhalang Kab.Bogor', '123@gmail.com', 'document.pdf', '081111111111', 7, 'Chrysanthemum.jpg', 0, 1, '-', 2, 0),
+(589, '0000017', '0000000000', '0000000000000000', 'Rendiyansah', 'L', 'Bogor', '2004-04-04', 1, 'WNI', 'Kp Mutiara Baru 002/011 Kedungwaringin Bojonggede', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 7, 'Penguins.jpg', 0, 7, '-', 2, 0),
+(590, '0000044', '0000000000000', '0000000000000000', 'Abdullah Aziz', 'L', 'Jakarta', '2000-05-19', 1, 'WNI', 'Jl. Keramat Pulo GG. I/B.26 RT 02/03 Desa Kramat Kec.Senen Jakarta Pusat', '123@gmail.com', 'document.pdf', '081111111111', 7, 'Desert.jpg', 0, 5, '-', 2, 0),
+(591, '0000018', '0000000000', '0000000000000000', 'Rizky Aditya', 'L', 'Bogor', '2003-12-01', 1, 'WNI', 'Bojonggede Timur 004/012 Bojonggede Bogor', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 7, 'Chrysanthemum.jpg', 0, 1, '-', 2, 0),
+(592, '0000015', '0000000000', '0000000000000000', 'Syech Muhammad Risky', 'L', 'Depok', '2003-04-18', 1, 'WNI', 'Bojong Bambon 007/005 Bojong Pondok Terong, Cipayung, Depok', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 7, 'Penguins.jpg', 0, 1, 'SDN Pondok Terong 4', 2, 0),
+(593, '0000045', '000000000000', '0000000000000000', 'Muhamad Lutpi Husain', 'L', 'Bogor', '2004-02-29', 1, 'WNI', 'Kp.Nanggela Rt 03/07 Desa Sukmajaya Kec.Tajurhalang kab.Bogor', '123@gmail.com', 'document.pdf', '081111111111', 7, 'Desert.jpg', 0, 1, '-', 2, 0),
+(594, '0000010', '0000000000', '0000000000000000', 'Muhammad Husain', 'L', 'Tasikmalaya', '2004-02-15', 1, 'WNI', 'Kp Nanggela 002/006 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '085289639657', 7, 'Tulips.jpg', 0, 2, 'MI Ar Roffiqy', 2, 0),
+(595, '0000046', '0000000000000', '0000000000000000', 'Muhamad Fajar', 'L', 'Bogor', '2004-04-07', 1, 'WNI', 'Kp.Perigi RT 02/02 Desa Bojonggede Kec.Tajurhalang Kab.Bogor', '123@gmail.com', 'document.pdf', '081111111111', 7, 'Chrysanthemum.jpg', 0, 2, 'SDN Bojonggede 4', 2, 0),
+(596, '0000005', '0000000000', '0000000000000000', 'Audy Anastasya Putri', 'P', 'Bogor', '2004-08-05', 1, 'WNI', 'Bojonggede Dalam 003/012 Bojonggede Bogor', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 7, 'Desert.jpg', 0, 1, 'SDN Bojonggede 4', 2, 0),
+(597, '0000047', '0000000000000', '0000000000000000', 'Mohamad Adam Apriyadi', 'L', 'Bogor', '2004-04-23', 1, 'WNI', 'Bojonggede', '123@gmail.com', 'document.pdf', '081111111111', 7, 'Chrysanthemum.jpg', 0, 3, '-', 2, 0),
+(598, '0000009', '0000000000', '0000000000000000', 'Aidah', 'P', 'Bogor', '2002-12-28', 1, 'WNI', 'Kp Tajurhalang 001/002 Tajurhalang Bogor', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 7, 'Koala.jpg', 0, 2, 'SDN Kandang Panjang 3', 2, 0),
+(599, '0000014', '0000000000', '0000000000000000', 'Muhammad Ridho Pratama', 'L', 'Jakarta', '2005-05-24', 1, 'WNI', 'Gg. Hidayah No 19 L 005/006 Lenteng Agung Jagakarsa ', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 7, 'Jellyfish.jpg', 0, 1, '-', 2, 0),
+(600, '0000008', '0000000000', '0000000000000000', 'Guntur Ahmad Dani', 'L', 'Purbalingga', '2004-01-06', 1, 'WNI', 'Kp Nanggela 001/007 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '089651242089', 7, 'Tulips.jpg', 0, 2, 'SDN Bojonggede 3', 2, 0),
+(601, '0000048', '000000000000', '0000000000000000', 'Tsanul Jamil', 'L', 'Bogor', '2004-04-19', 1, 'WNI', 'Kp.Mutiara Baru RT02/11 Desa Kedungwaringin Kec.Bojonggede Kab.Bogor', '123@gmail.com', 'document.pdf', '081111111111', 7, 'Chrysanthemum.jpg', 0, 1, '-', 2, 0),
+(602, '0000001', '0000000000', '0000000000000000', 'Ferry Akbar', 'L', 'Bogor', '2001-02-15', 1, 'WNI', 'Kp Bojonggede 004/012 Bojonggede Bogor', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 7, 'Tulips.jpg', 0, 1, 'SDN Kedungwaringin 3', 2, 0),
+(603, '0000003', '0000000000', '0000000000000000', 'Mohammad Rizki', 'L', 'Depok', '2004-09-03', 1, 'WNI', 'Gg Kingkit IX No 19 RT/RW 005/004 Kebon Kelapa Gambir ', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 7, 'Hydrangeas.jpg', 0, 3, '-', 2, 0),
+(604, '0000049', '000000000000', '0000000000000000', 'Aan Sarnianto', 'L', 'Wonogiri', '1976-04-12', 1, 'WNI', 'Jl. Kp. Pulo Mangga No. 46 E RT 07/05 Desa Grogol Kec. Limo Kota Depok', '123@gmail.com', 'document.pdf', '081111111111', 8, 'Chrysanthemum.jpg', 0, 1, 'SDN Jeblogan 1', 2, 0),
+(605, '0000004', '0000000000', '0000000000000000', 'Maulana Abdurrahim', 'L', 'Bogor', '2004-11-22', 1, 'WNI', 'Kp Tajurhalang 002/001 Tajurhalang Bogor', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '081286904264', 7, '81c333fd1c519d337a4bd2e71ad033ba.jpg', 0, 6, 'SDIT Al Hasanah', 2, 0),
+(606, '0000006', '0000000000', '0000000000000000', 'Ripki Akbar Alfito', 'L', 'Bogor', '2004-11-26', 1, 'WNI', 'Jl. Kalibata Timur 003/001 Kalibata Pancoran Jakarta Selatan', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 7, '81c333fd1c519d337a4bd2e71ad033ba.jpg', 0, 2, 'SDN Surakarya 2', 2, 0),
+(607, '0000050', '000000000000', '0000000000000000', 'Muhamad Alamsyah', 'L', 'Bogor', '2004-09-27', 1, 'WNI', 'Kp.Bojonggede Timur Jl. Curug Mas RT 04/12 Kec. Bojonggede Kab. Bojonggede', '123@gmail.com', 'document.pdf', '081111111111', 7, 'Chrysanthemum.jpg', 0, 1, '-', 2, 0),
+(608, '0000053', '0000000000', '0000000000000000', 'Ajis Kurnia', 'L', 'Bogor', '2001-04-22', 1, 'WNI', 'Kp Nanggela 003/007 Sukmajaya Tajurhalang', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 7, '81c333fd1c519d337a4bd2e71ad033ba.jpg', 0, 5, '-', 2, 0),
+(609, '0000052', '0000000000', '0000000000000000', 'Hilal Ramadhan', 'L', 'Jakarta', '2004-10-23', 1, 'WNI', 'Jl. manggarai Utara 2 012/004 Manggarai Tebet ', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 7, '81c333fd1c519d337a4bd2e71ad033ba.jpg', 0, 3, '-', 2, 0),
+(610, '0000012', '0000000000', '0000000000000000', 'Sahroni', 'L', 'Bogor', '1997-10-22', 1, 'WNI', 'Kp Nanggela 002/004 Sukmajaya Tajurhalang ', '123@gmail.com', '01_Soal_Bhs._Indonesia_Kls_7_.pdf', '0811111111', 11, '81c333fd1c519d337a4bd2e71ad033ba.jpg', 0, 1, 'SMP Tunas Harapan', 2, 0),
+(611, '2020745', '0121419541', '0000000000000000', 'Alexy Melvina Sharon Kurniawan', 'P', 'Jayapura', '2012-04-09', 2, 'WNI', 'Jayapura', 'alexymelvina@gmail.com', 'Alexy_Melvina.pdf', '082238517175', 1, 'Koala.jpg', 0, 1, 'Tidak Ada', 1, 0),
+(612, '2020733', '3124159729', '0000000000000000', 'Andrew Christian Prabowo', 'L', 'Tangerang', '2011-01-04', 2, 'WNI', 'Jalan Porto 2 Nomor 1 Gading Serpong Sektor 8A', 'alexanderprabowo@gmail.com', 'Andrew_Prabowo.pdf', '087877047795', 1, 'Desert.jpg', 0, 2, 'TIdak Ada', 1, 0),
+(613, '2020791', '1234', '0000000000000000', 'Adine Jani Kartika', 'P', 'Kota Batam ', '2012-11-16', 1, 'WNI', 'Binong 1 Residence Blok H 05\nTangerang Tangerang 15810', 'agshue12@gmail.com', 'Adine_Jani.pdf', '081287277590', 1, 'Adine_Jani.jpeg', 0, 3, 'SD Plus Islamic Village', 1, 0),
+(614, '2019554', '2121449533', '0000000000000000', 'Valdis Ibrahim Ardhinov Putra', 'L', 'Jakarta ', '2012-10-28', 1, 'WNI', ' 	Perumahan Serpong Garden Cluster Green River Blok D5 No. 14\nKabupaten Tangerang Banten 15344', 'ardhie_777@yahoo.com', 'valdis_2.pdf', '085694319731', 1, 'Valdis.jpeg', 0, 2, 'Sekolah Anak Panah', 1, 0),
+(615, '2019540', '2138795738', '0000000000000000', 'Dennis Setiawan', 'L', 'Jakarta ', '2013-05-05', 3, 'WNI', 'Kemanggisan komplek DPR RI no.34 rt.03 rw.13\nJakarta Jakarta Barat 11480\nIndonesia', 'angnovie82@gmail.com', 'denis_setiawan.pdf', 'angnovie82@gmail.com', 1, 'Dennis_Setiawan.jpeg', 0, 2, 'TK Mitra Penabur', 1, 0),
+(616, '2019543', '0134018697', '0000000000000000', 'Haskell Benedict Oentoro', 'L', 'Tangerang', '2013-08-10', 2, 'WNI', 'Jl. Kelapa Puan XIII blok AF6/ 18 sektor 1 A Gading Serpong Tangerang 15810', 'richard.oentoro@gmail.com', 'Hazkel.pdf', '081297970085', 1, 'Haskel.jpeg', 0, 2, 'TKK Penabur', 1, 0),
+(617, '2020731', '2133199525', '0000000000000000', 'Joseph Alvin Benyamin', 'L', 'Tangerang', '2013-10-03', 2, 'WNI', 'Botania Lake Residence Blok C No. 1 Sawangan Depok\nDepok Depok 1651', 'bennybenyamin77@gmail.com', 'Joseph_.pdf', '085776584478', 1, 'Joseph_Alvin.jpeg', 0, 4, 'Sekolah Anak Panah', 1, 0),
+(618, '2019552', '2125949897', '0000000000000000', 'Rr Radya Aaliyah Salwanabila', 'P', 'Bogor', '2012-04-17', 1, 'WNI', 'Mutiara Sentul blok Q no 6 jl alternatif sentul baru 88 Nanggewer Cibinong Kab Bogor', 'rikaetriyani@gmail.com', 'raden_roro_radya.pdf', '087888444341', 1, 'RR_Radya.jpeg', 0, 3, 'Sekolah Anak Panah', 1, 0),
+(619, '2020742', '0121470526', '0000000000000000', 'Tamera Alana Nagara ', 'P', 'Bekasi ', '2012-09-06', 1, 'WNI', 'Allura 2 Residence No.9c Jl.Caman Raya Utara 2, Jakasampurna, Bekasi Barat\nBekasi Jawa Barat 17145', 'rangga.nagara@gmail.com', 'tamera.pdf', '081586800688', 2, 'Tamera.jpeg', 0, 2, 'Global Prestasi School', 1, 0),
+(620, '2020793', '000000000000', '0000000000000000', 'Al Muqmin Ziqrullah', 'L', 'Jakarta', '2001-01-21', 1, 'WNI', 'Meruya Utara No 13 RT/RW 004/011 Kembangan Jakarta Barat', 'ganesha@persija.ac.id', 'al_muqmin_ziqurullah.pdf', '08123456789', 11, 'Untitled.jpg', 0, 1, 'SMP Negeri 4 Pasarkemis', 5, 0),
+(621, '2020794', '000000000000', '0000000000000000', 'Aditya Ramadhan', 'L', 'Bekasi', '2003-11-14', 1, 'WNI', 'Villa Mutiara Cikarang 2 Blok N 1 No 15 RT/RW 001/008 Suka Sejati Cikarang Selatan', 'ganesha@persija.ac.id', 'aditya_ramadhhan(1).pdf', '08123456789', 11, 'Untitled.jpg', 0, 1, '-', 5, 0),
+(622, '2020736', '0084931005', '0000000000000000', 'Tristan Zachely Famador', 'L', 'Jakarta', '2008-12-17', 1, 'WNI', 'Jl. Pondok Surya Blok D No.1 Karang tengah-Tangerang', 'keira.handayani@gmail.com', 'tristan_zachel.pdf', '08118072828', 3, 'Tristan_Zack.jpeg', 0, 1, 'Sekolah Mutiara Harapan International School', 1, 0),
+(623, '2019601', '0069087759', '0000000000000000', 'Michael Praditya Sutanto', 'L', 'Jakarta', '2006-08-23', 3, 'WNI', 'Jl. Duri Kencana Raya', '123@gmail.com', 'michael.pdf', '0', 7, 'WhatsApp_Image_2020-04-22_at_14.52_.48_.jpeg', 0, 2, 'Anak Panah', 1, 0),
+(624, '2020790', '12345', '0000000000000000', 'Boonsak adrian satrianto', 'L', 'Kota Batam', '2009-11-03', 1, 'WNI', 'Binong 1 Residence Blok H 05\nTangerang Tangerang 15810', 'agshue12@gmail.com', 'boonsak.pdf', '081287277590', 3, 'BOONSAK.jpeg', 0, 2, 'SDN BINONG II', 1, 0),
+(625, '2018345', '0093351471', '0000000000000000', 'Edeline Daxilia Pramono', 'P', 'PALU', '2009-04-09', 2, 'WNI', 'Teluk Gong jl.Lele Blok H3 No.1\nJakarta Utara Pejagalan 14450\nIndonesia', 'daxilia.fam@gmail.com', 'Edeline_Daxilia.pdf', '082298285856', 5, 'Edeline.jpeg', 0, 2, 'SD Stella Maris', 1, 0),
+(626, '2017158', '0049722633', '0000000000000000', 'Christianus janoko', 'L', 'Jakarta ', '2004-11-29', 3, 'WNI', 'Jl. Pane no.37 Cihideung Gambir Jakarta Pusat', 'meiskevisoka2@gmail.com', 'Christianus_Janoko_compressed.pdf', '08111774527', 5, 'Christianus_Janoko.jpeg', 0, 3, 'SD TARSISIUS 1', 1, 0),
+(627, '2018315', '2094539607', '0000000000000000', 'Elleasha Jovanca Patricia maloring', 'P', 'Manado ', '2009-12-02', 2, 'WNI', 'kompleks Fiordini gading serpong kec.curug ', 'elleashamaloring@gmail.com', 'Elleasha.pdf', '0896-3031-9831', 5, 'index.jpg', 0, 3, 'Sekolah Anak Panah', 1, 0),
+(628, '2020741', '3102766355', '0000000000000000', 'Yasyavardi Prabu Nagara', 'L', 'Bekasi', '2010-02-02', 1, 'WNI', 'Allura 2 Residence No.9c Jl.Caman Raya Utara 2, Jakasampurna, Bekasi Barat\nBekasi Jawa Barat 17145', 'rangga.nagara@gmail.com', 'Yasyavardi_Prabu.pdf', '081586800688', 5, 'YAsyavardi.jpeg', 0, 1, ' 	Global Prestasi School Bekasi', 1, 0),
+(629, '2018457', '0103159981', '0000000000000000', 'Adriel Mark Steven Yantoro', 'L', 'Jakarta', '2010-04-20', 2, 'WNI', 'Jl AR HAKIM NO 69 Tegal Jawa Tengah 52123', 'stevany2084@gmail.com', 'Adriel_mark_k4.pdf', '081902501623', 4, 'Untitled.jpg', 0, 1, 'Anak Panah', 1, 0),
+(630, '2018365', '2066484492', '0000000000000000', 'Muhammad Zulfan Djiaulhaq Mukti', 'L', 'Bogor', '2006-12-09', 1, 'WNI', 'Kampung  Pemagarsari RT 1 RW 1  Parung ', '123@gmail.com', 'muhammad_zulfan_compressed.pdf', '0', 8, 'Untitled.jpg', 0, 2, 'SD Negeri Parung 3', 5, 0),
+(631, '2020795', '2020205', '0000000000000000', 'Valencia Samatha Indrawan', 'P', 'Jakarta', '2007-11-07', 5, 'WNI', 'Teluk Gong Timur Nomor 50 RT 04 RW 09 Pejagalan Jakarta Utara', 'hensyur@yahoo.co.id', 'Valencia_Samatha_Indrawan.pdf', '082136080808', 7, 'WhatsApp_Image_2020-04-30_at_15.15_.35_.jpeg', 0, 2, '-', 1, 0),
+(632, '2018344', '2088930446', '0000000000000000', 'Zidane Khalid Wibowo', 'L', 'Jakarta', '2008-12-02', 1, 'WNI', 'Rajawali Timur IX No 15 RT 05 Rw 08 Pancoran Jakarta Selatan', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 5, 'Untitled.jpg', 0, 2, '-', 1, 0),
+(633, '2019602', '0076311754', '0000000000000000', 'Michelle Gabrielle Otniella Berhitoe', 'P', 'Jakarta', '2007-04-01', 2, 'WNI', 'Jl. Pulo Mas Utara No 2 RT 03 Rw 13 Kayu Putih, Pulo Gadung, Jakarta Timur', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 7, 'Untitled.jpg', 0, 1, 'Anak Panah', 1, 0),
+(634, '2020740', '0071058641', '0000000000000000', 'Naomi Patricia Adi Nugraha', 'P', 'Jakarta', '2007-05-14', 2, 'WNI', 'Jl. Hang Jebat III RT 04 RW 08 Gunung Kebayoran Baru Jakarta Selatan', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 7, 'Untitled.jpg', 0, 2, 'SD Negeri Durenseribu 04', 1, 0),
+(635, '2017190', '0059266754', '0000000000000000', 'Ancella Jovfelly Wijaya', 'P', 'Jakarta', '2005-07-05', 2, 'WNI', 'Daan Mogot Baru Blok LB No 22 RT/RW 001/017, Kalideres, Jakarta Barat', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 7, 'Untitled.jpg', 0, 1, 'IPEKA', 1, 0),
+(636, '2017208', '0042995719', '0000000000000000', 'Maria Audrey Helena', 'P', 'Jakarta', '2004-06-14', 3, 'WNI', 'Jl. Gading X Blok Z No 914 RT/RW 14/10 Pondok Bambu Duren Sawit Jakarta Timur', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 7, 'Untitled.jpg', 0, 2, 'SD Santa Ursula BSD', 1, 0),
+(637, '2019553', '0133041451', '0000000000000000', 'Sharleen Jemima Hoo', 'P', 'Tangerang Selatan', '2013-06-03', 2, 'WNI', 'Jl.Flourite Timur No 02 RT/RW 001/019 Pakulonan Barat Kelapa Dua Tangerang', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 1, 'Untitled.jpg', 0, 3, '-', 1, 0),
+(638, '2019634', '2076527828', '0000000000000000', 'Wesley Jericho Nugroho Hoo', 'L', 'Semarang', '2007-08-02', 2, 'WNI', 'Jl.Flourite Timur No 02 RT/RW 001/019 Pakulonan Barat Kelapa Dua Tangerang', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 7, 'Untitled.jpg', 0, 2, '-', 1, 0),
+(639, '2018370', '2066154812', '0000000000000000', 'Muhammad Farraz Al Hanif', 'L', 'Jakarta', '2006-03-10', 1, 'WNI', 'jl Damai No 26 RT/RW 003/002 Kunciran Pinang Kota Tangerang', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 8, 'Untitled.jpg', 0, 1, 'SD Islam Baitturachman', 1, 0),
+(640, '2017184', '0048517448', '0000000000000000', 'Abil Daffansyah', 'L', 'Jakarta', '2004-08-29', 1, 'WNI', 'Kedoya Selatan RT/RW 013/001 Kebon Jeruk Jakarta Barat', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 8, 'Untitled.jpg', 0, 1, 'SDN Pondok Kacang Barat 04', 1, 0),
+(641, '2018382', '0051210355', '0000000000000000', 'Tara Kaifa Hayyunisa', 'P', 'Sleman', '2005-06-01', 1, 'WNI', 'Bausasran DN 3/950 RT/RW 047/012 Danurejan Kota Yogyakarta', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 8, 'Untitled.jpg', 0, 1, '-', 1, 0),
+(642, '2019721', '0022144239', '0000000000000000', 'Stefanus Alfares', 'L', 'Jakarta', '2002-09-21', 3, 'WNI', 'Jl.Kramat Raya No 134 RT/RW 001/009 Kenari Senen Jakarta Pusat', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 11, 'Untitled.jpg', 0, 4, 'Anak Panah', 1, 0),
+(643, '2018452', '0022435988', '0000000000000000', 'Valen Basel', 'P', 'Bandung', '2002-09-11', 2, 'WNI', '-', '123@gmail.com', 'Daftar_Siswa_Th_Ajaran_2019.2020_._.pdf', '0', 13, 'Untitled.jpg', 0, 1, 'SMP Mardi Waluya 2', 1, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_tagihan`
+-- Struktur dari tabel `tbl_tagihan`
 --
 
 CREATE TABLE `tbl_tagihan` (
@@ -14819,7 +14860,7 @@ CREATE TABLE `tbl_tagihan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_tagihan`
+-- Dumping data untuk tabel `tbl_tagihan`
 --
 
 INSERT INTO `tbl_tagihan` (`id_tagihan`, `jns_tagihan`, `nom_tagihan`, `sts_tagihan`) VALUES
@@ -14843,7 +14884,7 @@ INSERT INTO `tbl_tagihan` (`id_tagihan`, `jns_tagihan`, `nom_tagihan`, `sts_tagi
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_terbilang`
+-- Struktur dari tabel `tbl_terbilang`
 --
 
 CREATE TABLE `tbl_terbilang` (
@@ -14852,7 +14893,7 @@ CREATE TABLE `tbl_terbilang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_terbilang`
+-- Dumping data untuk tabel `tbl_terbilang`
 --
 
 INSERT INTO `tbl_terbilang` (`id_nilai`, `nilai_terbilang`) VALUES
@@ -14960,7 +15001,7 @@ INSERT INTO `tbl_terbilang` (`id_nilai`, `nilai_terbilang`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_thn_ajaran`
+-- Struktur dari tabel `tbl_thn_ajaran`
 --
 
 CREATE TABLE `tbl_thn_ajaran` (
@@ -14972,7 +15013,7 @@ CREATE TABLE `tbl_thn_ajaran` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_thn_ajaran`
+-- Dumping data untuk tabel `tbl_thn_ajaran`
 --
 
 INSERT INTO `tbl_thn_ajaran` (`id_ta`, `thn_ajaran`, `semester`, `tgl_dikeluarkan`, `aktifkan`) VALUES
@@ -15094,6 +15135,12 @@ ALTER TABLE `tbl_nilai_indv`
   ADD PRIMARY KEY (`id_nilai_indv`);
 
 --
+-- Indexes for table `tbl_oc`
+--
+ALTER TABLE `tbl_oc`
+  ADD PRIMARY KEY (`id_oc`);
+
+--
 -- Indexes for table `tbl_orangtua`
 --
 ALTER TABLE `tbl_orangtua`
@@ -15175,170 +15222,146 @@ ALTER TABLE `tbl_thn_ajaran`
 --
 ALTER TABLE `tbl_absensi`
   MODIFY `id_absensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=819;
-
 --
 -- AUTO_INCREMENT for table `tbl_agama`
 --
 ALTER TABLE `tbl_agama`
   MODIFY `agama_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT for table `tbl_catmur`
 --
 ALTER TABLE `tbl_catmur`
   MODIFY `id_catmur` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=813;
-
 --
 -- AUTO_INCREMENT for table `tbl_catpenting`
 --
 ALTER TABLE `tbl_catpenting`
   MODIFY `id_catpenting` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=813;
-
 --
 -- AUTO_INCREMENT for table `tbl_forum`
 --
 ALTER TABLE `tbl_forum`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tbl_inbox`
 --
 ALTER TABLE `tbl_inbox`
   MODIFY `inbox_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
 --
 -- AUTO_INCREMENT for table `tbl_kelas`
 --
 ALTER TABLE `tbl_kelas`
   MODIFY `kelas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
 --
 -- AUTO_INCREMENT for table `tbl_kisikisi`
 --
 ALTER TABLE `tbl_kisikisi`
   MODIFY `kisikisi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=520;
-
 --
 -- AUTO_INCREMENT for table `tbl_komen_forum`
 --
 ALTER TABLE `tbl_komen_forum`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 --
 -- AUTO_INCREMENT for table `tbl_komen_tugas`
 --
 ALTER TABLE `tbl_komen_tugas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tbl_lembaga`
 --
 ALTER TABLE `tbl_lembaga`
   MODIFY `id_lembaga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `tbl_log_forum`
 --
 ALTER TABLE `tbl_log_forum`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tbl_mapel`
 --
 ALTER TABLE `tbl_mapel`
   MODIFY `kd_mapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
 --
 -- AUTO_INCREMENT for table `tbl_materi_forum`
 --
 ALTER TABLE `tbl_materi_forum`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `tbl_materi_tugas`
 --
 ALTER TABLE `tbl_materi_tugas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tbl_nilai`
 --
 ALTER TABLE `tbl_nilai`
   MODIFY `id_nilai` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8169;
-
 --
 -- AUTO_INCREMENT for table `tbl_nilai_indv`
 --
 ALTER TABLE `tbl_nilai_indv`
   MODIFY `id_nilai_indv` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=977;
-
+--
+-- AUTO_INCREMENT for table `tbl_oc`
+--
+ALTER TABLE `tbl_oc`
+  MODIFY `id_oc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tbl_orangtua`
 --
 ALTER TABLE `tbl_orangtua`
   MODIFY `ortu_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=644;
-
 --
 -- AUTO_INCREMENT for table `tbl_pegawai`
 --
 ALTER TABLE `tbl_pegawai`
   MODIFY `pegawai_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
 --
 -- AUTO_INCREMENT for table `tbl_pelajaran`
 --
 ALTER TABLE `tbl_pelajaran`
   MODIFY `id_pelajaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=210;
-
 --
 -- AUTO_INCREMENT for table `tbl_pembayaran`
 --
 ALTER TABLE `tbl_pembayaran`
   MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
-
 --
 -- AUTO_INCREMENT for table `tbl_pengajar`
 --
 ALTER TABLE `tbl_pengajar`
   MODIFY `id_pengajar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `tbl_pengguna`
 --
 ALTER TABLE `tbl_pengguna`
   MODIFY `pengguna_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=684;
-
 --
 -- AUTO_INCREMENT for table `tbl_pengumuman`
 --
 ALTER TABLE `tbl_pengumuman`
   MODIFY `pengumuman_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `tbl_satelit`
 --
 ALTER TABLE `tbl_satelit`
   MODIFY `satelit_id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
 --
 -- AUTO_INCREMENT for table `tbl_siswa`
 --
 ALTER TABLE `tbl_siswa`
   MODIFY `siswa_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=644;
-
 --
 -- AUTO_INCREMENT for table `tbl_tagihan`
 --
 ALTER TABLE `tbl_tagihan`
   MODIFY `id_tagihan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
 --
 -- AUTO_INCREMENT for table `tbl_thn_ajaran`
 --
 ALTER TABLE `tbl_thn_ajaran`
   MODIFY `id_ta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

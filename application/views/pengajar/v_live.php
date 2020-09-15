@@ -1,88 +1,3 @@
-<?php
-$layout = array('header', 'navbar');
-foreach ($layout as $layout) {
-	$this->load->view('pengajar/layout/' . $layout);
-}
-?>
-<style>
-	/*  Bhoechie tab */
-	div.bhoechie-tab-container {
-		background-color: #ffffff;
-		padding: 0;
-		border: 1px solid #ddd;
-
-	}
-
-	div.bhoechie-tab-menu {
-		padding-right: 0;
-		padding-left: 0;
-		padding-bottom: 0;
-	}
-
-	div.bhoechie-tab-menu div.list-group {
-		margin-bottom: 0;
-	}
-
-	div.bhoechie-tab-menu div.list-group>a {
-		margin-bottom: 0;
-	}
-
-	div.bhoechie-tab-menu div.list-group>a .glyphicon,
-	div.bhoechie-tab-menu div.list-group>a .fa {
-		color: #428bca;
-	}
-
-	div.bhoechie-tab-menu div.list-group>a {
-		border-right: 1px solid #ddd;
-		border-left: 0;
-		border-top: 0;
-	}
-
-	div.bhoechie-tab-menu div.list-group>a:last-child {
-		border-bottom: 0;
-	}
-
-	div.bhoechie-tab-menu div.list-group>a.active,
-	div.bhoechie-tab-menu div.list-group>a.active .glyphicon,
-	div.bhoechie-tab-menu div.list-group>a.active .fa {
-		background-color: #428bca;
-		background-image: #428bca;
-		color: #ffffff;
-		border-bottom: 0;
-		border-right: 1px solid #428bca;
-	}
-
-	div.bhoechie-tab-menu div.list-group>a.active:after {
-		content: '';
-		position: absolute;
-		left: 100%;
-		top: 50%;
-		margin-top: -13px;
-		border-left: 0;
-		border-bottom: 13px solid transparent;
-		border-top: 13px solid transparent;
-		border-left: 10px solid #428bca;
-	}
-
-	div.bhoechie-tab-content {
-		background-color: #ffffff;
-		padding-left: 20px;
-		padding-top: 10px;
-	}
-
-	div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
-		display: none;
-	}
-
-	.idp-group-item {
-		min-height: 150px;
-	}
-
-	iframe {
-		width: 100%;
-	}
-</style>
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
@@ -95,65 +10,114 @@ foreach ($layout as $layout) {
 	<!-- Main content -->
 	<div class="content">
 		<div class="container">
+			<!-- Kelas Online -->
 			<div class="row">
 				<div class="offset-1 col-sm-10">
-					<div class="card card-outline">
-						<div class="card-primary card-body row bhoechie-tab-container">
-							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
-								<div class="list-group nav flex-column nav-pills">
-									<a class="nav-link  list-group-item active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
-										<span>MINGGU PERTAMA <br><small>04-Mar-2020</small><br></span>
-										<span>Overview Part 1 (Theory)</span>
-										<span><br><i class="fa fa-comments col-lg-2"></i><i class="fa fa-tasks col-lg-2"></i><i class="fa fa-youtube col-lg-2"></i></span>
-
-									</a>
-									<a class="nav-link  list-group-item" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
-										<span>MINGGU KEDUA <br><small>04-Mar-2020</small><br>
-										</span><span>Overview Part 2 (Theory)</span>
-										<span><br><i class="fa fa-comments col-lg-2"></i><i class="fa fa-tasks col-lg-2"></i><i class="fa fa-youtube col-lg-2"></i></span>
-									</a>
-
-								</div>
-							</div>
-
-							<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
-								<div class="bhoechie-tab-content tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-									<!-- POSTINGAN GURU -->
-									<div class="card-header"><label>MINGGU PERTAMA (Live Streaming)</label></div>
-									<div class="card-body">
-										<!-- lokasi embed -->
-										<iframe width="560" height="315" src="https://www.youtube.com/embed/9HNNI8D-UCY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					<div class="card card-primary card-outline">
+						<div class="card-header">
+							<h5 class="card-title m-0">Agenda Kelas Online</h5>
+						</div>
+						<div class="card-body ">
+							<div class="row">
+								<?php foreach ($oc as $online) {
+									?>
+									<div class="col-sm-4">
+										<div class="card" style="height: 21%">
+											<?php if ($online['aktifkan']==1) {
+												?>
+												<a href="<?= $online['link_oc']  ?>">
+													<div class="card-header bg-primary">
+														<i class="fas fa-fw fa-video mr-1 blink_me" style="color: #f72121"></i> Sedang Berlangsung
+													</div>
+												</a>
+											<?php } else{ ?>
+												<div class="card-header bg-light">
+													<i class="fas fa-fw fa-video mr-1"></i> Belum Dimulai
+												</div>
+											<?php } ?>
+											
+											<div class="m-3">
+												<p class="card-text"><i class="fas fa-fw fa-bookmark mr-1"></i> <?= $online['nm_mapel']  ?></p>
+												<p class="card-text"><i class="far fa-fw fa-calendar-alt mr-1"></i> <?= $online['tgl_oc'] ?></p>
+												<p class="card-text"><i class="far fa-fw fa-clock mr-1"></i> <?= $online['time_start'] ?> - <?= $online['time_end'] ?></p>
+											</div>
+										</div>
+									</div>
+								<?php } ?>
+								<!-- <div class="col-sm-4">
+									<div class="card" style="height: 21%">
+										<div class="card-header bg-light">
+											<i class="fas fa-fw fa-video mr-1"></i> Belum Dimulai
+										</div>
+										<div class="m-3">
+											<p class="card-text"><i class="fas fa-fw fa-bookmark mr-1"></i> Bahasa Indonesia (SPOK)</p>
+											<p class="card-text"><i class="far fa-fw fa-calendar-alt mr-1"></i> <?= date('d M Y'); ?></p>
+											<p class="card-text"><i class="far fa-fw fa-clock mr-1"></i> 10:20 - 11:10</p>
+										</div>
 									</div>
 								</div>
-								<div class="bhoechie-tab-content tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-									<div class="card-header"><label>MINGGU KEDUA</label></div>
-									<div class="card-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque at, ullam excepturi eligendi necessitatibus assumenda ad dolores quasi ducimus! Sequi, nemo ut quia aperiam magni quam id quod autem pariatur.</div>
-								</div>
+								<div class="col-sm-4">
+									<div class="card" style="height: 21%">
+										<div class="card-header bg-light">
+											<i class="fas fa-fw fa-video mr-1"></i> Belum Dimulai
+										</div>
+										<div class="m-3">
+											<p class="card-text"><i class="fas fa-fw fa-bookmark mr-1"></i> Bahasa Inggris (Past Tense)</p>
+											<p class="card-text"><i class="far fa-fw fa-calendar-alt mr-1"></i> <?= date('d M Y'); ?></p>
+											<p class="card-text"><i class="far fa-fw fa-clock mr-1"></i> 19:20 - 20:10</p>
+										</div>
+									</div>
+								</div> -->
 							</div>
-
-
-
-
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- /.container -->
+			<!-- /.row -->
 
-		</div><!-- /.content-wrapper -->
+			<!-- End Of Kelas Online -->
+		</div><!-- /.container-fluid -->
+	</div><!-- /.content -->
 
-		<?php $this->load->view('pengajar/v_schedule') ?>
+	<?php $this->load->view('pengajar/v_kelasonline'); ?>
+</div>
+<!-- /.content-wrapper -->
 
-		<?php
-		$layout = array('footer', 'js');
-		foreach ($layout as $layout) {
-			$this->load->view('pengajar/layout/' . $layout);
-		}
-		?>
+<?php $this->load->view('pengajar/layout/v_js'); ?>
 
-		<script>
-			$('#myTab a').on('click', function(e) {
-				e.preventDefault()
-				$(this).tab('show')
-			})
-		</script>
+<script type="text/javascript">
+	function view(id){
+		$.ajax({
+			url: '<?= site_url('course/view/') ?>'+id,
+			type: 'post',
+			dataType: 'json',
+			success: function(data){
+				$('#modal_kelasonline').modal('show');
+				$('.modal-title').text(data.nm_mapel + ' ('+data.kelas_nama+')');
+
+				$('#id').val(id);
+				$('#jdl_kelas').val(data.tgl_oc);
+				$('#link_oc').val(data.link_oc);
+				$('#start_on').val(data.time_start);
+				$('#end_on').val(data.time_end);
+				$('input:radio[name=opsi_kls][value='+data.aktifkan+']')[0].checked = true;
+			}
+		});
+	}
+
+	function submit(){
+		$.ajax({
+			url: '<?= site_url('course/update_oc/') ?>',
+			type: 'post',
+			dataType: 'json',
+			data:$('#fm_oc').serialize(),
+			beforeSend: function() {
+				$('.btn').html('<i class="fa fa-spin fa-spinner"></i> loading');
+			},
+			success:function(data){
+				alert(data.msg);
+				location.reload();
+			} 	
+		})
+	}
+</script>

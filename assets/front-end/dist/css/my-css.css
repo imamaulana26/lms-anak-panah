@@ -90,11 +90,14 @@ a.nav-link.glider-slide {
   font-weight: bold;
 }
 
-/* custome modal */
-/* .modal-header {
-  background: lightskyblue;
+.badge-notify {
+	background: red;
+	position: absolute;
+	top: 0px;
+	right: 5px;
+	font-size: 10px;
+	/* height: 15px;
+	width: 15px;
+	border-radius: 50%; */
+	display: inline-block;
 }
-
-.modal-title {
-  color: white;
-} */

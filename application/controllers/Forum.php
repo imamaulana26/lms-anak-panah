@@ -67,7 +67,7 @@ class Forum extends CI_Controller
 		$data['forum'] = $this->m_forum->get_forum($id);
 		$data['materi'] = $this->m_forum->get_materi($id);
 		// $data['komen'] = $this->m_forum->get_komen($id);
-
+		
 		if ($akses == 2) {
 			$this->load->view('siswa/layout/v_header');
 			$this->load->view('siswa/layout/v_navbar');
@@ -102,6 +102,22 @@ class Forum extends CI_Controller
 		exit();
 	}
 
+	public function tambah_forum($id)
+	{
+		$this->db->select('*')->from('tbl_pelajaran a')
+			->join('tbl_mapel b', 'a.kd_mapel = b.kd_mapel', 'inner')
+			->where(['a.id_pelajaran' => $id]);
+		$res = $this->db->get()->row_array();
+
+		$data = array(
+			'data' => $res
+		);
+
+		$this->load->view('pengajar/layout/v_header');
+		$this->load->view('pengajar/layout/v_navbar');
+		$this->load->view('pengajar/v_tambah_forum', $data);
+	}
+
 	public function edit_forum($id)
 	{
 		$this->db->select('*')->from('tbl_materi_forum a')
@@ -132,7 +148,7 @@ class Forum extends CI_Controller
 	public function save_forum()
 	{
 		$this->validasi_forum();
-
+		
 		$akses = $this->session->userdata('akses');
 
 		if ($akses == 3) {
@@ -160,7 +176,7 @@ class Forum extends CI_Controller
 			}
 
 			// $this->diskusi($kd_mapel);
-			echo json_encode(['status' => true]);
+			echo json_encode(['status' => true, 'id' => $data['id_forum']]);
 			exit;
 		}
 	}
@@ -381,7 +397,7 @@ class Forum extends CI_Controller
 		$this->load->view('pengajar/layout/v_navbar');
 		$this->load->view('pengajar/v_edit_komen', $data);
 	}
-	
+
 	public function update_komen()
 	{
 		$data = array(

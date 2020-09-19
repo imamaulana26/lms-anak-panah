@@ -104,7 +104,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="offset-1 col-sm-10">
-					<span class="btn btn-primary float-right" onclick="add_forum()">Buat Forum Baru</span>
+					<a href="<?= site_url('forum/tambah_forum/'.$this->uri->segment(2)) ?>" class="btn btn-primary float-right">Buat Forum Baru</a>
+					<!-- <span class="btn btn-primary float-right" onclick="add_forum()">Buat Forum Baru</span> -->
 					<h2 class="pb-3">Forum <?= $forum['nm_mapel'] ?></h2>
 
 					<div class="card card-outline">

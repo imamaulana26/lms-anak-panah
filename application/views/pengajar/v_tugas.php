@@ -104,7 +104,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="offset-1 col-sm-10">
-					<span class="btn btn-primary float-right" onclick="add_forum()">Buat Tugas Baru</span>
+					<a href="<?= site_url('tugas/tambah_tugas/' . $this->uri->segment(2)) ?>" class="btn btn-primary float-right">Buat Tugas Baru</a>
 					<h2 class="pb-3">Tugas <?= $forum['nm_mapel'] ?></h2>
 
 					<div class="card card-outline">
@@ -128,7 +128,7 @@
 										<div class="card-header">
 											<label><?= $val['judul_materi'] ?> (<?= $val['jns_materi'] ?>)</label>
 											<span class="float-right">
-												<a href="javascript:void(0)" onclick="edit_forum('<?= $val['id'] ?>')" style="color: #1e7e34;"><i class="fa fa-fw fa-pencil-alt ml-3"></i></a>
+												<a href="<?= site_url('tugas/edit_tugas/' . $val['id']) ?>" style="color: #1e7e34;"><i class="fa fa-fw fa-pencil-alt ml-3"></i></a>
 												<a href="javascript:void(0)" onclick="delete_forum('<?= $val['id'] ?>')" style="color: #dc3545;"><i class="fa fa-fw fa-times ml-3"></i></a>
 											</span>
 										</div>
@@ -342,66 +342,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- /.container -->
-
-	<!-- Modal -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel"></h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form id="fm_forum" autocomplete="off">
-						<div class="form-group row">
-							<label for="judul_materi" class="col-sm-2 col-form-label">Judul Materi</label>
-							<div class="col-sm-10">
-								<input type="hidden" class="form-control" name="id_fm" id="id_fm">
-								<input type="hidden" class="form-control" name="kd_mapel" id="kd_mapel" value="<?= $this->uri->segment(2); ?>">
-								<input type="text" class="form-control" name="judul_materi" id="judul_materi">
-								<span class="help-block"></span>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="isi_materi" class="col-sm-2 col-form-label">Isi Materi</label>
-							<div class="col-sm-10">
-								<textarea class="form-control" name="isi_materi" id="isi_materi" cols="30" rows="4"></textarea>
-								<span class="help-block"></span>
-							</div>
-						</div>
-						<fieldset class="form-group">
-							<div class="row">
-								<label class="col-form-label col-sm-2 pt-0">Tipe Forum</label>
-								<div class="col-sm-10">
-									<div class="form-check">
-										<label class="form-check-label" for="tipe_forum1">
-											<input class="form-check-input" type="radio" name="tipe_forum" id="tipe_forum1" value="Teori" checked>
-											Teori
-										</label>
-									</div>
-									<div class="form-check">
-										<label class="form-check-label" for="tipe_forum2">
-											<input class="form-check-input" type="radio" name="tipe_forum" id="tipe_forum2" value="Praktek">
-											Praktek
-										</label>
-									</div>
-								</div>
-							</div>
-						</fieldset>
-						<div class="form-group row">
-							<div class="col-sm-10 offset-2">
-								<span class="btn btn-primary" onclick="save_forum()">Simpan</span>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+	</div><!-- /.container -->
 </div><!-- /.content-wrapper -->
 
 
@@ -454,37 +395,6 @@
 		$(this).tab('show')
 	});
 
-	function add_forum() {
-		method = 'add';
-
-		$('#fm_forum')[0].reset();
-		$('#exampleModal').modal('show');
-
-		$('.modal-title').text('Buat Forum Baru');
-	}
-
-	function edit_forum(id) {
-		url = 'update';
-
-		$.ajax({
-			url: "<?= site_url('tugas/edit_tugas/') ?>" + id,
-			type: "POST",
-			dataType: "JSON",
-			success: function(data) {
-				$('#fm_forum')[0].reset();
-				$('#exampleModal').modal('show');
-
-				$('.modal-title').text('Sunting Forum');
-
-				$('#id_fm').val(data.id);
-				$('#kd_mapel').val(data.id_forum);
-				$('#judul_materi').val(data.judul_materi);
-				$('#isi_materi').val(data.isi_materi);
-				$('input:radio[name=tipe_forum][value=' + data.jns_materi + ']')[0].checked = true;
-			}
-		});
-	}
-
 	function delete_forum(id) {
 		Swal.fire({
 			title: 'Hapus tugas ini?',
@@ -522,56 +432,6 @@
 			}
 		})
 	}
-
-	function save_forum() {
-		var url = '';
-		var msg = '';
-
-		if (method == 'add') {
-			url = '<?= site_url('tugas/save_tugas') ?>';
-			msg = 'Tugas berhasil dibuat';
-		} else {
-			url = '<?= site_url('tugas/update_tugas') ?>';
-			msg = 'Tugas berhasil diubah';
-		}
-
-		$.ajax({
-			url: url,
-			type: "POST",
-			dataType: "JSON",
-			data: $('#fm_forum').serialize(),
-			success: function(data) {
-				if (data.status) {
-					$('#exampleModal').modal('hide');
-					Swal.fire({
-						icon: 'success',
-						title: 'Sukses',
-						text: msg,
-						timer: 2000,
-						timerProgressBar: true,
-						// onBeforeOpen: () => {
-						// 	Swal.showLoading()
-						// },
-						showConfirmButton: false
-					}).then((result) => {
-						if (result.dismiss === Swal.DismissReason.timer) {
-							location.reload();
-						}
-					})
-				} else {
-					for (var i = 0; i < data.inputerror.length; i++) {
-						if (data.error[i] == '') {
-							$('[name="' + data.inputerror[i] + '"]').addClass('is-invalid');
-						} else {
-							$('[name="' + data.inputerror[i] + '"]').addClass('is-invalid');
-							$('[name="' + data.inputerror[i] + '"]').next().addClass('invalid-feedback').text(data.error[i]);
-						}
-					}
-				}
-			}
-		});
-	}
-
 
 	function hapus_komen(id) {
 		Swal.fire({

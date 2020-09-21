@@ -42,10 +42,6 @@ class Forum extends CI_Controller
 			$data['inputerror'][] = 'judul_materi';
 			$data['error'][] = 'Judul materi harus diisi';
 			$data['status'] = false;
-		} else if (!preg_match('/^[a-zA-Z0-9,. ]+$/', strtoupper($this->input->post('judul_materi')))) {
-			$data['inputerror'][] = 'judul_materi';
-			$data['error'][] = 'Judul materi tidak valid';
-			$data['status'] = false;
 		}
 
 		// if ($this->input->post('isi_materi') == '') {

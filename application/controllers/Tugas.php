@@ -42,21 +42,17 @@ class Tugas extends CI_Controller
 			$data['inputerror'][] = 'judul_materi';
 			$data['error'][] = 'Judul tugas harus diisi';
 			$data['status'] = false;
-		} else if (!preg_match('/^[a-zA-Z0-9,. ]+$/', strtoupper($this->input->post('judul_materi')))) {
-			$data['inputerror'][] = 'judul_materi';
-			$data['error'][] = 'Judul tugas tidak valid';
-			$data['status'] = false;
 		}
 
-		if ($this->input->post('isi_materi') == '') {
-			$data['inputerror'][] = 'isi_materi';
-			$data['error'][] = 'Isi tugas harus diisi';
-			$data['status'] = false;
-		} else if (!preg_match('/^[a-zA-Z0-9,. ]+$/', strtoupper($this->input->post('isi_materi')))) {
-			$data['inputerror'][] = 'isi_materi';
-			$data['error'][] = 'Isi tugas tidak valid';
-			$data['status'] = false;
-		}
+		// if ($this->input->post('isi_materi') == '') {
+		// 	$data['inputerror'][] = 'isi_materi';
+		// 	$data['error'][] = 'Isi tugas harus diisi';
+		// 	$data['status'] = false;
+		// } else if (!preg_match('/^[a-zA-Z0-9,. ]+$/', strtoupper($this->input->post('isi_materi')))) {
+		// 	$data['inputerror'][] = 'isi_materi';
+		// 	$data['error'][] = 'Isi tugas tidak valid';
+		// 	$data['status'] = false;
+		// }
 
 		if ($data['status'] === false) {
 			echo json_encode($data);
@@ -105,12 +101,37 @@ class Tugas extends CI_Controller
 		exit();
 	}
 
+	public function tambah_tugas($id)
+	{
+		$this->db->select('*')->from('tbl_pelajaran a')
+			->join('tbl_mapel b', 'a.kd_mapel = b.kd_mapel', 'inner')
+			->where(['a.id_pelajaran' => $id]);
+		$res = $this->db->get()->row_array();
+
+		$data = array(
+			'data' => $res
+		);
+
+		$this->load->view('pengajar/layout/v_header');
+		$this->load->view('pengajar/layout/v_navbar');
+		$this->load->view('pengajar/v_tambah_tugas', $data);
+	}
+
 	public function edit_tugas($id)
 	{
-		$data = $this->db->get_where('tbl_materi_tugas', ['id' => $id])->row_array();
+		$this->db->select('*')->from('tbl_materi_tugas a')
+			->join('tbl_pelajaran b', 'a.id_forum = b.id_pelajaran', 'left')
+			->join('tbl_mapel c', 'b.kd_mapel = c.kd_mapel', 'left')
+			->where(['a.id' => $id]);
+		$res = $this->db->get()->row_array();
 
-		echo json_encode($data);
-		exit;
+		$data = array(
+			'data' => $res
+		);
+
+		$this->load->view('pengajar/layout/v_header');
+		$this->load->view('pengajar/layout/v_navbar');
+		$this->load->view('pengajar/v_edit_tugas', $data);
 	}
 
 	public function delete_tugas($id)
@@ -151,7 +172,7 @@ class Tugas extends CI_Controller
 			}
 
 			// $this->diskusi($kd_mapel);
-			echo json_encode(['status' => true]);
+			echo json_encode(['status' => true, 'id' => $data['id_forum']]);
 			exit;
 		}
 	}
@@ -172,7 +193,7 @@ class Tugas extends CI_Controller
 			$this->db->update('tbl_materi_tugas', $data, ['id' => $this->input->post('id_fm')]);
 
 			// $this->diskusi($kd_mapel);
-			echo json_encode(['status' => true]);
+			echo json_encode(['status' => true, 'id' => $this->input->post('kd_mapel')]);
 			exit;
 		}
 	}
@@ -284,7 +305,7 @@ class Tugas extends CI_Controller
 				// echo '<img src="data:image/webp;base64,'.$base_64.'" />';
 			}
 		}
-		
+
 		if (!empty($komen)) {
 			$data = array(
 				'id_forum' => $this->input->post('id_forum'),

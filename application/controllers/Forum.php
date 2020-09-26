@@ -63,7 +63,7 @@ class Forum extends CI_Controller
 		$data['forum'] = $this->m_forum->get_forum($id);
 		$data['materi'] = $this->m_forum->get_materi($id);
 		// $data['komen'] = $this->m_forum->get_komen($id);
-		
+
 		if ($akses == 2) {
 			$this->load->view('siswa/layout/v_header');
 			$this->load->view('siswa/layout/v_navbar');
@@ -144,7 +144,7 @@ class Forum extends CI_Controller
 	public function save_forum()
 	{
 		$this->validasi_forum();
-		
+
 		$akses = $this->session->userdata('akses');
 
 		if ($akses == 3) {
@@ -196,6 +196,21 @@ class Forum extends CI_Controller
 			echo json_encode(['status' => true, 'id' => $this->input->post('kd_mapel')]);
 			exit;
 		}
+	}
+
+	public function upd_status($id)
+	{
+		$msg = '';
+		$cek = $this->db->get_where('tbl_materi_forum', ['id' => $id])->row_array();
+		if ($cek['status'] == 0) {
+			$this->db->update('tbl_materi_forum', ['status' => 1], ['id' => $id]);
+			$msg = 'di non-aktifkan';
+		} else {
+			$this->db->update('tbl_materi_forum', ['status' => 0], ['id' => $id]);
+			$msg = 'di aktifkan';
+		}
+		echo json_encode(['msg' => 'Forum berhasil ' . $msg . '!']);
+		exit;
 	}
 
 

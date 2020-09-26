@@ -44,38 +44,38 @@
 <?php $this->load->view('pengajar/layout/v_js'); ?>
 
 <script type="text/javascript">
-	function view(id){
+	function view(id) {
 		$.ajax({
-			url: '<?= site_url('course/view/') ?>'+id,
+			url: '<?= site_url('course/view/') ?>' + id,
 			type: 'post',
 			dataType: 'json',
-			success: function(data){
+			success: function(data) {
 				$('#modal_kelasonline').modal('show');
-				$('.modal-title').text(data.nm_mapel + ' ('+data.kelas_nama+')');
+				$('.modal-title').text(data.nm_mapel + ' (' + data.kelas_nama + ')');
 
 				$('#id').val(id);
 				$('#jdl_kelas').val(data.tgl_oc);
 				$('#link_oc').val(data.link_oc);
 				$('#start_on').val(data.time_start);
 				$('#end_on').val(data.time_end);
-				$('input:radio[name=opsi_kls][value='+data.aktifkan+']')[0].checked = true;
+				$('input:radio[name=opsi_kls][value=' + data.aktifkan + ']')[0].checked = true;
 			}
 		});
 	}
 
-	function submit(){
+	function submit() {
 		$.ajax({
 			url: '<?= site_url('course/update_oc/') ?>',
 			type: 'post',
 			dataType: 'json',
-			data:$('#fm_oc').serialize(),
+			data: $('#fm_oc').serialize(),
 			beforeSend: function() {
 				$('.btn').html('<i class="fa fa-spin fa-spinner"></i> loading');
 			},
-			success:function(data){
-				 alert(data.msg);
-				 location.reload();
-			} 	
+			success: function(data) {
+				alert(data.msg);
+				location.reload();
+			}
 		})
 	}
 </script>

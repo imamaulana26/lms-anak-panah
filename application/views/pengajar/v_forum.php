@@ -104,7 +104,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="offset-1 col-sm-10">
-					<a href="<?= site_url('forum/tambah_forum/'.$this->uri->segment(2)) ?>" class="btn btn-primary float-right">Buat Forum Baru</a>
+					<a href="<?= site_url('forum/tambah_forum/' . $this->uri->segment(2)) ?>" class="btn btn-primary float-right">Buat Forum Baru</a>
 					<!-- <span class="btn btn-primary float-right" onclick="add_forum()">Buat Forum Baru</span> -->
 					<h2 class="pb-3">Forum <?= $forum['nm_mapel'] ?></h2>
 
@@ -129,6 +129,7 @@
 										<div class="card-header">
 											<label><?= $val['judul_materi'] ?> (<?= $val['jns_materi'] ?>)</label>
 											<span class="float-right">
+												<a href="javascript:void(0)" class="badge badge-<?= $val['status'] == 0 ? 'success' : 'danger' ?>" onclick="sts_forum('<?= $val['id'] ?>')"><?= $val['status'] == 0 ? 'Aktif' : 'Non-aktif' ?></a>
 												<a href="<?= site_url('forum/edit_forum/' . $val['id']) ?>" style="color: #1e7e34;"><i class="fa fa-fw fa-pencil-alt ml-3"></i></a>
 												<a href="javascript:void(0)" onclick="delete_forum('<?= $val['id'] ?>')" style="color: #dc3545;"><i class="fa fa-fw fa-times ml-3"></i></a>
 											</span>
@@ -441,6 +442,27 @@
 		e.preventDefault()
 		$(this).tab('show')
 	});
+
+	function sts_forum(id) {
+		$.ajax({
+			url: '<?= site_url('forum/upd_status/') ?>' + id,
+			type: 'POST',
+			dataType: 'JSON',
+			success: function(res) {
+				Swal.fire({
+					title: 'Sukses',
+					icon: 'success',
+					text: res.msg,
+					timer: 2000,
+					showConfirmButton: false
+				}).then((res) => {
+					if (res.dismiss === Swal.DismissReason.timer) {
+						location.reload();
+					}
+				})
+			}
+		});
+	}
 
 	function add_forum() {
 		method = 'add';

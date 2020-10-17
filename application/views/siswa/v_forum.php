@@ -147,6 +147,9 @@
 												</span> -->
 											</div>
 											<div class="card-body">
+												<?php if ($val['lampiran'] != null) : ?>
+													<img src="<?= $val['lampiran'] ?>" style="width: 500px; height: 300px;">
+												<?php endif; ?>
 												<p><?= $val['isi_materi'] ?></p>
 												<hr>
 												<div>
@@ -166,20 +169,20 @@
 																<input type="hidden" name="id_forum" id="id_forum" value="<?= $val['id_forum'] ?>">
 																<input type="hidden" name="pertemuan" id="pertemuan" value="<?= $val['pertemuan'] ?>">
 																<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
-																<div class="input-group">
-																	<!-- <input type="text" name="komentar" class="form-control" id="komentar" placeholder="Tulis balasan..."> -->
-																	<?php $test = $this->db->get_where('tbl_komen_forum', ['id' => 52])->row_array(); ?>
-																	<textarea name="komentar" id="editorfr<?= $val['id'] ?>">
-																		<?= $test['isi_komen'];  ?>
-																	</textarea>
-																</div>
+																<!-- <input type="text" name="komentar" class="form-control" id="komentar" placeholder="Tulis balasan..."> -->
+																<?php $test = $this->db->get_where('tbl_komen_forum', ['id' => 52])->row_array(); ?>
+																<textarea name="komentar" id="editorfr<?= $val['id'] ?>"><?= $test['isi_komen'];  ?></textarea>
 
-																<div class="form-group">
-																	<label for="gambar">Masukan Gambar disini</label>
-																	<input type="file" class="form-control-file" id="gambar" name="gambar">
+																<div class="form-group mt-2">
+																	<label>Lampirkan Gambar</label>
+																	<div class="custom-file">
+																		<input type="file" class="custom-file-input" name="gambar" id="gambar">
+																		<label class="custom-file-label" for="customFile">Choose file</label>
+																	</div>
+																	<!-- <input type="file" class="form-control-file" id="gambar" name="gambar"> -->
 																</div>
-																<div class="input-group-append" style="width: 100%">
-																	<button class="btn btn-info" type="submit" style="width: 100%"><i class="fa fa-fw fa-paper-plane"></i></button>
+																<div class="input-group-append">
+																	<button class="btn btn-info" type="submit"><i class="fa fa-fw fa-paper-plane"></i> Submit</button>
 																</div>
 															</form>
 														</div>
@@ -226,6 +229,9 @@
 																	</div>
 																</div>
 																<div class="card-body bordered pb-0">
+																	<?php if ($cmd['lampiran'] != null) : ?>
+																		<img src="<?= $cmd['lampiran'] ?>" style="width: 500px; height: 300px;">
+																	<?php endif; ?>
 																	<p>
 																		<?= $cmd['isi_komen'] ?>
 																	</p>
@@ -249,17 +255,19 @@
 																				<input type="hidden" name="mention" id="mention" value="<?= $cmd['user_komen'] ?>">
 																				<input type="hidden" name="reply_to" id="reply_to" value="<?= $cmd['id'] ?>">
 																				<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
-																				<div class="form-group">
-																					<!-- <input type="text" name="komentar" class="form-control" id="komentar" placeholder="Tulis balasan..."> -->
-																					<textarea name="komentar" id="editor<?= $cmd['id'] ?>" rows="10" cols="45" placeholder="Type Here"></textarea>
-																				</div>
+																				<!-- <input type="text" name="komentar" class="form-control" id="komentar" placeholder="Tulis balasan..."> -->
+																				<textarea name="komentar" id="editor<?= $cmd['id'] ?>" rows="10" cols="45" placeholder="Type Here"></textarea>
 
-																				<div class="form-group">
-																					<label for="gambar">Masukan Gambar disini</label>
-																					<input type="file" class="form-control-file" id="gambar" name="gambar">
+																				<div class="form-group mt-2">
+																					<label>Lampirkan Gambar</label>
+																					<div class="custom-file">
+																						<input type="file" class="custom-file-input" name="gambar" id="gambar">
+																						<label class="custom-file-label" for="customFile">Choose file</label>
+																					</div>
+																					<!-- <input type="file" class="form-control-file" id="gambar" name="gambar"> -->
 																				</div>
-																				<div class="input-group-append" style="width: 100%">
-																					<button class="btn btn-info" type="submit" style="width: 100%"><i class="fa fa-fw fa-paper-plane"></i></button>
+																				<div class="input-group-append">
+																					<button class="btn btn-info" type="submit"><i class="fa fa-fw fa-paper-plane"></i> Submit</button>
 																				</div>
 																			</form>
 																		</div>
@@ -304,6 +312,9 @@
 																				</div>
 																			</div>
 																			<div class="card-body bordered pb-0">
+																				<?php if ($rep['lampiran'] != null) : ?>
+																					<img src="<?= $rep['lampiran'] ?>" style="width: 500px; height: 300px;">
+																				<?php endif; ?>
 																				<p>
 																					<b><?= $mention['siswa_nama'] ?></b> <?= $rep['isi_komen'] ?>
 																				</p>
@@ -323,17 +334,19 @@
 																							<input type="hidden" name="mention" id="mention" value="<?= $rep['user_komen'] ?>">
 																							<input type="hidden" name="reply_to" id="reply_to" value="<?= $cmd['id'] ?>">
 																							<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
-																							<div class="form-group">
-																								<!-- <input type="text" name="komentar" class="form-control" id="komentar" placeholder="Tulis balasan..."> -->
-																								<textarea name="komentar" id="editor<?= $rep['id'] ?>" rows="10" cols="45" placeholder="Type Here"></textarea>
-																							</div>
+																							<!-- <input type="text" name="komentar" class="form-control" id="komentar" placeholder="Tulis balasan..."> -->
+																							<textarea name="komentar" id="editor<?= $rep['id'] ?>" rows="10" cols="45" placeholder="Type Here"></textarea>
 
-																							<div class="form-group">
-																								<label for="gambar">Masukan Gambar disini</label>
-																								<input type="file" class="form-control-file" id="gambar" name="gambar">
+																							<div class="form-group mt-2">
+																								<label>Lampirkan Gambar</label>
+																								<div class="custom-file">
+																									<input type="file" class="custom-file-input" name="gambar" id="gambar">
+																									<label class="custom-file-label" for="customFile">Choose file</label>
+																								</div>
+																								<!-- <input type="file" class="form-control-file" id="gambar" name="gambar"> -->
 																							</div>
-																							<div class="input-group-append" style="width: 100%">
-																								<button class="btn btn-info" type="submit" style="width: 100%"><i class="fa fa-fw fa-paper-plane"></i></button>
+																							<div class="input-group-append">
+																								<button class="btn btn-info" type="submit"><i class="fa fa-fw fa-paper-plane"></i> Submit</button>
 																							</div>
 																						</form>
 																					</div>
@@ -438,6 +451,14 @@
 			}
 		});
 	});
+
+	$('input[type="file"]').on('change', function() {
+		//get the file name
+		var file = $(this).val();
+		var fileName = file.replace('C:\\fakepath\\', '');
+		//replace the "Choose a file" label
+		$(this).next('.custom-file-label').html(fileName);
+	})
 
 	$('#myTab.nav-link').on('click', function(e) {
 		e.preventDefault()

@@ -33,6 +33,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/front-end/plugins/chart.js/chart.min.css') ?>">
 	<!-- Sweetalert2 -->
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/front-end/plugins/sweetalert2/sweetalert2.min.css') ?>">
+	<!-- Ekko Lightbox -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" rel="stylesheet" crossorigin="anonymous">
 
 	<!-- Google Font: Source Sans Pro -->
 	<!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> -->

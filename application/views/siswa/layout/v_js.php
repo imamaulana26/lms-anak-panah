@@ -20,6 +20,8 @@
 <script src="<?= base_url('assets/front-end/plugins/sweetalert2/sweetalert2.min.js') ?>"></script>
 <!-- CK editor JS -->
 <script src="<?= base_url('assets/plugins/ckeditor/ckeditor.js') ?>"></script>
+<!-- Ekko Lightbox -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js" crossorigin="anonymous"></script>
 
 <!-- AdminLTE App -->
 <!-- <script src="dist/js/adminlte.min.js"></script> -->

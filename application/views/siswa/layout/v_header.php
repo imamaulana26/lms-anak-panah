@@ -1,5 +1,4 @@
-<!DOCTYPE math PUBLIC "-//W3C//DTD MathML 2.0//EN"
-	"http://www.w3.org/Math/DTD/mathml2/mathml2.dtd">
+<!DOCTYPE math PUBLIC "-//W3C//DTD MathML 2.0//EN" "http://www.w3.org/Math/DTD/mathml2/mathml2.dtd">
 <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
@@ -19,7 +18,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		};
 	</script>
 	<!-- <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=MML_HTMLorMML"></script> -->
-	
+
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 	<!-- <script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script> -->
 	<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['\\(','\\)']]}});</script>
@@ -40,6 +39,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/front-end/plugins/chart.js/chart.min.css') ?>">
 	<!-- Sweetalert2 -->
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/front-end/plugins/sweetalert2/sweetalert2.min.css') ?>">
+	<!-- Ekko Lightbox -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" rel="stylesheet" crossorigin="anonymous">
 
 	<!-- Google Font: Source Sans Pro -->
 	<!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> -->

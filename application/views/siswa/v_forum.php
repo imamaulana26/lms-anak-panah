@@ -141,16 +141,24 @@
 										<div class="bhoechie-tab-content tab-pane fade <?= $val['pertemuan'] == $page ? 'show active' : '' ?>" id="forum-<?= $val['pertemuan'] ?>" role="tabpanel" aria-labelledby="forum-<?= $val['pertemuan'] ?>-tab">
 											<div class="card-header">
 												<label><?= $val['judul_materi'] ?> (<?= $val['jns_materi'] ?>)</label>
-												<!-- <span class="float-right">
-													<a href=""><i class="fa fa-fw fa-comments ml-3"></i></a>
-													<a href=""><i class="fa fa-fw fa-tasks ml-3"></i></a>
-												</span> -->
 											</div>
 											<div class="card-body">
-												<?php if ($val['lampiran'] != null) : ?>
-													<img src="<?= $val['lampiran'] ?>" style="width: 500px; height: 300px;">
-												<?php endif; ?>
 												<p><?= $val['isi_materi'] ?></p>
+												<?php if (is_array(unserialize($val['lampiran']))) : ?>
+													<p><b>Lampiran</b></p>
+													<?php foreach (unserialize($val['lampiran']) as $att) : ?>
+														<a href="<?= $att ?>" data-toggle="lightbox" data-gallery="gallery">
+															<img src="<?= $att ?>" class="img-thumbnail" style="max-height: 80px; max-width: 80px;">
+														</a>
+													<?php endforeach; ?>
+												<?php else : ?>
+													<?php if ($val['lampiran'] != null) : ?>
+														<p><b>Lampiran</b></p>
+														<a href="<?= unserialize($val['lampiran']) ?>" data-toggle="lightbox" data-gallery="gallery">
+															<img src="<?= unserialize($val['lampiran']) ?>" class="img-thumbnail" style="max-height: 80px; max-width: 80px;">
+														</a>
+													<?php endif; ?>
+												<?php endif; ?>
 												<hr>
 												<div>
 													<?php if ($val['status'] == 0) : ?>
@@ -169,9 +177,8 @@
 																<input type="hidden" name="id_forum" id="id_forum" value="<?= $val['id_forum'] ?>">
 																<input type="hidden" name="pertemuan" id="pertemuan" value="<?= $val['pertemuan'] ?>">
 																<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
-																<!-- <input type="text" name="komentar" class="form-control" id="komentar" placeholder="Tulis balasan..."> -->
-																<?php $test = $this->db->get_where('tbl_komen_forum', ['id' => 52])->row_array(); ?>
-																<textarea name="komentar" id="editorfr<?= $val['id'] ?>"><?= $test['isi_komen'];  ?></textarea>
+
+																<textarea name="komentar" id="editorfr<?= $val['id'] ?>"></textarea>
 
 																<div class="form-group mt-2">
 																	<label>Lampirkan Gambar</label>
@@ -179,7 +186,6 @@
 																		<input type="file" class="custom-file-input" name="gambar" id="gambar">
 																		<label class="custom-file-label" for="customFile">Choose file</label>
 																	</div>
-																	<!-- <input type="file" class="form-control-file" id="gambar" name="gambar"> -->
 																</div>
 																<div class="input-group-append">
 																	<button class="btn btn-info" type="submit"><i class="fa fa-fw fa-paper-plane"></i> Submit</button>
@@ -229,12 +235,24 @@
 																	</div>
 																</div>
 																<div class="card-body bordered pb-0">
-																	<?php if ($cmd['lampiran'] != null) : ?>
-																		<img src="<?= $cmd['lampiran'] ?>" style="width: 500px; height: 300px;">
-																	<?php endif; ?>
 																	<p>
 																		<?= $cmd['isi_komen'] ?>
 																	</p>
+																	<?php if (is_array(unserialize($cmd['lampiran']))) : ?>
+																		<p><b>Lampiran</b></p>
+																		<?php foreach (unserialize($cmd['lampiran']) as $att) : ?>
+																			<a href="<?= $att ?>" data-toggle="lightbox" data-gallery="gallery-<?= $cmd['id'] ?>">
+																				<img src="<?= $att ?>" class="img-thumbnail mb-3" style="max-height: 80px; max-width: 80px;">
+																			</a>
+																		<?php endforeach; ?>
+																	<?php else : ?>
+																		<?php if ($cmd['lampiran'] != null) : ?>
+																			<p><b>Lampiran</b></p>
+																			<a href="<?= unserialize($cmd['lampiran']) ?>" data-toggle="lightbox" data-gallery="gallery-<?= $cmd['id'] ?>">
+																				<img src="<?= unserialize($cmd['lampiran']) ?>" class="img-thumbnail mb-3" style="max-height: 80px; max-width: 80px;">
+																			</a>
+																		<?php endif; ?>
+																	<?php endif; ?>
 																	<div>
 																		<?php if ($val['status'] == 0) : ?>
 																			<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $cmd['id'] ?>">
@@ -255,7 +273,7 @@
 																				<input type="hidden" name="mention" id="mention" value="<?= $cmd['user_komen'] ?>">
 																				<input type="hidden" name="reply_to" id="reply_to" value="<?= $cmd['id'] ?>">
 																				<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
-																				<!-- <input type="text" name="komentar" class="form-control" id="komentar" placeholder="Tulis balasan..."> -->
+
 																				<textarea name="komentar" id="editor<?= $cmd['id'] ?>" rows="10" cols="45" placeholder="Type Here"></textarea>
 
 																				<div class="form-group mt-2">
@@ -264,7 +282,6 @@
 																						<input type="file" class="custom-file-input" name="gambar" id="gambar">
 																						<label class="custom-file-label" for="customFile">Choose file</label>
 																					</div>
-																					<!-- <input type="file" class="form-control-file" id="gambar" name="gambar"> -->
 																				</div>
 																				<div class="input-group-append">
 																					<button class="btn btn-info" type="submit"><i class="fa fa-fw fa-paper-plane"></i> Submit</button>
@@ -297,7 +314,7 @@
 																									<i class='fa fa-ellipsis-v'></i>
 																								</a>
 																								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-																									<a class="dropdown-item" href="<?= site_url('forum/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;">
+																									<a class="dropdown-item" href="<?= site_url('forum/edit_komen/' . $rep['id']) ?>" style="font-size: 12px; color: #1e7e34;">
 																										<i class="fa fa-fw fa-pencil-alt"></i> Sunting
 																									</a>
 																									<a class="dropdown-item" href="javascript:void(0)" onclick="hapus_subkomen('<?= $rep['id'] ?>')" style="font-size: 12px; color: #dc3545;">
@@ -312,12 +329,24 @@
 																				</div>
 																			</div>
 																			<div class="card-body bordered pb-0">
-																				<?php if ($rep['lampiran'] != null) : ?>
-																					<img src="<?= $rep['lampiran'] ?>" style="width: 500px; height: 300px;">
-																				<?php endif; ?>
 																				<p>
 																					<b><?= $mention['siswa_nama'] ?></b> <?= $rep['isi_komen'] ?>
 																				</p>
+																				<?php if (is_array(unserialize($rep['lampiran']))) : ?>
+																					<p><b>Lampiran</b></p>
+																					<?php foreach (unserialize($rep['lampiran']) as $att) : ?>
+																						<a href="<?= $att ?>" data-toggle="lightbox" data-gallery="gallery-<?= $rep['id'] ?>">
+																							<img src="<?= $att ?>" class="img-thumbnail mb-3" style="max-height: 80px; max-width: 80px;">
+																						</a>
+																					<?php endforeach; ?>
+																				<?php else : ?>
+																					<?php if ($rep['lampiran'] != null) : ?>
+																						<p><b>Lampiran</b></p>
+																						<a href="<?= unserialize($rep['lampiran']) ?>" data-toggle="lightbox" data-gallery="gallery-<?= $rep['id'] ?>">
+																							<img src="<?= unserialize($rep['lampiran']) ?>" class="img-thumbnail mb-3" style="max-height: 80px; max-width: 80px;">
+																						</a>
+																					<?php endif; ?>
+																				<?php endif; ?>
 																				<div>
 																					<?php if ($val['status'] == 0) : ?>
 																						<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $rep['id'] ?>">
@@ -334,7 +363,7 @@
 																							<input type="hidden" name="mention" id="mention" value="<?= $rep['user_komen'] ?>">
 																							<input type="hidden" name="reply_to" id="reply_to" value="<?= $cmd['id'] ?>">
 																							<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
-																							<!-- <input type="text" name="komentar" class="form-control" id="komentar" placeholder="Tulis balasan..."> -->
+
 																							<textarea name="komentar" id="editor<?= $rep['id'] ?>" rows="10" cols="45" placeholder="Type Here"></textarea>
 
 																							<div class="form-group mt-2">
@@ -343,7 +372,6 @@
 																									<input type="file" class="custom-file-input" name="gambar" id="gambar">
 																									<label class="custom-file-label" for="customFile">Choose file</label>
 																								</div>
-																								<!-- <input type="file" class="form-control-file" id="gambar" name="gambar"> -->
 																							</div>
 																							<div class="input-group-append">
 																								<button class="btn btn-info" type="submit"><i class="fa fa-fw fa-paper-plane"></i> Submit</button>
@@ -450,6 +478,11 @@
 				}
 			}
 		});
+	});
+
+	$(document).on("click", '[data-toggle="lightbox"]', function(event) {
+		event.preventDefault();
+		$(this).ekkoLightbox();
 	});
 
 	$('input[type="file"]').on('change', function() {

@@ -296,7 +296,7 @@ class Tugas extends CI_Controller
 
 			$this->db->insert('tbl_komen_tugas', $data);
 
-			$cek_log = $this->db->get_where('tbl_log_tugas', ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
+			$cek_log = $this->db->get_where('tbl_log_forum', ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
 			if ($cek_log->num_rows() > 0) {
 				$log = $cek_log->row_array();
 				$exp = explode('::', $log['log_tugas']);
@@ -365,7 +365,7 @@ class Tugas extends CI_Controller
 
 			$this->db->insert('tbl_komen_tugas', $data);
 
-			$cek_log = $this->db->get_where('tbl_log_tugas', ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
+			$cek_log = $this->db->get_where('tbl_log_forum', ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
 			if ($cek_log->num_rows() > 0) {
 				$log = $cek_log->row_array();
 				$exp = explode('::', $log['log_tugas']);
@@ -441,13 +441,14 @@ class Tugas extends CI_Controller
 		}
 		$this->load->view('pengajar/v_edit_komen', $data);
 	}
+
 	public function update_komen()
 	{
 		$data = array(
 			'isi_komen' => $this->input->post('isi_materi'),
 			'lampiran' => serialize($this->session->userdata('lampiran'))
 		);
-
+		
 		$this->db->update('tbl_komen_tugas', $data, ['id' => $this->input->post('id_fm')]);
 		$this->session->unset_userdata('lampiran');
 

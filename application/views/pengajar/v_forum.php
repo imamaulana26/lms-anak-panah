@@ -425,7 +425,7 @@
 		var fileName = file.replace('C:\\fakepath\\', '');
 		//replace the "Choose a file" label
 		$(this).next('.custom-file-label').html(fileName);
-	})
+	});
 
 	$('#exampleModal').on('hidden.bs.modal', function() {
 		$('input, textarea').removeClass('is-invalid');

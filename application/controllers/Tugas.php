@@ -154,7 +154,8 @@ class Tugas extends CI_Controller
 				'id_forum' => $kd_mapel,
 				'judul_materi' => $this->input->post('judul_materi'),
 				'jns_materi' => $this->input->post('tipe_forum'),
-				'isi_materi' => $this->input->post('isi_materi')
+				'isi_materi' => $this->input->post('isi_materi'),
+				'lampiran' => serialize($this->session->userdata('lampiran'))
 			);
 
 			$cek = $this->db->get_where('tbl_materi_tugas', ['id_forum' => $kd_mapel]);
@@ -187,13 +188,64 @@ class Tugas extends CI_Controller
 			$data = array(
 				'judul_materi' => $this->input->post('judul_materi'),
 				'jns_materi' => $this->input->post('tipe_forum'),
-				'isi_materi' => $this->input->post('isi_materi')
+				'isi_materi' => $this->input->post('isi_materi'),
+				'lampiran' => serialize($this->session->userdata('lampiran'))
 			);
 
 			$this->db->update('tbl_materi_tugas', $data, ['id' => $this->input->post('id_fm')]);
 
 			// $this->diskusi($kd_mapel);
 			echo json_encode(['status' => true, 'id' => $this->input->post('kd_mapel')]);
+			exit;
+		}
+	}
+
+	public function upd_status($id)
+	{
+		$msg = '';
+		$cek = $this->db->get_where('tbl_materi_tugas', ['id' => $id])->row_array();
+		if ($cek['status'] == 0) {
+			$this->db->update('tbl_materi_tugas', ['status' => 1], ['id' => $id]);
+			$msg = 'di non-aktifkan';
+		} else {
+			$this->db->update('tbl_materi_tugas', ['status' => 0], ['id' => $id]);
+			$msg = 'di aktifkan';
+		}
+		echo json_encode(['msg' => 'Tugas berhasil ' . $msg . '!']);
+		exit;
+	}
+
+	public function upload()
+	{
+		$status = false;
+		$lampiran = array();
+
+		$count = count($_FILES['lampiran']['name']);
+		for ($i = 0; $i < $count; $i++) {
+			if (!empty($_FILES['lampiran']['name'][$i])) {
+				$file_name = $_FILES['lampiran']['name'][$i];
+				$file_type = $_FILES['lampiran']['type'][$i];
+				$file_tmp_name = $_FILES['lampiran']['tmp_name'][$i];
+
+				move_uploaded_file($file_tmp_name, './assets/files/' . $file_name);
+				$img = 'data:' . $file_type . ';base64,' . base64_encode(file_get_contents('./assets/files/' . $file_name));
+				$lampiran[] = $img;
+
+				unlink('./assets/files/' . $file_name);
+
+				$this->session->set_userdata(['lampiran' => $lampiran]);
+
+				$status = true;
+			} else {
+				$status = false;
+			}
+		}
+
+		if ($status == true) {
+			echo json_encode(['status' => true, 'title' => 'Sukses', 'icon' => 'success', 'msg' => 'Gambar berhasil di upload', 'lampiran' => $lampiran]);
+			exit;
+		} else {
+			echo json_encode(['status' => false, 'title' => 'Opps!', 'icon' => 'warning', 'msg' => 'Tidak ada file untuk di upload!']);
 			exit;
 		}
 	}
@@ -206,47 +258,45 @@ class Tugas extends CI_Controller
 		$komen = $this->input->post('komentar');
 		$id = $this->input->post('id');
 
-		if (!empty($_FILES['gambar']['name'])) {
-			$config['upload_path'] = './assets/test/';
-			$config['allowed_types'] = 'jpg|jpeg|png|gif|pdf';
-			$config['max_size'] = '1024'; // max_size in kb
-			$config['file_name'] = $_FILES['gambar']['name'];
-			$this->load->library('upload', $config);
-
-			// File upload
-			if ($this->upload->do_upload('gambar')) {
-				// Get data about the file
-				$uploadData = $this->upload->data();
-
-				$img = file_get_contents('./assets/test/' . $uploadData['file_name']);
-
-				// Encode the image string data into base64 
-				// $data = base64_encode($img); 
-
-				$base_64 = base64_encode($img);
-				$this->db->insert('tbl_base64', ['text' => $base_64]);
-				unlink('./assets/test/' . $uploadData['file_name']);
-				// $baseendoce = base64_decode($base_64);
-
-				// $data = file_get_contents($base_64);
-
-				// fclose( $ifp ); 
-				// echo '<img src="data:image/webp;base64,'.$base_64.'" />';
-			}
-		}
-
 		if (!empty($komen)) {
-			$data = array(
-				'id_forum' => $this->input->post('id_forum'),
-				'pertemuan' => $this->input->post('pertemuan'),
-				'reply_to' => 0,
-				'user_komen' => $this->input->post('user_komen'),
-				'isi_komen' => $this->input->post('komentar')
-			);
+			if (!empty($_FILES['gambar']['name'])) {
+				$config = array(
+					'upload_path' => './assets/files',
+					'allowed_types' => 'png|jpg|jpeg',
+					'encrypt_name' => true
+				);
+
+				$this->load->library('upload', $config);
+
+				// File upload
+				if ($this->upload->do_upload('gambar')) {
+					$file = array('upload_data' => $this->upload->data());
+
+					$image = $file['upload_data']['file_name'];
+
+					$data = array(
+						'id_forum' => $this->input->post('id_forum'),
+						'pertemuan' => $this->input->post('pertemuan'),
+						'reply_to' => 0,
+						'user_komen' => $this->input->post('user_komen'),
+						'isi_komen' => $this->input->post('komentar'),
+						'lampiran' => serialize('data:' . $file['upload_data']['file_type'] . ';base64,' . base64_encode(file_get_contents($config['upload_path'] . '/' . $image)))
+					);
+					unlink($config['upload_path'] . '/' . $image);
+				}
+			} else {
+				$data = array(
+					'id_forum' => $this->input->post('id_forum'),
+					'pertemuan' => $this->input->post('pertemuan'),
+					'reply_to' => 0,
+					'user_komen' => $this->input->post('user_komen'),
+					'isi_komen' => $this->input->post('komentar')
+				);
+			}
 
 			$this->db->insert('tbl_komen_tugas', $data);
 
-			$cek_log = $this->db->get_where('tbl_log_forum', ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
+			$cek_log = $this->db->get_where('tbl_log_tugas', ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
 			if ($cek_log->num_rows() > 0) {
 				$log = $cek_log->row_array();
 				$exp = explode('::', $log['log_tugas']);
@@ -277,48 +327,45 @@ class Tugas extends CI_Controller
 		$komen = $this->input->post('komentar');
 		$id = $this->input->post('id');
 
-		if (!empty($_FILES['gambar']['name'])) {
-			$config['upload_path'] = './assets/test/';
-			$config['allowed_types'] = 'jpg|jpeg|png|gif|pdf';
-			$config['max_size'] = '1024'; // max_size in kb
-			$config['file_name'] = $_FILES['gambar']['name'];
-			$this->load->library('upload', $config);
-
-			// File upload
-			if ($this->upload->do_upload('gambar')) {
-				// Get data about the file
-				$uploadData = $this->upload->data();
-
-				$img = file_get_contents('./assets/test/' . $uploadData['file_name']);
-
-				// Encode the image string data into base64 
-				// $data = base64_encode($img); 
-
-				$base_64 = base64_encode($img);
-				$this->db->insert('tbl_base64', ['text' => $base_64]);
-				unlink('./assets/test/' . $uploadData['file_name']);
-				// $baseendoce = base64_decode($base_64);
-
-				// $data = file_get_contents($base_64);
-
-				// fclose( $ifp ); 
-				// echo '<img src="data:image/webp;base64,'.$base_64.'" />';
-			}
-		}
-
 		if (!empty($komen)) {
-			$data = array(
-				'id_forum' => $this->input->post('id_forum'),
-				'pertemuan' => $this->input->post('pertemuan'),
-				'reply_to' => $this->input->post('reply_to'),
-				'mention' => $this->input->post('mention'),
-				'user_komen' => $this->input->post('user_komen'),
-				'isi_komen' => $this->input->post('komentar')
-			);
+			if (!empty($_FILES['gambar']['name'])) {
+				$config = array(
+					'upload_path' => './assets/files',
+					'allowed_types' => 'png|jpg|jpeg',
+					'encrypt_name' => true
+				);
+
+				$this->load->library('upload', $config);
+
+				// File upload
+				if ($this->upload->do_upload('gambar')) {
+					$file = array('upload_data' => $this->upload->data());
+
+					$image = $file['upload_data']['file_name'];
+
+					$data = array(
+						'id_forum' => $this->input->post('id_forum'),
+						'pertemuan' => $this->input->post('pertemuan'),
+						'reply_to' => 0,
+						'user_komen' => $this->input->post('user_komen'),
+						'isi_komen' => $this->input->post('komentar'),
+						'lampiran' => serialize('data:' . $file['upload_data']['file_type'] . ';base64,' . base64_encode(file_get_contents($config['upload_path'] . '/' . $image)))
+					);
+					unlink($config['upload_path'] . '/' . $image);
+				}
+			} else {
+				$data = array(
+					'id_forum' => $this->input->post('id_forum'),
+					'pertemuan' => $this->input->post('pertemuan'),
+					'reply_to' => 0,
+					'user_komen' => $this->input->post('user_komen'),
+					'isi_komen' => $this->input->post('komentar')
+				);
+			}
 
 			$this->db->insert('tbl_komen_tugas', $data);
 
-			$cek_log = $this->db->get_where('tbl_log_forum', ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
+			$cek_log = $this->db->get_where('tbl_log_tugas', ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum']]);
 			if ($cek_log->num_rows() > 0) {
 				$log = $cek_log->row_array();
 				$exp = explode('::', $log['log_tugas']);
@@ -336,8 +383,6 @@ class Tugas extends CI_Controller
 			} else {
 				$this->db->insert('tbl_log_forum', ['nisn_siswa' => $data['user_komen'], 'id_forum' => $data['id_forum'], 'log_tugas' => $data['pertemuan']]);
 			}
-
-
 
 			$this->session->set_flashdata('page', $data['pertemuan']);
 			$this->session->set_flashdata('mention', $id);
@@ -389,16 +434,22 @@ class Tugas extends CI_Controller
 		);
 
 		$this->load->view('pengajar/layout/v_header');
-		$this->load->view('pengajar/layout/v_navbar');
+		if ($this->session->userdata('akses') == 3) {
+			$this->load->view('pengajar/layout/v_navbar');
+		} else {
+			$this->load->view('siswa/layout/v_navbar');
+		}
 		$this->load->view('pengajar/v_edit_komen', $data);
 	}
 	public function update_komen()
 	{
 		$data = array(
-			'isi_komen' => $this->input->post('isi_materi')
+			'isi_komen' => $this->input->post('isi_materi'),
+			'lampiran' => serialize($this->session->userdata('lampiran'))
 		);
 
 		$this->db->update('tbl_komen_tugas', $data, ['id' => $this->input->post('id_fm')]);
+		$this->session->unset_userdata('lampiran');
 
 		echo json_encode(['status' => true, 'id' => $this->input->post('kd_mapel')]);
 		exit;

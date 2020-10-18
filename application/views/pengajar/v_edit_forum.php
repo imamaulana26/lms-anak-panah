@@ -150,10 +150,6 @@
 									<label for="lampiran" class="col-sm-2 control-label">Lampiran Gambar</label>
 									<div class="col-sm-10">
 										<span class="attach"><i class="fa fa-fw fa-paperclip" style="color: #007bff; cursor: pointer;"></i></span>
-										<!-- <div class="custom-file">
-											<input type="file" class="custom-file-input" name="lampiran" id="lampiran">
-											<label class="custom-file-label" for="customFile">Choose file</label>
-										</div> -->
 									</div>
 								</div>
 								<div class="form-group row">
@@ -169,7 +165,6 @@
 								<div class="form-group row">
 									<div class="col-sm-10 offset-2">
 										<span class="btn btn-primary" id="btn_save" onclick="save_forum()">Simpan</span>
-										<!-- <button type="submit" class="btn btn-primary" id="btn_save">Simpan</button> -->
 									</div>
 								</div>
 							</form>

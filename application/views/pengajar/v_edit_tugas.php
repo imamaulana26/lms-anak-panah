@@ -147,6 +147,24 @@
 									</div>
 								</fieldset>
 								<div class="form-group row">
+									<label for="lampiran" class="col-sm-2 control-label">Lampiran Gambar</label>
+									<div class="col-sm-10">
+										<span class="attach"><i class="fa fa-fw fa-paperclip" style="color: #007bff; cursor: pointer;"></i></span>
+									</div>
+								</div>
+								<div class="form-group row">
+									<div class="offset-2 col-md-10" id="gallery">
+										<?php $att = unserialize($data['lampiran']);
+										if ($data['lampiran'] != null) :
+											foreach ($att as $att) : ?>
+												<a href="<?= $att ?>" data-toggle="lightbox" data-gallery="gallery">
+													<img src="<?= $att ?>" class="img-thumbnail" style="max-height: 100px; max-width: 100px;">
+												</a>
+											<?php endforeach; ?>
+										<?php endif; ?>
+									</div>
+								</div>
+								<div class="form-group row">
 									<div class="col-sm-10 offset-2">
 										<span class="btn btn-primary" id="btn_save" onclick="save_forum()">Simpan</span>
 									</div>
@@ -160,9 +178,52 @@
 	</div><!-- /.container -->
 </div><!-- /.content-wrapper -->
 
+<!-- Modal -->
+<div class="modal fade" id="updModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="staticBackdropLabel">Form Upload</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form id="fm_upload" enctype="multipart/form-data" autocomplete="off">
+					<div class="form-group row">
+						<label for="lampiran" class="col-sm-3 control-label">Lampiran Gambar</label>
+						<div class="col-sm-8">
+							<div class="custom-file">
+								<input type="file" class="custom-file-input" name="lampiran[]" id="lampiran" multiple>
+								<label class="custom-file-label" for="customFile">Choose file</label>
+							</div>
+						</div>
+						<div class="col-sm-1" id="add">
+							<span class="btn btn-default btn_add"><i class="fa fa-fw fa-plus"></i></span>
+						</div>
+					</div>
+					<div class="clone"></div>
+					<div class="form-group row">
+						<div class="col-sm-9 offset-3">
+							<button type="submit" class="btn btn-primary" id="btn_upload">Upload</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
 <?php $this->load->view('pengajar/layout/v_js'); ?>
 
 <script>
+	var i = 0;
+
+	$(document).on("click", '[data-toggle="lightbox"]', function(event) {
+		event.preventDefault();
+		$(this).ekkoLightbox();
+	});
+
 	(function() {
 		var mathElements = [
 			'math',
@@ -216,6 +277,108 @@
 
 	var editor = CKEDITOR.instances["ckeditor"];
 	editor.setData(`<?= $data["isi_materi"] ?>`);
+
+	$('#fm_upload').on('change', 'input[type="file"]', function() {
+		//get the file name
+		var file = $(this).val();
+		var fileName = file.replace('C:\\fakepath\\', '');
+		//replace the "Choose a file" label
+		$(this).next('.custom-file-label').html(fileName);
+
+		var size = $(this)[0].files[0].size / 1000;
+
+		if ($(this)[0].files[0].type != 'image/jpeg' && $(this)[0].files[0].type != 'image/png') {
+			Swal.fire({
+				title: 'Oops!',
+				icon: 'warning',
+				text: 'File format tidak valid!'
+			});
+			$(this).next('.custom-file-label').html('Choose file');
+			$(this).val('');
+		} else {
+			if (size > 2048) {
+				Swal.fire({
+					title: 'Oops!',
+					icon: 'warning',
+					text: 'Ukuran file melebihin batas 2MB!'
+				});
+				$(this).next('.custom-file-label').html('Choose file');
+				$(this).val('');
+			}
+		}
+
+	})
+
+	$('.btn_add').click(function() {
+		var html = '';
+		html += `<div class="form-group row">
+						<div class="offset-3 col-sm-8">
+							<div class="custom-file">
+								<input type="file" class="custom-file-input" name="lampiran[]" id="lampiran" multiple>
+								<label class="custom-file-label" for="customFile">Choose file</label>
+							</div>
+						</div>
+						<div class="col-sm-1">
+							<span class="btn btn-default btn_delete"><i class="fa fa-fw fa-minus"></i></span>
+						</div>
+					</div>`;
+
+		if (i < 2) {
+			$('.clone').append(html);
+			i++;
+		} else {
+			Swal.fire({
+				title: 'Oops!',
+				icon: 'warning',
+				text: 'Lampiran telah mencapai batas!'
+			});
+		}
+	});
+
+	$('#fm_upload').on('click', '.btn_delete', function() {
+		$(this).parent().parent().remove();
+		i--;
+	});
+
+	$('.attach').on('click', function() {
+		$('#updModal').modal('show');
+	});
+
+	$('#fm_upload').submit(function(e) {
+		e.preventDefault();
+		url = '<?= site_url('tugas/upload') ?>';
+
+		$.ajax({
+			url: url,
+			type: 'post',
+			dataType: 'json',
+			data: new FormData(this),
+			cache: false,
+			contentType: false,
+			processData: false,
+			beforeSend: function() {
+				$('#btn_upload').attr('disabled', true);
+				$('#btn_upload').html('<i class="fa fa-fw fa-spinner fa-pulse"></i> Loading');
+			},
+			success: function(respon) {
+				Swal.fire({
+					icon: respon.icon,
+					title: respon.title,
+					text: respon.msg,
+					timer: 2000,
+					timerProgressBar: true,
+					showConfirmButton: false
+				}).then((result) => {
+					$('#updModal').modal('hide');
+
+					$('#lampiran').next('.custom-file-label').text('Choose file');
+					$('#btn_upload').attr('disabled', false);
+					$('#btn_upload').text('Upload');
+				});
+			}
+		});
+		return false;
+	});
 
 	$('input, textarea').keypress(function() {
 		$(this).removeClass('is-invalid');

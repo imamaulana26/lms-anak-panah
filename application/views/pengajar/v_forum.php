@@ -135,15 +135,15 @@
 										</div>
 										<div class="card-body">
 											<p><?= $val['isi_materi'] ?></p>
-											<?php if (is_array(unserialize($val['lampiran']))) : ?>
-												<p><b>Lampiran</b></p>
-												<?php foreach (unserialize($val['lampiran']) as $att) : ?>
-													<a href="<?= $att ?>" data-toggle="lightbox" data-gallery="gallery">
-														<img src="<?= $att ?>" class="img-thumbnail" style="max-height: 80px; max-width: 80px;">
-													</a>
-												<?php endforeach; ?>
-											<?php else : ?>
-												<?php if ($val['lampiran'] != null) : ?>
+											<?php if ($val['lampiran'] != null) : ?>
+												<?php if (is_array(unserialize($val['lampiran']))) : ?>
+													<p><b>Lampiran</b></p>
+													<?php foreach (unserialize($val['lampiran']) as $att) : ?>
+														<a href="<?= $att ?>" data-toggle="lightbox" data-gallery="gallery">
+															<img src="<?= $att ?>" class="img-thumbnail" style="max-height: 80px; max-width: 80px;">
+														</a>
+													<?php endforeach; ?>
+												<?php else : ?>
 													<p><b>Lampiran</b></p>
 													<a href="<?= unserialize($val['lampiran']) ?>" data-toggle="lightbox" data-gallery="gallery">
 														<img src="<?= unserialize($val['lampiran']) ?>" class="img-thumbnail" style="max-height: 80px; max-width: 80px;">
@@ -224,15 +224,15 @@
 																<p>
 																	<?= $cmd['isi_komen'] ?>
 																</p>
-																<?php if (is_array(unserialize($cmd['lampiran']))) : ?>
-																	<p><b>Lampiran</b></p>
-																	<?php foreach (unserialize($cmd['lampiran']) as $att) : ?>
-																		<a href="<?= $att ?>" data-toggle="lightbox" data-gallery="gallery-<?= $cmd['id'] ?>">
-																			<img src="<?= $att ?>" class="img-thumbnail mb-3" style="max-height: 80px; max-width: 80px;">
-																		</a>
-																	<?php endforeach; ?>
-																<?php else : ?>
-																	<?php if ($cmd['lampiran'] != null) : ?>
+																<?php if ($cmd['lampiran'] != null) : ?>
+																	<?php if (is_array(unserialize($cmd['lampiran']))) : ?>
+																		<p><b>Lampiran</b></p>
+																		<?php foreach (unserialize($cmd['lampiran']) as $att) : ?>
+																			<a href="<?= $att ?>" data-toggle="lightbox" data-gallery="gallery-<?= $cmd['id'] ?>">
+																				<img src="<?= $att ?>" class="img-thumbnail mb-3" style="max-height: 80px; max-width: 80px;">
+																			</a>
+																		<?php endforeach; ?>
+																	<?php else : ?>
 																		<p><b>Lampiran</b></p>
 																		<a href="<?= unserialize($cmd['lampiran']) ?>" data-toggle="lightbox" data-gallery="gallery-<?= $cmd['id'] ?>">
 																			<img src="<?= unserialize($cmd['lampiran']) ?>" class="img-thumbnail mb-3" style="max-height: 80px; max-width: 80px;">
@@ -313,15 +313,15 @@
 																			<p>
 																				<b><?= $mention['siswa_nama'] ?></b> <?= $rep['isi_komen'] ?>
 																			</p>
-																			<?php if (is_array(unserialize($rep['lampiran']))) : ?>
-																				<p><b>Lampiran</b></p>
-																				<?php foreach (unserialize($rep['lampiran']) as $att) : ?>
-																					<a href="<?= $att ?>" data-toggle="lightbox" data-gallery="gallery-<?= $rep['id'] ?>">
-																						<img src="<?= $att ?>" class="img-thumbnail mb-3" style="max-height: 80px; max-width: 80px;">
-																					</a>
-																				<?php endforeach; ?>
-																			<?php else : ?>
-																				<?php if ($rep['lampiran'] != null) : ?>
+																			<?php if ($rep['lampiran'] != null) : ?>
+																				<?php if (is_array(unserialize($rep['lampiran']))) : ?>
+																					<p><b>Lampiran</b></p>
+																					<?php foreach (unserialize($rep['lampiran']) as $att) : ?>
+																						<a href="<?= $att ?>" data-toggle="lightbox" data-gallery="gallery-<?= $rep['id'] ?>">
+																							<img src="<?= $att ?>" class="img-thumbnail mb-3" style="max-height: 80px; max-width: 80px;">
+																						</a>
+																					<?php endforeach; ?>
+																				<?php else : ?>
 																					<p><b>Lampiran</b></p>
 																					<a href="<?= unserialize($rep['lampiran']) ?>" data-toggle="lightbox" data-gallery="gallery-<?= $rep['id'] ?>">
 																						<img src="<?= unserialize($rep['lampiran']) ?>" class="img-thumbnail mb-3" style="max-height: 80px; max-width: 80px;">
@@ -387,7 +387,6 @@
 
 <script>
 	var method;
-	var i = 0;
 
 	$(document).on("click", '[data-toggle="lightbox"]', function(event) {
 		event.preventDefault();

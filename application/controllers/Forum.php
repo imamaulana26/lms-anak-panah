@@ -224,12 +224,20 @@ class Forum extends CI_Controller
 		$akses = $this->session->userdata('akses');
 
 		if ($akses == 3) {
-			$data = array(
-				'judul_materi' => $this->input->post('judul_materi'),
-				'jns_materi' => $this->input->post('tipe_forum'),
-				'isi_materi' => $this->input->post('isi_materi'),
-				'lampiran' => serialize($this->session->userdata('lampiran'))
-			);
+			if ($this->session->userdata('lampiran') != null) {
+				$data = array(
+					'judul_materi' => $this->input->post('judul_materi'),
+					'jns_materi' => $this->input->post('tipe_forum'),
+					'isi_materi' => $this->input->post('isi_materi'),
+					'lampiran' => serialize($this->session->userdata('lampiran'))
+				);
+			} else {
+				$data = array(
+					'judul_materi' => $this->input->post('judul_materi'),
+					'jns_materi' => $this->input->post('tipe_forum'),
+					'isi_materi' => $this->input->post('isi_materi')
+				);
+			}
 
 			$this->db->update('tbl_materi_forum', $data, ['id' => $this->input->post('id_fm')]);
 			$this->session->unset_userdata('lampiran');
@@ -451,10 +459,16 @@ class Forum extends CI_Controller
 
 	public function update_komen()
 	{
-		$data = array(
-			'isi_komen' => $this->input->post('isi_materi'),
-			'lampiran' => serialize($this->session->userdata('lampiran'))
-		);
+		if ($this->session->userdata('lampiran') != null) {
+			$data = array(
+				'isi_komen' => $this->input->post('isi_materi'),
+				'lampiran' => serialize($this->session->userdata('lampiran'))
+			);
+		} else {
+			$data = array(
+				'isi_komen' => $this->input->post('isi_materi')
+			);
+		}
 
 		$this->db->update('tbl_komen_forum', $data, ['id' => $this->input->post('id_fm')]);
 		$this->session->unset_userdata('lampiran');

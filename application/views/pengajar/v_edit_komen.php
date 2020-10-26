@@ -131,10 +131,12 @@
 												</a>
 											<?php endforeach; ?>
 										<?php else : ?>
-											<?php if (is_array(unserialize($data['lampiran']))) : ?>
-												<?php foreach (unserialize($data['lampiran']) as $val) : ?>
-													<a href="<?= $val ?>" data-toggle="lightbox" data-gallery="gallery">
-														<img src="<?= $val ?>" class="img-thumbnail" style="max-height: 80px; max-width: 80px;">
+											<?php if ($data['lampiran'] != null) : ?>
+												<?php if (is_array(unserialize($data['lampiran']))) : ?>
+													<?php foreach (unserialize($data['lampiran']) as $val) : ?>
+														<a href="<?= $val ?>" data-toggle="lightbox" data-gallery="gallery">
+															<img src="<?= $val ?>" class="img-thumbnail" style="max-height: 80px; max-width: 80px;">
+														</a>
 													<?php endforeach; ?>
 												<?php else : ?>
 													<a href="<?= unserialize($data['lampiran']) ?>" data-toggle="lightbox" data-gallery="gallery">
@@ -142,6 +144,7 @@
 													</a>
 												<?php endif; ?>
 											<?php endif; ?>
+										<?php endif; ?>
 									</div>
 								</div>
 								<div class="form-group row">
@@ -250,8 +253,8 @@
 		});
 	}());
 
-	$(document).on("click", '[data-toggle="lightbox"]', function(event) {
-		event.preventDefault();
+	$(document).on("click", '[data-toggle="lightbox"]', function(evt) {
+		evt.preventDefault();
 		$(this).ekkoLightbox();
 	});
 
@@ -261,11 +264,6 @@
 	$('input, textarea').keypress(function() {
 		$(this).removeClass('is-invalid');
 		$(this).next().empty();
-	});
-
-	$('#myTab.nav-link').on('click', function(e) {
-		e.preventDefault()
-		$(this).tab('show')
 	});
 
 	$('.attach').on('click', function() {
@@ -300,8 +298,7 @@
 				$(this).val('');
 			}
 		}
-
-	})
+	});
 
 	$('.btn_add').click(function() {
 		var html = '';
@@ -411,15 +408,6 @@
 							$(location).attr('href', url);
 						}
 					})
-				} else {
-					for (var i = 0; i < data.inputerror.length; i++) {
-						if (data.error[i] == '') {
-							$('[name="' + data.inputerror[i] + '"]').addClass('is-invalid');
-						} else {
-							$('[name="' + data.inputerror[i] + '"]').addClass('is-invalid');
-							$('[name="' + data.inputerror[i] + '"]').next().addClass('invalid-feedback').text(data.error[i]);
-						}
-					}
 				}
 			}
 		});

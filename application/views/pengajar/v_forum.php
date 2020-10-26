@@ -98,7 +98,10 @@
 		</div><!-- /.container-fluid -->
 	</div>
 	<!-- /.content-header -->
-	<?php $page = (empty($this->session->flashdata('page'))) ? 1 : $this->session->flashdata('page'); ?>
+	<?php
+	$akses = $this->session->userdata('akses');
+	$page = (empty($this->session->flashdata('page'))) ? 1 : $this->session->flashdata('page');
+	?>
 	<!-- Main content -->
 	<div class="content">
 		<div class="container">
@@ -205,6 +208,11 @@
 																				<i class='fa fa-ellipsis-v'></i>
 																			</a>
 																			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+																				<?php if ($admin['pengguna_username'] != $this->session->userdata('username')) : ?>
+																					<a class="dropdown-item" href="javascript:void(0)" onclick="nilai('<?= $cmd['id'] ?>')" style="font-size: 12px; color: #007bff;">
+																						<i class="fa fa-fw fa-check-square"></i> Nilai
+																					</a>
+																				<?php endif; ?>
 																				<a class="dropdown-item" href="<?= site_url('forum/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;">
 																					<i class="fa fa-fw fa-pencil-alt"></i> Sunting
 																				</a>
@@ -296,6 +304,11 @@
 																							<i class='fa fa-ellipsis-v'></i>
 																						</a>
 																						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+																							<?php if ($admin['pengguna_username'] != $this->session->userdata('username')) : ?>
+																								<a class="dropdown-item" href="javascript:void(0)" onclick="nilai('<?= $rep['id'] ?>')" style="font-size: 12px; color: #007bff;">
+																									<i class="fa fa-fw fa-check-square"></i> Nilai
+																								</a>
+																							<?php endif; ?>
 																							<a class="dropdown-item" href="<?= site_url('forum/edit_komen/' . $rep['id']) ?>" style="font-size: 12px; color: #1e7e34;">
 																								<i class="fa fa-fw fa-pencil-alt"></i> Sunting
 																							</a>
@@ -379,9 +392,46 @@
 	</div><!-- /.container -->
 </div><!-- /.content-wrapper -->
 
+<!-- Modal -->
+<div class="modal fade" id="nilaiModal" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="row">
+						<div class="col-md-2">
+							<label>Nama Siswa</label>
+						</div>
+						<div class="col-md-8">
+							<p class="nm_siswa"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2">
+							<label>Komen Siswa</label>
+						</div>
+						<div class="col-md-8">
+							<span id="ckeditor"></span>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <?php $this->load->view('pengajar/v_schedule') ?>
-</div>
 
 <?php $this->load->view('pengajar/layout/v_js'); ?>
 
@@ -441,7 +491,9 @@
 		e.preventDefault()
 		$(this).tab('show')
 	});
+</script>
 
+<script>
 	function sts_forum(id) {
 		$.ajax({
 			url: '<?= site_url('forum/upd_status/') ?>' + id,
@@ -487,7 +539,7 @@
 							timer: 2000,
 							timerProgressBar: true,
 							// onBeforeOpen: () => {
-							// 	Swal.showLoading()
+							// Swal.showLoading()
 							// },
 							showConfirmButton: false
 						}).then((result) => {
@@ -501,7 +553,21 @@
 		})
 	}
 
+	function nilai(id) {
+		let url = "<?= site_url($this->uri->segment(1) . '/get_komen/') ?>" + id;
 
+		$('#nilaiModal').modal('show');
+
+		$.ajax({
+			url: url,
+			type: 'get',
+			dataType: 'json',
+			success: function(data) {
+				$('.nm_siswa').text(data.siswa_nama + ' ( ' + data.kelas_nama + ' )');
+				$('#ckeditor').html(data.isi_komen)
+			}
+		});
+	}
 
 	function hapus_komen(id) {
 		Swal.fire({
@@ -527,7 +593,7 @@
 							timer: 2000,
 							timerProgressBar: true,
 							// onBeforeOpen: () => {
-							// 	Swal.showLoading()
+							// Swal.showLoading()
 							// },
 							showConfirmButton: false
 						}).then((result) => {
@@ -538,7 +604,7 @@
 					}
 				});
 			}
-		})
+		});
 	}
 
 	function hapus_subkomen(id) {
@@ -565,7 +631,7 @@
 							timer: 2000,
 							timerProgressBar: true,
 							// onBeforeOpen: () => {
-							// 	Swal.showLoading()
+							// Swal.showLoading()
 							// },
 							showConfirmButton: false
 						}).then((result) => {

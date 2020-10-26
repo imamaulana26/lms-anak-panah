@@ -354,7 +354,8 @@ class Tugas extends CI_Controller
 					$data = array(
 						'id_forum' => $this->input->post('id_forum'),
 						'pertemuan' => $this->input->post('pertemuan'),
-						'reply_to' => 0,
+						'reply_to' => $this->input->post('reply_to'),
+						'mention' => $this->input->post('mention'),
 						'user_komen' => $this->input->post('user_komen'),
 						'isi_komen' => $this->input->post('komentar'),
 						'lampiran' => serialize('data:' . $file['upload_data']['file_type'] . ';base64,' . base64_encode(file_get_contents($config['upload_path'] . '/' . $image)))
@@ -365,7 +366,8 @@ class Tugas extends CI_Controller
 				$data = array(
 					'id_forum' => $this->input->post('id_forum'),
 					'pertemuan' => $this->input->post('pertemuan'),
-					'reply_to' => 0,
+					'reply_to' => $this->input->post('reply_to'),
+					'mention' => $this->input->post('mention'),
 					'user_komen' => $this->input->post('user_komen'),
 					'isi_komen' => $this->input->post('komentar')
 				);

@@ -154,13 +154,26 @@
 								</div>
 								<div class="form-group row">
 									<div class="offset-2 col-md-10" id="gallery">
-										<?php $att = unserialize($data['lampiran']);
-										if ($data['lampiran'] != null) :
-											foreach ($att as $att) : ?>
-												<a href="<?= $att ?>" data-toggle="lightbox" data-gallery="gallery">
-													<img src="<?= $att ?>" class="img-thumbnail" style="max-height: 100px; max-width: 100px;">
+										<?php if ($this->session->userdata('lampiran') != null) : ?>
+											<?php foreach ($this->session->userdata('lampiran') as $val) : ?>
+												<a href="<?= $val ?>" data-toggle="lightbox" data-gallery="gallery">
+													<img src="<?= $val ?>" class="img-thumbnail" style="max-height: 80px; max-width: 80px;">
 												</a>
 											<?php endforeach; ?>
+										<?php else : ?>
+											<?php if ($data['lampiran'] != null) : ?>
+												<?php if (is_array(unserialize($data['lampiran']))) : ?>
+													<?php foreach (unserialize($data['lampiran']) as $val) : ?>
+														<a href="<?= $val ?>" data-toggle="lightbox" data-gallery="gallery">
+															<img src="<?= $val ?>" class="img-thumbnail" style="max-height: 80px; max-width: 80px;">
+														</a>
+													<?php endforeach; ?>
+												<?php else : ?>
+													<a href="<?= unserialize($data['lampiran']) ?>" data-toggle="lightbox" data-gallery="gallery">
+														<img src="<?= unserialize($data['lampiran']) ?>" class="img-thumbnail" style="max-height: 80px; max-width: 80px;">
+													</a>
+												<?php endif; ?>
+											<?php endif; ?>
 										<?php endif; ?>
 									</div>
 								</div>
@@ -219,8 +232,8 @@
 <script>
 	var i = 0;
 
-	$(document).on("click", '[data-toggle="lightbox"]', function(event) {
-		event.preventDefault();
+	$(document).on("click", '[data-toggle="lightbox"]', function(evt) {
+		evt.preventDefault();
 		$(this).ekkoLightbox();
 	});
 
@@ -383,11 +396,6 @@
 	$('input, textarea').keypress(function() {
 		$(this).removeClass('is-invalid');
 		$(this).next().empty();
-	});
-
-	$('#myTab.nav-link').on('click', function(e) {
-		e.preventDefault()
-		$(this).tab('show')
 	});
 
 	function save_forum() {

@@ -144,6 +144,7 @@ class Forum extends CI_Controller
 		echo json_encode(['status' => true]);
 		exit;
 	}
+
 	public function upload()
 	{
 		$status = false;
@@ -263,7 +264,20 @@ class Forum extends CI_Controller
 	}
 
 
+	public function submit_nilai()
+	{
+		
+	}
 
+	public function get_komen($key)
+	{
+		$sql = $this->db->select('*')->from('tbl_komen_forum a')
+		->join('tbl_siswa b', 'a.user_komen = b.siswa_nis', 'inner')
+		->join('tbl_kelas c', 'b.siswa_kelas_id = c.kelas_id', 'left')
+		->where(['a.id' => $key])->get()->row_array();
+
+		echo json_encode($sql); exit;
+	}
 
 	public function submit_main()
 	{

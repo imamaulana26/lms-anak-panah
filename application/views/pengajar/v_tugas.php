@@ -205,6 +205,11 @@
 																				<i class='fa fa-ellipsis-v'></i>
 																			</a>
 																			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+																				<?php if ($admin['pengguna_username'] != $this->session->userdata('username')) : ?>
+																					<a class="dropdown-item" href="javascript:void(0)" onclick="nilai('<?= $cmd['id'] ?>')" style="font-size: 12px; color: #007bff;">
+																						<i class="fa fa-fw fa-check-square"></i> Nilai
+																					</a>
+																				<?php endif; ?>
 																				<a class="dropdown-item" href="<?= site_url('tugas/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;">
 																					<i class="fa fa-fw fa-pencil-alt"></i> Sunting
 																				</a>
@@ -296,7 +301,12 @@
 																							<i class='fa fa-ellipsis-v'></i>
 																						</a>
 																						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-																							<a class="dropdown-item" href="<?= site_url('tugas/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;">
+																							<?php if ($admin['pengguna_username'] != $this->session->userdata('username')) : ?>
+																								<a class="dropdown-item" href="javascript:void(0)" onclick="nilai('<?= $rep['id'] ?>')" style="font-size: 12px; color: #007bff;">
+																									<i class="fa fa-fw fa-check-square"></i> Nilai
+																								</a>
+																							<?php endif; ?>
+																							<a class="dropdown-item" href="<?= site_url('tugas/edit_komen/' . $rep['id']) ?>" style="font-size: 12px; color: #1e7e34;">
 																								<i class="fa fa-fw fa-pencil-alt"></i> Sunting
 																							</a>
 																							<a class="dropdown-item" href="javascript:void(0)" onclick="hapus_subkomen('<?= $rep['id'] ?>')" style="font-size: 12px; color: #dc3545;">

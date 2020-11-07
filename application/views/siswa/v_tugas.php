@@ -141,6 +141,7 @@
 										<?php endforeach; ?>
 									</div>
 								</div>
+
 								<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
 									<?php foreach ($tugas as $val) : ?>
 										<div class="bhoechie-tab-content tab-pane fade <?= $val['pertemuan'] == $page ? 'show active' : '' ?>" id="tugas-<?= $val['pertemuan'] ?>" role="tabpanel" aria-labelledby="tugas-<?= $val['pertemuan'] ?>-tab">
@@ -209,7 +210,6 @@
 												</div>
 
 												<div class="collapse <?= $this->session->flashdata('page') ? 'show' : '' ?>" id="collapseExample-<?= $val['id'] ?>">
-													<!-- Main Comments -->
 													<div class="card-body">
 														<div class="row">
 															<?php $komen = $this->db->get_where('tbl_komen_tugas', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'user_komen' => $user, 'reply_to' => 0]);
@@ -218,6 +218,7 @@
 
 																$admin = $this->db->get_where('tbl_pengguna', ['pengguna_username' => $cmd['user_komen']])->row_array();
 																$rep_user = ($siswa == null) ? $admin['pengguna_nama'] . ' (pengajar)' : $siswa['siswa_nama']; ?>
+																<!-- Main Comments -->
 																<div class="card-header bordered mt-3 d-flex">
 																	<div class="col-md-1">
 																		<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
@@ -300,14 +301,16 @@
 																		</div>
 																	</div>
 																</div>
+																<!-- End of Main Comments -->
 
-																<?php $reply = $this->db->get_where('tbl_komen_tugas', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'user_komen' => $pengajar['pengguna_username'], 'reply_to' => $cmd['id']]);
+																<?php $where = "id_forum = '" . $val['id_forum'] . "' and pertemuan = '" . $val['pertemuan'] . "' and reply_to = '" . $cmd['id'] . "' and (user_komen = '" . $pengajar['pengguna_username'] . "' or user_komen = '" . $cmd['user_komen'] . "')";
+																$reply = $this->db->select('*')->from('tbl_komen_tugas')->where($where)->get();
 																foreach ($reply->result_array() as $rep) :
 																	$rep_siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['user_komen']])->row_array();
 																	$admin = $this->db->get_where('tbl_pengguna', ['pengguna_username' => $rep['user_komen']])->row_array();
 
-																	$rep_user = $admin['pengguna_nama'] . ' (pengajar)';
-																	$mention = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['mention']])->row_array(); ?>
+																	$rep_user = $rep_siswa == null ? $admin['pengguna_nama'] . ' (pengajar)' : $rep_siswa['siswa_nama'];
+																	$mention = $this->db->get_where('tbl_pengguna', ['pengguna_username' => $rep['mention']])->row_array(); ?>
 																	<!-- Reply Main Comments -->
 																	<div class="collapse <?= $this->session->flashdata('mention') == $cmd['id'] ? 'show' : '' ?>" id="comments-<?= $cmd['id'] ?>">
 																		<div class="col-lg ml-3">
@@ -340,7 +343,8 @@
 																			</div>
 																			<div class="card-body bordered pb-0">
 																				<p>
-																					<b><?= $mention['siswa_nama'] ?></b> <?= $rep['isi_komen'] ?>
+																					<?php $level = $mention['pengguna_level'] == '3' ? ' (pengajar)' : ''; ?>
+																					<b><?= $mention['pengguna_nama'] . $level ?></b> <?= $rep['isi_komen'] ?>
 																				</p>
 																				<?php if ($rep['lampiran'] != null) : ?>
 																					<?php if (is_array(unserialize($rep['lampiran']))) : ?>
@@ -393,7 +397,7 @@
 																<?php endforeach; ?>
 															<?php endforeach; ?>
 														</div>
-														<!-- End of Main Comments -->
+
 													</div>
 												</div>
 											</div>

@@ -46,6 +46,13 @@
 	});
 </script>
 
+<script>
+	// # check number javascript
+	function CheckNumeric() {
+		return event.keyCode >= 48 && event.keyCode <= 57;
+	}
+</script>
+
 <!-- My JS -->
 <script src="<?= base_url('assets/front-end/dist/js/my-js.js') ?>"></script>
 </body>

@@ -31,25 +31,6 @@
 								</div>
 							</div>
 						</div>
-						<!-- Modal option -->
-						<!-- <div class="modal fade bd-example-modal-sm" id="option<?= $val['id_pelajaran'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="position: absolute;left: 50%;top: 20%;transform: translate(-50%, -50%);">
-							<div class="modal-dialog modal-sm" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel"><?= $val['nm_mapel'] ?></h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="modal-body" style="text-align:center">
-										<a class="btn btn-primary col-sm-5" href="<?= site_url('forum/') . $val['id_pelajaran'] ?>" role="button">Forum</a>
-										<a class="btn btn-info col-sm-5" href="<?= site_url('absensi/') . $val['id_pelajaran'] ?>" role=" button">Absensi</a>
-									</div>
-								</div>
-							</div>
-
-						</div> -->
-
 					<?php endforeach; ?>
 				</div>
 			</div>

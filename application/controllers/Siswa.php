@@ -24,30 +24,16 @@ class Siswa extends CI_Controller
 	{
 		$this->load->view('admin/v_siswa');
 	}
-	function detail_absensi_siswa($nis)
-	{
-
-		$dataserialize = $this->db->get_where('tbl_abs_model', ['siswa_nis' => $nis])->row_array();
-		$dataunser = unserialize($dataserialize['fr_abs']);
-		// $datamapel = $this->db->get_where()
-		$data['forum'] = $dataunser;
-		$data['nama'] = $this->db->select('siswa_nama,siswa_kelas_id')->from('tbl_siswa')->where(['siswa_nis'=>$nis])->get()->row_array();
-		$kelas = $data['nama']['siswa_kelas_id'];
-		// $data['mapel'] = $this->db->get_where('tbl_pelajaran',['id_kelas'=>'11'])->result_array();
-		$data['mapel'] = $this->db->select('nm_mapel,id_pelajaran')->from('tbl_pelajaran a')->join('tbl_mapel b', 'a.kd_mapel=b.kd_mapel', 'inner')->where(['id_kelas' => $kelas])->get()->result_array();
-		// var_dump($data['forum']); die;
-		$this->load->view('admin/v_detail_absensi', $data);
-	}
 
 	function online_class()
 	{
 		$row = array();
 		$peserta = array();
 		$sql = $this->db->get_where('tbl_kelas', ['kelas_id <' => 16])->result_array();
-
+		
 		foreach ($sql as $sql) {
 			$qry = $this->db->get_where('tbl_siswa', ['siswa_kelas_id' => $sql['kelas_id']])->result_array();
-
+			
 			$peserta['kelas'] = $sql['kelas_nama'];
 			$siswa = array();
 			foreach ($qry as $val) {
@@ -65,7 +51,7 @@ class Siswa extends CI_Controller
 		}
 		// var_dump($row);
 		// die;
-
+				
 		$data['li_peserta'] = $row;
 
 		$this->load->view('admin/v_online_class', $data);
@@ -83,7 +69,7 @@ class Siswa extends CI_Controller
 
 		redirect(site_url('siswa/online_class'));
 	}
-
+	
 
 	public function list_siswa()
 	{
@@ -107,7 +93,6 @@ class Siswa extends CI_Controller
 			$aksi = '<a href="' . site_url('siswa/edit_siswa/' . $li['siswa_nis']) . '" class="label label-success col-md-12"><i class="fa fa-fw fa-edit"></i> Edit Siswa</a><br>';
 			$aksi .= '<a href="javascript:delete_siswa(' . "'" . $li['siswa_nis'] . "'" . ',' . "'" . $li['siswa_nama'] . "'" . ')" class="label label-danger col-md-12"><i class="fa fa-fw fa-trash"></i>Keluarkan Siswa</a><br>';
 			$aksi .= '<a href="javascript:void(0)" class="label label-info col-md-12" onclick="detail_siswa(' . "'" . $li['siswa_nis'] . "'" . ')"><i class="fa fa-fw fa-info"></i> Detail Siswa</a><br>';
-			$aksi .= '<a href="' . site_url('siswa/detail_absensi_siswa/' . $li['siswa_nis']) . '" class="label label-info col-md-12"><i class="fa fa-fw fa-info"></i> Absensi Siswa</a><br>';
 			$aksi .= '<a href="javascript:void(0)" class="label label-warning col-md-12" onclick="send_msg(' . "'" . $li['siswa_nis'] . "'" . ')"><i class="fa fa-fw fa-envelope-o"></i> Send Massage</a>';
 			$row[] = $aksi;
 

@@ -11,6 +11,8 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 <!-- Glider -->
 <script src="<?= base_url('assets/front-end/plugins/glider/glider.min.js') ?>"></script>
+<!-- select 2 -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <!-- Moment JS -->
 <script src="<?= base_url('assets/front-end/plugins/moment/moment.min.js') ?>"></script>
 <!-- ChartJs -->
@@ -19,10 +21,9 @@
 <script src="<?= base_url('assets/plugins/ckeditor/ckeditor.js') ?>"></script>
 <!-- Sweetalert2 -->
 <script src="<?= base_url('assets/front-end/plugins/sweetalert2/sweetalert2.min.js') ?>"></script>
-<!-- CK editor JS -->
-<script src="<?= base_url('assets/plugins/ckeditor/ckeditor.js') ?>"></script>
 <!-- Ekko Lightbox -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js" crossorigin="anonymous"></script>
+
 
 <!-- AdminLTE App -->
 <!-- <script src="dist/js/adminlte.min.js"></script> -->

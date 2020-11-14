@@ -131,6 +131,7 @@
 										<div class="card-header">
 											<label><?= $val['judul_materi'] ?> (<?= $val['jns_materi'] ?>)</label>
 											<span class="float-right">
+												<a href="<?= site_url('absensi/').$this->uri->segment(2)."/".$val['pertemuan'] ?>" class="badge badge-info">Absensi</a>
 												<a href="javascript:void(0)" class="badge badge-<?= $val['status'] == 0 ? 'success' : 'danger' ?>" onclick="sts_forum('<?= $val['id'] ?>')"><?= $val['status'] == 0 ? 'Aktif' : 'Non-aktif' ?></a>
 												<a href="<?= site_url('forum/edit_forum/' . $val['id']) ?>" style="color: #1e7e34;"><i class="fa fa-fw fa-pencil-alt ml-3"></i></a>
 												<a href="javascript:void(0)" onclick="delete_forum('<?= $val['id'] ?>')" style="color: #dc3545;"><i class="fa fa-fw fa-times ml-3"></i></a>

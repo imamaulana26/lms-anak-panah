@@ -25,12 +25,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<!-- DataTables -->
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
 	<link rel="stylesheet" href="<?php echo base_url() . 'assets/plugins/daterangepicker/daterangepicker.css' ?>">
+	<!-- SELECT 2 -->
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 	<!-- Theme style -->
 	<link rel="stylesheet" href="<?= base_url('assets/front-end/dist/css/adminlte.min.css') ?>">
 	<!-- Glider -->
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/front-end/plugins/glider/glider.min.css') ?>">
 	<!-- ChartJs -->
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/front-end/plugins/chart.js/chart.min.css') ?>">
+
 	<!-- Sweetalert2 -->
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/front-end/plugins/sweetalert2/sweetalert2.min.css') ?>">
 	<!-- Ekko Lightbox -->

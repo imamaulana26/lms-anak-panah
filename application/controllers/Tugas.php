@@ -260,7 +260,7 @@ class Tugas extends CI_Controller
 
 	public function get_komen($key)
 	{
-		$sql = $this->db->select('b.siswa_nis, b.siswa_nama, c.kelas_nama, f.nm_mapel, a.pertemuan, a.isi_komen, a.lampiran, d.judul_materi, d.jns_materi')
+		$data['komen'] = $this->db->select('b.siswa_nis, b.siswa_nama, c.kelas_nama, e.id_pelajaran, f.nm_mapel, a.pertemuan, a.isi_komen, a.lampiran, d.judul_materi, d.jns_materi')
 			->from('tbl_komen_tugas a')
 			->join('tbl_siswa b', 'a.user_komen = b.siswa_nis', 'inner')
 			->join('tbl_kelas c', 'b.siswa_kelas_id = c.kelas_id', 'left')
@@ -269,7 +269,17 @@ class Tugas extends CI_Controller
 			->join('tbl_mapel f', 'e.kd_mapel = f.kd_mapel', 'inner')
 			->where(['a.id' => $key])->get()->row_array();
 
-		echo json_encode($sql);
+		$data['nilai'] = $this->db->get_where(
+			'tbl_nilai_onclass',
+			[
+				'user_siswa' => $data['komen']['siswa_nis'],
+				'id_pelajaran' => $data['komen']['id_pelajaran'],
+				'pertemuan_ke' => $data['komen']['pertemuan'],
+				'tipe' => 'Tugas'
+			]
+		)->row_array();
+
+		echo json_encode($data);
 		exit;
 	}
 

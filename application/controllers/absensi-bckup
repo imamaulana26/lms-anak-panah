@@ -1,0 +1,631 @@
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+
+class Absensi extends CI_Controller
+{
+    function __construct()
+    {
+        parent::__construct();
+        $this->load->model('M_forum', 'm_forum');
+        $this->load->helper('text');
+
+        if ($this->session->userdata('masuk') != TRUE) {
+            $url = base_url('login');
+            redirect($url);
+        };
+        $akses = $this->session->userdata('akses');
+        if ($akses == 2) {
+            $url = base_url('course');
+            redirect($url);
+        }
+    }
+
+    function attendent_fr($key, $mgg)
+    {
+
+        $where = $this->db->get_where('tbl_pelajaran', ['id_pelajaran' => $key])->row_array();
+        $mapel = $this->db->get_where('tbl_mapel', ['kd_mapel' => $where['kd_mapel']])->row_array();
+        // var_dump($where); die;
+
+        // $row = array();
+        // $peserta = array();
+        // $sql = $this->db->get_where('tbl_kelas', ['kelas_id' => $where['id_kelas']])->row_array();
+
+
+
+        // foreach ($sql as $sql) {
+        //     $qry = $this->db->get_where('tbl_siswa', ['siswa_kelas_id' => $sql['kelas_id']])->result_array();
+
+        //     $peserta['kelas'] = $sql['kelas_nama'];
+        //     $siswa = array();
+        //     foreach ($qry as $val) {
+        //         array_push(
+        //             $siswa,
+        //             array(
+        //                 'nis' => $val['siswa_nis'],
+        //                 'nama' => $val['siswa_nama'],
+        //                 'onclass' => $val['oc']
+        //             )
+        //         );
+        //     }
+        //     $peserta['siswa'] = $siswa;
+        //     $row[] = $peserta;
+        // }
+        // $data = array(
+        // 	array(
+        // 		'frk' => '1',
+        // 		'siswa' => array(
+        // 			array(
+        // 				'nis' => 123123,
+        // 				'nama' => 'Merik'
+        // 			),
+        // 			array(
+        // 				'nis' => 3124124124,
+        // 				'nama' => 'Imam'
+        // 			)
+        // 		)
+        // 	),
+        // 	array(
+        //         'frk' => '2',
+        // 		'siswa' => array(
+        // 			array(
+        // 				'nis' => 512431,
+        // 			),
+        // 			array(
+        // 				'nis' => 541234,
+        // 			),
+        // 			array(
+        // 				'nis' => 52311,
+        // 			)
+        // 		)
+        // 	)
+        // );
+        $testdata = array(
+            array(
+                'idf' => '43', //agama k11
+                'data' => array(
+                    array(
+                        'frk' => '1',
+                        'abs' => 'hadir'
+                    ),
+                    array(
+                        'frk' => '2',
+                        'abs' => 'hadir'
+                    ),
+                    array(
+                        'frk' => '3',
+                        'abs' => 'hadir'
+                    ),
+                    array(
+                        'frk' => '4',
+                        'abs' => 'hadir'
+                    ),
+                ),
+            ),
+            array(
+                'idf' => '42', //agama k11
+                'data' => array(
+                    array(
+                        'frk' => '1',
+                        'abs' => 'hadir'
+                    ),
+                    array(
+                        'frk' => '2',
+                        'abs' => 'hadir'
+                    )
+                )
+            ),
+            array(
+                'idf' => '41', //agama k11
+                'data' => array(
+                    array(
+                        'frk' => '1',
+                        'abs' => 'hadir'
+                    )
+                )
+            )
+
+        );
+        // echo serialize($testdata);
+        // var_dump($testdata[1]['data']);
+        // die;
+        // echo json_encode($data); die;
+        // $dataserialize = $this->db->get_where('tbl_fr_absensi', ['id_forum' => $key])->row_array();
+        // $dataunser = unserialize($dataserialize['siswa_abs']);
+        // $siswa = array();
+        // foreach ($dataunser as $val) {
+        //     $siswa = array();
+        //     if ($val['frk'] == $mgg) {
+        //         foreach ($val['siswa'] as $sis) {
+        //             array_push(
+        //                 $siswa,
+        //                 array(
+        //                     'nis' => $sis['nis'],
+        //                 )
+        //             );
+        //         }
+        //         $peserta['siswa'] = $siswa;
+        //     }
+        // }
+
+
+        // $sql =
+        // $this->db->select('*')->from('tbl_siswa a')->join('tbl_orangtua b', 'a.siswa_nis=b.siswa_nis', 'inner')->where(['a.siswa_nis' => $id, 'a.soft_deleted' => '0'])->result_array();
+        // $sql = $this->db->get_where('tbl_siswa', ['siswa_kelas_id' => $where['id_kelas']])->result_array();
+        // $sql1 = $this->db->get_where('tbl_komen_forum', ['id_forum' => $key , 'pertemuan' => $mgg])->result_array();
+        $sql = $this->db->distinct()->select('siswa_nama,siswa_nis')->from('tbl_siswa a')->join('tbl_komen_forum b', 'a.siswa_nis=b.user_komen', 'inner')->where(['b.id_forum' => $key, 'b.pertemuan' => $mgg])->get()->result_array();
+        // var_dump($sql); die;
+
+        // $data['kel'] = $sql['kelas_id'];
+        // $data['absensi_siswa'] = $peserta['siswa'];
+        $data['nm_mapel'] = $mapel['nm_mapel'];
+        $data['dt_siswa'] = $sql;
+
+        $this->load->view('pengajar/layout/v_header');
+        $this->load->view('pengajar/layout/v_navbar');
+        $this->load->view('pengajar/v_absensi', $data);
+    }
+
+    function submit_absensi_fr()
+    {
+        $dataserialize = $this->db->get_where('tbl_abs_model', ['siswa_nis' => $this->input->post('nis')]);
+
+        $result = array();
+        $new_abs = array();
+        $status = true;
+        $sts_new = true;
+
+        if ($dataserialize->num_rows() > 0) {
+            $unser = $dataserialize->row_array();
+            $dataunser = unserialize($unser['fr_abs']);
+
+            foreach ($dataunser as $dtunser) {
+                
+                $data1 = array();
+                // update absensi
+                if ($status === true) {
+                    if ($dtunser['idf'] == $this->input->post('idf')) {
+                        foreach ($dtunser['data'] as $val) {
+                            if ($sts_new === true) {
+                                if ($val['frk'] === $this->input->post('idfk')) {
+                                    $val['abs'] = $this->input->post('absensi');
+                                } else {
+                                    // 
+                                    //update sub absensi jika minggu ke sama
+                                    $data1[] =
+                                        array(
+                                            'frk' => $this->input->post('idfk'),
+                                            'abs' => $this->input->post('absensi')
+                                        );
+                                    $sts_new = false;
+                                }
+                            }
+
+                            $data1[] = $val;
+                        }
+                        // var_dump();
+                        $temp = array_unique(array_column($data1, 'frk'));
+                        $unique_arr = array_intersect_key($data1, $temp);
+                        // var_dump($unique_arr);
+                        // var_dump($data1);
+                        // print_r(unique_key($data1,'frk'));
+
+                        $dtunser['data'] = $unique_arr;
+                        $status = false;
+                    } else {
+                        $new_abs = array(
+                            'idf' => $this->input->post('idf'),
+                            'data' => array(
+                                array(
+                                    'frk' => $this->input->post('idfk'),
+                                    'abs' => $this->input->post('absensi')
+                                )
+                            )
+                        );
+                    }
+                }
+
+                $result[] = $dtunser;
+            }
+            // 
+            // 
+            if ($sts_new == true) {
+                $result[] = $new_abs;
+            }
+            $this->db->update('tbl_abs_model', ['fr_abs' => serialize($result)], ['siswa_nis' => $this->input->post('nis')]);
+            // var_dump($result);
+
+            echo "<script>window.history.go(-1);location.reload();</script>";
+        } else {
+
+            $new_abs1 = array(
+                array(
+                    'idf' => $this->input->post('idf'),
+                    'data' => array(
+                        array(
+                            'frk' => $this->input->post('idfk'),
+                            'abs' => $this->input->post('absensi')
+                        )
+                    )
+                )
+            );
+
+            $this->db->insert('tbl_abs_model', ['siswa_nis' => $this->input->post('nis'), 'fr_abs' => serialize($new_abs1)]);
+            echo "<script>window.history.go(-1);location.reload();</script>";
+        }
+    }
+
+    function attendent_tgs($key, $mgg)
+    {
+
+        $where = $this->db->get_where('tbl_pelajaran', ['id_pelajaran' => $key])->row_array();
+        $mapel = $this->db->get_where('tbl_mapel', ['kd_mapel' => $where['kd_mapel']])->row_array();
+
+
+        $sql = $this->db->distinct()->select('siswa_nama,siswa_nis')->from('tbl_siswa a')->join('tbl_komen_tugas b', 'a.siswa_nis=b.user_komen', 'inner')->where(['b.id_forum' => $key, 'b.pertemuan' => $mgg])->get()->result_array();
+
+        $data['nm_mapel'] = $mapel['nm_mapel'];
+        $data['dt_siswa'] = $sql;
+
+        $this->load->view('pengajar/layout/v_header');
+        $this->load->view('pengajar/layout/v_navbar');
+        $this->load->view('pengajar/v_absensi_tgs', $data);
+    }
+
+    function submit_absensi_tgs()
+    {
+        $dataserialize = $this->db->get_where('tbl_abs_model', ['siswa_nis' => $this->input->post('nis')]);
+
+        $result = array();
+        $new_abs = array();
+        $status = true;
+        $sts_new = true;
+
+        if ($dataserialize->num_rows() > 0) {
+            $unser = $dataserialize->row_array();
+            $dataunser = unserialize($unser['tgs_abs']);
+
+            if ($dataunser == null) {
+                $new_abs1 = array(
+                    array(
+                        'idtg' => $this->input->post('idtg'),
+                        'data' => array(
+                            array(
+                                'tgk' => $this->input->post('idtgk'),
+                                'abs' => $this->input->post('absensi')
+                            )
+                        )
+                    )
+                );
+                $this->db->update('tbl_abs_model', ['tgs_abs' => serialize($new_abs1)], ['siswa_nis' => $this->input->post('nis')]);
+                echo "<script>window.history.go(-1);location.reload();</script>";
+                // die;
+            } else {
+                foreach ($dataunser as $dtunser) {
+                    $data1 = array();
+                    // update absensi
+                    if ($status === true) {
+                        if ($dtunser['idtg'] == $this->input->post('idtg')) {
+                            foreach ($dtunser['data'] as $val) {
+                                if ($sts_new === true) {
+                                    if ($val['tgk'] === $this->input->post('idtgk')) {
+                                        $val['abs'] = $this->input->post('absensi');
+                                    } else {
+                                        //update sub absensi jika minggu ke sama
+                                        $data1[] =
+                                            array(
+                                                'tgk' => $this->input->post('idtgk'),
+                                                'abs' => $this->input->post('absensi')
+                                            );
+                                        $sts_new = false;
+                                    }
+                                }
+
+                                $data1[] = $val;
+                            }
+                            $temp = array_unique(array_column($data1, 'tgk'));
+                            $unique_arr = array_intersect_key($data1, $temp);
+
+                            $dtunser['data'] = $unique_arr;
+                            $status = false;
+                        } else {
+                            $new_abs = array(
+                                'idtg' => $this->input->post('idtg'),
+                                'data' => array(
+                                    array(
+                                        'tgk' => $this->input->post('idtgk'),
+                                        'abs' => $this->input->post('absensi')
+                                    )
+                                )
+                            );
+                        }
+                    }
+
+                    $result[] = $dtunser;
+                }
+                if ($sts_new == true) {
+                    $result[] = $new_abs;
+                }
+                $this->db->update('tbl_abs_model', ['tgs_abs' => serialize($result)], ['siswa_nis' => $this->input->post('nis')]);
+                // var_dump($result[0]);
+                echo "<script>window.history.go(-1);location.reload();</script>";
+                // die;
+            }
+        } else {
+            $new_abs1 = array(
+                array(
+                    'idtg' => $this->input->post('idtg'),
+                    'data' => array(
+                        array(
+                            'tgk' => $this->input->post('idtgk'),
+                            'abs' => $this->input->post('absensi')
+                        )
+                    )
+                )
+            );
+            $this->db->insert('tbl_abs_model', ['siswa_nis' => $this->input->post('nis'), 'tgs_abs' => serialize($new_abs1)]);
+            echo "<script>window.history.go(-1);location.reload();</script>";
+        }
+    }
+
+    public function attendent_oc($key)
+    {
+        $sql1 = $this->db->get_where('tbl_abs_oc', ['id_pelajaran' => '43'])->row_array();
+        // $where = $this->db->get_where('tbl_pelajaran', ['id_pelajaran' => $key])->row_array();
+        // $mapel = $this->db->get_where('tbl_mapel', ['kd_mapel' => $where['kd_mapel']])->row_array();
+        $unser = unserialize($sql1['dt_oc']);
+
+
+        // $sql = $this->db->distinct()->select('siswa_nama,siswa_nis')->from('tbl_siswa a')->join('tbl_komen_tugas b', 'a.siswa_nis=b.user_komen', 'inner')->where(['b.id_forum' => $key, 'b.pertemuan' => $mgg])->get()->result_array();
+        // $sql = $this->db->get_where('tbl_kelas', ['kelas_id' => $where['id_kelas']])->row_array();
+
+        // $data['nm_mapel'] = $mapel['nm_mapel'];
+        $data['dt_tgl'] = $unser;
+
+        // var_dump($unser); die;
+
+
+        $this->load->view('pengajar/layout/v_header');
+        $this->load->view('pengajar/layout/v_navbar');
+        $this->load->view('pengajar/v_absensi_oc', $data);
+    }
+
+    public function list_siswa_oc($id)
+    {
+        $testdata = array(
+            array(
+                'nis' => '2019638',
+                'abs' => 'hadir'
+            ),
+            array(
+                'nis' => '2',
+                'abs' => 'hadir'
+            ),
+            array(
+                'nis' => '3',
+                'abs' => 'hadir'
+            ),
+            array(
+                'nis' => '4',
+                'abs' => 'hadir'
+            ),
+        );
+        $testdata1 = array(
+            array(
+                'idpel' => '43', //agama k11
+                'data' => array(
+                    array(
+                        'tgl' => '2020-09-08',
+                        'abs' => 'hadir'
+                    ),
+                    array(
+                        'tgl' => '2020-08-20',
+                        'abs' => 'hadir'
+                    ),
+                    array(
+                        'tgl' => '2020-08-28',
+                        'abs' => 'hadir'
+                    ),
+                    array(
+                        'tgl' => '2020-08-27',
+                        'abs' => 'hadir'
+                    ),
+                ),
+            ),
+            array(
+                'idpel' => '42', //agama k11
+                'data' => array(
+                    array(
+                        'tgl' => '2020-08-20',
+                        'abs' => 'hadir'
+                    ),
+                    array(
+                        'tgl' => '2020-08-28',
+                        'abs' => 'hadir'
+                    )
+                )
+            ),
+            array(
+                'tgl' => '41', //agama k11
+                'data' => array(
+                    array(
+                        'nis' => '2020-09-08',
+                        'abs' => 'hadir'
+                    )
+                )
+            )
+
+        );
+
+        // var_dump($testdata1);
+        // echo serialize($testdata1);
+        // die;
+        $where = $this->db->get_where('tbl_abs_oc', ['id_oc' => $id])->row_array();
+        $dtsiswa = $this->db->select('siswa_nis,siswa_nama')->from('tbl_siswa a')->join('tbl_pelajaran b', 'a.siswa_kelas_id=b.id_kelas', 'inner')->where(['b.id_pelajaran' => '43'])->get()->result_array();
+        // $sql = $this->db->get_where('tbl_kelas', ['kelas_id' => $where['id_kelas']])->row_array();
+        // var_dump($dtsiswa);
+        // die;
+
+        $data['dt_siswa'] = $dtsiswa;
+        $this->load->view('pengajar/layout/v_header');
+        $this->load->view('pengajar/layout/v_navbar');
+        $this->load->view('pengajar/v_absensi_oc_list', $data);
+    }
+
+    function submit_absensi_oc()
+    {
+        $dataserialize = $this->db->get_where('tbl_abs_model', ['siswa_nis' => $this->input->post('nis')]);
+
+        $result = array();
+        $new_abs = array();
+        $status = true;
+        $sts_new = true;
+        $search = true;
+
+        if ($dataserialize->num_rows() > 0) {
+            $unser = $dataserialize->row_array();
+            $dataunser = unserialize($unser['tgs_abs']);
+
+            if ($dataunser == null) {
+                $new_abs1 = array(
+                    array(
+                        'idtg' => $this->input->post('idtg'),
+                        'data' => array(
+                            array(
+                                'tgk' => $this->input->post('idtgk'),
+                                'abs' => $this->input->post('absensi')
+                            )
+                        )
+                    )
+                );
+                $this->db->update('tbl_abs_model', ['tgs_abs' => serialize($new_abs1)], ['siswa_nis' => $this->input->post('nis')]);
+                echo "<script>window.history.go(-1);location.reload();</script>";
+                // die;
+            } else {
+                foreach ($dataunser as $dtunser) {
+                    $data1 = array();
+                    // update absensi
+                    if ($status === true) {
+                        if ($dtunser['idtg'] == $this->input->post('idtg')) {
+                            foreach ($dtunser['data'] as $val) {
+                                if ($sts_new === true) {
+                                    if ($val['tgk'] === $this->input->post('idtgk')) {
+                                        $val['abs'] = $this->input->post('absensi');
+                                    } else {
+                                        // 
+                                        //update sub absensi jika minggu ke sama
+                                        $data1[] =
+                                            array(
+                                                'tgk' => $this->input->post('idtgk'),
+                                                'abs' => $this->input->post('absensi')
+                                            );
+                                        $sts_new = false;
+                                    }
+                                }
+
+                                $data1[] = $val;
+                            }
+                            $temp = array_unique(array_column($data1, 'tgk'));
+                            $unique_arr = array_intersect_key($data1, $temp);
+
+                            $dtunser['data'] = $unique_arr;
+                            $status = false;
+                        } else {
+                            $new_abs = array(
+                                'idtg' => $this->input->post('idtg'),
+                                'data' => array(
+                                    array(
+                                        'tgk' => $this->input->post('idtgk'),
+                                        'abs' => $this->input->post('absensi')
+                                    )
+                                )
+                            );
+                        }
+                    }
+
+                    $result[] = $dtunser;
+                }
+                if ($sts_new == true) {
+                    $result[] = $new_abs;
+                }
+                $this->db->update('tbl_abs_model', ['tgs_abs' => serialize($result)], ['siswa_nis' => $this->input->post('nis')]);
+                // var_dump($result[0]);
+                echo "<script>window.history.go(-1);location.reload();</script>";
+                // die;
+            }
+        } else {
+            $new_abs1 = array(
+                array(
+                    'idtg' => $this->input->post('idtg'),
+                    'data' => array(
+                        array(
+                            'tgk' => $this->input->post('idtgk'),
+                            'abs' => $this->input->post('absensi')
+                        )
+                    )
+                )
+            );
+            $this->db->insert('tbl_abs_model', ['siswa_nis' => $this->input->post('nis'), 'tgs_abs' => serialize($new_abs1)]);
+            echo "<script>window.history.go(-1);location.reload();</script>";
+        }
+    }
+    
+    function hapus_tgl_oc($idpel,$tgl)
+    {
+        // var_dump($idpel); die;
+        $sql = $this->db->get_where('tbl_abs_oc', ['id_pelajaran' => $idpel])->row_array();
+        $dtunsersql = unserialize($sql['dt_oc']);
+        foreach ($dtunsersql as $key => $value) {
+            if ($value['tgl'] == $tgl) {
+                unset($dtunsersql[$key]);
+            }
+        }
+        $dtfix = array_merge($dtunsersql); 
+        // var_dump($dtfix); die;
+        $this->db->update('tbl_abs_oc', ['dt_oc' => serialize($dtfix)], ['id_pelajaran' => $idpel]);
+        echo "<script>window.history.go(-1);location.reload();</script>";
+        // a:3:{i:0;a:2:{s:3:"tgl";s:10:"2020-09-08";s:4:"data";a:4:{i:0;a:2:{s:3:"nis";s:7:"2019638";s:3:"abs";s:5:"hadir";}i:1;a:2:{s:3:"nis";s:7:"2019639";s:3:"abs";s:5:"hadir";}i:2;a:2:{s:3:"nis";s:7:"2019636";s:3:"abs";s:5:"hadir";}i:3;a:2:{s:3:"nis";s:7:"2019644";s:3:"abs";s:5:"hadir";}}}i:1;a:2:{s:3:"tgl";s:10:"2020-08-20";s:4:"data";a:2:{i:0;a:2:{s:3:"nis";s:7:"2019638";s:3:"abs";s:5:"hadir";}i:1;a:2:{s:3:"nis";s:7:"2019644";s:3:"abs";s:5:"hadir";}}}i:2;a:2:{s:3:"tgl";s:10:"2020-08-28";s:4:"data";a:1:{i:0;a:2:{s:3:"nis";s:7:"2019638";s:3:"abs";s:5:"hadir";}}}}
+    }
+
+
+
+    function save_absensi_kelas()
+    {
+        $testpeserta = $this->input->post('siswa[]');
+        $forum = $this->input->post('fr');
+        $forumke = $this->input->post('frk');
+        $dataserialize = $this->db->get_where('tbl_fr_absensi', ['id_forum' => $forum])->row_array();
+        $dataunser = unserialize($dataserialize['siswa_abs']);
+        $dtinput = array();
+        $dtfix = array();
+
+        foreach ($dataunser as $dtsis) {
+            $siswa = array();
+            if ($dtsis['frk'] == $forumke) {
+                foreach ($testpeserta as $dtdekoy => $val) {
+                    array_push(
+                        $siswa,
+                        array(
+                            'nis' => $val,
+                        )
+                    );
+                }
+                $dtinput['frk'] = $forumke;
+                $dtinput['siswa'] = $siswa;
+                $dtfix[] =  $dtinput;
+                var_dump($dtfix);
+            }
+        }
+
+
+
+        var_dump($dtfix);
+        die;
+
+
+        foreach ($peserta as $key => $val) {
+            $this->db->update('tbl_siswa', ['oc' => 1], ['siswa_nis' => $val]);
+        }
+
+        redirect(site_url('siswa/online_class'));
+    }
+}

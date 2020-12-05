@@ -144,6 +144,7 @@
 					<a href="<?= site_url('kisikisi') ?>" class="nav-link" id="kisikisi">Kisi-kisi</a>
 					<a href="#" class="nav-link" id="schedule">Schedule</a>
 					<a href="#" class="nav-link" id="score">Score</a>
+					<a href="<?= site_url('detail_absensi/absensi_forum/'). $this->session->userdata('username') ?>" class="nav-link" id="absensi">Absensi</a>
 				</div>
 
 				<button aria-label="Previous" class="glider-prev">&#8249;</button>

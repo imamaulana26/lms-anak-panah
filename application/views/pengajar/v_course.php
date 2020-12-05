@@ -28,6 +28,8 @@
 									<a href="<?= site_url('tugas/') . $val['id_pelajaran'] ?>"><i class="fas fa-fw fa-tasks pr-1"></i> <?= $n_tugas ?> Assigment to do</a>
 									<div class="dropdown-divider"></div>
 									<a href="javascript:void(0)" id="view" onclick="view('<?= $val['id_pelajaran'] ?>')"><i class="fas fa-fw fa-video pr-1"></i> Kelas Online</a>
+									<div class="dropdown-divider"></div>
+									<a href="<?= site_url('absensi/attendent_kc/') . $val['id_pelajaran'] ?>"><i class="fas fa-check-square pr-1"></i> Kelas Komunitas</a>
 								</div>
 							</div>
 						</div>
@@ -85,6 +87,22 @@
 	function submit() {
 		$.ajax({
 			url: '<?= site_url('course/update_oc/') ?>',
+			type: 'post',
+			dataType: 'json',
+			data: $('#fm_oc').serialize(),
+			beforeSend: function() {
+				$('.btn').html('<i class="fa fa-spin fa-spinner"></i> loading');
+			},
+			success: function(data) {
+				alert(data.msg);
+				location.reload();
+			}
+		})
+	}
+
+	function absensi_oc() {
+		$.ajax({
+			url: '<?= site_url('course/absensi_oc') ?>',
 			type: 'post',
 			dataType: 'json',
 			data: $('#fm_oc').serialize(),

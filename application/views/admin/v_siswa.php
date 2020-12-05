@@ -233,7 +233,8 @@ if ($c['pengguna_level'] == 2) {
                   <div class="col-md-6" style="float: right;">
                     <div class="box-header">
                       <a class="btn btn-success btn-flat" style="float: right;" href="<?= site_url('siswa/add_siswa') ?>"><span class="fa fa-plus"></span> Add Siswa</a>
-                      <a href="<?= site_url('siswa/online_class') ?>" class="btn btn-info btn-flat" style="float: right; margin-right: 20px;">Online Class</a>
+                      <a href="<?= site_url('siswa/komunitas_class') ?>" class="btn btn-info btn-flat" style="float: right; margin-right: 20px;">Kelas Komunitas</a>
+                      <a href="<?= site_url('siswa/online_class') ?>" class="btn btn-warning btn-flat" style="float: right; margin-right: 20px;">Online Class</a>
                     </div>
                   </div>
                 </div>

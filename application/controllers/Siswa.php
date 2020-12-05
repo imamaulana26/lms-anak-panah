@@ -38,6 +38,76 @@ class Siswa extends CI_Controller
 		// var_dump($data['forum']); die;
 		$this->load->view('admin/v_detail_absensi', $data);
 	}
+	function detail_absensi_siswa_oc($nis)
+	{
+
+		// $dataserialize = $this->db->get_where('tbl_abs_model', ['siswa_nis' => $nis])->row_array();
+		// $siswa_where =$this->db->select('siswa_nama,siswa_kelas_id')->from('tbl_siswa')->where(['siswa_nis' => $nis])->get()->row_array();
+		$data['nama'] = $this->db->select('siswa_nama,siswa_kelas_id')->from('tbl_siswa')->where(['siswa_nis' => $nis])->get()->row_array();
+		$kelas = $data['nama']['siswa_kelas_id'];
+		$data['mapel'] = $this->db->select('nm_mapel,id_pelajaran')->from('tbl_pelajaran a')->join('tbl_mapel b', 'a.kd_mapel=b.kd_mapel', 'inner')->where(['id_kelas' => $kelas])->get()->result_array();
+		// $dataunser = unserialize($dataserialize['fr_abs']);
+		// $datamapel = $this->db->get_where()
+		// var_dump($siswa_where); die;
+		// $data['forum'] = $dataunser;
+
+
+		// $data['mapel'] = $this->db->get_where('tbl_pelajaran',['id_kelas'=>'11'])->result_array();
+
+		// var_dump($data['forum']); die;
+		// $testdata = $this->db->get_where('tbl_abs_oc', ['id_pelajaran' => '43'])->row_array();
+		// $dt_unser = unserialize($testdata['dt_oc']);
+		// foreach ($dt_unser as $key => $value) {
+		// 	var_dump($value);
+		// }
+
+		//  die;
+		$this->load->view('admin/v_detail_absensi_oc', $data);
+	}
+
+	function komunitas_class()
+	{
+		$row = array();
+		$peserta = array();
+		$sql = $this->db->get_where('tbl_kelas', ['kelas_id <' => 16])->result_array();
+
+		foreach ($sql as $sql) {
+			$qry = $this->db->get_where('tbl_siswa', ['siswa_kelas_id' => $sql['kelas_id']])->result_array();
+
+			$peserta['kelas'] = $sql['kelas_nama'];
+			$siswa = array();
+			foreach ($qry as $val) {
+				array_push(
+					$siswa,
+					array(
+						'nis' => $val['siswa_nis'],
+						'nama' => $val['siswa_nama'],
+						'komclass' => $val['kc']
+					)
+				);
+			}
+			$peserta['siswa'] = $siswa;
+			$row[] = $peserta;
+		}
+
+		$data['li_peserta'] = $row;
+
+		$this->load->view('admin/v_komunitas_class', $data);
+	}
+
+	function save_komunitas_class()
+	{
+		$this->db->update('tbl_siswa', ['kc' => 0], ['kc' => 1]);
+
+		$peserta = $this->input->post('peserta[]');
+
+		foreach ($peserta as $key => $val) {
+			$this->db->update('tbl_siswa', ['kc' => 1], ['siswa_nis' => $val]);
+		}
+
+		redirect(site_url('siswa/online_class'));
+	}
+
 
 	function online_class()
 	{
@@ -67,6 +137,7 @@ class Siswa extends CI_Controller
 		// die;
 
 		$data['li_peserta'] = $row;
+		// var_dump($row); die;
 
 		$this->load->view('admin/v_online_class', $data);
 	}

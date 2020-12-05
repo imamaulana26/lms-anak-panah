@@ -216,7 +216,7 @@ $c = $q->row_array();
                                 <a href="<?php site_url() ?>" class="btn btn-primary" style="margin-bottom: 10px"> Kelas Online</a>
                             </div>
                             <div class="box-header" style="text-align: center;">
-                                <label class="label label-primary" style="font-size: 20px;">Forum</label>
+                                <label class="label label-primary" style="font-size: 20px;">Kelas Online</label>
                             </div>
 
                             <!-- /.box-header -->
@@ -230,30 +230,42 @@ $c = $q->row_array();
                                                 <table class="table table-striped">
                                                     <thead>
                                                         <tr>
-                                                            <th>forumke</th>
-                                                            <th>materi</th>
+                                                            <th>Tgl</th>
                                                             <th>absen/hadir</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <?php foreach ($forum as $dtforum) : ?>
-                                                            <?php if ($dtforum['idf'] == $dtmapel['id_pelajaran']) : ?>
-                                                                <?php foreach ($dtforum['data'] as $dtabsen) { ?>
-                                                                    <tr>
-                                                                        <td><?= $dtabsen['frk'] ?></td>
-                                                                        <?php $dtnm_mapel = $this->db->get_where('tbl_materi_forum', ['id_forum' => $dtmapel['id_pelajaran'], 'pertemuan' => $dtabsen['frk']])->row_array() ?>
-                                                                        <td><?= $dtnm_mapel['judul_materi'] ?></td>
-                                                                        <td>
-                                                                            <?php if ($dtabsen['abs'] == 'hadir') { ?>
-                                                                                <span class="label label-success" style="width: 100%;display: table-caption;">hadir</span>
-                                                                            <?php } else { ?>
-                                                                                <span class="label label-danger" style="width: 100%;display: table-caption;">Tidak hadir</span>
-                                                                            <?php } ?>
-                                                                        </td>
-                                                                    </tr>
-                                                                <?php } ?>
-                                                            <?php endif; ?>
-                                                        <?php endforeach; ?>
+                                                        <?php
+                                                        $testdata = $this->db->get_where('tbl_abs_oc', ['id_pelajaran' => $dtmapel['id_pelajaran']])->row_array();
+                                                        if (!empty($testdata)) {
+                                                            $dt_unser = unserialize($testdata['dt_oc']);
+                                                            foreach ($dt_unser as $key => $value) { ?>
+                                                                <tr>
+                                                                    <td><?= $value['tgl'] ?></td>
+                                                                    <td>
+                                                                        <?php
+                                                                        $check = array_search($this->uri->segment(3), array_column($value['data'], 'nis'));
+                                                                        if ($check === 0) {
+                                                                            foreach ($value['data'] as $valdat) {
+                                                                                if ($valdat['nis'] === $this->uri->segment(3)) {
+                                                                                    echo $valdat['abs'];
+                                                                                }
+                                                                            }
+                                                                        } else {
+                                                                            echo 'Tidak Ada Data';
+                                                                        }
+                                                                        ?>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php }
+                                                        } else { ?>
+                                                            <tr>
+                                                                <td>x</td>
+                                                                <td>x</td>
+                                                            </tr>
+                                                        <?php } ?>
+
+
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -262,54 +274,6 @@ $c = $q->row_array();
                                     </div>
                                 <?php } ?>
 
-
-                                <!-- <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                    <?php foreach ($mapel as $dtmapel) {
-                                    ?>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" role="tab" id=" <?= $dtmapel['id_pelajaran'] ?>">
-                                                <h4 class="panel-title">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#<?= $dtmapel['id_pelajaran'] ?>" aria-expanded="false" aria-controls=" <?= $dtmapel['id_pelajaran'] ?>">
-                                                        <?= $dtmapel['nm_mapel'] ?>
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="<?= $dtmapel['id_pelajaran'] ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby=" <?= $dtmapel['id_pelajaran'] ?>">
-                                                <div class="panel-body">
-                                                    <table class="table table-striped" style="font-size:13px;width: 20%;">
-                                                        <thead>
-                                                            <tr>
-                                                                <th style="width: 20%;">forumke</th>
-                                                                <th>materi</th>
-                                                                <th>absen/hadir</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <?php foreach ($forum as $dtforum) : ?>
-                                                                <?php if ($dtforum['idf'] == $dtmapel['id_pelajaran']) : ?>
-                                                                    <?php foreach ($dtforum['data'] as $dtabsen) { ?>
-                                                                        <tr>
-                                                                            <td><?= $dtabsen['frk'] ?></td>
-                                                                            <?php $dtnm_mapel = $this->db->get_where('tbl_materi_forum', ['id_forum' => $dtmapel['id_pelajaran'], 'pertemuan' => $dtabsen['frk']])->row_array() ?>
-                                                                            <td><?= $dtnm_mapel['judul_materi'] ?></td>
-                                                                            <td>
-                                                                                <?php if ($dtabsen['abs'] == 'hadir') { ?>
-                                                                                    <span class="label label-success">hadir</span>
-                                                                                <?php } else { ?>
-                                                                                    <span class="label label-danger">Tidak hadir</span>
-                                                                                <?php } ?>
-                                                                            </td>
-                                                                        </tr>
-                                                                    <?php } ?>
-                                                                <?php endif; ?>
-                                                            <?php endforeach; ?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php } ?>
-                                </div> -->
 
                             </div>
                         </div>

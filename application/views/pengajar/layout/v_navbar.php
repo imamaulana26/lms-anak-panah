@@ -104,6 +104,7 @@
 					<a href="<?= site_url('dashboard') ?>" class="nav-link" id="home">Home</a>
 					<a href="<?= site_url('course') ?>" class="nav-link" id="course">Course</a>
 					<a href="#" class="nav-link" id="schedule">Schedule</a>
+					<!-- <a href="<?= site_url('absensi/list_kc_mapel') ?>" class="nav-link" id="schedule">Absensi Offline</a> -->
 				</div>
 
 				<button aria-label="Previous" class="glider-prev">&#8249;</button>

@@ -216,7 +216,7 @@ if ($c['pengguna_level'] == 2) {
 								<label>Daftar Peserta Kelas Online</label>
 								<form id="fm_class_online" action="<?= site_url('siswa/save_online_class') ?>" method="post">
 									<select class="select2" name="peserta[]" multiple="multiple" style="width: 100%;">
-										<?php foreach ($absensi_siswa as $val) : ?>
+										<?php foreach ($li_peserta as $val) : ?>
 											<optgroup label="<?= $val['kelas'] ?>">
 												<?php foreach ($val['siswa'] as $val) : ?>
 													<option value="<?= $val['nis'] ?>" <?= $val['onclass'] == 1 ? 'selected' : '' ?>><?= $val['nama'] ?></option>

@@ -23,7 +23,9 @@
 <script src="<?= base_url('assets/front-end/plugins/sweetalert2/sweetalert2.min.js') ?>"></script>
 <!-- Ekko Lightbox -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js" crossorigin="anonymous"></script>
-
+<!-- JS Datepicker -->
+<script src="<?= base_url('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') ?>"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.js"></script>
 
 <!-- AdminLTE App -->
 <!-- <script src="dist/js/adminlte.min.js"></script> -->
@@ -45,6 +47,22 @@
 			$("li.dropdown.nav-item").removeClass("show");
 		}
 	});
+</script>
+
+<script>
+	$('.input-group.date').datepicker({
+		format: 'yyyy-mm-dd',
+		endDate: '0d',
+		autoclose: true,
+		todayHighlight: true
+
+	});
+</script>
+
+
+<script type="text/javascript">
+	$('.clockpicker1').clockpicker();
+	$('.clockpicker2').clockpicker();
 </script>
 
 <!-- My JS -->

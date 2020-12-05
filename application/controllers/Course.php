@@ -45,6 +45,7 @@ class Course extends CI_Controller
 	function update_oc()
 	{
 		var_dump($_POST); die;
+		
 		$sql = $this->db->get_where('tbl_abs_oc', ['id_pelajaran' => $this->input->post('id')])->row_array();
 		if ($sql == null) {
 			$this->db->insert('tbl_abs_oc',['id_pelajaran' => $this->input->post('id')]);

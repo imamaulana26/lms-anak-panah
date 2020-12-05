@@ -85,6 +85,7 @@
 <?php $this->load->view('pengajar/v_schedule') ?>
 </div>
 
+<?php $this->load->view('pengajar/layout/v_footer'); ?>
 <?php $this->load->view('pengajar/layout/v_js'); ?>
 
 <!-- script here -->

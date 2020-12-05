@@ -57,4 +57,3 @@ $route['forum/(:num)'] = 'forum/diskusi/$1';
 $route['tugas/(:num)'] = 'tugas/tugas/$1';
 $route['absensi_fr/(:num)/(:num)'] = 'absensi/attendent_fr/$1/$2';
 $route['absensi_tgs/(:num)/(:num)'] = 'absensi/attendent_tgs/$1/$2';
-$route['course/absensi_oc/(:num)'] = 'absensi/attendent_oc/$1';

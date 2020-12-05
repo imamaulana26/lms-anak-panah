@@ -242,8 +242,9 @@ class Absensi extends CI_Controller
         }
     }
 
-    public function attendent_oc($key)
+    public function attendent_oc()
     {
+		$key = $this->input->post('id');
         $sql1 = $this->db->get_where('tbl_abs_oc', ['id_pelajaran' => $key])->row_array();
         $unser = unserialize($sql1['dt_oc']);
         // $data['nm_mapel'] = $mapel['nm_mapel'];

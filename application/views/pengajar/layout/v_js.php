@@ -59,10 +59,13 @@
 	});
 </script>
 
-
 <script type="text/javascript">
 	$('.clockpicker1').clockpicker();
 	$('.clockpicker2').clockpicker();
+	// # check number javascript
+	function CheckNumeric() {
+		return event.keyCode >= 48 && event.keyCode <= 57;
+	}
 </script>
 
 <!-- My JS -->

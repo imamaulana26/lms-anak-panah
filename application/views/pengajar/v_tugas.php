@@ -140,13 +140,13 @@
 												<?php if (is_array(unserialize($val['lampiran']))) : ?>
 													<p><b>Lampiran</b></p>
 													<?php foreach (unserialize($val['lampiran']) as $att) : ?>
-														<a href="<?= $att ?>" data-toggle="lightbox" data-gallery="gallery">
+														<a href="<?= $att ?>" data-toggle="lightbox" data-gallery="gallery-<?= $val['id'] ?>">
 															<img src="<?= $att ?>" class="img-thumbnail" style="max-height: 80px; max-width: 80px;">
 														</a>
 													<?php endforeach; ?>
 												<?php else : ?>
 													<p><b>Lampiran</b></p>
-													<a href="<?= unserialize($val['lampiran']) ?>" data-toggle="lightbox" data-gallery="gallery">
+													<a href="<?= unserialize($val['lampiran']) ?>" data-toggle="lightbox" data-gallery="gallery-<?= $val['id'] ?>">
 														<img src="<?= unserialize($val['lampiran']) ?>" class="img-thumbnail" style="max-height: 80px; max-width: 80px;">
 													</a>
 												<?php endif; ?>
@@ -191,6 +191,9 @@
 														<?php $komen = $this->db->get_where('tbl_komen_tugas', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'reply_to' => 0]);
 														foreach ($komen->result_array() as $cmd) :
 															$siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $cmd['user_komen']])->row_array();
+															// $nilai = $this->db->get_where('tbl_nilai_onclass', ['user_siswa' => $cmd['user_komen'], 'id_pelajaran' => $val['id_forum'], 'pertemuan_ke' => $val['pertemuan'], 'tipe' => 'Tugas'])->num_rows();
+															$nilai = $this->db->get_where('tbl_nilai_onclass', ['user_siswa' => $cmd['user_komen'], 'id_pelajaran' => $val['id_forum'], 'pertemuan_ke' => $val['pertemuan'], 'tipe' => 'Tugas'])->row_array();
+															$score = ($nilai['nilai'] == null) ? '' : ' (' . $nilai['nilai'] . ' point)';
 
 															$admin = $this->db->get_where('tbl_pengguna', ['pengguna_username' => $cmd['user_komen']])->row_array();
 															$rep_user = ($siswa == null) ? $admin['pengguna_nama'] . ' (pengajar)' : $siswa['siswa_nama']; ?>
@@ -199,13 +202,18 @@
 																	<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
 																</div>
 																<div class="col-md">
-																	<strong class="float-left"><?= $rep_user ?></strong>
+																	<strong class="float-left"><?= $rep_user . $score ?></strong>
 																	<small class="float-right text-secondary">
 																		<div class="dropdown mx-1">
 																			<a href="#" class="btn btn-link btn-xs" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 																				<i class='fa fa-ellipsis-v'></i>
 																			</a>
 																			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+																				<?php if ($admin['pengguna_username'] != $this->session->userdata('username')) : ?>
+																					<a class="dropdown-item" href="javascript:void(0)" onclick="nilai('<?= $cmd['id'] ?>')" style="font-size: 12px; color: #007bff;">
+																						<i class="fa fa-fw fa-check-square"></i> Nilai
+																					</a>
+																				<?php endif; ?>
 																				<a class="dropdown-item" href="<?= site_url('tugas/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;">
 																					<i class="fa fa-fw fa-pencil-alt"></i> Sunting
 																				</a>
@@ -279,6 +287,9 @@
 															foreach ($reply->result_array() as $rep) :
 																$rep_siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['user_komen']])->row_array();
 																$admin = $this->db->get_where('tbl_pengguna', ['pengguna_username' => $rep['user_komen']])->row_array();
+																// $rep_nilai = $this->db->get_where('tbl_nilai_onclass', ['user_siswa' => $rep['user_komen'], 'id_pelajaran' => $val['id_forum'], 'pertemuan_ke' => $val['pertemuan'], 'tipe' => 'Tugas'])->num_rows();
+																$rep_nilai = $this->db->get_where('tbl_nilai_onclass', ['user_siswa' => $rep['user_komen'], 'id_pelajaran' => $val['id_forum'], 'pertemuan_ke' => $val['pertemuan'], 'tipe' => 'Tugas'])->row_array();
+																$score = ($rep_nilai['nilai'] == null) ? '' : ' (' . $rep_nilai['nilai'] . ' point)';
 
 																$rep_user = ($rep_siswa == null) ? $admin['pengguna_nama'] . ' (pengajar)' : $rep_siswa['siswa_nama'];
 																$mention = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['mention']])->row_array(); ?>
@@ -290,14 +301,19 @@
 																				<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
 																			</div>
 																			<div class="col-md">
-																				<strong class="float-left"><?= $rep_user ?></strong>
+																				<strong class="float-left"><?= $rep_user . $score ?></strong>
 																				<small class="float-right text-secondary">
 																					<div class="dropdown mx-1">
 																						<a href="#" class="btn btn-link btn-xs" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 																							<i class='fa fa-ellipsis-v'></i>
 																						</a>
 																						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-																							<a class="dropdown-item" href="<?= site_url('tugas/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;">
+																							<?php if ($admin['pengguna_username'] != $this->session->userdata('username')) : ?>
+																								<a class="dropdown-item" href="javascript:void(0)" onclick="nilai('<?= $rep['id'] ?>')" style="font-size: 12px; color: #007bff;">
+																									<i class="fa fa-fw fa-check-square"></i> Nilai
+																								</a>
+																							<?php endif; ?>
+																							<a class="dropdown-item" href="<?= site_url('tugas/edit_komen/' . $rep['id']) ?>" style="font-size: 12px; color: #1e7e34;">
 																								<i class="fa fa-fw fa-pencil-alt"></i> Sunting
 																							</a>
 																							<a class="dropdown-item" href="javascript:void(0)" onclick="hapus_subkomen('<?= $rep['id'] ?>')" style="font-size: 12px; color: #dc3545;">
@@ -380,6 +396,42 @@
 	</div><!-- /.container -->
 </div><!-- /.content-wrapper -->
 
+<!-- Modal -->
+<div class="modal fade" id="nilaiModal" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<form method="post" action="<?= site_url($this->uri->segment(1) . '/submit_nilai') ?>" autocomplete="off">
+				<div class="modal-body">
+					<input type="hidden" name="nis_siswa" id="nis_siswa">
+					<input type="hidden" name="tugas_id" id="tugas_id">
+					<input type="hidden" name="tugas_ke" id="tugas_ke">
+					<input type="hidden" name="komen_tugas" id="komen_tugas">
+					<input type="hidden" name="lamp_tugas" id="lamp_tugas">
+					<div class="row">
+						<div class="col">
+							<p id="text"></p>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-2">
+							<label class="control-label">Input Nilai</label>
+						</div>
+						<div class="col-1">
+							<input type="text" name="nilai_siswa" id="nilai_siswa" class="form-control form-control-sm" required onkeypress="return CheckNumeric()">
+						</div>
+						<div class="col">
+							<small class="form-text text-muted">Range 10 - 100</small>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 
 <?php $this->load->view('pengajar/v_schedule') ?>
 </div>
@@ -442,6 +494,25 @@
 		e.preventDefault()
 		$(this).tab('show')
 	});
+</script>
+
+<script>
+	<?php $msg = $this->session->flashdata('msg');
+	if (!empty($msg)) :
+		if ($msg['status'] == false) : ?>
+			Swal.fire({
+				title: 'Oops!',
+				text: '<?= $msg['text'] ?>',
+				icon: 'warning',
+			});
+		<?php else : ?>
+			Swal.fire({
+				title: 'Success',
+				text: '<?= $msg['text'] ?>',
+				icon: 'success',
+			});
+	<?php endif;
+	endif; ?>
 
 	function sts_forum(id) {
 		$.ajax({
@@ -460,6 +531,32 @@
 						location.reload();
 					}
 				})
+			}
+		});
+	}
+
+	function nilai(id) {
+		let url = "<?= site_url($this->uri->segment(1) . '/get_komen/') ?>" + id;
+
+		$('#nilaiModal').modal('show');
+
+		$.ajax({
+			url: url,
+			type: 'get',
+			dataType: 'json',
+			success: function(data) {
+				var komen = data.komen;
+				var nilai = (data.nilai == null) ? '' : data.nilai.nilai;
+				var text = `Berikan nilai kepada <b>` + komen.siswa_nama + `</b> - <b>` + komen.kelas_nama + `</b> 
+				untuk <b><?= ucfirst($this->uri->segment(1)); ?> ` + komen.nm_mapel + ` pertemuan ke-` + komen.pertemuan + `</b> tentang <b>` + komen.judul_materi + ` (` + komen.jns_materi + `)</b>`;
+				$('#text').html(text);
+
+				$('#nis_siswa').val(komen.siswa_nis);
+				$('#tugas_id').val('<?= $this->uri->segment(2) ?>');
+				$('#tugas_ke').val(komen.pertemuan);
+				$('#komen_tugas').val(komen.isi_komen);
+				$('#lamp_tugas').val(komen.lampiran);
+				$('#nilai_siswa').val(nilai);
 			}
 		});
 	}

@@ -144,6 +144,7 @@ class Forum extends CI_Controller
 		echo json_encode(['status' => true]);
 		exit;
 	}
+
 	public function upload()
 	{
 		$status = false;
@@ -263,7 +264,76 @@ class Forum extends CI_Controller
 	}
 
 
+	public function submit_nilai()
+	{
+		$nilai = $this->input->post('nilai_siswa');
+		$where = array(
+			'user_siswa' => $this->input->post('nis_siswa'),
+			'id_pelajaran' => $this->input->post('forum_id'),
+			'pertemuan_ke' => $this->input->post('forum_ke'),
+			'tipe' => 'Forum'
+		);
+		$cek = $this->db->get_where('tbl_nilai_onclass', $where)->num_rows();
 
+		$data = array(
+			'user_siswa' => $this->input->post('nis_siswa'),
+			'id_pelajaran' => $this->input->post('forum_id'),
+			'pertemuan_ke' => $this->input->post('forum_ke'),
+			'nilai' => $this->input->post('nilai_siswa'),
+			'komen' => $this->input->post('komen_forum'),
+			'lampiran' => $this->input->post('lamp_forum'),
+			'tipe' => 'Forum'
+		);
+
+		if ($nilai < 10 || $nilai > 100) {
+			$msg = array(
+				'status' => false,
+				'text' => 'Input nilai invalid!'
+			);
+			$this->session->set_flashdata('msg', $msg);
+		} else {
+			if ($cek > 0) {
+				$data['updateDate'] = date('Y-m-d');
+				$this->db->update('tbl_nilai_onclass', $data, $where);
+			} else {
+				$data['createDate'] = date('Y-m-d');
+				$this->db->insert('tbl_nilai_onclass', $data);
+			}
+
+			$msg = array(
+				'status' => true,
+				'text' => 'Nilai berhasil tersimpan'
+			);
+
+			$this->session->set_flashdata('msg', $msg);
+		}
+		redirect(site_url('forum/' . $data['id_pelajaran']));
+	}
+
+	public function get_komen($key)
+	{
+		$data['komen'] = $this->db->select('b.siswa_nis, b.siswa_nama, c.kelas_nama, e.id_pelajaran, f.nm_mapel, a.pertemuan, a.isi_komen, a.lampiran, d.judul_materi, d.jns_materi')
+			->from('tbl_komen_forum a')
+			->join('tbl_siswa b', 'a.user_komen = b.siswa_nis', 'inner')
+			->join('tbl_kelas c', 'b.siswa_kelas_id = c.kelas_id', 'left')
+			->join('tbl_materi_forum d', 'a.id_forum = d.id_forum and a.pertemuan = d.pertemuan', 'inner')
+			->join('tbl_pelajaran e', 'e.id_pelajaran = a.id_forum', 'inner')
+			->join('tbl_mapel f', 'e.kd_mapel = f.kd_mapel', 'inner')
+			->where(['a.id' => $key])->get()->row_array();
+
+		$data['nilai'] = $this->db->get_where(
+			'tbl_nilai_onclass',
+			[
+				'user_siswa' => $data['komen']['siswa_nis'],
+				'id_pelajaran' => $data['komen']['id_pelajaran'],
+				'pertemuan_ke' => $data['komen']['pertemuan'],
+				'tipe' => 'Forum'
+			]
+		)->row_array();
+
+		echo json_encode($data);
+		exit;
+	}
 
 	public function submit_main()
 	{

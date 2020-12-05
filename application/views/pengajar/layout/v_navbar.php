@@ -103,6 +103,7 @@
 				<div class="glider">
 					<a href="<?= site_url('dashboard') ?>" class="nav-link" id="home">Home</a>
 					<a href="<?= site_url('course') ?>" class="nav-link" id="course">Course</a>
+					<a href="<?= site_url('penilaian') ?>" class="nav-link" id="score">Score</a>
 					<a href="#" class="nav-link" id="schedule">Schedule</a>
 					<!-- <a href="<?= site_url('absensi/list_kc_mapel') ?>" class="nav-link" id="schedule">Absensi Offline</a> -->
 				</div>

@@ -258,6 +258,77 @@ class Tugas extends CI_Controller
 		}
 	}
 
+	public function get_komen($key)
+	{
+		$data['komen'] = $this->db->select('b.siswa_nis, b.siswa_nama, c.kelas_nama, e.id_pelajaran, f.nm_mapel, a.pertemuan, a.isi_komen, a.lampiran, d.judul_materi, d.jns_materi')
+			->from('tbl_komen_tugas a')
+			->join('tbl_siswa b', 'a.user_komen = b.siswa_nis', 'inner')
+			->join('tbl_kelas c', 'b.siswa_kelas_id = c.kelas_id', 'left')
+			->join('tbl_materi_forum d', 'a.id_forum = d.id_forum and a.pertemuan = d.pertemuan', 'inner')
+			->join('tbl_pelajaran e', 'e.id_pelajaran = a.id_forum', 'inner')
+			->join('tbl_mapel f', 'e.kd_mapel = f.kd_mapel', 'inner')
+			->where(['a.id' => $key])->get()->row_array();
+
+		$data['nilai'] = $this->db->get_where(
+			'tbl_nilai_onclass',
+			[
+				'user_siswa' => $data['komen']['siswa_nis'],
+				'id_pelajaran' => $data['komen']['id_pelajaran'],
+				'pertemuan_ke' => $data['komen']['pertemuan'],
+				'tipe' => 'Tugas'
+			]
+		)->row_array();
+
+		echo json_encode($data);
+		exit;
+	}
+
+	public function submit_nilai()
+	{
+		$nilai = $this->input->post('nilai_siswa');
+		$where = array(
+			'user_siswa' => $this->input->post('nis_siswa'),
+			'id_pelajaran' => $this->input->post('tugas_id'),
+			'pertemuan_ke' => $this->input->post('tugas_ke'),
+			'tipe' => 'Tugas'
+		);
+		$cek = $this->db->get_where('tbl_nilai_onclass', $where)->num_rows();
+
+		$data = array(
+			'user_siswa' => $this->input->post('nis_siswa'),
+			'id_pelajaran' => $this->input->post('tugas_id'),
+			'pertemuan_ke' => $this->input->post('tugas_ke'),
+			'nilai' => $this->input->post('nilai_siswa'),
+			'komen' => $this->input->post('komen_tugas'),
+			'lampiran' => $this->input->post('lamp_tugas'),
+			'tipe' => 'Tugas'
+		);
+
+		if ($nilai < 10 || $nilai > 100) {
+			$msg = array(
+				'status' => false,
+				'text' => 'Input nilai invalid!'
+			);
+			$this->session->set_flashdata('msg', $msg);
+		} else {
+			if ($cek > 0) {
+				$data['updateDate'] = date('Y-m-d');
+				$this->db->update('tbl_nilai_onclass', $data, $where);
+			} else {
+				$data['createDate'] = date('Y-m-d');
+				$this->db->insert('tbl_nilai_onclass', $data);
+			}
+
+			$msg = array(
+				'status' => true,
+				'text' => 'Nilai berhasil tersimpan'
+			);
+
+			$this->session->set_flashdata('msg', $msg);
+		}
+		redirect(site_url('tugas/' . $data['id_pelajaran']));
+	}
+
 
 
 
@@ -354,7 +425,8 @@ class Tugas extends CI_Controller
 					$data = array(
 						'id_forum' => $this->input->post('id_forum'),
 						'pertemuan' => $this->input->post('pertemuan'),
-						'reply_to' => 0,
+						'reply_to' => $this->input->post('reply_to'),
+						'mention' => $this->input->post('mention'),
 						'user_komen' => $this->input->post('user_komen'),
 						'isi_komen' => $this->input->post('komentar'),
 						'lampiran' => serialize('data:' . $file['upload_data']['file_type'] . ';base64,' . base64_encode(file_get_contents($config['upload_path'] . '/' . $image)))
@@ -365,7 +437,8 @@ class Tugas extends CI_Controller
 				$data = array(
 					'id_forum' => $this->input->post('id_forum'),
 					'pertemuan' => $this->input->post('pertemuan'),
-					'reply_to' => 0,
+					'reply_to' => $this->input->post('reply_to'),
+					'mention' => $this->input->post('mention'),
 					'user_komen' => $this->input->post('user_komen'),
 					'isi_komen' => $this->input->post('komentar')
 				);

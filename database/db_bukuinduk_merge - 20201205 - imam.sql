@@ -20,6 +20,9 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_bukuinduk_merge`
 --
+drop database if exists `db_bukuinduk_merge`;
+create database `db_bukuinduk_merge`;
+use `db_bukuinduk_merge`;
 
 -- --------------------------------------------------------
 

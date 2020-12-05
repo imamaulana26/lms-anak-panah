@@ -30,7 +30,7 @@
                 <div class="offset-1 col-sm-10">
                     <div class="card card-primary card-outline">
                         <div class="card-header">
-                            <h5 class="card-title m-0">Absensi Forum ke <?= $this->uri->segment(3) ?> <?= $nm_mapel ?></h5>
+                            <h5 class="card-title m-0">Data Siswa Kelas Online</h5>
                         </div>
                         <div class="card-body ">
                             <div class="box">
@@ -43,7 +43,8 @@
                                                         <tr>
                                                             <th style="width: 15px">No</th>
                                                             <th>NIS</th>
-                                                            <th>Nama Siswa</th>
+                                                            <th>Nama</th>
+                                                            <th>Status</th>
                                                             <th>Aksi</th>
                                                         </tr>
                                                     </thead>
@@ -54,10 +55,32 @@
                                                                 <td><?= $no++ ?></td>
                                                                 <td><?= $li['siswa_nis'] ?></td>
                                                                 <td><?= $li['siswa_nama'] ?></td>
+                                                                <td>
+                                                                    <?php
+                                                                    $data = $this->db->get_where('tbl_abs_oc', ['id_pelajaran' => $this->uri->segment(3)])->row_array();
+                                                                    $dt_unser = unserialize($data['dt_oc']);
+                                                                    // var_dump($dt_unser);
+                                                                    foreach ($dt_unser as $key => $value) {
+                                                                        // var_dump($value['tgl']);
+                                                                        if ($value['tgl'] === $this->uri->segment(4)) {
+                                                                            $check = array_search($li['siswa_nis'], array_column($value['data'], 'nis'));
+                                                                            foreach ($value['data'] as $dtval) {
+                                                                                if ($dtval['nis'] == $li['siswa_nis']) {
+                                                                                    echo $dtval['abs'];
+                                                                                    // var_dump($dtval);
+                                                                                }
+                                                                                // break;
+                                                                            }
+                                                                        }
+                                                                    }
+
+                                                                    if ($check === false) {
+                                                                        echo 'Belum Di Absen';
+                                                                    }
+                                                                    ?>
+                                                                </td>
                                                                 <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal<?= $li['siswa_nis'] ?>">Absensi</button></td>
-
                                                             </tr>
-
                                                             <div class="modal fade bd-example-modal-lg" id="modal<?= $li['siswa_nis'] ?>" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-lg">
                                                                     <div class="modal-content" style="display: inline-block; text-align: center;">
@@ -69,11 +92,10 @@
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
-                                                                        <form action="<?= site_url('absensi/submit_absensi') ?>" method="post" autocomplete="off" enctype="multipart/form-data">
-                                                                            <input type="hidden" name="nis" id="id" value="<?= $li['siswa_nis'] ?>">
-                                                                            <input type="hidden" name="idf" id="id_forum" value="<?= $this->uri->segment(2) ?>">
-                                                                            <input type="hidden" name="idfk" id="user_komen" value="<?= $this->uri->segment(3) ?>">
-                                                                            <!-- <input type="hidden" name="idfk" id="user_komen" value="<?= $this->uri->segment(3) ?>"> -->
+                                                                        <form action="<?= site_url('absensi/submit_absensi_oc') ?>" method="post" autocomplete="off" enctype="multipart/form-data">
+                                                                            <input type="hidden" name="nis" value="<?= $li['siswa_nis'] ?>">
+                                                                            <input type="hidden" name="idoc" value="<?= $this->uri->segment(3) ?>">
+                                                                            <input type="hidden" name="tgl" value="<?= $this->uri->segment(4) ?>">
                                                                             <div class="form-check form-check-inline" style="margin-bottom: 20px; margin-top: 20px;">
                                                                                 <input class="form-check-input" type="radio" name="absensi" id="inlineRadio1" value="Hadir">
                                                                                 <label class="radio-inline form-check-label" for="inlineRadio1">Hadir</label>

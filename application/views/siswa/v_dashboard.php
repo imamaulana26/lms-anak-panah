@@ -36,8 +36,8 @@
 						</div>
 						<div class="card-body">
 							<div class="row">
-								<div class="col-sm">
-									<table class="table table-responsive" style="white-space: nowrap;">
+								<div class="col">
+									<table class="table table-bordered" style="white-space: nowrap;">
 										<thead>
 											<tr>
 												<th>#</th>
@@ -50,14 +50,20 @@
 										<tbody>
 											<?php $no = 1;
 											$tagihan = $this->db->select('*')->from('tbl_pembayaran a')->join('tbl_tagihan b', 'a.jns_tagihan = b.id_tagihan', 'inner')
-												->where('a.nis_siswa', $this->session->userdata('username'))->get()->result_array();
-											foreach ($tagihan as $tgh) { ?>
+												->where('a.nis_siswa', $this->session->userdata('username'))->get();
+											if ($tagihan->num_rows() > 0) {
+												foreach ($tagihan->result_array() as $tgh) { ?>
+													<tr>
+														<td><?= $no++ ?></td>
+														<td><?= $tgh['jns_tagihan'] ?></td>
+														<td><?= date('d F Y', strtotime($tgh['tgl_jatuh_tempo'])) ?></td>
+														<td>Rp. <?= number_format($tgh['nom_tagihan'], 2, ',', '.') ?></td>
+														<td>Rp. <?= number_format(rand(100000, 1000000), 2, ',', '.') ?></td>
+													</tr>
+												<?php }
+											} else { ?>
 												<tr>
-													<td><?= $no++ ?></td>
-													<td><?= $tgh['jns_tagihan'] ?></td>
-													<td><?= date('d F Y', strtotime($tgh['tgl_jatuh_tempo'])) ?></td>
-													<td>Rp. <?= number_format($tgh['nom_tagihan'], 2, ',', '.') ?></td>
-													<td>Rp. <?= number_format(rand(100000, 1000000), 2, ',', '.') ?></td>
+													<td class="text-center" colspan="5">Data tidak tersedia!</td>
 												</tr>
 											<?php } ?>
 										</tbody>
@@ -98,85 +104,42 @@
 						</div>
 						<div class="card-body">
 							<div class="row display">
-								<div class="col-md-4 col-sm">
-									<div class="card card-primary bg-light mb-3">
-										<div class="card-header">Adyakhansa Mustika Jagatwanata</div>
-										<div class="card-body">
-											<table class="table">
-												<thead>
-													<tr>
-														<th>Petemuan</th>
-														<th>Nilai</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>Forum ke-1</td>
-														<td>75 point</td>
-													</tr>
-													<tr>
-														<td>Tugas ke-1</td>
-														<td>25 point</td>
-													</tr>
-												</tbody>
-											</table>
+								<?php foreach ($course as $key => $val) : ?>
+									<div class="col-md-4 col-sm">
+										<div class="card card-primary bg-light mb-3">
+											<div class="card-header"><?= $val['mapel']; ?></div>
+											<div class="card-body">
+												<table class="table">
+													<thead>
+														<tr>
+															<th>Petemuan</th>
+															<th>Nilai</th>
+														</tr>
+													</thead>
+													<tbody>
+														<?php if (array_key_exists('forum', $val['item'])) : ?>
+															<?php for ($i = 0; $i < count($val['item']['forum']); $i++) : ?>
+																<tr>
+																	<td>Forum ke-<?= $val['item']['forum'][$i]['pertemuan'] ?></td>
+																	<td><?= $val['item']['forum'][$i]['nilai'] ?> point</td>
+																</tr>
+															<?php endfor; ?>
+														<?php endif; ?>
+
+														<?php if (array_key_exists('tugas', $val['item'])) : ?>
+															<?php for ($i = 0; $i < count($val['item']['tugas']); $i++) : ?>
+																<tr>
+																	<td>Tugas ke-<?= $val['item']['tugas'][$i]['pertemuan'] ?></td>
+																	<td><?= $val['item']['tugas'][$i]['nilai'] ?> point</td>
+																</tr>
+															<?php endfor; ?>
+														<?php endif; ?>
+													</tbody>
+												</table>
+											</div>
 										</div>
 									</div>
-								</div>
-								<div class="col-md-4 col-sm">
-									<div class="card card-primary bg-light mb-3">
-										<div class="card-header">Afnan Al Kautzar</div>
-										<div class="card-body">
-											<table class="table">
-												<thead>
-													<tr>
-														<th>Petemuan</th>
-														<th>Nilai</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>Forum ke-1</td>
-														<td>35 point</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm">
-									<div class="card card-primary bg-light mb-3">
-										<div class="card-header">Alfarezha Prasetya V</div>
-										<div class="card-body">
-											<table class="table">
-												<thead>
-													<tr>
-														<th>Petemuan</th>
-														<th>Nilai</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>Forum ke-1</td>
-														<td>45 point</td>
-													</tr>
-													<tr>
-														<td>Forum ke-2</td>
-														<td>25 point</td>
-													</tr>
-													<tr>
-														<td>Tugas ke-1</td>
-														<td>50 point</td>
-													</tr>
-													<tr>
-														<td>Tugas ke-2</td>
-														<td>45 point</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
+								<?php endforeach; ?>
 							</div>
 						</div>
 					</div>
@@ -186,7 +149,8 @@
 	</div>
 	<!-- /.content -->
 
-	<?php // $this->load->view('siswa/v_schedule'); ?>
+	<?php // $this->load->view('siswa/v_schedule'); 
+	?>
 </div>
 <!-- /.content-wrapper -->
 

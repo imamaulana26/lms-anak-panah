@@ -30,7 +30,8 @@ class Course extends CI_Controller
 		}
 	}
 
-	function view($id){
+	function view($id)
+	{
 		// $data = $this->db->get_where('tbl_pelajaran', ['id_pelajaran' => $id])->row_array();
 		$data = $this->db->select('*')->from('tbl_pelajaran a')
 			->join('tbl_mapel b', 'a.kd_mapel = b.kd_mapel', 'inner')
@@ -40,7 +41,54 @@ class Course extends CI_Controller
 		echo json_encode($data);
 		exit();
 	}
-	function update_oc(){
+
+	function update_oc()
+	{
+		var_dump($_POST); die;
+		$sql = $this->db->get_where('tbl_abs_oc', ['id_pelajaran' => $this->input->post('id')])->row_array();
+		if ($sql == null) {
+			$this->db->insert('tbl_abs_oc',['id_pelajaran' => $this->input->post('id')]);
+			$new_abs1 = array(
+				array(
+					'tgl' => $this->input->post('jdl_kelas'),
+					'data' => array(
+						array(
+							'nis' => 'null',
+							'absensi' => 'null'
+						)
+					)
+				)
+			);
+			$this->db->update('tbl_abs_oc', ['dt_oc' => serialize($new_abs1)], ['id_pelajaran' => $this->input->post('id')]);
+		}
+
+		//data yang lama
+		if ($sql['dt_oc']!=null) {
+			$dtunser = unserialize($sql['dt_oc']);
+			foreach ($dtunser as $datuns) {
+				if ($datuns['tgl'] == $this->input->post('jdl_kelas')) {
+					echo "<script>alert('data sudah ada');window.history.go(-1);location.reload();</script>";
+					die;
+				}
+			}
+			$dtfix = array_merge($dtunser, $new_abs1);
+		}
+		//end of data lama
+		$new_abs1 = array(
+			array(
+				'tgl' => $this->input->post('jdl_kelas'),
+				'data' => array(
+					array(
+						'nis' => null,
+						'absensi' => null
+					)
+				)
+			)
+		);
+		$dtfix = array_merge($dtunser, $new_abs1);
+		var_dump($dtfix);
+		// $this->db->update('tbl_abs_oc', ['dt_oc' => serialize($dtfix)], ['id_pelajaran' => $this->input->post('id')]);
+		die;
 		$data = array(
 			'link_oc' => $this->input->post('link_oc'),
 			'tgl_oc' => $this->input->post('jdl_kelas'),
@@ -48,7 +96,10 @@ class Course extends CI_Controller
 			'time_end' => $this->input->post('end_on'),
 			'aktifkan' => $this->input->post('opsi_kls')
 		);
-		$this->db->update('tbl_pelajaran', $data,['id_pelajaran'=>$this->input->post('id')]);
+
+		var_dump($data);
+		die;
+		// $this->db->update('tbl_pelajaran', $data,['id_pelajaran'=>$this->input->post('id')]);
 
 		echo json_encode(['msg' => 'berhasil']);
 		exit();

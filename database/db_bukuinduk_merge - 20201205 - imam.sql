@@ -3327,7 +3327,7 @@ CREATE TABLE `tbl_materi_tugas` (
   `judul_materi` varchar(100) NOT NULL,
   `jns_materi` varchar(25) NOT NULL,
   `isi_materi` text NOT NULL,
-  `lampiran` longtext NOT NULL,
+  `lampiran` longtext DEFAULT NULL,
   `createDate` datetime NOT NULL DEFAULT current_timestamp(),
   `status` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

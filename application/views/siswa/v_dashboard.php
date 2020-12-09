@@ -81,11 +81,75 @@
 					<div class="card card-primary card-outline">
 						<div class="card-header">
 							<h5 class="card-title m-0"><i class="far fa-fw fa-chart-bar fa-lg" style="padding-right: 1.5em"></i> Index Prestasi</h5>
-							<a href="#" class="m-auto" style="float: right; position: relative;">View All</a>
+							<!-- <a href="#" class="m-auto" style="float: right; position: relative;">View All</a> -->
 						</div>
 						<div class="card-body">
+							<form action="" method="post">
+								<div class="row">
+									<div class="form-group col-md-4">
+										<select name="xta" class="form-control">
+											<option value="" selected disabled>-- pilih tahun ajaran --</option>
+											<?php
+											$ta = $this->db->select('ta')->from('tbl_nilai')->where('nis_siswa', $_SESSION['username'])->group_by('ta')->get()->result_array();
+											foreach ($ta as $st) {
+												echo "<option value=" . $st['ta'] . ">" . $st['ta'] . "</option>";
+											} ?>
+										</select>
+									</div>
+									<div class="col-2">
+										<button type="submit" class="btn btn-default"><i class="fa fa-fw fa-search"></i> Search</button>
+									</div>
+								</div>
+							</form>
 							<div class="row">
-								<div class="offset-md-1 col-md-10 col-sm">
+								<?php
+								$cond = !isset($_POST['xta']) ? $ta[count($ta) - 1]['ta'] : $_POST['xta'];
+								$sql = "select b.nm_mapel as label, a.semester, a.nilai as y from tbl_nilai a left join tbl_mapel b on a.kd_mapel = b.kd_mapel where a.nis_siswa = '" . $_SESSION['username'] . "' and a.ta = '" . $cond . "' ";
+								$where_1 = " and a.semester = 1 group by label";
+								$where_2 = " and a.semester = 2 group by label";
+
+								$sms_1 = $this->db->query($sql . $where_1)->result_array();
+								$sms_2 = $this->db->query($sql . $where_2)->result_array();
+
+								$res = $this->db->query($sql . $where_1 . ' union ' . $sql . $where_2)->result_array();
+								$mapel = array_unique(array_column($res, 'label'));
+								// var_dump($mapel);
+
+								$label = '[';
+								foreach ($mapel as $key => $val) {
+									$label .= "'" . $val . "',";
+								}
+								$label .= ']';
+
+								$nilai_1 = '[';
+								$color_1 = '[';
+								foreach ($sms_1 as $key => $val) {
+									if ($mapel[$key] == $val['label']) {
+										$nilai_1 .= $val['y'] . ",";
+									} else {
+										$nilai_1 .= "0,";
+									}
+									$color_1 .= "'rgba(54, 162, 235, 0.2)',";
+								}
+								$color_1 .= ']';
+								$nilai_1 .= ']';
+
+								$nilai_2 = '[';
+								$color_2 = '[';
+								foreach ($sms_2 as $key => $val) {
+									if ($mapel[$key] == $val['label']) {
+										$nilai_2 .= $val['y'] . ",";
+									} else {
+										$nilai_2 .= "0,";
+									}
+									$color_2 .= "'rgba(255, 206, 86, 0.2)',";
+								}
+								$color_2 .= ']';
+								$nilai_2 .= ']';
+
+								?>
+								<div class="col-md">
+									<h3 class="text-center">Nilai tahun ajaran <?= $cond; ?></h3>
 									<canvas id="myChart" style="height: 15px;"></canvas>
 								</div>
 							</div>
@@ -160,36 +224,44 @@
 <script>
 	var ctx = document.getElementById('myChart').getContext('2d');
 	var myChart = new Chart(ctx, {
-		type: 'bar',
+		type: 'horizontalBar',
 		data: {
-			labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+			labels: <?= $label; ?>,
 			datasets: [{
-				label: '# of Votes',
-				data: [12, 19, 3, 5, 2, 3],
-				backgroundColor: [
-					'rgba(255, 99, 132, 0.2)',
-					'rgba(54, 162, 235, 0.2)',
-					'rgba(255, 206, 86, 0.2)',
-					'rgba(75, 192, 192, 0.2)',
-					'rgba(153, 102, 255, 0.2)',
-					'rgba(255, 159, 64, 0.2)'
-				],
-				borderColor: [
-					'rgba(255, 99, 132, 1)',
-					'rgba(54, 162, 235, 1)',
-					'rgba(255, 206, 86, 1)',
-					'rgba(75, 192, 192, 1)',
-					'rgba(153, 102, 255, 1)',
-					'rgba(255, 159, 64, 1)'
-				],
-				borderWidth: 1
-			}]
+					label: 'Semester 1',
+					data: <?= $nilai_1; ?>,
+					backgroundColor: <?= $color_1; ?>,
+					borderColor: <?= $color_1; ?>,
+					borderWidth: 1
+				},
+				{
+					label: 'Semester 2',
+					data: <?= $nilai_2; ?>,
+					backgroundColor: <?= $color_2; ?>,
+					borderColor: <?= $color_2; ?>,
+					borderWidth: 1
+				}
+			]
 		},
 		options: {
 			scales: {
-				yAxes: [{
+				// yAxes: [{
+				// 	ticks: {
+				// 		beginAtZero: true
+				// 	}
+				// }],
+				xAxes: [{
 					ticks: {
-						beginAtZero: true
+						autoSkip: false,
+						beginAtZero: true,
+						stepSize: 20,
+						callback: function(label, index, labels) {
+							if (/\s/.test(label)) {
+								return label.split(" ");
+							} else {
+								return label;
+							}
+						}
 					}
 				}]
 			}

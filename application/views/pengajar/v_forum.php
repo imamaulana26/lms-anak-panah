@@ -139,7 +139,7 @@
 										</div>
 										<div class="card-body">
 											<p><?= $val['isi_materi'] ?></p>
-											<?php if ($val['lampiran'] != null) : ?>
+											<?php if (!empty($val['lampiran'])) : ?>
 												<?php if (is_array(unserialize($val['lampiran']))) : ?>
 													<p><b>Lampiran</b></p>
 													<?php foreach (unserialize($val['lampiran']) as $att) : ?>
@@ -196,10 +196,10 @@
 															$siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $cmd['user_komen']])->row_array();
 															// $nilai = $this->db->get_where('tbl_nilai_onclass', ['user_siswa' => $cmd['user_komen'], 'id_pelajaran' => $val['id_forum'], 'pertemuan_ke' => $val['pertemuan'], 'tipe' => 'Forum'])->num_rows();
 															$nilai = $this->db->get_where('tbl_nilai_onclass', ['user_siswa' => $cmd['user_komen'], 'id_pelajaran' => $val['id_forum'], 'pertemuan_ke' => $val['pertemuan'], 'tipe' => 'Forum'])->row_array();
-															$score = ($nilai['nilai'] == null) ? '' : ' (' . $nilai['nilai'] . ' point)';
+															$score = empty($nilai['nilai']) ? '' : ' (' . $nilai['nilai'] . ' point)';
 
 															$admin = $this->db->get_where('tbl_pengguna', ['pengguna_username' => $cmd['user_komen']])->row_array();
-															$rep_user = ($siswa == null) ? $admin['pengguna_nama'] . ' (pengajar)' : $siswa['siswa_nama'] . $score; ?>
+															$rep_user = empty($siswa) ? $admin['pengguna_nama'] . ' (pengajar)' : $siswa['siswa_nama'] . $score; ?>
 															<div class="card-header bordered mt-3 d-flex">
 																<div class="col-md-1">
 																	<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
@@ -236,7 +236,7 @@
 																<p>
 																	<?= $cmd['isi_komen'] ?>
 																</p>
-																<?php if ($cmd['lampiran'] != null) : ?>
+																<?php if (!empty($cmd['lampiran'])) : ?>
 																	<?php if (is_array(unserialize($cmd['lampiran']))) : ?>
 																		<p><b>Lampiran</b></p>
 																		<?php foreach (unserialize($cmd['lampiran']) as $att) : ?>
@@ -291,11 +291,11 @@
 																$rep_siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['user_komen']])->row_array();
 																// $rep_nilai = $this->db->get_where('tbl_nilai_onclass', ['user_siswa' => $rep['user_komen'], 'id_pelajaran' => $val['id_forum'], 'pertemuan_ke' => $val['pertemuan'], 'tipe' => 'Forum'])->num_rows();
 																$rep_nilai = $this->db->get_where('tbl_nilai_onclass', ['user_siswa' => $rep['user_komen'], 'id_pelajaran' => $val['id_forum'], 'pertemuan_ke' => $val['pertemuan'], 'tipe' => 'Forum'])->row_array();
-																$score = ($rep_nilai['nilai'] == null) ? '' : ' (' . $rep_nilai['nilai'] . ' point)';
+																$score = empty($rep_nilai['nilai']) ? '' : ' (' . $rep_nilai['nilai'] . ' point)';
 
 																$admin = $this->db->get_where('tbl_pengguna', ['pengguna_username' => $rep['user_komen']])->row_array();
 
-																$rep_user = ($rep_siswa == null) ? $admin['pengguna_nama'] . ' (pengajar)' : $rep_siswa['siswa_nama'] . $score;
+																$rep_user = empty($rep_siswa) ? $admin['pengguna_nama'] . ' (pengajar)' : $rep_siswa['siswa_nama'] . $score;
 																$mention = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['mention']])->row_array(); ?>
 																<!-- Reply Main Comments -->
 																<div class="collapse <?= $this->session->flashdata('mention') == $cmd['id'] ? 'show' : '' ?>" id="comments-<?= $cmd['id'] ?>">
@@ -334,7 +334,7 @@
 																			<p>
 																				<b><?= $mention['siswa_nama'] ?></b> <?= $rep['isi_komen'] ?>
 																			</p>
-																			<?php if ($rep['lampiran'] != null) : ?>
+																			<?php if (!empty($rep['lampiran'])) : ?>
 																				<?php if (is_array(unserialize($rep['lampiran']))) : ?>
 																					<p><b>Lampiran</b></p>
 																					<?php foreach (unserialize($rep['lampiran']) as $att) : ?>
@@ -590,7 +590,7 @@
 			dataType: 'json',
 			success: function(data) {
 				var komen = data.komen;
-				var nilai = (data.nilai == null) ? '' : data.nilai.nilai;
+				var nilai = data.nilai.empty() ? '' : data.nilai.nilai;
 				var text = `Berikan nilai kepada <b>` + komen.siswa_nama + `</b> - <b>` + komen.kelas_nama + `</b> 
 				untuk <b><?= ucfirst($this->uri->segment(1)); ?> ` + komen.nm_mapel + ` pertemuan ke-` + komen.pertemuan + `</b> tentang <b>` + komen.judul_materi + ` (` + komen.jns_materi + `)</b>`;
 				$('#text').html(text);

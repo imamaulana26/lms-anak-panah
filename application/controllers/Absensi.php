@@ -242,8 +242,9 @@ class Absensi extends CI_Controller
         }
     }
 
-    public function attendent_oc($key)
+    public function attendent_oc()
     {
+		$key = $this->input->post('id');
         $sql1 = $this->db->get_where('tbl_abs_oc', ['id_pelajaran' => $key])->row_array();
         $unser = unserialize($sql1['dt_oc']);
         // $data['nm_mapel'] = $mapel['nm_mapel'];
@@ -360,7 +361,8 @@ class Absensi extends CI_Controller
                 // var_dump($result);
                 // die;
             }
-            // var_dump($result[1]);
+
+			$this->db->update('tbl_abs_model', ['fr_abs' => serialize($result)], ['siswa_nis' => $this->input->post('nis')]);
         } else {
             $new_abs1 = array(
                 array(

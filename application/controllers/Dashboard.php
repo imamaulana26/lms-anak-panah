@@ -20,23 +20,98 @@ class Dashboard extends CI_Controller
 
 		ob_start('ob_gzhandler');
 		$data = array();
-
-		if (isset($_POST['xta'])) {
-			$data['tahun'] = $this->db->get_where('tbl_nilai', ['ta' => $this->input->post('xta')])->row_array();
-		} else {
-			$data['tahun'] = $this->db->select_max('ta')->from('tbl_nilai')->get()->row_array();
-		}
-
 		$akses = $this->session->userdata('akses');
 
 		if ($akses == 1) {
 			$this->load->view('admin/v_dashboard');
 		} elseif ($akses == 2) {
-			$data['oc'] = $this->db->select('*')->from('tbl_pelajaran a')
-				->join('tbl_mapel b', 'a.kd_mapel = b.kd_mapel')
-				->join('tbl_kelas c', 'a.id_kelas = c.kelas_id')
-				->where(['a.kd_pengajar' => 2])
+			if (isset($_POST['xta'])) {
+				$data['tahun'] = $this->db->get_where('tbl_nilai', ['ta' => $this->input->post('xta')])->row_array();
+			} else {
+				$data['tahun'] = $this->db->select_max('ta')->from('tbl_nilai')->get()->row_array();
+			}
+
+			// $data['oc'] = $this->db->select('*')->from('tbl_pelajaran a')
+			// 	->join('tbl_mapel b', 'a.kd_mapel = b.kd_mapel')
+			// 	->join('tbl_kelas c', 'a.id_kelas = c.kelas_id')
+			// 	->where(['a.kd_pengajar' => 2])
+			// 	->get()->result_array();
+
+			// $pelajaran = $this->db->get_where('tbl_pelajaran', ['id_kelas' => $kelas, 'kd_mapel' => $mapel])->row_array();
+
+			// $data['course'] = array(
+			// 	array(
+			// 		'mapel' => 'Bahasa',
+			// 		'item' => array(
+			// 			'forum' => array(
+			// 				array(
+			// 					'pertemuan' => 1,
+			// 					'nilai' => 80
+			// 				),
+			// 				array(
+			// 					'pertemuan' => 2,
+			// 					'nilai' => 75
+			// 				)
+			// 			),
+			// 			'tugas' => array(
+			// 				array(
+			// 					'pertemuan' => 1,
+			// 					'nilai' => 80
+			// 				)
+			// 			)
+			// 		)
+			// 	),
+			// 	array(
+			// 		'mapel' => 'MTK',
+			// 		'item' => array(
+			// 			'forum' => array(
+			// 				array(
+			// 					'pertemuan' => 1,
+			// 					'nilai' => 65
+			// 				)
+			// 			)
+			// 		)
+			// 	)
+			// );
+
+			$siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $_SESSION['username']])->row_array();
+			$mapel = $this->db->select('b.id_pelajaran, c.nm_mapel')
+				->from('tbl_nilai_onclass a')
+				->join('tbl_pelajaran b', 'a.id_pelajaran = b.id_pelajaran', 'inner')
+				->join('tbl_mapel c', 'b.kd_mapel = c.kd_mapel', 'inner')
+				->where(['a.user_siswa' => $siswa['siswa_nis']])
+				->group_by('b.id_pelajaran, c.nm_mapel')
 				->get()->result_array();
+
+			foreach ($mapel as $mpl) {
+				$arr[] = array(
+					'id_pelajaran' => $mpl['id_pelajaran'],
+					'mapel' => $mpl['nm_mapel']
+				);
+			}
+
+			for ($i = 0; $i < count($arr); $i++) {
+				$forum = $this->db->get_where('tbl_nilai_onclass', ['user_siswa' => $siswa['siswa_nis'], 'tipe' => 'Forum', 'id_pelajaran' => $arr[$i]['id_pelajaran']])->result_array();
+				foreach ($forum as $frm) {
+					$arr[$i]['item']['forum'][] = array(
+						'pertemuan' => $frm['pertemuan_ke'],
+						'nilai' => $frm['nilai']
+					);
+				}
+			}
+
+			for ($i = 0; $i < count($arr); $i++) {
+				$tugas = $this->db->get_where('tbl_nilai_onclass', ['user_siswa' => $siswa['siswa_nis'], 'tipe' => 'Tugas', 'id_pelajaran' => $arr[$i]['id_pelajaran']])->result_array();
+				foreach ($tugas as $tgs) {
+					$arr[$i]['item']['tugas'][] = array(
+						'pertemuan' => $tgs['pertemuan_ke'],
+						'nilai' => $tgs['nilai']
+					);
+				}
+			}
+
+			$data['course'] = $arr;
+
 
 			$this->load->view('siswa/layout/v_header');
 			$this->load->view('siswa/layout/v_navbar');

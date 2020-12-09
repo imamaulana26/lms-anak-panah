@@ -91,7 +91,7 @@
 			dataType: 'json',
 			data: $('#fm_oc').serialize(),
 			beforeSend: function() {
-				$('.btn').html('<i class="fa fa-spin fa-spinner"></i> loading');
+				$('.submit').html('<i class="fa fa-spin fa-spinner"></i> loading');
 			},
 			success: function(data) {
 				alert(data.msg);
@@ -102,12 +102,14 @@
 
 	function absensi_oc() {
 		$.ajax({
-			url: '<?= site_url('course/absensi_oc') ?>',
+			url: '<?= site_url('absensi/attendent_oc') ?>',
 			type: 'post',
 			dataType: 'json',
-			data: $('#fm_oc').serialize(),
+			data: {
+				id: $('#id').val()
+			},
 			beforeSend: function() {
-				$('.btn').html('<i class="fa fa-spin fa-spinner"></i> loading');
+				$('.absen').html('<i class="fa fa-spin fa-spinner"></i> loading');
 			},
 			success: function(data) {
 				alert(data.msg);

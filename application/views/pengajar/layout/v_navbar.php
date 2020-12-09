@@ -1,23 +1,23 @@
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
 	<div class="container">
-		<button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+		<!-- <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
 		<div class="collapse navbar-collapse order-3" id="navbarCollapse">
-			<!-- Left navbar links -->
+			Left navbar links
 			<ul class="navbar-nav" style="padding-left: 5em">
 				<li class="nav-item dropdown">
 					<a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle" onclick="myFunction()"><i class="fas fa-fw fa-bars" id="icon"></i> Menu</a>
 					<ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-						<!-- <li><a href="<?= site_url('dashboard') ?>" class="dropdown-item">Dashboard</a></li> -->
-						<!-- <li class="dropdown-divider"></li> -->
+						<li><a href="<?= site_url('dashboard') ?>" class="dropdown-item">Dashboard</a></li>
+						<li class="dropdown-divider"></li>
 						<?php $sumMail = $this->db->select_sum('inbox_status')->from('tbl_inbox')->where('inbox_kontak', $this->session->userdata('username'))->get()->row_array(); ?>
 						<li><a href="<?= site_url('inbox') ?>" class="dropdown-item">Mail <span class="badge badge-danger" style="position: relative; float: right; top: 0.25em;"><?= $sumMail['inbox_status'] ?></span></a></li>
 						<li class="dropdown-divider"></li>
-						<!-- Level two dropdown-->
-						<!-- <li class="dropdown-submenu dropdown-hover">
+						Level two dropdown
+						<li class="dropdown-submenu dropdown-hover">
                             <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Private</a>
                             <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
                                 <li><a tabindex="-1" href="#" class="dropdown-item">level 2</a></li>
@@ -35,9 +35,9 @@
                                 <li class="dropdown-divider"></li>
                                 <li><a href="#" class="dropdown-item">level 2</a></li>
                             </ul>
-                        </li> -->
-						<!-- <li class="dropdown-divider"></li> -->
-						<!-- End Level two -->
+                        </li>
+						<li class="dropdown-divider"></li>
+						End Level two
 						<li><a href="<?= site_url('kisikisi') ?>" class="dropdown-item">Exam</a></li>
 						<li class="dropdown-divider"></li>
 						<li><a href="<?= site_url('keuangan_siswa') ?>" class="dropdown-item">Finance</a></li>
@@ -56,7 +56,7 @@
 					<span class="nav-link" id="clock"></span>
 				</li>
 			</ul>
-		</div>
+		</div> -->
 
 		<!-- Right navbar links -->
 		<ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto" style="padding-right: 5em">

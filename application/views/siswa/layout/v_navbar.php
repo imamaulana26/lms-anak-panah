@@ -1,9 +1,9 @@
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
 	<div class="container">
-		<button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+		<!-- <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
-		</button>
+		</button> -->
 
 		<!-- <div class="collapse navbar-collapse order-3" id="navbarCollapse">
 			Left navbar links
@@ -52,7 +52,7 @@
 		</div> -->
 
 		<!-- Right navbar links -->
-		<ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto" style="padding-right: 5em">
+		<ul class="order-1 order-md-3 navbar-nav navbar-no-expand">
 			<li class="nav-item dropdown">
 				<a href="<?= site_url('inbox') ?>" class="nav-link">
 					<?php $sumMail = $this->db->select_sum('inbox_status')->from('tbl_inbox')->where('inbox_kontak', $this->session->userdata('username'))->get()->row_array(); ?>
@@ -114,18 +114,17 @@
 		<?php $nis = $this->session->userdata('username');
 		$siswa = $this->db->select('*')->from('tbl_siswa a')->join('tbl_kelas b', 'a.siswa_kelas_id = b.kelas_id', 'inner')->where('a.siswa_nis', $nis)->get()->row_array(); ?>
 
-		<div class="offset-1 col-sm-2" style="padding-left: 50px">
-			<img class="img-fluid img-thumbnail rounded-circle" src="<?= base_url() . '/assets/filesiswa/' . $nis . '/' . $siswa['siswa_photo'] ?>" style="width: 80%">
-
+		<div class="offset-md-1 col-md-2 col-sm">
+			<img class="img-fluid img-thumbnail rounded-circle" src="<?= base_url() . '/assets/filesiswa/' . $nis . '/' . $siswa['siswa_photo'] ?>" style="width: 50%">
 		</div>
-		<div class="col-sm-3" style="padding-top: 1em">
+		<div class="col-md-3 col-sm" style="padding-top: 1em">
 			<h3 class="text-left"><?= $this->session->userdata('nama'); ?></h3>
 			<p class="text-left text-muted"><?= $siswa['kelas_nama'] ?></p>
 		</div>
 
-		<div class="offset-1 col-sm-3" style="padding-top: 1em">
+		<div class="offset-md-1 col-md-3 col-sm" style="padding-top: 1em">
 			<!-- <p class="text-left">PKBM ANAK PANAH HS</p> -->
-			<img src="<?= base_url('assets/images/mylogo.png') ?>" alt="logo" style="width: 80%;">
+			<img src="<?= base_url('assets/images/mylogo.png') ?>" alt="logo" style="width: 50%;">
 		</div>
 	</div>
 </div>

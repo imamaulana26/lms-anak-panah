@@ -546,7 +546,7 @@
 			dataType: 'json',
 			success: function(data) {
 				var komen = data.komen;
-				var nilai = data.nilai.empty ? '' : data.nilai.nilai;
+				var nilai = (data.nilai == null) ? '' : data.nilai.nilai;
 				var text = `Berikan nilai kepada <b>` + komen.siswa_nama + `</b> - <b>` + komen.kelas_nama + `</b> 
 				untuk <b><?= ucfirst($this->uri->segment(1)); ?> ` + komen.nm_mapel + ` pertemuan ke-` + komen.pertemuan + `</b> tentang <b>` + komen.judul_materi + ` (` + komen.jns_materi + `)</b>`;
 				$('#text').html(text);

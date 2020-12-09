@@ -217,9 +217,9 @@
 																						<i class="fa fa-fw fa-check-square"></i> Nilai
 																					</a>
 																				<?php endif; ?>
-																				<a class="dropdown-item" href="<?= site_url('forum/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;">
+																				<!-- <a class="dropdown-item" href="<?= site_url('forum/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;">
 																					<i class="fa fa-fw fa-pencil-alt"></i> Sunting
-																				</a>
+																				</a> -->
 																				<a class="dropdown-item" href="javascript:void(0)" onclick="hapus_komen('<?= $cmd['id'] ?>')" style="font-size: 12px; color: #dc3545;">
 																					<i class="fa fa-fw fa-times"></i> Hapus
 																				</a>
@@ -317,9 +317,9 @@
 																									<i class="fa fa-fw fa-check-square"></i> Nilai
 																								</a>
 																							<?php endif; ?>
-																							<a class="dropdown-item" href="<?= site_url('forum/edit_komen/' . $rep['id']) ?>" style="font-size: 12px; color: #1e7e34;">
+																							<!-- <a class="dropdown-item" href="<?= site_url('forum/edit_komen/' . $rep['id']) ?>" style="font-size: 12px; color: #1e7e34;">
 																								<i class="fa fa-fw fa-pencil-alt"></i> Sunting
-																							</a>
+																							</a> -->
 																							<a class="dropdown-item" href="javascript:void(0)" onclick="hapus_subkomen('<?= $rep['id'] ?>')" style="font-size: 12px; color: #dc3545;">
 																								<i class="fa fa-fw fa-times"></i> Hapus
 																							</a>
@@ -590,7 +590,7 @@
 			dataType: 'json',
 			success: function(data) {
 				var komen = data.komen;
-				var nilai = data.nilai.empty() ? '' : data.nilai.nilai;
+				var nilai = data.nilai.empty ? '' : data.nilai.nilai;
 				var text = `Berikan nilai kepada <b>` + komen.siswa_nama + `</b> - <b>` + komen.kelas_nama + `</b> 
 				untuk <b><?= ucfirst($this->uri->segment(1)); ?> ` + komen.nm_mapel + ` pertemuan ke-` + komen.pertemuan + `</b> tentang <b>` + komen.judul_materi + ` (` + komen.jns_materi + `)</b>`;
 				$('#text').html(text);

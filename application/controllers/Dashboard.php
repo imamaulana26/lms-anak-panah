@@ -20,6 +20,7 @@ class Dashboard extends CI_Controller
 
 		ob_start('ob_gzhandler');
 		$data = array();
+		$arr = array();
 		$akses = $this->session->userdata('akses');
 
 		if ($akses == 1) {
@@ -30,49 +31,6 @@ class Dashboard extends CI_Controller
 			} else {
 				$data['tahun'] = $this->db->select_max('ta')->from('tbl_nilai')->get()->row_array();
 			}
-
-			// $data['oc'] = $this->db->select('*')->from('tbl_pelajaran a')
-			// 	->join('tbl_mapel b', 'a.kd_mapel = b.kd_mapel')
-			// 	->join('tbl_kelas c', 'a.id_kelas = c.kelas_id')
-			// 	->where(['a.kd_pengajar' => 2])
-			// 	->get()->result_array();
-
-			// $pelajaran = $this->db->get_where('tbl_pelajaran', ['id_kelas' => $kelas, 'kd_mapel' => $mapel])->row_array();
-
-			// $data['course'] = array(
-			// 	array(
-			// 		'mapel' => 'Bahasa',
-			// 		'item' => array(
-			// 			'forum' => array(
-			// 				array(
-			// 					'pertemuan' => 1,
-			// 					'nilai' => 80
-			// 				),
-			// 				array(
-			// 					'pertemuan' => 2,
-			// 					'nilai' => 75
-			// 				)
-			// 			),
-			// 			'tugas' => array(
-			// 				array(
-			// 					'pertemuan' => 1,
-			// 					'nilai' => 80
-			// 				)
-			// 			)
-			// 		)
-			// 	),
-			// 	array(
-			// 		'mapel' => 'MTK',
-			// 		'item' => array(
-			// 			'forum' => array(
-			// 				array(
-			// 					'pertemuan' => 1,
-			// 					'nilai' => 65
-			// 				)
-			// 			)
-			// 		)
-			// 	)
-			// );
 
 			$siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $_SESSION['username']])->row_array();
 			$mapel = $this->db->select('b.id_pelajaran, c.nm_mapel')
@@ -111,7 +69,6 @@ class Dashboard extends CI_Controller
 			}
 
 			$data['course'] = $arr;
-
 
 			$this->load->view('siswa/layout/v_header');
 			$this->load->view('siswa/layout/v_navbar');

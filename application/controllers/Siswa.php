@@ -24,20 +24,33 @@ class Siswa extends CI_Controller
 	{
 		$this->load->view('admin/v_siswa');
 	}
+
 	function detail_absensi_siswa($nis)
 	{
 
 		$dataserialize = $this->db->get_where('tbl_abs_model', ['siswa_nis' => $nis])->row_array();
 		$dataunser = unserialize($dataserialize['fr_abs']);
-		// $datamapel = $this->db->get_where()
-		$data['forum'] = $dataunser;
-		$data['nama'] = $this->db->select('siswa_nama,siswa_kelas_id')->from('tbl_siswa')->where(['siswa_nis'=>$nis])->get()->row_array();
+		$data['dtforumsiswa'] = $dataunser;
+		$data['nama'] = $this->db->select('siswa_nama,siswa_kelas_id')->from('tbl_siswa')->where(['siswa_nis' => $nis])->get()->row_array();
 		$kelas = $data['nama']['siswa_kelas_id'];
-		// $data['mapel'] = $this->db->get_where('tbl_pelajaran',['id_kelas'=>'11'])->result_array();
 		$data['mapel'] = $this->db->select('nm_mapel,id_pelajaran')->from('tbl_pelajaran a')->join('tbl_mapel b', 'a.kd_mapel=b.kd_mapel', 'inner')->where(['id_kelas' => $kelas])->get()->result_array();
-		// var_dump($data['forum']); die;
 		$this->load->view('admin/v_detail_absensi', $data);
 	}
+
+	function detail_absensi_siswa_tgs($nis)
+	{
+
+		$dataserialize = $this->db->get_where('tbl_abs_model', ['siswa_nis' => $nis])->row_array();
+		if ($dataserialize['tgs_abs'] !== null) {
+			$dataunser = unserialize($dataserialize['tgs_abs']);
+			$data['dttgssiswa'] = $dataunser;
+		}
+		$data['nama'] = $this->db->select('siswa_nama,siswa_kelas_id')->from('tbl_siswa')->where(['siswa_nis' => $nis])->get()->row_array();
+		$kelas = $data['nama']['siswa_kelas_id'];
+		$data['mapel'] = $this->db->select('nm_mapel,id_pelajaran')->from('tbl_pelajaran a')->join('tbl_mapel b', 'a.kd_mapel=b.kd_mapel', 'inner')->where(['id_kelas' => $kelas])->get()->result_array();
+		$this->load->view('admin/v_detail_absensi_tgs', $data);
+	}
+
 	function detail_absensi_siswa_oc($nis)
 	{
 

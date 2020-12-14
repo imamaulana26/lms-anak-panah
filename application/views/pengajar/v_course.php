@@ -63,7 +63,6 @@
 <!-- /.content-wrapper -->
 
 <?php $this->load->view('pengajar/layout/v_js'); ?>
-
 <script type="text/javascript">
 	function view(id) {
 		$.ajax({
@@ -102,7 +101,7 @@
 
 	function absensi_oc() {
 		$.ajax({
-			url: '<?= site_url('absensi/attendent_oc') ?>',
+			url: '<?= site_url('absensi/keyid') ?>',
 			type: 'post',
 			dataType: 'json',
 			data: {
@@ -112,8 +111,7 @@
 				$('.absen').html('<i class="fa fa-spin fa-spinner"></i> loading');
 			},
 			success: function(data) {
-				alert(data.msg);
-				location.reload();
+				window.location.href = "<?= site_url('absensi/attendent_oc/') ?>" + data.id;
 			}
 		})
 	}

@@ -25,12 +25,13 @@ class Absensi extends CI_Controller
 
         $where = $this->db->get_where('tbl_pelajaran', ['id_pelajaran' => $key])->row_array();
         $mapel = $this->db->get_where('tbl_mapel', ['kd_mapel' => $where['kd_mapel']])->row_array();
-        
+
         $sql = $this->db->distinct()->select('siswa_nama,siswa_nis')->from('tbl_siswa a')->join('tbl_komen_forum b', 'a.siswa_nis=b.user_komen', 'inner')->where(['b.id_forum' => $key, 'b.pertemuan' => $mgg])->get()->result_array();
-        
+
         $data['nm_mapel'] = $mapel['nm_mapel'];
         $data['dt_siswa'] = $sql;
-        
+
+
         $this->load->view('pengajar/layout/v_header');
         $this->load->view('pengajar/layout/v_navbar');
         $this->load->view('pengajar/absensi/v_absensi', $data);
@@ -39,12 +40,6 @@ class Absensi extends CI_Controller
     function submit_absensi_fr()
     {
         $dataserialize = $this->db->get_where('tbl_abs_model', ['siswa_nis' => $this->input->post('nis')]);
-
-        $result = array();
-        $new_abs = array();
-        $status = true;
-        $sts_new = true;
-
         if ($dataserialize->num_rows() > 0) {
             $unser = $dataserialize->row_array();
             $dataunser = unserialize($unser['fr_abs']);
@@ -61,74 +56,59 @@ class Absensi extends CI_Controller
                         )
                     )
                 );
+                $this->session->set_flashdata('msg', 'success');
                 $this->db->update('tbl_abs_model', ['fr_abs' => serialize($new_abs1)], ['siswa_nis' => $this->input->post('nis')]);
-                echo "<script>window.history.go(-1);location.reload();</script>";
-                // die;
+                redirect(site_url('absensi_fr/' . $this->input->post('idf').'/'. $this->input->post('idfk')));
+                // echo "<script>window.history.go(-1); location.reload();</script>";
+                die;
             } else {
-                foreach ($dataunser as $dtunser) {
-                    $data1 = array();
-                    // update absensi
-                    if ($status === true) {
-                        if ($dtunser['idf'] == $this->input->post('idf')) {
-                            foreach ($dtunser['data'] as $val) {
-                                if ($sts_new === true) {
-                                    if ($val['frk'] === $this->input->post('idfk')) {
-                                        $val['abs'] = $this->input->post('absensi');
-                                    } else {
-                                        //update sub absensi jika minggu ke sama
-                                        $data1[] =
-                                            array(
-                                                'frk' => $this->input->post('idfk'),
-                                                'abs' => $this->input->post('absensi')
-                                            );
-                                        $sts_new = false;
-                                    }
-                                }
 
-                                $data1[] = $val;
-                            }
-                            $temp = array_unique(array_column($data1, 'frk'));
-                            $unique_arr = array_intersect_key($data1, $temp);
-                            $dtunser['data'] = $unique_arr;
-                            $status = false;
-                        } else {
-                            $new_abs = array(
-                                'idf' => $this->input->post('idf'),
-                                'data' => array(
-                                    array(
-                                        'frk' => $this->input->post('idfk'),
-                                        'abs' => $this->input->post('absensi')
-                                    )
+                if (($key1 = array_search($this->input->post('idf'), array_column($dataunser, 'idf'))) !== false) {
+                    if (($key2 = array_search($this->input->post('idfk'), array_column($dataunser[$key1]['data'], 'frk'))) !== false) {
+                        // untuk pergantian status absensi
+                        $new_abs1[$key1] = array(
+                            'data' => array(
+                                $key2 => array(
+                                    'frk' => $this->input->post('idfk'),
+                                    'abs' => $this->input->post('absensi')
                                 )
-                            );
-                            $result[] = $new_abs;
-                        }
-                    }
-                    // $merge = array_merge($dtunser , $new_abs)
+                            )
 
-                    $result[] = $dtunser;
-                }
-                // var_dump($result); die;
-                $this->db->update('tbl_abs_model', ['fr_abs' => serialize($result)], ['siswa_nis' => $this->input->post('nis')]);
-                // var_dump($result[0]);
-                echo "<script>window.history.go(-1);location.reload();</script>";
-                // die;
-            }
-        } else {
-            $new_abs1 = array(
-                array(
-                    'idf' => $this->input->post('idf'),
-                    'data' => array(
+                        );
+                        $newarray =   array_replace_recursive($dataunser, $new_abs1);
+                        $dataunser = $newarray;
+                        //end untuk pergantian status absensi
+                    } else {
+                        // untuk menambah status absensi
+                        $new_abs2 =
+                            array(
+                                'frk' => $this->input->post('idfk'),
+                                'abs' => $this->input->post('absensi')
+                            );
+                        array_push($dataunser[$key1]['data'], $new_abs2);
+                        //end untuk menambah status absensi
+                    }
+                } else {
+                    //untuk menambah status mapel
+                    $new_abs3 =
                         array(
-                            'frk' => $this->input->post('idfk'),
-                            'abs' => $this->input->post('absensi')
-                        )
-                    )
-                )
-            );
-            $this->db->insert('tbl_abs_model', ['siswa_nis' => $this->input->post('nis'), 'fr_abs' => serialize($new_abs1)]);
-            echo "<script>window.history.go(-1);location.reload();</script>";
+                            'idtg' => $this->input->post('idtg'),
+                            'data' => array(
+                                array(
+                                    'frk' => $this->input->post('idfk'),
+                                    'abs' => $this->input->post('absensi')
+                                )
+                            )
+                        );
+                    array_push($dataunser, $new_abs3);
+                    //end untuk menambah status mapel
+                }
+            }
         }
+        $this->session->set_flashdata('msg', 'success');
+        $this->db->update('tbl_abs_model', ['fr_abs' => serialize($dataunser)], ['siswa_nis' => $this->input->post('nis')]);
+        redirect(site_url('absensi_fr/' . $this->input->post('idf') . '/' . $this->input->post('idfk')));
+        // echo "<script>window.history.go(-1);location.reload();</script>";
     }
 
     function attendent_tgs($key, $mgg)
@@ -151,12 +131,6 @@ class Absensi extends CI_Controller
     function submit_absensi_tgs()
     {
         $dataserialize = $this->db->get_where('tbl_abs_model', ['siswa_nis' => $this->input->post('nis')]);
-
-        $result = array();
-        $new_abs = array();
-        $status = true;
-        $sts_new = true;
-
         if ($dataserialize->num_rows() > 0) {
             $unser = $dataserialize->row_array();
             $dataunser = unserialize($unser['tgs_abs']);
@@ -173,85 +147,91 @@ class Absensi extends CI_Controller
                         )
                     )
                 );
+                $this->session->set_flashdata('msg', 'success');
                 $this->db->update('tbl_abs_model', ['tgs_abs' => serialize($new_abs1)], ['siswa_nis' => $this->input->post('nis')]);
-                echo "<script>window.history.go(-1);location.reload();</script>";
-                // die;
+                redirect(site_url('absensi_tgs/' . $this->input->post('idtg') . '/' . $this->input->post('idtgk')));
+                // echo "<script>window.history.go(-1);location.reload();</script>";
+                die;
             } else {
-                foreach ($dataunser as $dtunser) {
-                    $data1 = array();
-                    // update absensi
-                    if ($status === true) {
-                        if ($dtunser['idtg'] == $this->input->post('idtg')) {
-                            foreach ($dtunser['data'] as $val) {
-                                if ($sts_new === true) {
-                                    if ($val['tgk'] === $this->input->post('idtgk')) {
-                                        $val['abs'] = $this->input->post('absensi');
-                                    } else {
-                                        //update sub absensi jika minggu ke sama
-                                        $data1[] =
-                                            array(
-                                                'tgk' => $this->input->post('idtgk'),
-                                                'abs' => $this->input->post('absensi')
-                                            );
-                                        $sts_new = false;
-                                    }
-                                }
 
-                                $data1[] = $val;
-                            }
-                            $temp = array_unique(array_column($data1, 'tgk'));
-                            $unique_arr = array_intersect_key($data1, $temp);
-
-                            $dtunser['data'] = $unique_arr;
-                            $status = false;
-                        } else {
-                            $new_abs = array(
-                                'idtg' => $this->input->post('idtg'),
-                                'data' => array(
-                                    array(
-                                        'tgk' => $this->input->post('idtgk'),
-                                        'abs' => $this->input->post('absensi')
-                                    )
+                if (($key1 = array_search($this->input->post('idtg'), array_column($dataunser, 'idtg'))) !== false) {
+                    if (($key2 = array_search($this->input->post('idtgk'), array_column($dataunser[$key1]['data'], 'tgk'))) !== false) {
+                        // untuk pergantian status absensi
+                        $new_abs1[$key1] = array(
+                            'data' => array(
+                                $key2 => array(
+                                    'tgk' => $this->input->post('idtgk'),
+                                    'abs' => $this->input->post('absensi')
                                 )
-                            );
-                            $result[] = $new_abs;
-                        }
-                    }
+                            )
 
-                    $result[] = $dtunser;
-                }
-                $this->db->update('tbl_abs_model', ['tgs_abs' => serialize($result)], ['siswa_nis' => $this->input->post('nis')]);
-                // var_dump($result[0]);
-                echo "<script>window.history.go(-1);location.reload();</script>";
-                // die;
-            }
-        } else {
-            $new_abs1 = array(
-                array(
-                    'idtg' => $this->input->post('idtg'),
-                    'data' => array(
+                        );
+                        $newarray =   array_replace_recursive($dataunser, $new_abs1);
+                        $dataunser = $newarray;
+                        //end untuk pergantian status absensi
+                    } else {
+                        // untuk menambah status absensi
+                        $new_abs2 =
+                            array(
+                                'tgk' => $this->input->post('idtgk'),
+                                'abs' => $this->input->post('absensi')
+                            );
+                        array_push($dataunser[$key1]['data'], $new_abs2);
+                        //end untuk menambah status absensi
+                    }
+                } else {
+                    //untuk menambah status mapel
+                    $new_abs3 =
                         array(
-                            'tgk' => $this->input->post('idtgk'),
-                            'abs' => $this->input->post('absensi')
-                        )
-                    )
-                )
-            );
-            $this->db->insert('tbl_abs_model', ['siswa_nis' => $this->input->post('nis'), 'tgs_abs' => serialize($new_abs1)]);
-            echo "<script>window.history.go(-1);location.reload();</script>";
+                            'idtg' => $this->input->post('idtg'),
+                            'data' => array(
+                                array(
+                                    'tgk' => $this->input->post('idtgk'),
+                                    'abs' => $this->input->post('absensi')
+                                )
+                            )
+                        );
+                    array_push($dataunser, $new_abs3);
+                    //end untuk menambah status mapel
+                }
+            }
         }
+        // else {
+        //     $new_abs1 = array(
+        //         array(
+        //             'idtg' => $this->input->post('idtg'),
+        //             'data' => array(
+        //                 array(
+        //                     'tgk' => $this->input->post('idtgk'),
+        //                     'abs' => $this->input->post('absensi')
+        //                 )
+        //             )
+        //         )
+        //     );
+
+        // echo 'id tugas:' . $this->input->post('idtg');
+        // echo '<br>tugas ke:' . $this->input->post('idtgk');
+
+        // var_dump($basket[0]);
+        $this->session->set_flashdata('msg', 'success');
+        $this->db->update('tbl_abs_model', ['tgs_abs' => serialize($dataunser)], ['siswa_nis' => $this->input->post('nis')]);
+        redirect(site_url('absensi_tgs/' . $this->input->post('idtg') . '/' . $this->input->post('idtgk')));
+        // echo "<script>window.history.go(-1);location.reload();</script>";
     }
 
-    public function attendent_oc()
+    public function keyid()
     {
-		$key = $this->input->post('id');
+        $data['id'] = $this->input->post('id');
+        echo json_encode($data);
+        exit();
+    }
+    public function attendent_oc($key)
+    {
         $sql1 = $this->db->get_where('tbl_abs_oc', ['id_pelajaran' => $key])->row_array();
         $unser = unserialize($sql1['dt_oc']);
-        // $data['nm_mapel'] = $mapel['nm_mapel'];
         $data['dt_tgl'] = $unser;
 
-        // var_dump($unser); die;
-
+        // var_dump($unser[1]); die;
 
         $this->load->view('pengajar/layout/v_header');
         $this->load->view('pengajar/layout/v_navbar');
@@ -277,106 +257,55 @@ class Absensi extends CI_Controller
     {
         $dataserialize = $this->db->get_where('tbl_abs_oc', ['id_pelajaran' => $this->input->post('idoc')]);
 
-        $result = array();
-        $new_abs = array();
-        $status = true;
-        $sts_new = true;
-
-
         if ($dataserialize->num_rows() > 0) {
             $unser = $dataserialize->row_array();
             $dataunser = unserialize($unser['dt_oc']);
-            if ($dataunser == null) {
-                $new_abs1 = array(
-                    array(
-                        'tgl' => $this->input->post('tgl'),
+
+            if (($key1 = array_search($this->input->post('tgl'), array_column($dataunser, 'tgl'))) !== false) {
+                //menghilangkan nilai default null
+                if (($key2 = array_search('null', array_column($dataunser[$key1]['data'], 'nis'))) !== false) {
+                    $new_abs1[$key1] = array(
                         'data' => array(
-                            array(
+                            $key2 => array(
                                 'nis' => $this->input->post('nis'),
-                                'abs' => $this->input->post('absensi')
+                                'absensi' => $this->input->post('absensi')
                             )
                         )
-                    )
-                );
-                $this->db->update('tbl_abs_model', ['dt_oc' => serialize($new_abs1)], ['id_pelajaran' => $this->input->post('idoc')]);
-                echo "<script>window.history.go(-1);location.reload();</script>";
-                // die;
-            } else {
-                foreach ($dataunser as $dtunser) {
-                    $data1 = array();
-                    // update absensi
-                    if ($status === true) {
-                        if ($dtunser['tgl'] == $this->input->post('tgl')) {
-                            foreach ($dtunser['data'] as $val) {
-
-                                if ($sts_new === true) {
-                                    if ($val['nis'] === $this->input->post('nis')) {
-                                        $val['abs'] = $this->input->post('absensi');
-                                    } else {
-                                        // 
-                                        //update sub absensi
-                                        $data1[] =
-                                            array(
-                                                'nis' => $this->input->post('nis'),
-                                                'abs' => $this->input->post('absensi')
-                                            );
-
-                                        $sts_new = false;
-                                    }
-                                }
-                                $data1[] = $val;
-                            }
-                            // var_dump($data1);
-                            if (($key = array_search('null', array_column($data1, 'nis'))) !== false) {
-                                unset($data1[$key]);
-                            }
-                            // unset($data1[1]);
-                            // var_dump($data1);
-                            $temp = array_unique(array_column($data1, 'nis'));
-                            $unique_arr = array_intersect_key($data1, $temp);
-
-                            $dtunser['data'] = $unique_arr;
-                            $status = false;
-                        } else {
-                            $new_abs = array(
-                                'tgl' => $this->input->post('nis'),
-                                'data' => array(
-                                    array(
-                                        'nis' => $this->input->post('nis'),
-                                        'abs' => $this->input->post('absensi')
-                                    )
-                                )
-                            );
-                        }
-                    }
-
-
-                    // var_dump($dtunser);
-
-                    $result[] = $dtunser;
+                    );
+                    $newarray =   array_replace_recursive($dataunser, $new_abs1);
+                    $dataunser = $newarray;
                 }
-                $this->db->update('tbl_abs_oc', ['dt_oc' => serialize($result)], ['id_pelajaran' => $this->input->post('idoc')]);
+                //end of menghilangkan nilai default null
+                if (($key3 = array_search($this->input->post('nis'), array_column($dataunser[$key1]['data'], 'nis'))) !== false) {
+                    $new_abs1[$key1] = array(
+                        'data' => array(
+                            $key3 => array(
+                                'nis' => $this->input->post('nis'),
+                                'absensi' => $this->input->post('absensi')
+                            )
+                        )
 
-                echo "<script>window.history.go(-1);location.reload();</script>";
-                // var_dump($result);
-                // die;
-            }
-
-			$this->db->update('tbl_abs_model', ['fr_abs' => serialize($result)], ['siswa_nis' => $this->input->post('nis')]);
-        } else {
-            $new_abs1 = array(
-                array(
-                    'tgl' => $this->input->post('tgl'),
-                    'data' => array(
+                    );
+                    $newarray =   array_replace_recursive($dataunser, $new_abs1);
+                    $dataunser = $newarray;
+                } else {
+                    // untuk menambah absensi siswa
+                    $new_abs2 =
                         array(
                             'nis' => $this->input->post('nis'),
-                            'abs' => $this->input->post('absensi')
-                        )
-                    )
-                )
-            );
-            $this->db->insert('tbl_abs_oc', ['id_pelajaran' => $this->input->post('idoc'), 'tgs_abs' => serialize($new_abs1)]);
-            echo "<script>window.history.go(-1);location.reload();</script>";
+                            'absensi' => $this->input->post('absensi')
+                        );
+
+                    array_push($dataunser[$key1]['data'], $new_abs2);
+                    //end untuk menambah absensi siswa
+                }
+            }
+            // array_values($dataunser[$key1]['data']);
+
+            $this->session->set_flashdata('msg', 'success');
+            $this->db->update('tbl_abs_oc', ['dt_oc' => serialize($dataunser)], ['id_pelajaran' => $this->input->post('idoc')]);
+            redirect(site_url('absensi/list_siswa_oc/' . $this->input->post('idoc').'/'. $this->input->post('tgl')));
+            // echo "<script>window.history.go(-1);location.reload();</script>";
         }
     }
 
@@ -392,8 +321,10 @@ class Absensi extends CI_Controller
         }
         $dtfix = array_merge($dtunsersql);
         // var_dump($dtfix); die;
+        $this->session->set_flashdata('msg', 'deleted');
         $this->db->update('tbl_abs_oc', ['dt_oc' => serialize($dtfix)], ['id_pelajaran' => $idpel]);
-        echo "<script>window.history.go(-1);location.reload();</script>";
+        redirect(site_url('absensi/attendent_oc/' . $idpel));
+        // echo "<script>window.history.go(-1);</script>";
         // a:3:{i:0;a:2:{s:3:"tgl";s:10:"2020-09-08";s:4:"data";a:4:{i:0;a:2:{s:3:"nis";s:7:"2019638";s:3:"abs";s:5:"hadir";}i:1;a:2:{s:3:"nis";s:7:"2019639";s:3:"abs";s:5:"hadir";}i:2;a:2:{s:3:"nis";s:7:"2019636";s:3:"abs";s:5:"hadir";}i:3;a:2:{s:3:"nis";s:7:"2019644";s:3:"abs";s:5:"hadir";}}}i:1;a:2:{s:3:"tgl";s:10:"2020-08-20";s:4:"data";a:2:{i:0;a:2:{s:3:"nis";s:7:"2019638";s:3:"abs";s:5:"hadir";}i:1;a:2:{s:3:"nis";s:7:"2019644";s:3:"abs";s:5:"hadir";}}}i:2;a:2:{s:3:"tgl";s:10:"2020-08-28";s:4:"data";a:1:{i:0;a:2:{s:3:"nis";s:7:"2019638";s:3:"abs";s:5:"hadir";}}}}
     }
 
@@ -442,6 +373,7 @@ class Absensi extends CI_Controller
                     )
                 )
             );
+            $this->session->set_flashdata('msg', 'success');
             $this->db->update('tbl_abs_oc', ['dt_kc' => serialize($new_abs1)], ['id_pelajaran' => $this->input->post('id')]);
         }
 
@@ -450,8 +382,10 @@ class Absensi extends CI_Controller
             $dtunser = unserialize($sql['dt_kc']);
             foreach ($dtunser as $datuns) {
                 if ($datuns['tgl'] == $this->input->post('jdl_kelas')) {
-                    echo "<script>alert('data sudah ada');window.history.go(-1);location.reload();</script>";
-                    die;
+                    $this->session->set_flashdata('msg', 'info');
+                    // echo "<script>window.history.go(-1);location.reload();</script>";
+                    redirect(site_url('absensi/attendent_kc/' . $this->input->post('id')));
+                    // die;
                 }
             }
             $new_abs1 = array(
@@ -468,8 +402,10 @@ class Absensi extends CI_Controller
                 )
             );
             $dtfix = array_merge($dtunser, $new_abs1);
+            $this->session->set_flashdata('msg', 'success');
             $this->db->update('tbl_abs_oc', ['dt_kc' => serialize($dtfix)], ['id_pelajaran' => $this->input->post('id')]);
-            echo "<script>alert('Data Berhasil Disimpan');window.history.go(-1);location.reload();</script>";
+            // echo "<script>window.history.go(-1);location.reload();</script>";
+            redirect(site_url('absensi/attendent_kc/' . $this->input->post('id')));
         }
 
         if ($sql['dt_kc'] == null) {
@@ -486,9 +422,11 @@ class Absensi extends CI_Controller
                     )
                 )
             );
+            $this->session->set_flashdata('msg', 'success');
             $this->db->update('tbl_abs_oc', ['dt_kc' => serialize($new_abs1)], ['id_pelajaran' => $this->input->post('id')]);
-            echo "<script>alert('Data Berhasil Disimpan');window.history.go(-1);location.reload();</script>";
-            die;
+            // echo "<script>window.history.go(-1);location.reload();</script>";
+            // die;
+            redirect(site_url('absensi/attendent_kc/' . $this->input->post('id')));
         }
 
         //end of data lama
@@ -508,7 +446,9 @@ class Absensi extends CI_Controller
         $dtfix = array_merge($dtunsersql);
         // var_dump($dtfix); die;
         $this->db->update('tbl_abs_oc', ['dt_kc' => serialize($dtfix)], ['id_pelajaran' => $idpel]);
-        echo "<script>window.history.go(-1);location.reload();</script>";
+        $this->session->set_flashdata('msg', 'deleted');
+        redirect(site_url('absensi/attendent_kc/' . $idpel));
+        // echo "<script>window.history.go(-1);location.reload();</script>";
         // a:3:{i:0;a:2:{s:3:"tgl";s:10:"2020-09-08";s:4:"data";a:4:{i:0;a:2:{s:3:"nis";s:7:"2019638";s:3:"abs";s:5:"hadir";}i:1;a:2:{s:3:"nis";s:7:"2019639";s:3:"abs";s:5:"hadir";}i:2;a:2:{s:3:"nis";s:7:"2019636";s:3:"abs";s:5:"hadir";}i:3;a:2:{s:3:"nis";s:7:"2019644";s:3:"abs";s:5:"hadir";}}}i:1;a:2:{s:3:"tgl";s:10:"2020-08-20";s:4:"data";a:2:{i:0;a:2:{s:3:"nis";s:7:"2019638";s:3:"abs";s:5:"hadir";}i:1;a:2:{s:3:"nis";s:7:"2019644";s:3:"abs";s:5:"hadir";}}}i:2;a:2:{s:3:"tgl";s:10:"2020-08-28";s:4:"data";a:1:{i:0;a:2:{s:3:"nis";s:7:"2019638";s:3:"abs";s:5:"hadir";}}}}
     }
 
@@ -526,106 +466,58 @@ class Absensi extends CI_Controller
     function submit_absensi_kc()
     {
         $dataserialize = $this->db->get_where('tbl_abs_oc', ['id_pelajaran' => $this->input->post('idkc')]);
-
-        $result = array();
-        $new_abs = array();
-        $status = true;
-        $sts_new = true;
+        // var_dump($_POST);
+        // die;
 
 
         if ($dataserialize->num_rows() > 0) {
             $unser = $dataserialize->row_array();
             $dataunser = unserialize($unser['dt_kc']);
-            if ($dataunser == null) {
-                $new_abs1 = array(
-                    array(
-                        'tgl' => $this->input->post('tgl'),
+            if (($key1 = array_search($this->input->post('tgl'), array_column($dataunser, 'tgl'))) !== false) {
+                //menghilangkan nilai default null
+                if (($key2 = array_search('null', array_column($dataunser[$key1]['data'], 'nis'))) !== false) {
+                    $new_abs1[$key1] = array(
                         'data' => array(
-                            array(
+                            $key2 => array(
                                 'nis' => $this->input->post('nis'),
-                                'abs' => $this->input->post('absensi')
+                                'absensi' => $this->input->post('absensi')
                             )
                         )
-                    )
-                );
-                $this->db->update('tbl_abs_model', ['dt_kc' => serialize($new_abs1)], ['id_pelajaran' => $this->input->post('idkc')]);
-                echo "<script>window.history.go(-1);location.reload();</script>";
-                // die;
-            } else {
-                foreach ($dataunser as $dtunser) {
-                    $data1 = array();
-                    // update absensi
-                    if ($status === true) {
-                        if ($dtunser['tgl'] == $this->input->post('tgl')) {
-                            foreach ($dtunser['data'] as $val) {
-
-                                if ($sts_new === true) {
-                                    if ($val['nis'] === $this->input->post('nis')) {
-                                        $val['abs'] = $this->input->post('absensi');
-                                    } else {
-                                        // 
-                                        //update sub absensi
-                                        $data1[] =
-                                            array(
-                                                'nis' => $this->input->post('nis'),
-                                                'abs' => $this->input->post('absensi')
-                                            );
-
-                                        $sts_new = false;
-                                    }
-                                }
-                                $data1[] = $val;
-                            }
-                            // var_dump($data1);
-                            if (($key = array_search('null', array_column($data1, 'nis'))) !== false) {
-                                unset($data1[$key]);
-                            }
-                            // unset($data1[1]);
-                            // var_dump($data1);
-                            $temp = array_unique(array_column($data1, 'nis'));
-                            $unique_arr = array_intersect_key($data1, $temp);
-
-                            $dtunser['data'] = $unique_arr;
-                            $status = false;
-                        } else {
-                            $new_abs = array(
-                                'tgl' => $this->input->post('nis'),
-                                'data' => array(
-                                    array(
-                                        'nis' => $this->input->post('nis'),
-                                        'abs' => $this->input->post('absensi')
-                                    )
-                                )
-                            );
-                        }
-                    }
-
-
-                    // var_dump($dtunser);
-
-                    $result[] = $dtunser;
+                    );
+                    $newarray =   array_replace_recursive($dataunser, $new_abs1);
+                    $dataunser = $newarray;
                 }
-                $this->db->update('tbl_abs_oc', ['dt_kc' => serialize($result)], ['id_pelajaran' => $this->input->post('idkc')]);
-
-                echo "<script>window.history.go(-1);location.reload();</script>";
-                // var_dump($result);
-                // die;
-            }
-            // var_dump($result[1]);
-        } else {
-            $new_abs1 = array(
-                array(
-                    'tgl' => $this->input->post('tgl'),
-                    'data' => array(
+                //end of menghilangkan nilai default null
+                if (($key3 = array_search($this->input->post('nis'), array_column($dataunser[$key1]['data'], 'nis'))) !== false) {
+                    $new_abs1[$key1] = array(
+                        'data' => array(
+                            $key3 => array(
+                                'nis' => $this->input->post('nis'),
+                                'absensi' => $this->input->post('absensi')
+                            )
+                        )
+                    );
+                    $newarray =   array_replace_recursive($dataunser, $new_abs1);
+                    $dataunser = $newarray;
+                } else {
+                    // untuk menambah absensi siswa
+                    $new_abs2 =
                         array(
                             'nis' => $this->input->post('nis'),
-                            'abs' => $this->input->post('absensi')
-                        )
-                    )
-                )
-            );
-            $this->db->insert('tbl_abs_oc', ['id_pelajaran' => $this->input->post('idkc'), 'tgs_abs' => serialize($new_abs1)]);
-            echo "<script>window.history.go(-1);location.reload();</script>";
+                            'absensi' => $this->input->post('absensi')
+                        );
+
+                    array_push($dataunser[$key1]['data'], $new_abs2);
+                    //end untuk menambah absensi siswa
+                }
+            }
+            // var_dump($dataunser[0]);
+            // die;
+            $this->session->set_flashdata('msg', 'success');
+            $this->db->update('tbl_abs_oc', ['dt_kc' => serialize($dataunser)], ['id_pelajaran' => $this->input->post('idkc')]);
+            redirect(site_url('absensi/list_siswa_kc/' . $this->input->post('idkc').'/'. $this->input->post('tgl')));
+            // echo "<script>window.history.go(-1);location.reload();</script>";
+            // var_dump($result[1]);
         }
     }
 }

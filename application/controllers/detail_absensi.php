@@ -21,6 +21,10 @@ class Detail_absensi extends CI_Controller
     function absensi_forum($nis)
     {
         $dataserialize = $this->db->get_where('tbl_abs_model', ['siswa_nis' => $nis])->row_array();
+        if (empty($dataserialize)) {
+            $this->db->insert('tbl_abs_model', ['siswa_nis' => $nis]);
+            echo "<script>location.reload();</script>";
+        }
         $dataunser = unserialize($dataserialize['fr_abs']);
         $data['dtforumsiswa'] = $dataunser;
         // $dataforum = $this->db->get_where('tbl_materi_forum')->result_array();
@@ -29,6 +33,7 @@ class Detail_absensi extends CI_Controller
         // var_dump($dataserialize); die;
         $data['nama'] = $this->db->select('siswa_nama,siswa_kelas_id')->from('tbl_siswa')->where(['siswa_nis' => $nis])->get()->row_array();
         $kelas = $data['nama']['siswa_kelas_id'];
+        // var_dump($dataserialize); die;
         $data['mapel'] = $this->db->select('nm_mapel,id_pelajaran')->from('tbl_pelajaran a')->join('tbl_mapel b', 'a.kd_mapel=b.kd_mapel', 'inner')->where(['id_kelas' => $kelas])->get()->result_array();
         $this->load->view('siswa/layout/v_header');
         $this->load->view('siswa/layout/v_navbar');
@@ -46,8 +51,8 @@ class Detail_absensi extends CI_Controller
         $kelas = $data['nama']['siswa_kelas_id'];
         $data['mapel'] = $this->db->select('nm_mapel,id_pelajaran')->from('tbl_pelajaran a')->join('tbl_mapel b', 'a.kd_mapel=b.kd_mapel', 'inner')->where(['id_kelas' => $kelas])->get()->result_array();
 
-       
-        // var_dump($sqlbaru);
+    //    dummy a:2:{i:0;a:2:{s:4:"idtg";s:2:"44";s:4:"data";a:1:{i:0;a:2:{s:3:"tgk";s:1:"1";s:3:"abs";s:11:"Tidak Hadir";}}}i:1;a:2:{s:4:"idtg";s:2:"45";s:4:"data";a:1:{i:0;a:2:{s:3:"tgk";s:1:"1";s:3:"abs";s:11:"Tidak Hadir";}}}}
+        // var_dump($dataserialize);
         // die;
         $this->load->view('siswa/layout/v_header');
         $this->load->view('siswa/layout/v_navbar');

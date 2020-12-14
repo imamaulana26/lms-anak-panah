@@ -59,26 +59,22 @@
 
                                                                     <?php
                                                                     $data = $this->db->get_where('tbl_abs_model', ['siswa_nis' => $li['siswa_nis']])->row_array();
-                                                                    // var_dump($data);
+                                                                    // var_dump(unserialize($data['tgs_abs']));
+
                                                                     if (!empty($data['tgs_abs'])) {
                                                                         $dt_unser = unserialize($data['tgs_abs']);
-                                                                        foreach ($dt_unser as $key => $value1) {
-                                                                            if ($value1['idtg'] === $this->uri->segment(2)) {
-                                                                                foreach ($value1['data'] as $val2) {
-                                                                                    if ($val2['tgk'] === $this->uri->segment(3)) {
-                                                                                        echo $val2['abs'];
-                                                                                    } else {
-                                                                                        echo 'belum di absen';
-                                                                                    }
-                                                                                    break;
-                                                                                }
-                                                                            } else {
-                                                                                echo 'belum di absen';
+                                                                        // var_dump($dt_unser);
+                                                                        if (($key1 = array_search($this->uri->segment(2), array_column($dt_unser, 'idtg'))) !== false) {
+                                                                            if (($key2 = array_search($this->uri->segment(3), array_column($dt_unser[$key1]['data'], 'tgk'))) !== false) {
+                                                                                echo $dt_unser[$key1]['data'][$key2]['abs'];
+                                                                            }else{
+                                                                                echo 'Belum Diabsen';
                                                                             }
-                                                                            break;
+                                                                        } else {
+                                                                            echo 'Belum Diabsen';
                                                                         }
                                                                     } else {
-                                                                        echo 'belum di absen';
+                                                                        echo 'Belum di absen';
                                                                     }
                                                                     ?>
                                                                 </td>

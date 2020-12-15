@@ -62,7 +62,7 @@
                                                                     <td><?= $li['end'] ?></td>
                                                                     <td>
                                                                         <a href="<?= base_url('absensi/list_siswa_kc/') . $this->uri->segment(3) . '/' . $li['tgl'] ?>"><button type="button" class="btn btn-primary">Absensi</button></a>
-                                                                        <a href="<?= base_url('absensi/hapus_tgl_kc/') . $this->uri->segment(3) . '/' . $li['tgl'] ?>"><button type="button" class="btn btn-danger">Hapus</button></a>
+                                                                        <a onclick="confirmation(event)" href="<?= base_url('absensi/hapus_tgl_kc/') . $this->uri->segment(3) . '/' . $li['tgl'] ?>"><button type="button" class="btn btn-danger">Hapus</button></a>
                                                                     </td>
                                                                 </tr>
                                                             <?php }
@@ -113,7 +113,7 @@
                                     <div class="input-group-addon">
                                         <span class="input-group-text" style="height: 100%; border-radius: 0.25rem 0 0 0.25rem;"><i class="fa fa-fw fa-calendar"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" name="tgl_lahirsiswa" id="xtgl_lahir" placeholder="yyyy-mm-dd" required>
+                                    <input type="text" class="form-control" name="jdl_kelas" id="jdl_kelas" placeholder="yyyy-mm-dd" required>
                                 </div>
                             </div>
                         </div>
@@ -163,4 +163,26 @@
         $(document).ready(function() {
             $('#table').DataTable();
         });
+    </script>
+
+    <script type="text/javascript">
+        function confirmation(ev) {
+            ev.preventDefault();
+            var urlToRedirect = ev.currentTarget.getAttribute('href'); //use currentTarget because the click may be on the nested i tag and not a tag causing the href to be empty
+            console.log(urlToRedirect); // verify if this is the right URL
+            Swal.fire({
+                title: 'Apakah Anda Yakin?',
+                text: "Menghapus Tanggal Ini Berarti Menghapus Semua Data Absensi Yang Ada Di Tanggal Ini",
+                type: 'warning',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Lanjutkan'
+            }).then((result) => {
+                if (result.value) {
+                    window.location.href = urlToRedirect;
+                }
+            });
+        }
     </script>

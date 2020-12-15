@@ -135,3 +135,18 @@
             $('#table').DataTable();
         });
     </script>
+    <script>
+        $.ajax({
+            url: '<?= site_url('course/update_oc/') ?>',
+            type: 'post',
+            dataType: 'json',
+            data: $('#fm_oc').serialize(),
+            beforeSend: function() {
+                $('.submit').html('<i class="fa fa-spin fa-spinner"></i> loading');
+            },
+            success: function(data) {
+                alert(data.msg);
+                location.reload();
+            }
+        })
+    </script>

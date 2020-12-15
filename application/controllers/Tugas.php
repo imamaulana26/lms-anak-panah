@@ -171,7 +171,7 @@ class Tugas extends CI_Controller
 
 				$this->db->insert('tbl_materi_tugas', $data);
 			}
-
+			$this->session->set_flashdata('msg', 'success');
 			// $this->diskusi($kd_mapel);
 			echo json_encode(['status' => true, 'id' => $data['id_forum']]);
 			exit;
@@ -201,7 +201,7 @@ class Tugas extends CI_Controller
 			}
 
 			$this->db->update('tbl_materi_tugas', $data, ['id' => $this->input->post('id_fm')]);
-
+			$this->session->set_flashdata('msg', 'success');
 			// $this->diskusi($kd_mapel);
 			echo json_encode(['status' => true, 'id' => $this->input->post('kd_mapel')]);
 			exit;
@@ -396,7 +396,7 @@ class Tugas extends CI_Controller
 
 			$this->session->set_flashdata('page', $data['pertemuan']);
 			$this->session->set_flashdata('mention', $id);
-
+			$this->session->set_flashdata('msg', 'success');
 			redirect(site_url('tugas/' . $data['id_forum']));
 		}
 	}
@@ -467,7 +467,7 @@ class Tugas extends CI_Controller
 
 			$this->session->set_flashdata('page', $data['pertemuan']);
 			$this->session->set_flashdata('mention', $id);
-
+			$this->session->set_flashdata('msg', 'success');
 			redirect(site_url('tugas/' . $data['id_forum']));
 		}
 	}

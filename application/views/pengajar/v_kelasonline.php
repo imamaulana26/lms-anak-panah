@@ -20,7 +20,7 @@
 								<div class="input-group-addon">
 									<span class="input-group-text" style="height: 100%; border-radius: 0.25rem 0 0 0.25rem;"><i class="fa fa-fw fa-calendar"></i></span>
 								</div>
-								<input type="text" class="form-control" name="tgl_lahirsiswa" id="xtgl_lahir" placeholder="yyyy-mm-dd" required>
+								<input type="text" class="form-control" name="jdl_kelas" id="jdl_kelas" placeholder="yyyy-mm-dd" required>
 							</div>
 						</div>
 					</div>

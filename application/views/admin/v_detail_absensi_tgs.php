@@ -230,50 +230,50 @@ $c = $q->row_array();
                                                 <table class="table table-striped">
                                                     <thead>
                                                         <tr>
-                                                            <th>forumke</th>
+                                                            <th>tugaske</th>
                                                             <th>materi</th>
                                                             <th>absen/hadir</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <?php $dataforum = $this->db->get_where('tbl_materi_forum', ['id_forum' => $dtmapel['id_pelajaran']])->result_array();
-                                                        if (!empty($dataforum)) {
-                                                            foreach ($dataforum as $dtforum) : ?>
+                                                        <?php
+                                                        $datatugas = $this->db->get_where('tbl_materi_tugas', ['id_forum' => $dtmapel['id_pelajaran']])->result_array();
+                                                        if (!empty($datatugas)) {
+                                                            foreach ($datatugas as $dttugas) : ?>
                                                                 <tr>
-                                                                    <td><?= $dtforum['pertemuan'] ?></td>
-                                                                    <td><?= $dtforum['judul_materi'] ?></td>
+                                                                    <td><?= $dttugas['pertemuan'] ?></td>
+                                                                    <td><?= $dttugas['judul_materi'] ?></td>
                                                                     <td>
-                                                                        <?php
-                                                                        $checkforum = $this->db->get_where('tbl_komen_forum', ['id_forum' => $dtforum['id_forum'], 'pertemuan' => $dtforum['pertemuan']])->row_array();
-                                                                        foreach ($dtforumsiswa as $dtfrsiswa) {
-
-                                                                            if ($dtfrsiswa['idf'] === $dtmapel['id_pelajaran']) {
-                                                                                foreach ($dtfrsiswa['data'] as $dtsiswa) {
-                                                                                    $check = array_search($dtforum['pertemuan'], array_column($dtfrsiswa['data'], 'frk'));
-                                                                                    if ($dtsiswa['frk'] === $dtforum['pertemuan']) {
-
+                                                                        <?php $checktugas = $this->db->get_where('tbl_komen_tugas', ['id_forum' => $dttugas['id_forum'], 'pertemuan' => $dttugas['pertemuan']])->row_array();
                                                                         ?>
-                                                                                        <?= $dtsiswa['abs'] ?>
-                                                                        <?php
-                                                                                        break;
-                                                                                    }
-                                                                                }
-                                                                                break;
-                                                                            } else {
-                                                                            }
-                                                                        }
-                                                                        if ($check === false) {
-                                                                            if (empty($checkforum)) {
-                                                                                echo 'Belum Mengerjakan';
-                                                                            } else {
-                                                                                echo 'Belum Di Absen';
-                                                                            }
-                                                                        } ?>
+                                                                        <?php if (!empty($dttgssiswa)) {
+                                                                            foreach ($dttgssiswa as $dttgsiswa) {
+                                                                                if ($dttgsiswa['idtg'] === $dtmapel['id_pelajaran']) {
+                                                                                    foreach ($dttgsiswa['data'] as $dtsiswa) {
+                                                                                        $check = array_search($dttugas['pertemuan'], array_column($dttgsiswa['data'], 'tgk'));
+                                                                                        if ($dtsiswa['tgk'] === $dttugas['pertemuan']) { ?>
+                                                                                            <?= $dtsiswa['abs'] ?>
 
+                                                                        <?php
+                                                                                            break;
+                                                                                        }
+                                                                                    }
+                                                                                    break;
+                                                                                }
+                                                                            }
+                                                                            if ($check === false) {
+                                                                                if (empty($checktugas)) {
+                                                                                    echo 'Belum Mengerjakan';
+                                                                                } else {
+                                                                                    echo 'Belum Di Absen';
+                                                                                }
+                                                                            }
+                                                                        } else {
+                                                                            echo 'Belum Di Absen';
+                                                                        } ?>
                                                                     </td>
                                                                 </tr>
                                                             <?php endforeach; ?>
-
                                                         <?php
                                                         } else {
                                                             echo '<tr><td colspan="3">Belum ada data</td><tr>';

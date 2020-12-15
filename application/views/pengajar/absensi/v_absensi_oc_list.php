@@ -60,20 +60,19 @@
                                                                     $data = $this->db->get_where('tbl_abs_oc', ['id_pelajaran' => $this->uri->segment(3)])->row_array();
                                                                     $dt_unser = unserialize($data['dt_oc']);
                                                                     // var_dump($dt_unser);
-                                                                    foreach ($dt_unser as $key => $value) {
-                                                                        // var_dump($value['tgl']);
+                                                                    // var_dump($this->session->flashdata('msg'));
+                                                                    foreach ($dt_unser as $value) {
                                                                         if ($value['tgl'] === $this->uri->segment(4)) {
                                                                             $check = array_search($li['siswa_nis'], array_column($value['data'], 'nis'));
                                                                             foreach ($value['data'] as $dtval) {
                                                                                 if ($dtval['nis'] == $li['siswa_nis']) {
-                                                                                    echo $dtval['abs'];
+                                                                                    echo $dtval['absensi'];
                                                                                     // var_dump($dtval);
                                                                                 }
                                                                                 // break;
                                                                             }
                                                                         }
                                                                     }
-
                                                                     if ($check === false) {
                                                                         echo 'Belum Di Absen';
                                                                     }

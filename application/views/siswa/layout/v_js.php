@@ -44,7 +44,44 @@
 		}
 	});
 </script>
+<?php if ($this->session->flashdata('msg') == 'deleted') : ?>
+	<script type="text/javascript">
+		Swal.fire({
+			icon: 'error',
+			title: 'Berhasil Di Hapus',
+			text: 'Data Berhasil Di Hapus',
+		})
+	</script>
 
+<?php elseif ($this->session->flashdata('msg') == 'success') : ?>
+	<script type="text/javascript">
+		Swal.fire({
+			position: 'center',
+			icon: 'success',
+			title: 'Data Berhasil Di Simpan',
+			showConfirmButton: false,
+			timer: 1500
+		})
+	</script>
+<?php elseif ($this->session->flashdata('msg') == 'info') : ?>
+	<script type="text/javascript">
+		Swal.fire({
+			icon: 'info',
+			title: 'Maaf Data Sudah Ada',
+			text: 'Data Yang Anda Masukan Sudah ada di Database, Silahkan Input Ulang',
+		})
+	</script>
+<?php elseif ($this->session->flashdata('msg') == 'test') : ?>
+	<script type="text/javascript">
+		Swal.fire(
+			'Data Berhasil Di Simpan',
+			'Terimakasih',
+			'success'
+		)
+	</script>
+<?php else : ?>
+
+<?php endif; ?>
 <!-- My JS -->
 <script src="<?= base_url('assets/front-end/dist/js/my-js.js') ?>"></script>
 

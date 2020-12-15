@@ -57,30 +57,23 @@
                                                                 <td><?= $li['siswa_nama'] ?></td>
                                                                 <td>
                                                                     <?php
+
                                                                     $data = $this->db->get_where('tbl_abs_model', ['siswa_nis' => $li['siswa_nis']])->row_array();
-                                                                    // var_dump($data['fr_abs']);
+                                                                    
                                                                     if (!empty($data['fr_abs'])) {
                                                                         $dt_unser = unserialize($data['fr_abs']);
-                                                                        foreach ($dt_unser as $key => $value1) {
-                                                                            // var_dump($value1);
-                                                                            if ($value1['idf'] === $this->uri->segment(2)) {
-                                                                                foreach ($value1['data'] as $val2) {
-                                                                                    if ($val2['frk'] === $this->uri->segment(3)) {
-                                                                                        echo $val2['abs'];
-                                                                                    }
-                                                                                    else{
-                                                                                        echo 'belum di absen';
-                                                                                    }
-                                                                                    break;
-                                                                                }
+                                                                        // var_dump($dt_unser);
+                                                                        if (($key1 = array_search($this->uri->segment(2), array_column($dt_unser, 'idf'))) !== false) {
+                                                                            if (($key2 = array_search($this->uri->segment(3), array_column($dt_unser[$key1]['data'], 'frk'))) !== false) {
+                                                                                echo $dt_unser[$key1]['data'][$key2]['abs'];
+                                                                            }else{
+                                                                                echo 'Belum Diabsen';
                                                                             }
-                                                                            else{
-                                                                                echo 'belum di absen';
-                                                                            }
-                                                                            break;
+                                                                        } else {
+                                                                            echo 'Belum Diabsen';
                                                                         }
-                                                                    }else{
-                                                                        echo 'belum di absen';
+                                                                    } else {
+                                                                        echo 'Belum di absen';
                                                                     }
                                                                     ?>
 

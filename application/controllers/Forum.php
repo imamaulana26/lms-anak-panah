@@ -399,7 +399,7 @@ class Forum extends CI_Controller
 
 			$this->session->set_flashdata('page', $data['pertemuan']);
 			$this->session->set_flashdata('mention', $id);
-
+			$this->session->set_flashdata('msg', 'success');
 			redirect(site_url('forum/' . $data['id_forum']));
 		}
 	}
@@ -470,7 +470,7 @@ class Forum extends CI_Controller
 
 			$this->session->set_flashdata('page', $data['pertemuan']);
 			$this->session->set_flashdata('mention', $id);
-
+			$this->session->set_flashdata('msg', 'success');
 			redirect(site_url('forum/' . $data['id_forum']));
 		}
 	}
@@ -483,7 +483,6 @@ class Forum extends CI_Controller
 
 		$this->db->delete('tbl_komen_forum', ['id' => $id]);
 		$this->db->delete('tbl_komen_forum', ['reply_to' => $id]);
-
 		echo json_encode([
 			'msg' => 'Komentar berhasil dihapus!'
 		]);
@@ -542,7 +541,7 @@ class Forum extends CI_Controller
 
 		$this->db->update('tbl_komen_forum', $data, ['id' => $this->input->post('id_fm')]);
 		$this->session->unset_userdata('lampiran');
-
+		$this->session->set_flashdata('msg', 'success');
 		echo json_encode(['status' => true, 'id' => $this->input->post('kd_mapel')]);
 		exit;
 	}

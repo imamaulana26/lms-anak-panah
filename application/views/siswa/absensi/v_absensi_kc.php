@@ -13,10 +13,10 @@
             <div class="offset-1 col-sm-10">
                 <div class="row" style="margin-bottom: 20px;">
                     <div class="col-md-6">
-                        <a href="<?= site_url('detail_absensi/absensi_forum/') . $this->uri->segment(3) ?>" class="btn btn-outline-success">Forum</a>
-                        <a href="<?= site_url('detail_absensi/absensi_tugas/') . $this->uri->segment(3) ?>" class="btn btn-outline-success">Tugas</a>
-                        <a href="<?= site_url('detail_absensi/absensi_oc/') . $this->uri->segment(3) ?>" class="btn btn-outline-success">Kelas Online</a>
-                        <a href="<?= site_url('detail_absensi/absensi_kc/') . $this->uri->segment(3) ?>" class="btn btn-success">Kelas Komunitas</a>
+                        <a href="<?= site_url('detail_absensi/absensi_forum/') . $this->session->userdata('username') ?>" class="btn btn-outline-success">Forum</a>
+                        <a href="<?= site_url('detail_absensi/absensi_tugas/') . $this->session->userdata('username') ?>" class="btn btn-outline-success">Tugas</a>
+                        <a href="<?= site_url('detail_absensi/absensi_oc/') . $this->session->userdata('username') ?>" class="btn btn-outline-success">Kelas Online</a>
+                        <a href="<?= site_url('detail_absensi/absensi_kc/') . $this->session->userdata('username') ?>" class="btn btn-success">Kelas Komunitas</a>
                     </div>
                 </div>
                 <div class="row">
@@ -46,8 +46,8 @@
                                                             <td><?= $dt_kc['tgl'] ?></td>
                                                             <td>
                                                                 <?php
-                                                                if (($key = array_search($this->uri->segment(3), array_column($dt_kc['data'], 'nis'))) !== false) {
-                                                                    echo $dt_kc['data'][$key]['abs'];
+                                                                if (($key = array_search($this->session->userdata('username'), array_column($dt_kc['data'], 'nis'))) !== false) {
+                                                                    echo $dt_kc['data'][$key]['absensi'];
                                                                 } else {
                                                                     echo 'Belum di Absen';
                                                                 }

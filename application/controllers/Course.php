@@ -44,52 +44,12 @@ class Course extends CI_Controller
 
 	function update_oc()
 	{
-		var_dump($_POST); die;
+		// var_dump($_POST); die;	
 		
-		$sql = $this->db->get_where('tbl_abs_oc', ['id_pelajaran' => $this->input->post('id')])->row_array();
-		if ($sql == null) {
-			$this->db->insert('tbl_abs_oc',['id_pelajaran' => $this->input->post('id')]);
-			$new_abs1 = array(
-				array(
-					'tgl' => $this->input->post('jdl_kelas'),
-					'data' => array(
-						array(
-							'nis' => 'null',
-							'absensi' => 'null'
-						)
-					)
-				)
-			);
-			$this->db->update('tbl_abs_oc', ['dt_oc' => serialize($new_abs1)], ['id_pelajaran' => $this->input->post('id')]);
-		}
 
-		//data yang lama
-		if ($sql['dt_oc']!=null) {
-			$dtunser = unserialize($sql['dt_oc']);
-			foreach ($dtunser as $datuns) {
-				if ($datuns['tgl'] == $this->input->post('jdl_kelas')) {
-					echo "<script>alert('data sudah ada');window.history.go(-1);location.reload();</script>";
-					die;
-				}
-			}
-			$dtfix = array_merge($dtunser, $new_abs1);
-		}
-		//end of data lama
-		$new_abs1 = array(
-			array(
-				'tgl' => $this->input->post('jdl_kelas'),
-				'data' => array(
-					array(
-						'nis' => null,
-						'absensi' => null
-					)
-				)
-			)
-		);
-		$dtfix = array_merge($dtunser, $new_abs1);
-		var_dump($dtfix);
-		// $this->db->update('tbl_abs_oc', ['dt_oc' => serialize($dtfix)], ['id_pelajaran' => $this->input->post('id')]);
-		die;
+		$sql = $this->db->get_where('tbl_abs_oc', ['id_pelajaran' => $this->input->post('id')])->row_array();
+		// var_dump($sql); die;
+
 		$data = array(
 			'link_oc' => $this->input->post('link_oc'),
 			'tgl_oc' => $this->input->post('jdl_kelas'),
@@ -98,11 +58,55 @@ class Course extends CI_Controller
 			'aktifkan' => $this->input->post('opsi_kls')
 		);
 
-		var_dump($data);
-		die;
-		// $this->db->update('tbl_pelajaran', $data,['id_pelajaran'=>$this->input->post('id')]);
+		$new_abs1 = array(
+			array(
+				'tgl' => $this->input->post('jdl_kelas'),
+				'data' => array(
+					array(
+						'nis' => 'null',
+						'absensi' => 'null'
+					)
+				)
+			)
+		);
 
-		echo json_encode(['msg' => 'berhasil']);
-		exit();
+		if ($sql['dt_oc'] == null) {
+			
+			// belum ada data di tbl_abs_oc
+
+			$this->db->insert('tbl_abs_oc', ['id_pelajaran' => $this->input->post('id')]);
+
+			$this->db->update('tbl_abs_oc', ['dt_oc' => serialize($new_abs1)], ['id_pelajaran' => $this->input->post('id')]);
+
+			$this->db->update('tbl_pelajaran', $data, ['id_pelajaran' => $this->input->post('id')]);
+			echo json_encode(['msg' => 'Berhasil']);
+			exit();
+			 // end of belum ada data di tbl_abs_oc
+		}
+
+		//sudah ada data
+		if ($sql['dt_oc'] != null) {
+
+			$dtunser = unserialize($sql['dt_oc']);
+
+			foreach ($dtunser as $datuns) {
+				if ($datuns['tgl'] == $this->input->post('jdl_kelas')) {
+					// update hanya tbl pelajaran
+					$this->db->update('tbl_pelajaran', $data, ['id_pelajaran' => $this->input->post('id')]);
+					echo json_encode(['msg' => 'Berhasil']);
+					exit();
+				}
+			}
+
+			$dtfix = array_merge($dtunser, $new_abs1);
+			// var_dump($dtfix);
+			$this->db->update('tbl_abs_oc', ['dt_oc' => serialize($dtfix)], ['id_pelajaran' => $this->input->post('id')]);
+			$this->db->update('tbl_pelajaran', $data, ['id_pelajaran' => $this->input->post('id')]);
+			echo json_encode(['msg' => 'Berhasil']);
+			exit();
+		}
+
+		//end of data lama
+
 	}
 }

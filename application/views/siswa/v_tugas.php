@@ -96,7 +96,8 @@
 		</div><!-- /.container-fluid -->
 	</div>
 	<!-- /.content-header -->
-	<?php $page = (empty($this->session->flashdata('page'))) ? 1 : $this->session->flashdata('page');
+	<?php $li_komen = 0;
+	$page = (empty($this->session->flashdata('page'))) ? 1 : $this->session->flashdata('page');
 	$user = $this->session->userdata('username');
 	$pengajar = $this->db->select('*')->from('tbl_pelajaran a')
 		->join('tbl_pengajar b', 'a.kd_pengajar = b.id_pengajar', 'left')
@@ -174,30 +175,22 @@
 													<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $val['id_forum'] . '-' . $val['pertemuan'] ?>">
 														<i class="fa fa-fw fa-reply"></i> Balas
 													</a>
-													<span data-toggle="collapse" data-target="#collapseExample-<?= $val['id'] ?>" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;">
-														<?php $li_komen = 0;
-														$cek = $this->db->get_where('tbl_komen_tugas', ['user_komen' => $user]);
-														if ($cek->num_rows() > 0) {
-															$id = $cek->row_array();
-															$where = 'id_forum = ' . $val['id_forum'] . ' and pertemuan = ' . $val['pertemuan'] . ' and reply_to in (0, ' . $id['id'] . ') and user_komen in ("' . $user . '", "' . $pengajar['pengguna_username'] . '")';
-															$this->db->select('*')->from('tbl_komen_tugas')->where($where);
-															$li_komen = $this->db->get()->num_rows();
-														} ?>
-														Lihat Komentar (<?= $li_komen ?>)
+													<span id="komen" data-toggle="collapse" data-target="#collapseExample-<?= $val['id'] ?>" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;">
+														<!-- Lihat Komentar (<?= $li_komen ?>) -->
 													</span>
 													<div class="collapse pt-3" id="show_komen-<?= $val['id_forum'] . '-' . $val['pertemuan'] ?>">
 														<div class="card card-body">
-															<form action="<?= site_url('tugas/submit_main') ?>" method="post" autocomplete="off" id="my-awesome-dropzone" class="dropzone" enctype="multipart/form-data">
-																<input type="hidden" name="id" id="id" value="<?= $val['id'] ?>">
-																<input type="hidden" name="id_forum" id="id_forum" value="<?= $val['id_forum'] ?>">
-																<input type="hidden" name="pertemuan" id="pertemuan" value="<?= $val['pertemuan'] ?>">
-																<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
+															<form action="<?= site_url('tugas/submit_main') ?>" method="post" autocomplete="off" enctype="multipart/form-data">
+																<input type="hidden" name="id" value="<?= $val['id'] ?>">
+																<input type="hidden" name="id_forum" value="<?= $val['id_forum'] ?>">
+																<input type="hidden" name="pertemuan" value="<?= $val['pertemuan'] ?>">
+																<input type="hidden" name="user_komen" value="<?= $this->session->userdata('user'); ?>">
 																<textarea name="komentar" id="editorfr<?= $val['id'] ?>" placeholder="Type Here"></textarea>
 
 																<div class="form-group mt-2">
 																	<label>Lampirkan Gambar</label>
 																	<div class="custom-file">
-																		<input type="file" class="custom-file-input" name="gambar" id="gambar">
+																		<input type="file" class="custom-file-input" name="gambar">
 																		<label class="custom-file-label" for="customFile">Choose file</label>
 																	</div>
 																</div>
@@ -213,6 +206,7 @@
 													<div class="card-body">
 														<div class="row">
 															<?php $komen = $this->db->get_where('tbl_komen_tugas', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'user_komen' => $user, 'reply_to' => 0]);
+															$li_komen += $komen->num_rows();
 															foreach ($komen->result_array() as $cmd) :
 																$siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $cmd['user_komen']])->row_array();
 
@@ -225,7 +219,7 @@
 																	</div>
 																	<div class="col-md">
 																		<strong class="float-left"><?= $rep_user ?></strong>
-																		<?php if ($siswa['siswa_nis'] == $user) : ?>
+																		<?php if ($siswa['siswa_nis'] == $user && $val['status'] == 0) : ?>
 																			<small class="float-right text-secondary">
 																				<div class="dropdown mx-1">
 																					<a href="#" class="btn btn-link btn-xs" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -279,18 +273,19 @@
 																	<div class="collapse pt-3" id="show_komen-<?= $cmd['id'] ?>">
 																		<div class="card card-body">
 																			<form action="<?= site_url('tugas/submit_komen') ?>" method="post" autocomplete="off" enctype="multipart/form-data">
-																				<input type="hidden" name="id" id="id" value="<?= $val['id'] ?>">
-																				<input type="hidden" name="id_forum" id="id_forum" value="<?= $cmd['id_forum'] ?>">
-																				<input type="hidden" name="pertemuan" id="pertemuan" value="<?= $cmd['pertemuan'] ?>">
-																				<input type="hidden" name="mention" id="mention" value="<?= $cmd['user_komen'] ?>">
-																				<input type="hidden" name="reply_to" id="reply_to" value="<?= $cmd['id'] ?>">
-																				<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
+																				<input type="hidden" name="id" value="<?= $val['id'] ?>">
+																				<input type="hidden" name="id_reply" value="<?= $cmd['id'] ?>">
+																				<input type="hidden" name="id_forum" value="<?= $cmd['id_forum'] ?>">
+																				<input type="hidden" name="pertemuan" value="<?= $cmd['pertemuan'] ?>">
+																				<input type="hidden" name="mention" value="<?= $cmd['user_komen'] ?>">
+																				<input type="hidden" name="reply_to" value="<?= $cmd['id'] ?>">
+																				<input type="hidden" name="user_komen" value="<?= $this->session->userdata('user'); ?>">
 																				<textarea name="komentar" id="editor<?= $cmd['id'] ?>" rows="10" cols="45" placeholder="Type Here"></textarea>
 
 																				<div class="form-group mt-2">
 																					<label>Lampirkan Gambar</label>
 																					<div class="custom-file">
-																						<input type="file" class="custom-file-input" name="gambar" id="gambar">
+																						<input type="file" class="custom-file-input" name="gambar">
 																						<label class="custom-file-label" for="customFile">Choose file</label>
 																					</div>
 																				</div>
@@ -305,12 +300,12 @@
 
 																<?php $where = "id_forum = '" . $val['id_forum'] . "' and pertemuan = '" . $val['pertemuan'] . "' and reply_to = '" . $cmd['id'] . "' and (user_komen = '" . $pengajar['pengguna_username'] . "' or user_komen = '" . $cmd['user_komen'] . "')";
 																$reply = $this->db->select('*')->from('tbl_komen_tugas')->where($where)->get();
+																$li_komen += $reply->num_rows();
 																foreach ($reply->result_array() as $rep) :
 																	$rep_siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['user_komen']])->row_array();
 																	$admin = $this->db->get_where('tbl_pengguna', ['pengguna_username' => $rep['user_komen']])->row_array();
 
-																	$rep_user = $rep_siswa == null ? $admin['pengguna_nama'] . ' (pengajar)' : $rep_siswa['siswa_nama'];
-																	$mention = $this->db->get_where('tbl_pengguna', ['pengguna_username' => $rep['mention']])->row_array(); ?>
+																	$rep_user = $rep_siswa == null ? $admin['pengguna_nama'] . ' (pengajar)' : $rep_siswa['siswa_nama']; ?>
 																	<!-- Reply Main Comments -->
 																	<div class="collapse <?= $this->session->flashdata('mention') == $cmd['id'] ? 'show' : '' ?>" id="comments-<?= $cmd['id'] ?>">
 																		<div class="col-lg ml-3">
@@ -327,7 +322,7 @@
 																									<i class='fa fa-ellipsis-v'></i>
 																								</a>
 																								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-																									<a class="dropdown-item" href="<?= site_url('tugas/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;">
+																									<a class="dropdown-item" href="<?= site_url('tugas/edit_komen/' . $rep['id']) ?>" style="font-size: 12px; color: #1e7e34;">
 																										<i class="fa fa-fw fa-pencil-alt"></i> Sunting
 																									</a>
 																									<a class="dropdown-item" href="javascript:void(0)" onclick="hapus_subkomen('<?= $rep['id'] ?>')" style="font-size: 12px; color: #dc3545;">
@@ -342,10 +337,14 @@
 																				</div>
 																			</div>
 																			<div class="card-body bordered pb-0">
-																				<p>
-																					<?php $level = $mention['pengguna_level'] == '3' ? ' (pengajar)' : ''; ?>
-																					<b><?= $mention['pengguna_nama'] . $level ?></b> <?= $rep['isi_komen'] ?>
-																				</p>
+																				<blockquote>
+																					<?php $get_komen = $this->db->select('*')->from('tbl_komen_tugas a')->join('tbl_pengguna b', 'a.user_komen = b.pengguna_username', 'inner')->where(['id' => $rep['id_reply']])->get()->row_array(); ?>
+																					<b><?= $get_komen['pengguna_level'] == 3 ? $get_komen['pengguna_nama'] . ' (pengajar)' : $get_komen['pengguna_nama'] ?></b>
+
+																					<?= $get_komen['isi_komen'] ?>
+																				</blockquote>
+																				<?= $rep['isi_komen'] ?>
+
 																				<?php if ($rep['lampiran'] != null) : ?>
 																					<?php if (is_array(unserialize($rep['lampiran']))) : ?>
 																						<p><b>Lampiran</b></p>
@@ -369,18 +368,19 @@
 																				<div class="collapse pt-5" id="show_komen-<?= $rep['id'] ?>">
 																					<div class="card card-body">
 																						<form action="<?= site_url('tugas/submit_komen') ?>" method="post" autocomplete="off" enctype="multipart/form-data">
-																							<input type="hidden" name="id" id="id" value="<?= $cmd['id'] ?>">
-																							<input type="hidden" name="id_forum" id="id_forum" value="<?= $rep['id_forum'] ?>">
-																							<input type="hidden" name="pertemuan" id="pertemuan" value="<?= $rep['pertemuan'] ?>">
-																							<input type="hidden" name="mention" id="mention" value="<?= $rep['user_komen'] ?>">
-																							<input type="hidden" name="reply_to" id="reply_to" value="<?= $cmd['id'] ?>">
-																							<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
+																							<input type="hidden" name="id" value="<?= $cmd['id'] ?>">
+																							<input type="hidden" name="id_reply" value="<?= $rep['id'] ?>">
+																							<input type="hidden" name="id_forum" value="<?= $rep['id_forum'] ?>">
+																							<input type="hidden" name="pertemuan" value="<?= $rep['pertemuan'] ?>">
+																							<input type="hidden" name="mention" value="<?= $rep['user_komen'] ?>">
+																							<input type="hidden" name="reply_to" value="<?= $cmd['id'] ?>">
+																							<input type="hidden" name="user_komen" value="<?= $this->session->userdata('user'); ?>">
 																							<textarea name="komentar" id="editor<?= $rep['id'] ?>" rows="10" cols="45" placeholder="Type Here"></textarea>
 
 																							<div class="form-group mt-2">
 																								<label>Lampirkan Gambar</label>
 																								<div class="custom-file">
-																									<input type="file" class="custom-file-input" name="gambar" id="gambar">
+																									<input type="file" class="custom-file-input" name="gambar">
 																									<label class="custom-file-label" for="customFile">Choose file</label>
 																								</div>
 																							</div>
@@ -425,6 +425,8 @@
 	});
 
 	$(document).ready(function() {
+		$('span#komen').text('Lihat Komentar (' + <?= $li_komen ?> + ')');
+
 		// tugas
 		$.ajax({
 			url: "<?= site_url('tugas/datafr_id/') ?>" + <?= $this->uri->segment(2); ?>,
@@ -432,7 +434,53 @@
 			dataType: 'json',
 			success: function(data) {
 				for (var i = 0; i < data.length; i++) {
-					CKEDITOR.replace('editorfr' + data[i].id);
+					var mathElements = [
+						'math',
+						'maction',
+						'maligngroup',
+						'malignmark',
+						'menclose',
+						'merror',
+						'mfenced',
+						'mfrac',
+						'mglyph',
+						'mi',
+						'mlabeledtr',
+						'mlongdiv',
+						'mmultiscripts',
+						'mn',
+						'mo',
+						'mover',
+						'mpadded',
+						'mphantom',
+						'mroot',
+						'mrow',
+						'ms',
+						'mscarries',
+						'mscarry',
+						'msgroup',
+						'msline',
+						'mspace',
+						'msqrt',
+						'msrow',
+						'mstack',
+						'mstyle',
+						'msub',
+						'msup',
+						'msubsup',
+						'mtable',
+						'mtd',
+						'mtext',
+						'mtr',
+						'munder',
+						'munderover',
+						'semantics',
+						'annotation',
+						'annotation-xml'
+					];
+					CKEDITOR.replace('editorfr' + data[i].id, {
+						extraAllowedContent: mathElements.join(' ') + '(*)[*]{*};img[data-mathml,data-custom-editor,role](Wirisformula)'
+					});
 				}
 			}
 		});

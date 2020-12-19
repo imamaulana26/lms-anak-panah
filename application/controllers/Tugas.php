@@ -89,7 +89,11 @@ class Tugas extends CI_Controller
 
 	function data_id($id)
 	{
-		$qry = $this->db->get_where('tbl_komen_tugas', ['id_forum' => $id])->result_array();
+		if ($_SESSION['akses'] == 3) {
+			$qry = $this->db->get_where('tbl_komen_tugas', ['id_forum' => $id])->result_array();
+		} else {
+			$qry = $this->db->get_where('tbl_komen_tugas', ['id_forum' => $id, 'user_komen' => $_SESSION['username']])->result_array();
+		}
 		echo json_encode($qry);
 		exit();
 	}
@@ -395,7 +399,7 @@ class Tugas extends CI_Controller
 			}
 
 			$this->session->set_flashdata('page', $data['pertemuan']);
-			$this->session->set_flashdata('mention', $id);
+			$this->session->set_flashdata('mention', ($id - 1));
 			$this->session->set_flashdata('msg', 'success');
 			redirect(site_url('tugas/' . $data['id_forum']));
 		}
@@ -424,6 +428,7 @@ class Tugas extends CI_Controller
 
 					$data = array(
 						'id_forum' => $this->input->post('id_forum'),
+						'id_reply' => $this->input->post('id_reply'),
 						'pertemuan' => $this->input->post('pertemuan'),
 						'reply_to' => $this->input->post('reply_to'),
 						'mention' => $this->input->post('mention'),
@@ -436,6 +441,7 @@ class Tugas extends CI_Controller
 			} else {
 				$data = array(
 					'id_forum' => $this->input->post('id_forum'),
+					'id_reply' => $this->input->post('id_reply'),
 					'pertemuan' => $this->input->post('pertemuan'),
 					'reply_to' => $this->input->post('reply_to'),
 					'mention' => $this->input->post('mention'),
@@ -466,7 +472,7 @@ class Tugas extends CI_Controller
 			}
 
 			$this->session->set_flashdata('page', $data['pertemuan']);
-			$this->session->set_flashdata('mention', $id);
+			$this->session->set_flashdata('mention', $data['reply_to']);
 			$this->session->set_flashdata('msg', 'success');
 			redirect(site_url('tugas/' . $data['id_forum']));
 		}

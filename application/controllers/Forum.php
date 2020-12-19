@@ -427,6 +427,7 @@ class Forum extends CI_Controller
 
 					$data = array(
 						'id_forum' => $this->input->post('id_forum'),
+						'id_reply' => $this->input->post('id_reply'),
 						'pertemuan' => $this->input->post('pertemuan'),
 						'reply_to' => $this->input->post('reply_to'),
 						'mention' => $this->input->post('mention'),
@@ -439,6 +440,7 @@ class Forum extends CI_Controller
 			} else {
 				$data = array(
 					'id_forum' => $this->input->post('id_forum'),
+					'id_reply' => $this->input->post('id_reply'),
 					'pertemuan' => $this->input->post('pertemuan'),
 					'reply_to' => $this->input->post('reply_to'),
 					'mention' => $this->input->post('mention'),

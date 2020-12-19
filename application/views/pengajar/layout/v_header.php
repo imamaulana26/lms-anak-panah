@@ -49,6 +49,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 	<!-- My CSS -->
 	<link rel="stylesheet" href="<?= base_url('assets/front-end/dist/css/my-css.css') ?>">
+
+	<style>
+		blockquote {
+			background: #f9f9f9;
+			border-left: .2em solid #007bff;
+			border-radius: 5px;
+			margin: 0px 0px 10px 0px;
+			padding: .5em .7rem;
+		}
+	</style>
 </head>
 
 <body class="hold-transition sidebar-collapse layout-top-nav">

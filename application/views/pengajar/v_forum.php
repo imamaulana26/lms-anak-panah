@@ -98,7 +98,7 @@
 		</div><!-- /.container-fluid -->
 	</div>
 	<!-- /.content-header -->
-	<?php
+	<?php $li_komen = 0;
 	$akses = $this->session->userdata('akses');
 	$page = (empty($this->session->flashdata('page'))) ? 1 : $this->session->flashdata('page');
 	?>
@@ -159,23 +159,24 @@
 												<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $val['id_forum'] . '-' . $val['pertemuan'] ?>">
 													<i class="fa fa-fw fa-reply"></i> Balas
 												</a>
-												<span data-toggle="collapse" data-target="#collapseExample-<?= $val['id'] ?>" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;">
-													<?php $li_komen = $this->db->get_where('tbl_komen_forum', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan']])->num_rows(); ?>
-													Lihat Komentar (<?= $li_komen ?>)
+												<span id="komen" data-toggle="collapse" data-target="#collapseExample-<?= $val['id'] ?>" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;">
+													<?php // $li_komen = $this->db->get_where('tbl_komen_forum', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan']])->num_rows(); 
+													?>
+													<!-- Lihat Komentar (<?= $li_komen ?>) -->
 												</span>
 												<div class="collapse pt-3" id="show_komen-<?= $val['id_forum'] . '-' . $val['pertemuan'] ?>">
 													<div class="card card-body">
 														<form action="<?= site_url('forum/submit_main') ?>" method="post" autocomplete="off" enctype="multipart/form-data">
-															<input type="hidden" name="id" id="id" value="<?= $val['id'] ?>">
-															<input type="hidden" name="id_forum" id="id_forum" value="<?= $val['id_forum'] ?>">
-															<input type="hidden" name="pertemuan" id="pertemuan" value="<?= $val['pertemuan'] ?>">
-															<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
+															<input type="hidden" name="id" value="<?= $val['id'] ?>">
+															<input type="hidden" name="id_forum" value="<?= $val['id_forum'] ?>">
+															<input type="hidden" name="pertemuan" value="<?= $val['pertemuan'] ?>">
+															<input type="hidden" name="user_komen" value="<?= $this->session->userdata('user'); ?>">
 															<textarea name="komentar" id="editorfr<?= $val['id'] ?>" placeholder="Type Here"></textarea>
 
 															<div class="form-group mt-2">
 																<label>Lampirkan Gambar</label>
 																<div class="custom-file">
-																	<input type="file" class="custom-file-input" name="gambar" id="gambar">
+																	<input type="file" class="custom-file-input" name="gambar">
 																	<label class="custom-file-label" for="customFile">Choose file</label>
 																</div>
 															</div>
@@ -192,6 +193,7 @@
 												<div class="card-body">
 													<div class="row">
 														<?php $komen = $this->db->get_where('tbl_komen_forum', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'reply_to' => 0]);
+														$li_komen += $komen->num_rows();
 														foreach ($komen->result_array() as $cmd) :
 															$siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $cmd['user_komen']])->row_array();
 															// $nilai = $this->db->get_where('tbl_nilai_onclass', ['user_siswa' => $cmd['user_komen'], 'id_pelajaran' => $val['id_forum'], 'pertemuan_ke' => $val['pertemuan'], 'tipe' => 'Forum'])->num_rows();
@@ -217,9 +219,11 @@
 																						<i class="fa fa-fw fa-check-square"></i> Nilai
 																					</a>
 																				<?php endif; ?>
-																				<!-- <a class="dropdown-item" href="<?= site_url('forum/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;">
-																					<i class="fa fa-fw fa-pencil-alt"></i> Sunting
-																				</a> -->
+																				<?php if ($_SESSION['akses'] == 3 && $_SESSION['username'] == $cmd['user_komen']) : ?>
+																					<a class="dropdown-item" href="<?= site_url('forum/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;">
+																						<i class="fa fa-fw fa-pencil-alt"></i> Sunting
+																					</a>
+																				<?php endif; ?>
 																				<a class="dropdown-item" href="javascript:void(0)" onclick="hapus_komen('<?= $cmd['id'] ?>')" style="font-size: 12px; color: #dc3545;">
 																					<i class="fa fa-fw fa-times"></i> Hapus
 																				</a>
@@ -263,18 +267,19 @@
 																<div class="collapse pt-3" id="show_komen-<?= $cmd['id'] ?>">
 																	<div class="card card-body">
 																		<form action="<?= site_url('forum/submit_komen') ?>" method="post" autocomplete="off" enctype="multipart/form-data">
-																			<input type="hidden" name="id" id="id" value="<?= $val['id'] ?>">
-																			<input type="hidden" name="id_forum" id="id_forum" value="<?= $cmd['id_forum'] ?>">
-																			<input type="hidden" name="pertemuan" id="pertemuan" value="<?= $cmd['pertemuan'] ?>">
-																			<input type="hidden" name="mention" id="mention" value="<?= $cmd['user_komen'] ?>">
-																			<input type="hidden" name="reply_to" id="reply_to" value="<?= $cmd['id'] ?>">
-																			<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
+																			<input type="hidden" name="id" value="<?= $val['id'] ?>">
+																			<input type="hidden" name="id_reply" value="<?= $cmd['id'] ?>">
+																			<input type="hidden" name="id_forum" value="<?= $cmd['id_forum'] ?>">
+																			<input type="hidden" name="pertemuan" value="<?= $cmd['pertemuan'] ?>">
+																			<input type="hidden" name="mention" value="<?= $cmd['user_komen'] ?>">
+																			<input type="hidden" name="reply_to" value="<?= $cmd['id'] ?>">
+																			<input type="hidden" name="user_komen" value="<?= $this->session->userdata('user'); ?>">
 																			<textarea name="komentar" id="editor<?= $cmd['id'] ?>" rows="10" cols="45" placeholder="Type Here"></textarea>
 
 																			<div class="form-group mt-2">
 																				<label>Lampirkan Gambar</label>
 																				<div class="custom-file">
-																					<input type="file" class="custom-file-input" name="gambar" id="gambar">
+																					<input type="file" class="custom-file-input" name="gambar">
 																					<label class="custom-file-label" for="customFile">Choose file</label>
 																				</div>
 																			</div>
@@ -287,6 +292,7 @@
 															</div>
 
 															<?php $reply = $this->db->get_where('tbl_komen_forum', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'reply_to' => $cmd['id']]);
+															$li_komen += $reply->num_rows();
 															foreach ($reply->result_array() as $rep) :
 																$rep_siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['user_komen']])->row_array();
 																// $rep_nilai = $this->db->get_where('tbl_nilai_onclass', ['user_siswa' => $rep['user_komen'], 'id_pelajaran' => $val['id_forum'], 'pertemuan_ke' => $val['pertemuan'], 'tipe' => 'Forum'])->num_rows();
@@ -317,9 +323,11 @@
 																									<i class="fa fa-fw fa-check-square"></i> Nilai
 																								</a>
 																							<?php endif; ?>
-																							<!-- <a class="dropdown-item" href="<?= site_url('forum/edit_komen/' . $rep['id']) ?>" style="font-size: 12px; color: #1e7e34;">
-																								<i class="fa fa-fw fa-pencil-alt"></i> Sunting
-																							</a> -->
+																							<?php if ($_SESSION['akses'] == 3 && $_SESSION['username'] == $rep['user_komen']) : ?>
+																								<a class="dropdown-item" href="<?= site_url('forum/edit_komen/' . $rep['id']) ?>" style="font-size: 12px; color: #1e7e34;">
+																									<i class="fa fa-fw fa-pencil-alt"></i> Sunting
+																								</a>
+																							<?php endif; ?>
 																							<a class="dropdown-item" href="javascript:void(0)" onclick="hapus_subkomen('<?= $rep['id'] ?>')" style="font-size: 12px; color: #dc3545;">
 																								<i class="fa fa-fw fa-times"></i> Hapus
 																							</a>
@@ -331,9 +339,14 @@
 																			</div>
 																		</div>
 																		<div class="card-body bordered pb-0">
-																			<p>
-																				<b><?= $mention['siswa_nama'] ?></b> <?= $rep['isi_komen'] ?>
-																			</p>
+																			<blockquote>
+																				<?php $get_komen = $this->db->select('*')->from('tbl_komen_forum a')->join('tbl_pengguna b', 'a.user_komen = b.pengguna_username', 'inner')->where(['id' => $rep['id_reply']])->get()->row_array(); ?>
+																				<b><?= $get_komen['pengguna_level'] == 3 ? $get_komen['pengguna_nama'] . ' (pengajar)' : $get_komen['pengguna_nama'] ?></b>
+
+																				<?= $get_komen['isi_komen'] ?>
+																			</blockquote>
+																			<?= $rep['isi_komen'] ?>
+
 																			<?php if (!empty($rep['lampiran'])) : ?>
 																				<?php if (is_array(unserialize($rep['lampiran']))) : ?>
 																					<p><b>Lampiran</b></p>
@@ -357,18 +370,19 @@
 																			<div class="collapse pt-5" id="show_komen-<?= $rep['id'] ?>">
 																				<div class="card card-body">
 																					<form action="<?= site_url('forum/submit_komen') ?>" method="post" autocomplete="off" enctype="multipart/form-data">
-																						<input type="hidden" name="id" id="id" value="<?= $cmd['id'] ?>">
-																						<input type="hidden" name="id_forum" id="id_forum" value="<?= $rep['id_forum'] ?>">
-																						<input type="hidden" name="pertemuan" id="pertemuan" value="<?= $rep['pertemuan'] ?>">
-																						<input type="hidden" name="mention" id="mention" value="<?= $rep['user_komen'] ?>">
-																						<input type="hidden" name="reply_to" id="reply_to" value="<?= $cmd['id'] ?>">
-																						<input type="hidden" name="user_komen" id="user_komen" value="<?= $this->session->userdata('user'); ?>">
+																						<input type="hidden" name="id" value="<?= $cmd['id'] ?>">
+																						<input type="hidden" name="id_reply" value="<?= $rep['id'] ?>">
+																						<input type="hidden" name="id_forum" value="<?= $rep['id_forum'] ?>">
+																						<input type="hidden" name="pertemuan" value="<?= $rep['pertemuan'] ?>">
+																						<input type="hidden" name="mention" value="<?= $rep['user_komen'] ?>">
+																						<input type="hidden" name="reply_to" value="<?= $cmd['id'] ?>">
+																						<input type="hidden" name="user_komen" value="<?= $this->session->userdata('user'); ?>">
 																						<textarea name="komentar" id="editor<?= $rep['id'] ?>" rows="10" cols="45" placeholder="Type Here"></textarea>
 
 																						<div class="form-group mt-2">
 																							<label>Lampirkan Gambar</label>
 																							<div class="custom-file">
-																								<input type="file" class="custom-file-input" name="gambar" id="gambar">
+																								<input type="file" class="custom-file-input" name="gambar">
 																								<label class="custom-file-label" for="customFile">Choose file</label>
 																							</div>
 																						</div>
@@ -451,6 +465,8 @@
 	});
 
 	$(document).ready(function() {
+		$('span#komen').text('Lihat Komentar (' + <?= $li_komen ?> + ')');
+		
 		// forum
 		$.ajax({
 			url: "<?= site_url('forum/datafr_id/') ?>" + <?= $this->uri->segment(2); ?>,

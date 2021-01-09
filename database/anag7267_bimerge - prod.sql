@@ -6279,6 +6279,7 @@ INSERT INTO `tbl_mapel` (`kd_mapel`, `nm_mapel`, `status_mapel`, `kelompok`) VAL
 CREATE TABLE `tbl_materi_forum` (
   `id` int(11) NOT NULL,
   `id_forum` int(11) NOT NULL,
+	`id_reply` int(11) NOT NULL,
   `pertemuan` int(11) NOT NULL,
   `judul_materi` varchar(100) NOT NULL,
   `jns_materi` varchar(25) NOT NULL,
@@ -6302,6 +6303,7 @@ CREATE TABLE `tbl_materi_forum` (
 CREATE TABLE `tbl_materi_tugas` (
   `id` int(11) NOT NULL,
   `id_forum` int(11) NOT NULL,
+	`id_reply` int(11) NOT NULL,
   `pertemuan` int(11) NOT NULL,
   `judul_materi` varchar(100) NOT NULL,
   `jns_materi` varchar(25) NOT NULL,

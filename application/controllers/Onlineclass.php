@@ -13,10 +13,13 @@ class Onlineclass extends CI_Controller
 
 	public function index()
 	{
+		$dt_kelas = $this->db->select('siswa_kelas_id')->from('tbl_siswa')->where(['siswa_nis' => $this->session->userdata('user')])->get()->row_array();
 		$data['oc'] = $this->db->select('*')->from('tbl_pelajaran a')
 		->join('tbl_mapel b', 'a.kd_mapel = b.kd_mapel')
-		->where(['a.id_kelas'=>11])
+		->where(['a.id_kelas'=> $dt_kelas['siswa_kelas_id']])
 		->get()->result_array();
+		// var_dump($data['oc']);
+		// die;
 		$this->load->view('siswa/layout/v_header');
 		$this->load->view('siswa/layout/v_navbar');
 		$this->load->view('siswa/v_onlineclass', $data );

@@ -17,15 +17,15 @@ class M_siswa extends CI_Model
 	var $table = 'tbl_siswa'; // table yang ingin ditampilkan
 	var $order = array('a.siswa_id' => 'asc');
 	var $id = 'a.siswa_nis';
-	var $column_order = array(null, 'a.siswa_nis', 'a.siswa_nama', 'b.kelas_nama', 'a.siswa_email', 'a.siswa_no_telp', 'c.satelit_nama', null);
+	var $column_order = array(null, 'a.siswa_nis', 'a.siswa_nama', 'b.kelas_nama', 'a.siswa_email', 'a.siswa_no_telp', 'c.satelit_nama', 'a.soft_deleted', null);
 	var $column_search = array('a.siswa_nis', 'a.siswa_nama', 'b.kelas_nama', 'a.siswa_email', 'a.siswa_no_telp', 'c.satelit_nama');
 	function _get_datatable_query()
 	{
-		$this->db->select('a.siswa_nis, a.siswa_nama, b.kelas_nama, a.siswa_email, a.siswa_no_telp, c.satelit_nama');
+		$this->db->select('a.siswa_nis, a.siswa_nama, b.kelas_nama, a.siswa_email, a.siswa_no_telp, c.satelit_nama, a.soft_deleted');
 		$this->db->from($this->table . ' a');
 		$this->db->join('tbl_kelas b', 'a.siswa_kelas_id = b.kelas_id', 'inner');
 		$this->db->join('tbl_satelit c', 'a.satelit = c.satelit_id', 'right');
-		$this->db->where('a.soft_deleted', '0');
+		$this->db->where(['a.soft_deleted'=>'0']);
 		if (isset($_POST['columns'][2]['search']['value']) and $_POST['columns'][2]['search']['value'] != 'all') {
 			$this->db->where('a.siswa_kelas_id', $_POST['columns'][2]['search']['value']);
 		}

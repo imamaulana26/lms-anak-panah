@@ -31,7 +31,7 @@
           <!-- Index Prestasi -->
           <div class="card card-primary card-outline">
             <div class="card-header">
-              <h5 class="card-title m-0"><i class="fas fa-fw file-invoice-dollar fa-lg"></i>History Keuangan</h5>
+              <h5 class="card-title m-0"><i class="fas fa-fw fa-file-invoice-dollar fa-lg"></i>History Keuangan</h5>
             </div>
             <div class="card-body">
               <div class="row">

@@ -58,7 +58,7 @@ class Absensi extends CI_Controller
                 );
                 $this->session->set_flashdata('msg', 'success');
                 $this->db->update('tbl_abs_model', ['fr_abs' => serialize($new_abs1)], ['siswa_nis' => $this->input->post('nis')]);
-                redirect(site_url('absensi_fr/' . $this->input->post('idf').'/'. $this->input->post('idfk')));
+                redirect(site_url('absensi_fr/' . $this->input->post('idf') . '/' . $this->input->post('idfk')));
                 // echo "<script>window.history.go(-1); location.reload();</script>";
                 die;
             } else {
@@ -104,11 +104,28 @@ class Absensi extends CI_Controller
                     //end untuk menambah status mapel
                 }
             }
+            $this->session->set_flashdata('msg', 'success');
+            $this->db->update('tbl_abs_model', ['fr_abs' => serialize($dataunser)], ['siswa_nis' => $this->input->post('nis')]);
+            redirect(site_url('absensi_fr/' . $this->input->post('idf') . '/' . $this->input->post('idfk')));
+            // echo "<script>window.history.go(-1);location.reload();</script>";
+
+        } else {
+            $new_abs1 = array(
+                array(
+                    'idf' => $this->input->post('idf'),
+                    'data' => array(
+                        array(
+                            'frk' => $this->input->post('idfk'),
+                            'abs' => $this->input->post('absensi')
+                        )
+                    )
+                )
+            );
+            $this->session->set_flashdata('msg', 'success');
+            $this->db->insert('tbl_abs_model', ['siswa_nis' => $this->input->post('nis'), 'fr_abs' => serialize($new_abs1)]);
+            redirect(site_url('absensi_fr/' . $this->input->post('idf') . '/' . $this->input->post('idfk')));
+            die;
         }
-        $this->session->set_flashdata('msg', 'success');
-        $this->db->update('tbl_abs_model', ['fr_abs' => serialize($dataunser)], ['siswa_nis' => $this->input->post('nis')]);
-        redirect(site_url('absensi_fr/' . $this->input->post('idf') . '/' . $this->input->post('idfk')));
-        // echo "<script>window.history.go(-1);location.reload();</script>";
     }
 
     function attendent_tgs($key, $mgg)
@@ -195,28 +212,26 @@ class Absensi extends CI_Controller
                     //end untuk menambah status mapel
                 }
             }
+            $this->session->set_flashdata('msg', 'success');
+            $this->db->update('tbl_abs_model', ['tgs_abs' => serialize($dataunser)], ['siswa_nis' => $this->input->post('nis')]);
+            redirect(site_url('absensi_tgs/' . $this->input->post('idtg') . '/' . $this->input->post('idtgk')));
+        } else {
+            $new_abs1 = array(
+                array(
+                    'idtg' => $this->input->post('idtg'),
+                    'data' => array(
+                        array(
+                            'tgk' => $this->input->post('idtgk'),
+                            'abs' => $this->input->post('absensi')
+                        )
+                    )
+                )
+            );
+            $this->session->set_flashdata('msg', 'success');
+            $this->db->insert('tbl_abs_model', ['siswa_nis' => $this->input->post('nis'), 'tgs_abs' => serialize($new_abs1)]);
+            redirect(site_url('absensi_tgs/' . $this->input->post('idtg') . '/' . $this->input->post('idtgk')));
+            die;
         }
-        // else {
-        //     $new_abs1 = array(
-        //         array(
-        //             'idtg' => $this->input->post('idtg'),
-        //             'data' => array(
-        //                 array(
-        //                     'tgk' => $this->input->post('idtgk'),
-        //                     'abs' => $this->input->post('absensi')
-        //                 )
-        //             )
-        //         )
-        //     );
-
-        // echo 'id tugas:' . $this->input->post('idtg');
-        // echo '<br>tugas ke:' . $this->input->post('idtgk');
-
-        // var_dump($basket[0]);
-        $this->session->set_flashdata('msg', 'success');
-        $this->db->update('tbl_abs_model', ['tgs_abs' => serialize($dataunser)], ['siswa_nis' => $this->input->post('nis')]);
-        redirect(site_url('absensi_tgs/' . $this->input->post('idtg') . '/' . $this->input->post('idtgk')));
-        // echo "<script>window.history.go(-1);location.reload();</script>";
     }
 
     public function keyid()
@@ -304,7 +319,7 @@ class Absensi extends CI_Controller
 
             $this->session->set_flashdata('msg', 'success');
             $this->db->update('tbl_abs_oc', ['dt_oc' => serialize($dataunser)], ['id_pelajaran' => $this->input->post('idoc')]);
-            redirect(site_url('absensi/list_siswa_oc/' . $this->input->post('idoc').'/'. $this->input->post('tgl')));
+            redirect(site_url('absensi/list_siswa_oc/' . $this->input->post('idoc') . '/' . $this->input->post('tgl')));
             // echo "<script>window.history.go(-1);location.reload();</script>";
         }
     }
@@ -358,23 +373,33 @@ class Absensi extends CI_Controller
     {
         // var_dump($_POST); die;
         $sql = $this->db->get_where('tbl_abs_oc', ['id_pelajaran' => $this->input->post('id')])->row_array();
-        if ($sql == null) {
-            $this->db->insert('tbl_abs_oc', ['id_pelajaran' => $this->input->post('id')]);
-            $new_abs1 = array(
-                array(
-                    'tgl' => $this->input->post('jdl_kelas'),
-                    'start' => $this->input->post('start_on'),
-                    'end' => $this->input->post('end_on'),
-                    'data' => array(
-                        array(
-                            'nis' => 'null',
-                            'absensi' => 'null'
-                        )
+        $new_abs1 = array(
+            array(
+                'tgl' => $this->input->post('jdl_kelas'),
+                'start' => $this->input->post('start_on'),
+                'end' => $this->input->post('end_on'),
+                'data' => array(
+                    array(
+                        'nis' => 'null',
+                        'absensi' => 'null'
                     )
                 )
-            );
-            $this->session->set_flashdata('msg', 'success');
+            )
+        );
+
+        foreach ($new_abs1[0] as $key => $value) {
+            if ($value === '') {
+                $this->session->set_flashdata('msg', 'valid'); //jika ada yang kosong
+                redirect(site_url('absensi/attendent_kc/' . $this->input->post('id')));
+            }
+        }
+
+
+        //data yang lama
+        if ($sql == null) {
+            $this->db->insert('tbl_abs_oc', ['id_pelajaran' => $this->input->post('id')]);
             $this->db->update('tbl_abs_oc', ['dt_kc' => serialize($new_abs1)], ['id_pelajaran' => $this->input->post('id')]);
+            $this->session->set_flashdata('msg', 'success');
         }
 
         //data yang lama
@@ -383,49 +408,18 @@ class Absensi extends CI_Controller
             foreach ($dtunser as $datuns) {
                 if ($datuns['tgl'] == $this->input->post('jdl_kelas')) {
                     $this->session->set_flashdata('msg', 'info');
-                    // echo "<script>window.history.go(-1);location.reload();</script>";
                     redirect(site_url('absensi/attendent_kc/' . $this->input->post('id')));
-                    // die;
                 }
             }
-            $new_abs1 = array(
-                array(
-                    'tgl' => $this->input->post('jdl_kelas'),
-                    'start' => $this->input->post('start_on'),
-                    'end' => $this->input->post('end_on'),
-                    'data' => array(
-                        array(
-                            'nis' => 'null',
-                            'absensi' => 'null'
-                        )
-                    )
-                )
-            );
             $dtfix = array_merge($dtunser, $new_abs1);
             $this->session->set_flashdata('msg', 'success');
             $this->db->update('tbl_abs_oc', ['dt_kc' => serialize($dtfix)], ['id_pelajaran' => $this->input->post('id')]);
-            // echo "<script>window.history.go(-1);location.reload();</script>";
             redirect(site_url('absensi/attendent_kc/' . $this->input->post('id')));
         }
 
         if ($sql['dt_kc'] == null) {
-            $new_abs1 = array(
-                array(
-                    'tgl' => $this->input->post('jdl_kelas'),
-                    'start' => $this->input->post('start_on'),
-                    'end' => $this->input->post('end_on'),
-                    'data' => array(
-                        array(
-                            'nis' => 'null',
-                            'absensi' => 'null'
-                        )
-                    )
-                )
-            );
             $this->session->set_flashdata('msg', 'success');
             $this->db->update('tbl_abs_oc', ['dt_kc' => serialize($new_abs1)], ['id_pelajaran' => $this->input->post('id')]);
-            // echo "<script>window.history.go(-1);location.reload();</script>";
-            // die;
             redirect(site_url('absensi/attendent_kc/' . $this->input->post('id')));
         }
 
@@ -515,7 +509,7 @@ class Absensi extends CI_Controller
             // die;
             $this->session->set_flashdata('msg', 'success');
             $this->db->update('tbl_abs_oc', ['dt_kc' => serialize($dataunser)], ['id_pelajaran' => $this->input->post('idkc')]);
-            redirect(site_url('absensi/list_siswa_kc/' . $this->input->post('idkc').'/'. $this->input->post('tgl')));
+            redirect(site_url('absensi/list_siswa_kc/' . $this->input->post('idkc') . '/' . $this->input->post('tgl')));
             // echo "<script>window.history.go(-1);location.reload();</script>";
             // var_dump($result[1]);
         }

@@ -75,12 +75,13 @@ class Dashboard extends CI_Controller
 			$this->load->view('siswa/v_dashboard', $data);
 			$this->load->view('siswa/layout/v_footer');
 		} else {
+			$where = $this->db->get_where('tbl_pengajar', ['nm_pengajar'=> $this->session->userdata('nama')])->row_array();
+			
 			$data['oc'] = $this->db->select('*')->from('tbl_pelajaran a')
 				->join('tbl_mapel b', 'a.kd_mapel = b.kd_mapel')
 				->join('tbl_kelas c', 'a.id_kelas = c.kelas_id')
-				->where(['a.kd_pengajar' => 2])
+				->where(['a.kd_pengajar' => $where['id_pengajar']])
 				->get()->result_array();
-
 			$this->load->view('pengajar/layout/v_header');
 			$this->load->view('pengajar/layout/v_navbar');
 			$this->load->view('pengajar/v_dashboard', $data);

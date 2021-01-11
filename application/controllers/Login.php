@@ -118,6 +118,7 @@ class Login extends CI_Controller
 		$data['list'] = $this->db->get()->result_array();
 
 		$data['nama_pengajar'] = $this->db->get_where('tbl_pengajar',['id_pengajar'=> $id ])->row_array();
+		
 		$this->load->view('admin/v_list_superadmin',$data);
 	}
 	function hapus_hak(){

@@ -32,7 +32,7 @@
 					<div class="card card-primary card-outline">
 						<div class="card-header">
 							<h5 class="card-title m-0"><i class="fas fa-fw fa-file-invoice fa-lg" style="padding-right: 1.5em"></i> Informasi Tagihan</h5>
-							<a href="#" class="m-auto" style="float: right; position: relative;">View All</a>
+							<a href="<?= site_url('keuangan_siswa') ?>" class="m-auto" style="float: right; position: relative;">View All</a>
 						</div>
 						<div class="card-body">
 							<div class="row">
@@ -50,7 +50,9 @@
 										<tbody>
 											<?php $no = 1;
 											$tagihan = $this->db->select('*')->from('tbl_pembayaran a')->join('tbl_tagihan b', 'a.jns_tagihan = b.id_tagihan', 'inner')
-												->where('a.nis_siswa', $this->session->userdata('username'))->get();
+												->where(['a.nis_siswa' => $this->session->userdata('username') , 'a.sts_pembayaran' => '1' ])->get();
+									// $sql = "select * from tbl_pembayaran a inner join tbl_tagihan b on b.id_tagihan = a.jns_tagihan where a.sts_pembayaran = '1' and a.nis_siswa = '" . $c['siswa_nis'] . "'";
+									// $data = $this->db->query($sql)->result_array();
 											if ($tagihan->num_rows() > 0) {
 												foreach ($tagihan->result_array() as $tgh) { ?>
 													<tr>
@@ -58,7 +60,7 @@
 														<td><?= $tgh['jns_tagihan'] ?></td>
 														<td><?= date('d F Y', strtotime($tgh['tgl_jatuh_tempo'])) ?></td>
 														<td>Rp. <?= number_format($tgh['nom_tagihan'], 2, ',', '.') ?></td>
-														<td>Rp. <?= number_format(rand(100000, 1000000), 2, ',', '.') ?></td>
+														<td>Rp. <?= number_format($tgh['sisa_angsur'], 2, ',', '.') ?></td>
 													</tr>
 												<?php }
 											} else { ?>
@@ -81,7 +83,6 @@
 					<div class="card card-primary card-outline">
 						<div class="card-header">
 							<h5 class="card-title m-0"><i class="far fa-fw fa-chart-bar fa-lg" style="padding-right: 1.5em"></i> Index Prestasi</h5>
-							<!-- <a href="#" class="m-auto" style="float: right; position: relative;">View All</a> -->
 						</div>
 						<div class="card-body">
 							<form action="" method="post">
@@ -105,10 +106,12 @@
 								<?php
 								$cond = !isset($_POST['xta']) ? $ta[count($ta) - 1]['ta'] : $_POST['xta'];
 								$sql = "select b.nm_mapel as label, a.semester, a.nilai as y from tbl_nilai a left join tbl_mapel b on a.kd_mapel = b.kd_mapel where a.nis_siswa = '" . $_SESSION['username'] . "' and a.ta = '" . $cond . "' ";
+								
 								$where_1 = " and a.semester = 1 group by label";
 								$where_2 = " and a.semester = 2 group by label";
 
 								$sms_1 = $this->db->query($sql . $where_1)->result_array();
+								// var_dump($sms_1);
 								$sms_2 = $this->db->query($sql . $where_2)->result_array();
 
 								$res = $this->db->query($sql . $where_1 . ' union ' . $sql . $where_2)->result_array();
@@ -146,12 +149,17 @@
 								}
 								$color_2 .= ']';
 								$nilai_2 .= ']';
+								// var_dump($nilai_1);
 
 								?>
 								<div class="col-md">
 									<h3 class="text-center">Nilai tahun ajaran <?= $cond; ?></h3>
 									<canvas id="myChart" style="height: 15px;"></canvas>
+									<!-- <?php var_dump($this->session->userdata('user')); ?> -->
+									<!-- <?= site_url('cetak/raport') . '/' . $this->session->userdata('user') . '/' . str_replace('/', '-', $cond) . '/' . '1' ?> -->
+									<a target="_blank" href="<?= site_url('cetak/raport') . '/' . $this->session->userdata('user') . '/' . str_replace('/', '-', $cond) . '/' . '1' ?>" class="m-auto btn btn-success" style="float: right; position: relative; top: 5;"><i class="fas fa-fw fa-print fa-lg" style="padding-right: 1.5em"></i>Cetak</a>
 								</div>
+
 							</div>
 						</div>
 					</div>

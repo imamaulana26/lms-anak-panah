@@ -213,7 +213,8 @@ $c = $q->row_array();
                             <div class="box-header">
                                 <a href="<?= site_url('siswa/detail_absensi_siswa/') . $this->uri->segment(3) ?>" class="btn btn-primary" style="margin-bottom: 10px"> Forum</a>
                                 <a href="<?= site_url('siswa/detail_absensi_siswa_tgs/') . $this->uri->segment(3) ?>" class="btn btn-primary" style="margin-bottom: 10px"> Tugas</a>
-                                <a href="<?= site_url('siswa/detail_absensi_siswa/') . $this->uri->segment(3) ?>" class="btn btn-primary" style="margin-bottom: 10px"> Kelas Online</a>
+                                <a href="<?= site_url('siswa/detail_absensi_siswa_oc/') . $this->uri->segment(3) ?>" class="btn btn-primary" style="margin-bottom: 10px"> Kelas Online</a>
+                                <a href="<?= site_url('siswa/detail_absensi_siswa_kc/') . $this->uri->segment(3) ?>" class="btn btn-primary" style="margin-bottom: 10px"> Kelas Komunitas</a>
                             </div>
                             <div class="box-header" style="text-align: center;">
                                 <label class="label label-primary" style="font-size: 20px;">Forum</label>
@@ -238,39 +239,30 @@ $c = $q->row_array();
                                                     <tbody>
                                                         <?php $dataforum = $this->db->get_where('tbl_materi_forum', ['id_forum' => $dtmapel['id_pelajaran']])->result_array();
                                                         if (!empty($dataforum)) {
-                                                            foreach ($dataforum as $dtforum) : ?>
+                                                            foreach ($dataforum as $dtforum) : $checkforum = $this->db->get_where('tbl_komen_forum', ['id_forum' => $dtforum['id_forum'], 'pertemuan' => $dtforum['pertemuan']])->row_array(); ?>
                                                                 <tr>
                                                                     <td><?= $dtforum['pertemuan'] ?></td>
                                                                     <td><?= $dtforum['judul_materi'] ?></td>
-                                                                    <td>
-                                                                        <?php
-                                                                        $checkforum = $this->db->get_where('tbl_komen_forum', ['id_forum' => $dtforum['id_forum'], 'pertemuan' => $dtforum['pertemuan']])->row_array();
-                                                                        foreach ($dtforumsiswa as $dtfrsiswa) {
-
-                                                                            if ($dtfrsiswa['idf'] === $dtmapel['id_pelajaran']) {
-                                                                                foreach ($dtfrsiswa['data'] as $dtsiswa) {
-                                                                                    $check = array_search($dtforum['pertemuan'], array_column($dtfrsiswa['data'], 'frk'));
-                                                                                    if ($dtsiswa['frk'] === $dtforum['pertemuan']) {
-
-                                                                        ?>
-                                                                                        <?= $dtsiswa['abs'] ?>
-                                                                        <?php
-                                                                                        break;
-                                                                                    }
+                                                                    <?php
+                                                                    if (!empty($dtforumsiswa)) { //kondisi murid lama
+                                                                        if (!empty($checkforum)) {
+                                                                            $checkidp = array_search($dtmapel['id_pelajaran'], array_column($dtforumsiswa, 'idf'));
+                                                                            if (($key1 = array_search($dtmapel['id_pelajaran'], array_column($dtforumsiswa, 'idf'))) !== false) {
+                                                                                if (($key2 = array_search($dtforum['pertemuan'], array_column($dtforumsiswa[$key1]['data'], 'frk'))) !== false) {
+                                                                                    echo '<td>' . $dtforumsiswa[$key1]['data'][$key2]['abs'] . '</td>';
+                                                                                } else {
+                                                                                    echo '<td> Belum Diabsen </td>';
                                                                                 }
-                                                                                break;
                                                                             } else {
+                                                                                echo '<td> Belum Diabsen </td>';
                                                                             }
+                                                                        } else {
+                                                                            echo '<td> Belum Mengerjakan </td>';
                                                                         }
-                                                                        if ($check === false) {
-                                                                            if (empty($checkforum)) {
-                                                                                echo 'Belum Mengerjakan';
-                                                                            } else {
-                                                                                echo 'Belum Di Absen';
-                                                                            }
-                                                                        } ?>
-
-                                                                    </td>
+                                                                    } else { //kondisi murid baru
+                                                                        echo '<td>Belum Mengerjakan</td>';
+                                                                    }
+                                                                    ?>
                                                                 </tr>
                                                             <?php endforeach; ?>
 

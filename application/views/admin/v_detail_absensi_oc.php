@@ -211,9 +211,10 @@ $c = $q->row_array();
                     <div class="col-xs-12">
                         <div class="box">
                             <div class="box-header">
-                                <a class="btn btn-primary" style="margin-bottom: 10px"> Forum</a>
-                                <a class="btn btn-primary" style="margin-bottom: 10px"> Tugas</a>
-                                <a href="<?php site_url() ?>" class="btn btn-primary" style="margin-bottom: 10px"> Kelas Online</a>
+                                <a href="<?= site_url('siswa/detail_absensi_siswa/') . $this->uri->segment(3) ?>" class="btn btn-primary" style="margin-bottom: 10px"> Forum</a>
+                                <a href="<?= site_url('siswa/detail_absensi_siswa_tgs/') . $this->uri->segment(3) ?>" class="btn btn-primary" style="margin-bottom: 10px"> Tugas</a>
+                                <a href="<?= site_url('siswa/detail_absensi_siswa_oc/') . $this->uri->segment(3) ?>" class="btn btn-primary" style="margin-bottom: 10px"> Kelas Online</a>
+                                <a href="<?= site_url('siswa/detail_absensi_siswa_kc/') . $this->uri->segment(3) ?>" class="btn btn-primary" style="margin-bottom: 10px"> Kelas Komunitas</a>
                             </div>
                             <div class="box-header" style="text-align: center;">
                                 <label class="label label-primary" style="font-size: 20px;">Kelas Online</label>
@@ -236,35 +237,31 @@ $c = $q->row_array();
                                                     </thead>
                                                     <tbody>
                                                         <?php
-                                                        $testdata = $this->db->get_where('tbl_abs_oc', ['id_pelajaran' => $dtmapel['id_pelajaran']])->row_array();
-                                                        if (!empty($testdata)) {
-                                                            $dt_unser = unserialize($testdata['dt_oc']);
-                                                            foreach ($dt_unser as $key => $value) { ?>
-                                                                <tr>
-                                                                    <td><?= $value['tgl'] ?></td>
-                                                                    <td>
-                                                                        <?php
-                                                                        $check = array_search($this->uri->segment(3), array_column($value['data'], 'nis'));
-                                                                        if ($check === 0) {
-                                                                            foreach ($value['data'] as $valdat) {
-                                                                                if ($valdat['nis'] === $this->uri->segment(3)) {
-                                                                                    echo $valdat['abs'];
-                                                                                }
+                                                        $dataoc = $this->db->get_where('tbl_abs_oc', ['id_pelajaran' => $dtmapel['id_pelajaran']])->row_array();
+                                                        if (!empty($dataoc)) {
+                                                            if ($dataoc['dt_oc'] !== null) {
+                                                                $dt_unser = unserialize($dataoc['dt_oc']);
+                                                                foreach ($dt_unser as $dt_oc) { ?>
+                                                                    <tr>
+                                                                        <td><?= $dt_oc['tgl'] ?></td>
+                                                                        <td>
+                                                                            <?php
+                                                                            if (($key = array_search($this->uri->segment(3), array_column($dt_oc['data'], 'nis'))) !== false) {
+                                                                                echo $dt_oc['data'][$key]['absensi'];
+                                                                            } else {
+                                                                                echo 'Belum di Absen';
                                                                             }
-                                                                        } else {
-                                                                            echo 'Tidak Ada Data';
-                                                                        }
-                                                                        ?>
-                                                                    </td>
-                                                                </tr>
-                                                            <?php }
-                                                        } else { ?>
-                                                            <tr>
-                                                                <td>x</td>
-                                                                <td>x</td>
-                                                            </tr>
-                                                        <?php } ?>
-
+                                                                            ?>
+                                                                        </td>
+                                                                    </tr>
+                                                        <?PHP }
+                                                            } else {
+                                                                echo '<tr><td colspan="4">Belum ada data</td><tr>';
+                                                            }
+                                                        } else {
+                                                            echo '<tr><td colspan="4">Belum ada data</td><tr>';
+                                                        }
+                                                        ?>
 
                                                     </tbody>
                                                 </table>

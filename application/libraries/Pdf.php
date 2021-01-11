@@ -1,4 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
+// @set_magic_quotes_runtime(false);
+// ini_set('magic_quotes_runtime', 0);
 include_once APPPATH . '/third_party/fpdf/fpdf.php';
 class Pdf extends FPDF
 {
@@ -8,6 +10,10 @@ class Pdf extends FPDF
         parent::__construct($orientation, $unit, $size);
         date_default_timezone_set('Asia/Jakarta');
     }
+    // function __construct()
+    // {
+    //     include_once APPPATH . '/third_party/fpdf/fpdf.php';
+    // }
 
     // function Header()
     // {
@@ -41,4 +47,3 @@ class Pdf extends FPDF
     //     $this->Cell($this->GetStringWidth($tanggal), 10, $tanggal);
     // }
 }
-

@@ -252,6 +252,7 @@ if ($c['pengguna_level'] == 2) {
                         <th>Email</th>
                         <th>No. Telepon</th>
                         <th>Satelit</th>
+                        <th>Status Siswa</th>
                         <th class="text-center">Aksi</th>
                       </tr>
                     </thead>

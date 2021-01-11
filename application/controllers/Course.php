@@ -16,6 +16,129 @@ class Course extends CI_Controller
 		$akses = $this->session->userdata('akses');
 
 		$data['course'] = $this->m_course->get_course();
+		$data['kelas'] = $this->db->select('b.kelas_nama , b.kelas_id ,b.kls_jadwal')->from('tbl_siswa a')->join('tbl_kelas b', 'a.siswa_kelas_id = b.kelas_id', 'left')->where(['a.siswa_nis' => $this->session->userdata('user')])->get()->row_array();
+		// $data['jadwal'] = $this->db->get('tbl_kelas', limit, offset);
+
+
+		$test = array(
+			array(
+				'hari' => 'Senin',
+				'data' => array(
+					array(
+						'mapel' => 'Bahasa Inggris',
+						'tipe' => 'Kc'
+					),
+					array(
+						'mapel' => 'Bahasa Indonesia',
+						'tipe' => 'Kc'
+					)
+				)
+			),
+			array(
+				'hari' => 'Selasa',
+				'data' => array(
+
+					array(
+						'mapel' => 'Bahasa Indonesia',
+						'tipe' => 'Vc'
+					), array(
+						'mapel' => 'Bahasa Inggris',
+						'tipe' => 'Vc'
+					), array(
+						'mapel' => 'Ekonomi',
+						'tipe' => 'Vc'
+					)
+				)
+			), array(
+				'hari' => 'Rabu',
+				'data' => array(
+					array(
+						'mapel' => 'Ekonomi',
+						'tipe' => 'Kc'
+					),
+					array(
+						'mapel' => 'Matematika',
+						'tipe' => 'Kc'
+					)
+				)
+			), array(
+				'hari' => 'Kamis',
+				'data' => array(
+					array(
+						'mapel' => 'Matematika',
+						'tipe' => 'Vc'
+					), array(
+						'mapel' => 'Geografi',
+						'tipe' => 'Vc'
+					)
+				)
+			), array(
+				'hari' => 'Jumat',
+				'data' => array(
+					array(
+						'mapel' => 'Sosiologi',
+						'tipe' => 'Kc'
+					),
+					array(
+						'mapel' => 'Geografi',
+						'tipe' => 'Kc'
+					),
+					array(
+						'mapel' => 'Pendidikan Kewarganegaraan',
+						'tipe' => 'Kc'
+					)
+				)
+			)
+		);
+
+		$test2 = array(
+			array(
+				'ta' => '2019/2020',
+				'wakel' => 'RAY RIZKY DWIPUTRA',
+				'ttd' => 'ray.png'
+			), array(
+				'ta' => '2020/2021',
+				'wakel' => 'WILLY SUMANTRI',
+				'ttd' => 'willy.png'
+			)
+		);
+
+		var_dump($test2);
+		echo serialize($test2);
+
+		// foreach ($test2 as $value) {
+		// 	var_dump($value);
+		// }
+
+		// if (($key = array_search('2019/2020', array_column($test2, 'ta'))) !== false) {
+		// 	echo $test2[$key]['ttd'];
+		// }
+		$datasblm = 'a:2:{i:0;a:3:{s:2:"ta";s:9:"2019/2020";s:5:"wakel";s:6:"TARSIH";s:3:"ttd";s:10:"tarsih.png";}i:1;a:3:{s:2:"ta";s:9:"2020/2021";s:5:"wakel";s:13:"IMAS INDRIANI";s:3:"ttd";s:8:"imas.png";}}';
+		$dtunser = unserialize($datasblm);
+		$dtfix = array(
+			'ta' => '2016/2017',
+			'wakel' => 'TARSIH',
+			'ttd' => 'tarsih.png'
+		);
+
+		$dtfix2 = array(
+			'ta' => '2017/2018',
+			'wakel' => 'TARSIH',
+			'ttd' => 'tarsih.png'
+		);
+		
+		$dtfix3 = array(
+			'ta' => '2018/2019',
+			'wakel' => 'TARSIH',
+			'ttd' => 'tarsih.png'
+		);
+
+		array_push($dtunser, $dtfix, $dtfix2, $dtfix3);
+		var_dump($dtunser);
+		echo serialize($dtunser);
+		die;
+
+		die;
 
 		if ($akses == 2) {
 			$this->load->view('siswa/layout/v_header');
@@ -45,7 +168,11 @@ class Course extends CI_Controller
 	function update_oc()
 	{
 		// var_dump($_POST); die;	
-		
+		// $validasi[] = $this->input->post('link_oc');
+		// $validasi[] = $this->input->post('jdl_kelas');
+		// $validasi[] = $this->input->post('start_on');
+
+
 
 		$sql = $this->db->get_where('tbl_abs_oc', ['id_pelajaran' => $this->input->post('id')])->row_array();
 		// var_dump($sql); die;
@@ -58,6 +185,19 @@ class Course extends CI_Controller
 			'aktifkan' => $this->input->post('opsi_kls')
 		);
 
+		//validasi kiriman kosong
+		foreach ($data as $key => $value) {
+			if ($value === '') {
+				echo json_encode(['msg' => 'eror']); //jika ada yang kosong
+				exit();
+			}
+		}
+		//end of validasi
+		// var_dump($data->result_array());
+		// if ($data['link_oc'] == "" || $data['tgl_oc'] == "" || $data['time_start'] == "" || $data['time_end'] == "" || $data['aktifkan'] == "") {
+		// 	echo json_encode(['msg' => 'eror']);
+		// 	exit();
+		// }
 		$new_abs1 = array(
 			array(
 				'tgl' => $this->input->post('jdl_kelas'),
@@ -71,7 +211,7 @@ class Course extends CI_Controller
 		);
 
 		if ($sql['dt_oc'] == null) {
-			
+
 			// belum ada data di tbl_abs_oc
 
 			$this->db->insert('tbl_abs_oc', ['id_pelajaran' => $this->input->post('id')]);
@@ -81,7 +221,7 @@ class Course extends CI_Controller
 			$this->db->update('tbl_pelajaran', $data, ['id_pelajaran' => $this->input->post('id')]);
 			echo json_encode(['msg' => 'Berhasil']);
 			exit();
-			 // end of belum ada data di tbl_abs_oc
+			// end of belum ada data di tbl_abs_oc
 		}
 
 		//sudah ada data

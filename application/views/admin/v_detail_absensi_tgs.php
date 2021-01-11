@@ -213,10 +213,11 @@ $c = $q->row_array();
                             <div class="box-header">
                                 <a href="<?= site_url('siswa/detail_absensi_siswa/') . $this->uri->segment(3) ?>" class="btn btn-primary" style="margin-bottom: 10px"> Forum</a>
                                 <a href="<?= site_url('siswa/detail_absensi_siswa_tgs/') . $this->uri->segment(3) ?>" class="btn btn-primary" style="margin-bottom: 10px"> Tugas</a>
-                                <a href="<?= site_url('siswa/detail_absensi_siswa/') . $this->uri->segment(3) ?>" class="btn btn-primary" style="margin-bottom: 10px"> Kelas Online</a>
+                                <a href="<?= site_url('siswa/detail_absensi_siswa_oc/') . $this->uri->segment(3) ?>" class="btn btn-primary" style="margin-bottom: 10px"> Kelas Online</a>
+                                <a href="<?= site_url('siswa/detail_absensi_siswa_kc/') . $this->uri->segment(3) ?>" class="btn btn-primary" style="margin-bottom: 10px"> Kelas Komunitas</a>
                             </div>
                             <div class="box-header" style="text-align: center;">
-                                <label class="label label-primary" style="font-size: 20px;">Forum</label>
+                                <label class="label label-primary" style="font-size: 20px;">Tugas</label>
                             </div>
 
                             <!-- /.box-header -->
@@ -239,37 +240,29 @@ $c = $q->row_array();
                                                         <?php
                                                         $datatugas = $this->db->get_where('tbl_materi_tugas', ['id_forum' => $dtmapel['id_pelajaran']])->result_array();
                                                         if (!empty($datatugas)) {
-                                                            foreach ($datatugas as $dttugas) : ?>
+                                                            foreach ($datatugas as $dttugas) :     $checktugas = $this->db->get_where('tbl_komen_tugas', ['id_forum' => $dttugas['id_forum'], 'pertemuan' => $dttugas['pertemuan']])->row_array();
+                                                        ?>
                                                                 <tr>
                                                                     <td><?= $dttugas['pertemuan'] ?></td>
                                                                     <td><?= $dttugas['judul_materi'] ?></td>
                                                                     <td>
-                                                                        <?php $checktugas = $this->db->get_where('tbl_komen_tugas', ['id_forum' => $dttugas['id_forum'], 'pertemuan' => $dttugas['pertemuan']])->row_array();
-                                                                        ?>
-                                                                        <?php if (!empty($dttgssiswa)) {
-                                                                            foreach ($dttgssiswa as $dttgsiswa) {
-                                                                                if ($dttgsiswa['idtg'] === $dtmapel['id_pelajaran']) {
-                                                                                    foreach ($dttgsiswa['data'] as $dtsiswa) {
-                                                                                        $check = array_search($dttugas['pertemuan'], array_column($dttgsiswa['data'], 'tgk'));
-                                                                                        if ($dtsiswa['tgk'] === $dttugas['pertemuan']) { ?>
-                                                                                            <?= $dtsiswa['abs'] ?>
-
-                                                                        <?php
-                                                                                            break;
-                                                                                        }
+                                                                        <?php if (!empty($checktugas)) { // kondisi murid sudah ada di tbl
+                                                                            $checkidp = array_search($dtmapel['id_pelajaran'], array_column($dttgssiswa, 'idtg'));
+                                                                            if (!empty($dttgssiswa)) {
+                                                                                if (($key1 = array_search($dtmapel['id_pelajaran'], array_column($dttgssiswa, 'idtg'))) !== false) {
+                                                                                    if (($key2 = array_search($dttugas['pertemuan'], array_column($dttgssiswa[$key1]['data'], 'tgk'))) !== false) {
+                                                                                        echo $dttgssiswa[$key1]['data'][$key2]['abs'];
+                                                                                    } else {
+                                                                                        echo 'Belum di absen';
                                                                                     }
-                                                                                    break;
-                                                                                }
-                                                                            }
-                                                                            if ($check === false) {
-                                                                                if (empty($checktugas)) {
-                                                                                    echo 'Belum Mengerjakan';
                                                                                 } else {
-                                                                                    echo 'Belum Di Absen';
+                                                                                    echo 'Belum di absen';
                                                                                 }
+                                                                            } else {
+                                                                                echo ' Belum Mengerjakan';
                                                                             }
-                                                                        } else {
-                                                                            echo 'Belum Di Absen';
+                                                                        } else { // kondisi murid belum ada di tbl
+                                                                            echo 'Tugas belum dikerjakan';
                                                                         } ?>
                                                                     </td>
                                                                 </tr>

@@ -22,7 +22,9 @@ class Nilai_raport extends CI_Controller{
 			'thn_ajaran'=>$ta,
 			'semester'=>$sms
 		);
-		$this->db->insert('tbl_thn_ajaran', $data);
+		
+		var_dump($data); die;
+		// $this->db->insert('tbl_thn_ajaran', $data);
 		redirect('nilai_raport','refresh');
 	}
 

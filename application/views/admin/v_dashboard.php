@@ -62,7 +62,7 @@ $c = $q->row_array();
 
             <li>
               <a href="<?php echo base_url() . 'jadwal' ?>">
-                <i class="fa fa-calendar"></i> <span>Jadwal</span>
+                <i class="fa fa-calendar"></i> <span>Kalendar</span>
                 <span class="pull-right-container">
                   <small class="p pull-right"></small>
                 </span>
@@ -296,6 +296,10 @@ $c = $q->row_array();
                       <li><a data-toggle="tab" href="#satelit">Satelit</a></li>
                       <li><a data-toggle="tab" href="#datasatelit">Data Satelit</a></li>
                     </ul>
+                    
+                    <?php
+                    $tglwali = ($this->input->post('tgl_lahirwali')==='0000-00-00') ? Null : $this->input->post('tgl_lahirwali') ; 
+                     ?>
 
                     <div class="panel panel-default">
                       <div class="panel-body">

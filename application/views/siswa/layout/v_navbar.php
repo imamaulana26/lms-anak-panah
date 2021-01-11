@@ -136,6 +136,7 @@
 			<div class="glider-contain">
 				<div class="glider">
 					<a href="<?= site_url('dashboard') ?>" class="nav-link" id="home">Home</a>
+					<a href="<?= site_url('jadwal') ?>" class="nav-link" id="schedule">Kalender</a>
 					<a href="<?= site_url('course') ?>" class="nav-link" id="course">Course</a>
 					<?php if ($siswa['oc'] == 1) {
 					?>
@@ -143,13 +144,13 @@
 					<?php } ?>
 					<a href="<?= site_url('kisikisi') ?>" class="nav-link" id="kisikisi">Kisi-kisi</a>
 					<a href="#" class="nav-link" id="schedule">Schedule</a>
+          <a href="<?= site_url('keuangan_siswa') ?>" class="nav-link" id="schedule">Keuangan</a>
 					<a href="<?= site_url('dashboard/penilaian') ?>" class="nav-link" id="score">Score</a>
 					<a href="<?= site_url('detail_absensi/absensi_forum/'). $this->session->userdata('username') ?>" class="nav-link" id="absensi">Absensi</a>
 				</div>
 
 				<button aria-label="Previous" class="glider-prev">&#8249;</button>
 				<button aria-label="Next" class="glider-next">&#8250;</button>
-				<!-- <div role="tablist" class="dots"></div> -->
 			</div>
 		</div>
 	</div>

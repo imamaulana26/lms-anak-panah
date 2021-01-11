@@ -43,7 +43,6 @@
 
                                             if (!empty($dataforum)) {
                                                 foreach ($dataforum as $dtforum) {
-                                                    $check = true;
                                                     $checkforum = $this->db->get_where('tbl_komen_forum', ['id_forum' => $dtforum['id_forum'], 'pertemuan' => $dtforum['pertemuan']])->row_array();
                                             ?>
                                                     <tr>
@@ -66,10 +65,6 @@
                                                                 } else {
                                                                     echo '<td> Belum Diabsen </td><td><a href=' . site_url() . "forum/" . $dtmapel['id_pelajaran'] . '><span class="btn btn-outline-success">Cek Jawaban</span></a></td>';
                                                                 }
-                                                                // echo $dtforum['pertemuan'];//frk
-                                                                // echo $dtmapel['id_pelajaran'];//idpelajaran
-                                                                // echo $checkidp;
-                                                                // echo 'ada di table';
                                                             } else {
                                                                 echo '<td> Belum Mengerjakan </td><td><a href=' . site_url() . "forum/". $dtmapel['id_pelajaran'] .'><span class="btn btn-outline-success">Kerjakan</span></a></td>';
                                                                 // var_dump($dtforumsiswa[0]['data'][0]['abs']);

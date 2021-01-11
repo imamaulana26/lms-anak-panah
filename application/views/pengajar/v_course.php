@@ -93,8 +93,27 @@
 				$('.submit').html('<i class="fa fa-spin fa-spinner"></i> loading');
 			},
 			success: function(data) {
-				alert(data.msg);
-				location.reload();
+
+				if (data.msg === 'Berhasil') {
+					Swal.fire({
+						position: 'center',
+						icon: 'success',
+						title: 'Data Berhasil Di Update',
+						showConfirmButton: false,
+						timer: 1500
+					}).then(function() {
+						location.reload();
+					});
+				} else if (data.msg === 'eror') {
+					Swal.fire({
+						icon: 'error',
+						title: 'Gagal Update',
+						text: 'Data Tidak Boleh Kosong',
+					}).then(function() {
+						location.reload();
+					});
+				}
+
 			}
 		})
 	}

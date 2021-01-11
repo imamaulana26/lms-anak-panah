@@ -54,28 +54,20 @@ class Siswa extends CI_Controller
 	function detail_absensi_siswa_oc($nis)
 	{
 
-		// $dataserialize = $this->db->get_where('tbl_abs_model', ['siswa_nis' => $nis])->row_array();
-		// $siswa_where =$this->db->select('siswa_nama,siswa_kelas_id')->from('tbl_siswa')->where(['siswa_nis' => $nis])->get()->row_array();
 		$data['nama'] = $this->db->select('siswa_nama,siswa_kelas_id')->from('tbl_siswa')->where(['siswa_nis' => $nis])->get()->row_array();
 		$kelas = $data['nama']['siswa_kelas_id'];
 		$data['mapel'] = $this->db->select('nm_mapel,id_pelajaran')->from('tbl_pelajaran a')->join('tbl_mapel b', 'a.kd_mapel=b.kd_mapel', 'inner')->where(['id_kelas' => $kelas])->get()->result_array();
-		// $dataunser = unserialize($dataserialize['fr_abs']);
-		// $datamapel = $this->db->get_where()
-		// var_dump($siswa_where); die;
-		// $data['forum'] = $dataunser;
-
-
-		// $data['mapel'] = $this->db->get_where('tbl_pelajaran',['id_kelas'=>'11'])->result_array();
-
-		// var_dump($data['forum']); die;
-		// $testdata = $this->db->get_where('tbl_abs_oc', ['id_pelajaran' => '43'])->row_array();
-		// $dt_unser = unserialize($testdata['dt_oc']);
-		// foreach ($dt_unser as $key => $value) {
-		// 	var_dump($value);
-		// }
-
-		//  die;
+       
 		$this->load->view('admin/v_detail_absensi_oc', $data);
+	}
+	function detail_absensi_siswa_kc($nis)
+	{
+
+		$data['nama'] = $this->db->select('siswa_nama,siswa_kelas_id')->from('tbl_siswa')->where(['siswa_nis' => $nis])->get()->row_array();
+		$kelas = $data['nama']['siswa_kelas_id'];
+		$data['mapel'] = $this->db->select('nm_mapel,id_pelajaran')->from('tbl_pelajaran a')->join('tbl_mapel b', 'a.kd_mapel=b.kd_mapel', 'inner')->where(['id_kelas' => $kelas])->get()->result_array();
+
+		$this->load->view('admin/v_detail_absensi_kc', $data);
 	}
 
 	function komunitas_class()
@@ -183,6 +175,7 @@ class Siswa extends CI_Controller
 			$row[] = $li['siswa_email'];
 			$row[] = $li['siswa_no_telp'];
 			$row[] = $li['satelit_nama'];
+			$row[] = ($li['soft_deleted'] == 0) ? 'Aktif' : 'Keluar';;
 			// $aksi = '<center><a href="javascript:void(0)" title="Edit Siswa" onclick="edit_siswa(' . "'" . $li['siswa_nis'] . "'" . ')"><i class="fa fa-fw fa-edit"></i></a> ';
 			// $aksi .= '<a href="javascript:void(0)" title="Keluarkan Siswa" onclick="delete_siswa(' . "'" . $li['siswa_nis'] . "'" . ')"><i class="fa fa-fw fa-trash"></i></a> ';
 			// $aksi .= '<br><a href="keuangan"><i class="fa fa-fw fa-dollar"></i></a> ';
@@ -389,7 +382,7 @@ class Siswa extends CI_Controller
 				'wali_nama' => strip_tags($this->input->post('xnamawali')),
 				'wali_nik' => strip_tags($this->input->post('xnikwali')),
 				'wali_tempat' => strip_tags($this->input->post('xtmpwali')),
-				'wali_tanggal' => $this->input->post('tgl_lahirwali'),
+				'wali_tanggal' => ($this->input->post('tgl_lahirwali') === '') ? null : $this->input->post('tgl_lahirwali'),
 				'wali_pendidikan' => strip_tags($this->input->post('xptwali')),
 				'wali_pekerjaan' => strip_tags($this->input->post('xkwali')),
 				'wali_penghasilan' => strip_tags($this->input->post('xpnwali')),
@@ -496,7 +489,7 @@ class Siswa extends CI_Controller
 			'wali_nama' => strip_tags($this->input->post('xnamawali')),
 			'wali_nik' => strip_tags($this->input->post('xnikwali')),
 			'wali_tempat' => strip_tags($this->input->post('xtmpwali')),
-			'wali_tanggal' => $this->input->post('tgl_lahirwali'),
+			'wali_tanggal' => ($this->input->post('tgl_lahirwali')=== '') ? null : $this->input->post('tgl_lahirwali'),
 			'wali_pendidikan' => strip_tags($this->input->post('xptwali')),
 			'wali_pekerjaan' => strip_tags($this->input->post('xkwali')),
 			'wali_penghasilan' => strip_tags($this->input->post('xpnwali')),

@@ -59,7 +59,7 @@
 														<td><?= $no++ ?></td>
 														<td><?= $tgh['jns_tagihan'] ?></td>
 														<td><?= date('d F Y', strtotime($tgh['tgl_jatuh_tempo'])) ?></td>
-														<td>Rp. <?= number_format($tgh['nom_tagihan'], 2, ',', '.') ?></td>
+														<td>Rp. <?= number_format($tgh['total_tagihan'], 2, ',', '.') ?></td>
 														<td>Rp. <?= number_format($tgh['sisa_angsur'], 2, ',', '.') ?></td>
 													</tr>
 												<?php }

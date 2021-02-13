@@ -38,7 +38,7 @@ class Keuangan extends CI_Controller
 			$row[] = $li['siswa_email'];
 			$row[] = $li['siswa_no_telp'];
 			$aksi = '<a href="javascript:void(0)" class="label label-success" onclick="edit_keuangan(' . "'" . $li['siswa_nis'] . "'" . ')">Edit Keuangan</a><br>';
-
+			$aksi .= '<a href="javascript:void(0)" class="label label-warning" onclick="detail_keuangan(' . "'" . $li['siswa_nis'] . "'" . ')">Detail Keuangan</a><br>';
 			if ($li['status'] > 0) {
 				$aksi .= '<a href="javascript:void(0)" id="test" class="label label-info" onclick="edit_pembayaran(' . "'" . $li['siswa_nis'] . "'" . ')">Lihat Tagihan</a>';
 			}
@@ -71,6 +71,8 @@ class Keuangan extends CI_Controller
 		exit();
 	}
 
+
+
 	public function add_kategori()
 	{
 
@@ -85,12 +87,15 @@ class Keuangan extends CI_Controller
 
 	public function edit_keuangan_submit()
 	{
-		$tagihan = $this->db->get_where('tbl_tagihan', ['id_tagihan' => $this->input->post('jns_tagihan')])->row_array();
+		// $tagihan = $this->db->get_where('tbl_tagihan', ['id_tagihan' => $this->input->post('jns_tagihan')])->row_array();
 
 		$data = array(
 			'nis_siswa' => strip_tags($this->input->post('xnis')),
 			'jns_tagihan' => strip_tags($this->input->post('jns_tagihan')),
-			'sisa_angsur' => $tagihan['nom_tagihan'],
+			'total_tagihan' => str_replace(',', '', $this->input->post('nom_tagihan')),
+			'sisa_angsur' => str_replace(',', '', $this->input->post('nom_tagihan')),
+			'jml_pembayaran' => 0,
+			'ket_pembayaran' => NULL,
 			'tgl_jatuh_tempo' => strip_tags($this->input->post('tgl_tempo')),
 		);
 
@@ -108,6 +113,18 @@ class Keuangan extends CI_Controller
 		exit;
 	}
 
+	function detail_keuangan($nis)
+	{
+		$sql = "select a.nis_siswa, a.tgl_pembayaran, a.kd_transaksi, b.jns_tagihan, b.nom_tagihan, c.total_tagihan, sum(a.nom_pembayaran) as bayar, a.status from tbl_keuangan a ";
+		$sql .= "left join tbl_tagihan b on a.kd_tagihan = b.id_tagihan ";
+		$sql .= "left join tbl_pembayaran c on a.kd_tagihan = c.jns_tagihan ";
+		$sql .= "where a.nis_siswa = '" . $nis . "' and c.nis_siswa = '" . $nis . "' ";
+		$sql .= "group by b.jns_tagihan";
+		$data['keuangan'] = $this->db->query($sql)->result_array();
+		$data['nama'] = $this->db->select('siswa_nama')->from('tbl_siswa')->where(['siswa_nis' => $nis])->get()->row_array();
+		$this->load->view('admin/v_detail_keuangan', $data);
+	}
+
 	// function edit_pembayaran($nis){
 	// 	$result = $this->db->get_where('tbl_siswa',['siswa_nis'=>$nis])->result_array();
 	// 	echo json_encode($result);
@@ -116,7 +133,6 @@ class Keuangan extends CI_Controller
 
 	public function edit_pembayaran_submit()
 	{
-
 		$id = $this->input->post('id');
 		$bayar = $this->input->post('bayar');
 		$nominal = $this->input->post('nom_bayar');

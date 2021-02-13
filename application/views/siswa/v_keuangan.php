@@ -55,7 +55,7 @@
                         <td><?= $dt['tgl_pembayaran'] ?></td>
                         <td><?= $dt['kd_transaksi'] ?></td>
                         <td><?= $dt['jns_tagihan']; ?></td>
-                        <td>Rp. <?= number_format($dt['nom_tagihan']); ?></td>
+                        <td>Rp. <?= number_format($dt['total_tagihan']); ?></td>
                         <td>Rp. <?= number_format($dt['bayar']); ?></td>
                       </tr>
                     <?php } ?>

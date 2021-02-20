@@ -14,7 +14,7 @@
 			<?php $notif = $this->db->get('tbl_pengumuman')->row_array();
 			if ($notif['aktifkan'] > 0) { ?>
 				<div class="row">
-					<div class="offset-1 col-sm-10">
+					<div class="offset-1 col-sm-10 media-nav">
 						<div class="alert alert-info" role="alert">
 							<h4 class="alert-heading">Announcement!</h4>
 							<p><?= $notif['pengumuman_deskripsi'] ?></p>
@@ -27,7 +27,7 @@
 
 			<!-- Next Agenda -->
 			<div class="row">
-				<div class="offset-1 col-sm-10">
+				<div class="offset-1 col-sm-10 media-nav">
 					<div class="card card-primary card-outline">
 						<div class="card-header">
 							<h5 class="card-title m-0">Agenda Kelas Online</h5>
@@ -40,7 +40,7 @@
 										<div class="card" style="height: 15em">
 											<?php if ($online['aktifkan'] == 1) {
 												?>
-												<a href="<?= $online['link_oc']  ?>">
+												<a href="<?= $online['link_oc']  ?>" target="_blank">
 													<div class="card-header bg-primary">
 														<i class="fas fa-fw fa-video mr-1 blink_me" style="color: #f72121"></i> Sedang Berlangsung
 													</div>

@@ -1,4 +1,8 @@
 <style>
+    iframe {
+		width: -moz-available;
+		width: -webkit-fill-available;
+	}
 	/*  Bhoechie tab */
 	div.bhoechie-tab-container {
 		background-color: #ffffff;
@@ -82,6 +86,15 @@
 	.bordered {
 		border-left: 3px solid #007bff;
 	}
+	@media screen and (max-width: 574px) {
+		div.bhoechie-tab-menu div.list-group>a.active:after {
+			display: none;
+		}
+
+		div.bhoechie-tab-content {
+			padding-left: 0px;
+		}
+	}
 
 	#cke_editorfr1 {
 		width: 100%;
@@ -102,8 +115,13 @@
 	<div class="content">
 		<div class="container">
 			<div class="row">
-				<div class="offset-1 col-sm-10">
+				<div class="offset-1 col-sm-10 media-nav">
 					<?php if (!empty($materi)) : ?>
+					<a href="<?= site_url('course/') ?>" class="btn btn-link float-right">
+							<div class="btn btn-outline-primary">
+								<i class="fas fa-angle-left"></i> Back to course
+							</div>
+						</a>
 						<h2 class="pb-3">Forum <?= $forum['nm_mapel'] ?></h2>
 
 						<div class="card card-outline">
@@ -131,7 +149,7 @@
 														echo $new;
 													} ?>
 												</h5>
-												<small><?= date('d M Y', strtotime($val['createDate'])) ?></small>
+												<small><?= date('d M Y', strtotime($val['createDate'])) ?> - <?= date('d M Y', strtotime($val['endDate'])) ?></small>
 												<p><?= word_limiter($val['judul_materi'], 2) ?></p>
 											</a>
 										<?php endforeach; ?>
@@ -160,7 +178,7 @@
 														</a>
 													<?php endif; ?>
 												<?php endif; ?>
-												<hr>
+												<hr class="media-line">
 												<div>
 													<?php if ($val['status'] == 0) : ?>
 														<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $val['id_forum'] . '-' . $val['pertemuan'] ?>">
@@ -210,9 +228,13 @@
 
 																$admin = $this->db->get_where('tbl_pengguna', ['pengguna_username' => $cmd['user_komen']])->row_array();
 																$rep_user = ($siswa == null) ? $admin['pengguna_nama'] . ' (pengajar)' : $siswa['siswa_nama']; ?>
-																<div class="card-header bordered mt-3 d-flex">
+																<div class="card-header bordered mt-3 d-flex" style="width: 100%;">
 																	<div class="col-md-1">
-																		<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
+																		<?php if ($admin['pengguna_level'] == 3) { ?>
+																			<img class="media-img-width"  src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" style="width: 100%;" />
+																		<?php } else { ?>
+																			<img class="media-img-width"  src="<?= base_url() . '/assets/filesiswa/' . $siswa['siswa_nis'] . '/' . $siswa['siswa_photo'] ?>" class="img img-rounded img-fluid" style="width: 100%;" />
+																		<?php } ?>
 																	</div>
 																	<div class="col-md">
 																		<strong class="float-left"><?= $rep_user ?></strong>
@@ -309,9 +331,13 @@
 																	<!-- Reply Main Comments -->
 																	<div class="collapse <?= $this->session->flashdata('mention') == $cmd['id'] ? 'show' : '' ?>" id="comments-<?= $cmd['id'] ?>">
 																		<div class="col-lg ml-3">
-																			<div class="card-header bordered mt-3 d-flex">
+																			<div class="card-header bordered mt-3 d-flex" style="width: 100%;">
 																				<div class="col-md-1">
-																					<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
+																					<?php if ($admin['pengguna_level'] == 3) { ?>
+																			<img class="media-img-width"  src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" style="width: 100%;" />
+																		<?php } else { ?>
+																			<img class="media-img-width"  src="<?= base_url() . '/assets/filesiswa/' . $siswa['siswa_nis'] . '/' . $siswa['siswa_photo'] ?>" class="img img-rounded img-fluid" style="width: 100%;" />
+																		<?php } ?>
 																				</div>
 																				<div class="col-md">
 																					<strong class="float-left"><?= $rep_user ?></strong>
@@ -536,6 +562,7 @@
 							title: 'Sukses',
 							text: res.msg,
 							timer: 2000,
+							allowOutsideClick: false,
 							timerProgressBar: true,
 							// onBeforeOpen: () => {
 							// 	Swal.showLoading()
@@ -574,6 +601,7 @@
 							title: 'Sukses',
 							text: res.msg,
 							timer: 2000,
+							allowOutsideClick: false,
 							timerProgressBar: true,
 							// onBeforeOpen: () => {
 							// 	Swal.showLoading()

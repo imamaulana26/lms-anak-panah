@@ -56,6 +56,58 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			margin: 0px 0px 10px 0px;
 			padding: .5em .7rem;
 		}
+		@media screen and (max-width: 574px) {
+	.media-nav {
+		margin-left: 0 !important;
+	}
+
+	.media-form {
+		width: 80%;
+	}
+  .media-width{
+    	width: 100%;
+  }
+
+	.media-footer {
+		float: unset !important;
+		display: unset !important;
+	}
+
+	.media-align-center {
+		text-align: center !important;
+	}
+
+	.media-logo-show {
+		display: unset !important;
+		margin-right: 10px;
+		margin-top: 5px;
+	}
+
+	.media-logo-none {
+		display: none;
+	}
+
+	.media-display {
+		position: fixed;
+	}
+
+	.media-header {
+		margin-top: 15%;
+	}
+
+	.media-float {
+		float: left;
+	}
+
+	.media-img-width {
+		width: 30% !important;
+	}
+	.media-line {
+				position: relative;
+				right: 5%;
+				width: 110%;
+			}
+}
 	</style>
 </head>
 

@@ -19,7 +19,7 @@ class Kisikisi extends CI_Controller{
 			$kelas = $this->db->select('siswa_kelas_id')->from('tbl_siswa')->where(['siswa_nis' => $this->session->userdata('username')])->get()->row_array();
 			
 			// $data['kisikisi'] = $this->db->select('*')->from('tbl_kisikisi a')->join('tbl_mapel b', 'a.kisikisi_mapel = b.kd_mapel', 'inner')->join('tbl_kelas c', 'a.kisikisi_kelas_id = c.kelas_id', 'inner')->where(['a.kisikisi_kelas_id' => 15])->get()->result_array();
-			$data['kisikisi'] = $this->db->select('*')->from('tbl_kisikisi a')->join('tbl_mapel b', 'a.kisikisi_mapel = b.kd_mapel', 'inner')->join('tbl_kelas c', 'a.kisikisi_kelas_id = c.kelas_id', 'inner')->where(['a.kisikisi_kelas_id' => 15])->get()->result_array();
+			$data['kisikisi'] = $this->db->select('*')->from('tbl_kisikisi a')->join('tbl_mapel b', 'a.kisikisi_mapel = b.kd_mapel', 'inner')->join('tbl_kelas c', 'a.kisikisi_kelas_id = c.kelas_id', 'inner')->where(['a.kisikisi_kelas_id' => $kelas['siswa_kelas_id']])->get()->result_array();
 			$this->load->view('siswa/layout/v_header');
 			$this->load->view('siswa/layout/v_navbar');
 			$this->load->view('siswa/v_kisikisi',$data);
@@ -27,6 +27,15 @@ class Kisikisi extends CI_Controller{
 		}
 
 
+	}
+	function kisikisi_pengajar()
+	{
+	    if($this->session->userdata('akses')=='3'){
+			$this->load->view('pengajar/layout/v_header');
+			$this->load->view('pengajar/layout/v_navbar');
+			$this->load->view('pengajar/v_kisikisi');
+			$this->load->view('pengajar/layout/v_footer');
+		}
 	}
 
 	function setting_kelas($id){

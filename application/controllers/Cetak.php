@@ -40,11 +40,13 @@ class Cetak extends CI_Controller
 		// var_dump($id);
 		$id_admin = $this->session->userdata('idadmin');
 		$c = $this->db->select('*')->from('tbl_pengguna a')->join('tbl_siswa b', 'a.pengguna_username = b.siswa_nis', 'inner')->where(['a.pengguna_id' => $id_admin])->get()->row_array();
-		if ($id != $c['siswa_nis']) {
-			echo "<h1 style='text-align: center;
+		if ($this->session->userdata('akses') == 2) {
+			if ($id != $c['siswa_nis']) {
+				echo "<h1 style='text-align: center;
 			margin-top: 50px;
 			color: red;'>MAAF ANDA TIDAK BERHAK MELIHAT RAPORT SISWA LAIN</h1>";
-			exit();
+				exit();
+			}
 		}
 
 		$d = $this->db->get_where('tbl_thn_ajaran', ['thn_ajaran' => str_replace('-', '/', $ta), 'semester' => $sms])->row_array();
@@ -665,8 +667,6 @@ class Cetak extends CI_Controller
 			$ttdwakel =  $dtunser[$key]['ttd'];
 			$nmwakel =  $dtunser[$key]['wakel'];
 		}
-
-		
 
 		if (empty($datavalid['semester'])) {
 			$fpdf->Cell(30, 6, 'data semester 1 kosong', 0, 0, 'L');

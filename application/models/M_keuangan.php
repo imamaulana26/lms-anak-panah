@@ -16,6 +16,7 @@ class M_keuangan extends CI_Model
 		$this->db->join('tbl_kelas b', 'a.siswa_kelas_id = b.kelas_id', 'inner');
 		$this->db->join('tbl_pembayaran c', 'a.siswa_nis = c.nis_siswa', 'left');
 		$this->db->group_by('a.siswa_nis, a.siswa_nama, b.kelas_nama, a.siswa_email, a.siswa_no_telp');
+		$this->db->where([ 'a.soft_deleted' => '0' , 'a.siswa_kelas_id <'=>'16']);
 
 		if (isset($_POST['columns'][2]['search']['value']) and $_POST['columns'][2]['search']['value'] != 'all') {
 			$this->db->where('a.siswa_kelas_id', $_POST['columns'][2]['search']['value']);

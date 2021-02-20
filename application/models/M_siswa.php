@@ -21,7 +21,7 @@ class M_siswa extends CI_Model
 	var $column_search = array('a.siswa_nis', 'a.siswa_nama', 'b.kelas_nama', 'a.siswa_email', 'a.siswa_no_telp', 'c.satelit_nama');
 	function _get_datatable_query()
 	{
-		$this->db->select('a.siswa_nis, a.siswa_nama, b.kelas_nama, a.siswa_email, a.siswa_no_telp, c.satelit_nama, a.soft_deleted');
+		$this->db->select('a.siswa_nis,a.siswa_photo, a.siswa_nama, b.kelas_nama, a.siswa_email, a.siswa_no_telp, c.satelit_nama, a.soft_deleted');
 		$this->db->from($this->table . ' a');
 		$this->db->join('tbl_kelas b', 'a.siswa_kelas_id = b.kelas_id', 'inner');
 		$this->db->join('tbl_satelit c', 'a.satelit = c.satelit_id', 'right');

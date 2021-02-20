@@ -22,9 +22,7 @@ class Nilai_raport extends CI_Controller{
 			'thn_ajaran'=>$ta,
 			'semester'=>$sms
 		);
-		
-		var_dump($data); die;
-		// $this->db->insert('tbl_thn_ajaran', $data);
+		$this->db->insert('tbl_thn_ajaran', $data);
 		redirect('nilai_raport','refresh');
 	}
 
@@ -156,9 +154,9 @@ class Nilai_raport extends CI_Controller{
 		// INPUT ABSEN
 		$absen = array(
 			'nis_siswa' => $nis,
-			'sakit' => strip_tags($this->input->post('sakit')),
-			'izin' => strip_tags($this->input->post('izin')),
-			'tanpa_ket' => strip_tags($this->input->post('tanpaket')),
+			'sakit' => (!empty(strip_tags($this->input->post('sakit')))) ? strip_tags($this->input->post('sakit')) : 0,
+			'izin' => (!empty(strip_tags($this->input->post('izin')))) ? strip_tags($this->input->post('izin')) : 0,
+			'tanpa_ket' => (!empty(strip_tags($this->input->post('tanpaket')))) ? strip_tags($this->input->post('tanpaket')) : 0,
 			'ta' => $ta,
 			'semester' => $sms,
 		);
@@ -181,9 +179,9 @@ class Nilai_raport extends CI_Controller{
 		// INPUT CATATAN PENTING SISWA
 		$catatanpenting = array(
 			'nis_siswa' => $nis,
-			'sikap' => strip_tags($this->input->post('sikap')),
-			'kegiatan' => strip_tags($this->input->post('kegiatan')),
-			'tugas' => strip_tags($this->input->post('tugas')),
+			'sikap' => (!empty(strip_tags($this->input->post('sikap')))) ? strip_tags($this->input->post('sikap')) : 0,
+			'kegiatan' => (!empty(strip_tags($this->input->post('kegiatan')))) ? strip_tags($this->input->post('kegiatan')) : 0,
+			'tugas' => (!empty(strip_tags($this->input->post('tugas')))) ? strip_tags($this->input->post('tugas')) : 0,
 			'ta' => $ta,
 			'sms' => $sms,
 		);
@@ -222,7 +220,8 @@ class Nilai_raport extends CI_Controller{
 		
 		// $sql = $this->db->insert_batch('tbl_nilai', $data); // Panggil fungsi save_batch yang ada di model siswa (SiswaModel.php)        // Cek apakah query insert nya sukses atau gagal 
 		if($data){ // Jika sukses
-			echo "<script>alert('Data berhasil disimpan'); window.history.go(-2);</script>";
+			echo "<script>alert('Raport Berhasil Di Update!');";
+			echo "window.location.href = '" . base_url('nilai_raport/raport_siswa/') . str_replace('/', '-', $ta) . '/' . $sms . "';</script>";
 		} else { // Jika gagal
 			echo "<script>alert('Data gagal disimpan'); window.history.go(-1);</script>";
 		}

@@ -27,7 +27,7 @@
                                                 <p class="round active"><?= $dt_jadwal['tipe'] ?></p>
                                             </div>
                                             <div class="col-sm-9">
-                                                <h5><?= $dt_jadwal['mapel'] ?></h5>
+                                                <?= $dt_jadwal['mapel'] ?>
                                             </div>
                                         </div>
                                     <?php } ?>

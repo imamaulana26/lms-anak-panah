@@ -225,6 +225,7 @@ $c=$q->row_array();
                        </select>
                      </div>
                      <button type="submit" class="btn btn-default" style="margin-left: 10px"><i class="fa fa-fw fa-search"></i> Search</button>
+                     
                    </div>
                  </form>
                </div>
@@ -253,7 +254,8 @@ $c=$q->row_array();
                         <td><?= $li['kelas_nama'] ?></td>
                         <td><?= $li['siswa_email'] ?></td>
                         <td><?= $li['siswa_no_telp'] ?></td>
-                        <td><a href="<?= site_url('nilai_raport/data/').'/'.$li['siswa_nis'].'/'.str_replace('/', '-', $ta).'/'.$sms ?>" class="btn btn-primary">Submit</a></td>
+                        <td><a href="<?= site_url('nilai_raport/data/').'/'.$li['siswa_nis'].'/'.str_replace('/', '-', $ta).'/'.$sms ?>" class="btn btn-primary">Submit</a>
+                        <a target="_blank" href="<?= site_url('cetak/raport') . '/' . $li['siswa_nis'] . '/' . str_replace('/', '-', $ta) . '/' . $sms ?>" class="btn btn-success">Cetak</a></td>
                       </tr>
                     <?php } ?>
                   </tbody>

@@ -11,23 +11,10 @@
 	<div class="content">
 		<div class="container">
 			<!-- Announcement -->
-			<?php $notif = $this->db->get('tbl_pengumuman')->row_array();
-			if ($notif['aktifkan'] > 0) { ?>
-				<div class="row">
-					<div class="offset-1 col-sm-10">
-						<div class="alert alert-info" role="alert">
-							<h4 class="alert-heading">Announcement!</h4>
-							<p><?= $notif['pengumuman_deskripsi'] ?></p>
-							<hr>
-							<p class="mb-0">&copy; Anak Panah Cyber Scholl.</p>
-						</div>
-					</div>
-				</div>
-			<?php } ?>
 
 			<!-- Tagihan -->
 			<div class="row">
-				<div class="offset-1 col-sm-10">
+				<div class="offset-1 col-sm-10 media-nav">
 					<!-- Index Prestasi -->
 					<div class="card card-primary card-outline">
 						<div class="card-header">
@@ -39,24 +26,55 @@
 									<thead>
 										<tr>
 											<th>No</th>
+											<th>kls</th>
 											<th>Mata Pelajaran</th>
 											<th>Sms</th>
-											<th>Ulangan Bulanan</th>
+											<th>UB</th>
 											<th>Kisi-Kisi</th>
 										</tr>
 									</thead>
 									<tbody>
+										<?php
+
+										// $this->db->select('*')->from('tbl_kisikisi a')->join('tbl_mapel b', 'a.kisikisi_mapel = b.kd_mapel', 'inner')->join('tbl_kelas c', 'a.kisikisi_kelas_id = c.kelas_id', 'inner')->where(['a.kisikisi_kelas_id' => $kelas['siswa_kelas_id']])->get()->result_array(); 
+
+										// var_dump($this->session->userdata()
+										// );
+										$kdpengajar = $this->db->get_where('tbl_pengajar', ['nm_pengajar' => $this->session->userdata('nama')])->row_array();
+										$kelas = $this->db->get_where('tbl_pelajaran', ['kd_pengajar' => $kdpengajar['id_pengajar']])->result_array();
+										$dummy = array();
+										foreach ($kelas as $dt_kelas) {
+											// $dumykelas = $dt_kelas['id_kelas'];
+											$dummy[] = $dt_kelas['id_kelas'];
+										}
+										// $dtdummy
+										$dtfix = array_merge(array_unique($dummy));
+										$kls = '';
+										foreach ($dtfix as $key => $val) {
+											$kls .= $val . ', ';
+										}
+										// var_dump($kls); die;
+
+										// var_dump($dtfix);
+										$where = 'kisikisi_kelas_id in (' . substr($kls, 0, -2) . ')';
+
+										// $kisikisi = $this->db->get_where('tbl_kisikisi', $where)->result_array();
+										$kisikisi = $this->db->select('c.kelas_nama,a.kisikisi_semester,a.kisikisi_ub,a.kisikisi_deskripsi,b.nm_mapel')->from('tbl_kisikisi a')->join('tbl_mapel b', 'a.kisikisi_mapel = b.kd_mapel', 'inner')->join('tbl_kelas c', 'a.kisikisi_kelas_id = c.kelas_id', 'inner')->where($where)->get()->result_array();
+										// var_dump($kisikisi);
+										// $dtfix = array_merge($dtunsersql);
+										?>
 										<?php $no = 1;
-										$sisa = 0;
-										foreach ($kisikisi as $dt) { ?>
+										foreach ($kisikisi as $ks) {
+										?>
 											<tr>
 												<td><?= $no++ ?></td>
-												<td><?= $dt['nm_mapel'] ?></td>
-												<td><?= $dt['kisikisi_semester'] ?></td>
-												<td>UB <?= $dt['kisikisi_ub'] ?></td>
-												<td><?= $dt['kisikisi_deskripsi'] ?></td>
+												<td><?= substr($ks['kelas_nama'], 6) ?></td>
+												<td><?= $ks['nm_mapel'] ?></td>
+												<td><?= $ks['kisikisi_semester'] ?></td>
+												<td><?= $ks['kisikisi_ub'] ?></td>
+												<td><?= $ks['kisikisi_deskripsi'] ?></td>
 											</tr>
-										<?php } ?>
+										<?php }  ?>
 									</tbody>
 								</table>
 							</div>
@@ -78,5 +96,8 @@
 
 <!-- script here -->
 <script>
-	$("#example1").DataTable();
+	$("#example1").DataTable({
+    "scrollX": true,
+    pagingType: $(window).width() < 450 ? "simple" : "simple_numbers"
+  });
 </script>

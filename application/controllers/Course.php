@@ -5,6 +5,11 @@ class Course extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		if ($this->session->userdata('masuk') != TRUE) {
+            $url = base_url('login');
+            redirect($url);
+        };
+
 		$this->load->model('M_course', 'm_course');
 	}
 
@@ -17,127 +22,75 @@ class Course extends CI_Controller
 		$data['course'] = $this->m_course->get_course();
 		$data['kelas'] = $this->db->select('b.kelas_nama , b.kelas_id ,b.kls_jadwal')->from('tbl_siswa a')->join('tbl_kelas b', 'a.siswa_kelas_id = b.kelas_id', 'left')->where(['a.siswa_nis' => $this->session->userdata('user')])->get()->row_array();
 		// $data['jadwal'] = $this->db->get('tbl_kelas', limit, offset);
-
+		
 
 		$test = array(
 			array(
-				'hari' => 'Senin',
-				'data' => array(
-					array(
-						'mapel' => 'Bahasa Inggris',
-						'tipe' => 'Kc'
-					),
-					array(
-						'mapel' => 'Bahasa Indonesia',
-						'tipe' => 'Kc'
-					)
-				)
-			),
-			array(
-				'hari' => 'Selasa',
-				'data' => array(
-
-					array(
-						'mapel' => 'Bahasa Indonesia',
-						'tipe' => 'Vc'
-					), array(
-						'mapel' => 'Bahasa Inggris',
-						'tipe' => 'Vc'
-					), array(
-						'mapel' => 'Ekonomi',
-						'tipe' => 'Vc'
-					)
-				)
-			), array(
-				'hari' => 'Rabu',
-				'data' => array(
-					array(
-						'mapel' => 'Ekonomi',
-						'tipe' => 'Kc'
-					),
-					array(
-						'mapel' => 'Matematika',
-						'tipe' => 'Kc'
-					)
-				)
-			), array(
-				'hari' => 'Kamis',
+				'hari' => 'senin',
 				'data' => array(
 					array(
 						'mapel' => 'Matematika',
-						'tipe' => 'Vc'
-					), array(
-						'mapel' => 'Geografi',
+						'tipe' => 'Kc'
+					),
+					array(
+						'mapel' => 'Prakarya/TIK',
+						'tipe' => 'Kc'
+					),
+					array(
+						'mapel' => 'Ilmu Pengetahuan Sosial',
 						'tipe' => 'Vc'
 					)
 				)
 			), array(
-				'hari' => 'Jumat',
+				'hari' => 'selasa',
 				'data' => array(
 					array(
-						'mapel' => 'Sosiologi',
-						'tipe' => 'Kc'
-					),
+						'mapel' => 'bahasa indonesia',
+						'tipe' => ''
+					), array(
+						'mapel' => 'Matematika',
+						'tipe' => 'vc'
+					)
+				)
+			), array(
+				'hari' => 'rabu',
+				'data' => array(
 					array(
-						'mapel' => 'Geografi',
-						'tipe' => 'Kc'
-					),
+						'mapel' => 'bahasa indonesia',
+						'tipe' => 'kc'
+					), array(
+						'mapel' => 'Matematika',
+						'tipe' => 'vc'
+					)
+				)
+			), array(
+				'hari' => 'kamis',
+				'data' => array(
 					array(
-						'mapel' => 'Pendidikan Kewarganegaraan',
-						'tipe' => 'Kc'
+						'mapel' => 'bahasa indonesia',
+						'tipe' => 'kc'
+					), array(
+						'mapel' => 'Matematika',
+						'tipe' => 'vc'
+					)
+				)
+			), array(
+				'hari' => 'jumat',
+				'data' => array(
+					array(
+						'mapel' => 'bahasa indonesia',
+						'tipe' => 'kc'
+					), array(
+						'mapel' => 'Matematika',
+						'tipe' => 'vc'
 					)
 				)
 			)
 		);
 
-		$test2 = array(
-			array(
-				'ta' => '2019/2020',
-				'wakel' => 'RAY RIZKY DWIPUTRA',
-				'ttd' => 'ray.png'
-			), array(
-				'ta' => '2020/2021',
-				'wakel' => 'WILLY SUMANTRI',
-				'ttd' => 'willy.png'
-			)
-		);
-
-		var_dump($test2);
-		echo serialize($test2);
-
-		// foreach ($test2 as $value) {
-		// 	var_dump($value);
-		// }
-
-		// if (($key = array_search('2019/2020', array_column($test2, 'ta'))) !== false) {
-		// 	echo $test2[$key]['ttd'];
-		// }
-		$datasblm = 'a:2:{i:0;a:3:{s:2:"ta";s:9:"2019/2020";s:5:"wakel";s:6:"TARSIH";s:3:"ttd";s:10:"tarsih.png";}i:1;a:3:{s:2:"ta";s:9:"2020/2021";s:5:"wakel";s:13:"IMAS INDRIANI";s:3:"ttd";s:8:"imas.png";}}';
-		$dtunser = unserialize($datasblm);
-		$dtfix = array(
-			'ta' => '2016/2017',
-			'wakel' => 'TARSIH',
-			'ttd' => 'tarsih.png'
-		);
-
-		$dtfix2 = array(
-			'ta' => '2017/2018',
-			'wakel' => 'TARSIH',
-			'ttd' => 'tarsih.png'
-		);
-		
-		$dtfix3 = array(
-			'ta' => '2018/2019',
-			'wakel' => 'TARSIH',
-			'ttd' => 'tarsih.png'
-		);
-
-		array_push($dtunser, $dtfix, $dtfix2, $dtfix3);
-		var_dump($dtunser);
-		echo serialize($dtunser);
-		die;
-
-		die;
+// 		var_dump($test[0]);
+		// echo serialize($test);
+// 		die;
 
 		if ($akses == 2) {
 			$this->load->view('siswa/layout/v_header');

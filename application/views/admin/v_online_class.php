@@ -230,8 +230,39 @@ if ($c['pengguna_level'] == 2) {
 						</div>
 						<!-- /.box -->
 					</div>
-				</div>
-				<!-- /.row -->
+					<div class="box">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="box-body">
+									<table id="table" class="table table-striped table-hover">
+										<thead>
+											<tr>
+												<th width='20px'>No</th>
+												<th width='100px'>Nis</th>
+												<th>Nama Siswa</th>
+												<th>Kelas</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php $no = 1;
+											$datamurid = $this->db->select('siswa_nis,siswa_nama,kelas_nama')->from('tbl_siswa a')->join('tbl_kelas b', 'a.siswa_kelas_id=b.kelas_id')->where(['a.oc' => 1, 'a.soft_deleted' => 0])->order_by('kelas_nama', 'ASC')->order_by('siswa_nama', 'ASC')->get()->result_array();
+											foreach ($datamurid as $dtm) {
+											?>
+
+												<tr>
+													<td><?= $no++ ?></td>
+													<td><?= $dtm['siswa_nis'] ?></td>
+													<td><?= $dtm['siswa_nama'] ?></td>
+													<td><?= $dtm['kelas_nama'] ?></td>
+												</tr>
+											<?php } ?>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /.row -->
 			</section>
 		</div>
 
@@ -257,6 +288,9 @@ if ($c['pengguna_level'] == 2) {
 	<!-- select 2 -->
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 	<!-- FastClick -->
+	<!-- DataTables -->
+	<script src="<?php echo base_url() . 'assets/plugins/datatables/jquery.dataTables.min.js' ?>"></script>
+	<script src="<?php echo base_url() . 'assets/plugins/datatables/dataTables.bootstrap.min.js' ?>"></script>
 	<script src="<?php echo base_url() . 'assets/plugins/fastclick/fastclick.js' ?>"></script>
 	<!-- AdminLTE App -->
 	<script src="<?php echo base_url() . 'assets/dist/js/app.min.js' ?>"></script>
@@ -267,6 +301,16 @@ if ($c['pengguna_level'] == 2) {
 
 
 	<script>
+		$(document).ready(function() {
+			$('#table').DataTable({
+				"paging": true,
+				"lengthChange": false,
+				"searching": true,
+				"ordering": true,
+				"info": true,
+				"autoWidth": true
+			});
+		});
 		$(document).ready(function() {
 			$('.select2').select2();
 		});

@@ -10,9 +10,9 @@
     <!-- Main content -->
     <div class="content">
         <div class="container">
-            <div class="offset-1 col-sm-10">
+            <div class="offset-1 col-sm-10 media-nav">
                 <div class="row" style="margin-bottom: 20px;">
-                    <div class="col-md-6">
+                    <div class="col-md-6 media-align-center">
                         <a href="<?= site_url('detail_absensi/absensi_forum/') . $this->session->userdata('username') ?>" class="btn btn-success">Forum</a>
                         <a href="<?= site_url('detail_absensi/absensi_tugas/') . $this->session->userdata('username') ?>" class="btn btn-outline-success">Tugas</a>
                         <a href="<?= site_url('detail_absensi/absensi_oc/') . $this->session->userdata('username') ?>" class="btn btn-outline-success">Kelas Online</a>
@@ -28,6 +28,7 @@
                                     <?= $dtmapel['nm_mapel'] ?>
                                 </div>
                                 <div class="card-body" style="padding-top: 0;">
+                                    <div class="table-responsive">
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
@@ -82,6 +83,7 @@
                                             } ?>
                                         </tbody>
                                     </table>
+                                </div>
                                 </div>
                             </div>
                         </div>

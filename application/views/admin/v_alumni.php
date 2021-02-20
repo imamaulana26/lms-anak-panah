@@ -60,6 +60,14 @@ $c=$q->row_array();
               </span>
             </a>
           </li>
+          <li>
+              <a href="<?php echo base_url() . 'jadwal' ?>">
+                <i class="fa fa-calendar"></i> <span>Kalendar</span>
+                <span class="pull-right-container">
+                  <small class="p pull-right"></small>
+                </span>
+              </a>
+            </li>
           <li class="treeview">
             <a href="#">
               <i class="fa fa-university"></i>

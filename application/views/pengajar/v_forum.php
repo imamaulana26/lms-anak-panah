@@ -1,4 +1,8 @@
 <style>
+    iframe {
+		width: -moz-available;
+		width: -webkit-fill-available;
+	}
 	/*  Bhoechie tab */
 	div.bhoechie-tab-container {
 		background-color: #ffffff;
@@ -84,6 +88,16 @@
 	.bordered {
 		border-left: 3px solid #007bff;
 	}
+	
+	@media screen and (max-width: 574px) {
+		div.bhoechie-tab-menu div.list-group>a.active:after {
+			display: none;
+		}
+
+		div.bhoechie-tab-content {
+			padding-left: 0px;
+		}
+	}
 
 	#cke_editorfr1 {
 		width: 100%;
@@ -106,7 +120,7 @@
 	<div class="content">
 		<div class="container">
 			<div class="row">
-				<div class="offset-1 col-sm-10">
+				<div class="offset-1 col-sm-10 media-nav">
 					<a href="<?= site_url('forum/tambah_forum/' . $this->uri->segment(2)) ?>" class="btn btn-primary float-right">Buat Forum Baru</a>
 					<h2 class="pb-3">Forum <?= $forum['nm_mapel'] ?></h2>
 
@@ -119,7 +133,7 @@
 											<h5>
 												Forum Ke-<?= $val['pertemuan'] ?>
 											</h5>
-											<small><?= date('d M Y', strtotime($val['createDate'])) ?></small>
+											<small><?= date('d M Y', strtotime($val['createDate'])) ?> - <?= date('d M Y', strtotime($val['endDate'])) ?></small>
 											<p><?= word_limiter($val['judul_materi'], 2) ?></p>
 										</a>
 									<?php endforeach; ?>
@@ -131,7 +145,7 @@
 										<div class="card-header">
 											<label><?= $val['judul_materi'] ?> (<?= $val['jns_materi'] ?>)</label>
 											<span class="float-right">
-												<a href="<?= site_url('absensi_fr/') . $this->uri->segment(2) . "/" . $val['pertemuan'] ?>" class="badge badge-info">Absensi</a>
+												<!--<a href="<?= site_url('absensi_fr/') . $this->uri->segment(2) . "/" . $val['pertemuan'] ?>" class="badge badge-info">Absensi</a>-->
 												<a href="javascript:void(0)" class="badge badge-<?= $val['status'] == 0 ? 'success' : 'danger' ?>" onclick="sts_forum('<?= $val['id'] ?>')"><?= $val['status'] == 0 ? 'Aktif' : 'Non-aktif' ?></a>
 												<a href="<?= site_url('forum/edit_forum/' . $val['id']) ?>" style="color: #1e7e34;"><i class="fa fa-fw fa-pencil-alt ml-3"></i></a>
 												<a href="javascript:void(0)" onclick="delete_forum('<?= $val['id'] ?>')" style="color: #dc3545;"><i class="fa fa-fw fa-times ml-3"></i></a>
@@ -154,7 +168,7 @@
 													</a>
 												<?php endif; ?>
 											<?php endif; ?>
-											<hr>
+											<hr class="media-line">
 											<div>
 												<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $val['id_forum'] . '-' . $val['pertemuan'] ?>">
 													<i class="fa fa-fw fa-reply"></i> Balas
@@ -202,9 +216,13 @@
 
 															$admin = $this->db->get_where('tbl_pengguna', ['pengguna_username' => $cmd['user_komen']])->row_array();
 															$rep_user = empty($siswa) ? $admin['pengguna_nama'] . ' (pengajar)' : $siswa['siswa_nama'] . $score; ?>
-															<div class="card-header bordered mt-3 d-flex">
+															<div class="card-header bordered mt-3 d-flex" style="width: 100%;">
 																<div class="col-md-1">
-																	<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
+																	<?php if ($admin['pengguna_level'] == 3) { ?>
+																			<img class="media-img-width" src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" style="width: 100%;" />
+																		<?php } else { ?>
+																			<img class="media-img-width" src="<?= base_url() . '/assets/filesiswa/' . $siswa['siswa_nis'] . '/' . $siswa['siswa_photo'] ?>" class="img img-rounded img-fluid" style="width: 100%;" />
+																		<?php } ?>
 																</div>
 																<div class="col-md">
 																	<strong class="float-left"><?= $rep_user ?></strong>
@@ -306,9 +324,13 @@
 																<!-- Reply Main Comments -->
 																<div class="collapse <?= $this->session->flashdata('mention') == $cmd['id'] ? 'show' : '' ?>" id="comments-<?= $cmd['id'] ?>">
 																	<div class="col-lg ml-3">
-																		<div class="card-header bordered mt-3 d-flex">
+																		<div class="card-header bordered mt-3 d-flex" style="width: 100%;">
 																			<div class="col-md-1">
-																				<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
+																				<?php if ($admin['pengguna_level'] == 3) { ?>
+																			<img class="media-img-width" src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" style="width: 100%;" />
+																		<?php } else { ?>
+																			<img class="media-img-width" src="<?= base_url() . '/assets/filesiswa/' . $siswa['siswa_nis'] . '/' . $siswa['siswa_photo'] ?>" class="img img-rounded img-fluid" style="width: 100%;" />
+																		<?php } ?>
 																			</div>
 																			<div class="col-md">
 																				<strong class="float-left"><?= $rep_user ?></strong>
@@ -434,7 +456,7 @@
 						<div class="col-2">
 							<label class="control-label">Input Nilai</label>
 						</div>
-						<div class="col-1">
+						<div class="col-1 media-score-nilai">
 							<input type="text" name="nilai_siswa" id="nilai_siswa" class="form-control form-control-sm" required onkeypress="return CheckNumeric()">
 						</div>
 						<div class="col">
@@ -547,6 +569,7 @@
 					icon: 'success',
 					text: res.msg,
 					timer: 2000,
+					allowOutsideClick: false,
 					showConfirmButton: false
 				}).then((res) => {
 					if (res.dismiss === Swal.DismissReason.timer) {
@@ -579,6 +602,7 @@
 							title: 'Sukses',
 							text: 'Forum berhasil dihapus',
 							timer: 2000,
+							allowOutsideClick: false,
 							timerProgressBar: true,
 							// onBeforeOpen: () => {
 							// Swal.showLoading()
@@ -643,6 +667,7 @@
 							title: 'Sukses',
 							text: res.msg,
 							timer: 2000,
+							allowOutsideClick: false,
 							timerProgressBar: true,
 							// onBeforeOpen: () => {
 							// Swal.showLoading()
@@ -681,6 +706,7 @@
 							title: 'Sukses',
 							text: res.msg,
 							timer: 2000,
+							allowOutsideClick: false,
 							timerProgressBar: true,
 							// onBeforeOpen: () => {
 							// Swal.showLoading()

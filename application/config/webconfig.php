@@ -17,9 +17,9 @@ switch ($ver) {
         $config = array(
             'version' => 'prod',
             'hostname' => 'localhost',
-            'username' => 'indn4117_adminbukuinduk',
-            'password' => '4dm1nbuku1nduk',
-            'database' => 'indn4117_bukuinduk',
+            'username' => 'anag7267_admin',
+            'password' => 'anakpanah.sch.id',
+            'database' => 'anag7267_bimerge',
             'dbdriver' => 'mysqli'
         );
         break;

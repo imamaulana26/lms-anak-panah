@@ -26,7 +26,7 @@ class Absensi extends CI_Controller
         $where = $this->db->get_where('tbl_pelajaran', ['id_pelajaran' => $key])->row_array();
         $mapel = $this->db->get_where('tbl_mapel', ['kd_mapel' => $where['kd_mapel']])->row_array();
 
-        $sql = $this->db->distinct()->select('siswa_nama,siswa_nis')->from('tbl_siswa a')->join('tbl_komen_forum b', 'a.siswa_nis=b.user_komen', 'inner')->where(['b.id_forum' => $key, 'b.pertemuan' => $mgg])->get()->result_array();
+        $sql = $this->db->distinct()->select('siswa_nama,siswa_nis')->from('tbl_siswa a')->join('tbl_komen_forum b', 'a.siswa_nis=b.user_komen', 'inner')->where(['b.id_forum' => $key, 'b.pertemuan' => $mgg])->order_by('siswa_nama ASC')->get()->result_array();
 
         $data['nm_mapel'] = $mapel['nm_mapel'];
         $data['dt_siswa'] = $sql;
@@ -92,7 +92,7 @@ class Absensi extends CI_Controller
                     //untuk menambah status mapel
                     $new_abs3 =
                         array(
-                            'idtg' => $this->input->post('idtg'),
+                            'idf' => $this->input->post('idf'),
                             'data' => array(
                                 array(
                                     'frk' => $this->input->post('idfk'),
@@ -135,7 +135,7 @@ class Absensi extends CI_Controller
         $mapel = $this->db->get_where('tbl_mapel', ['kd_mapel' => $where['kd_mapel']])->row_array();
 
 
-        $sql = $this->db->distinct()->select('siswa_nama,siswa_nis')->from('tbl_siswa a')->join('tbl_komen_tugas b', 'a.siswa_nis=b.user_komen', 'inner')->where(['b.id_forum' => $key, 'b.pertemuan' => $mgg])->get()->result_array();
+        $sql = $this->db->distinct()->select('siswa_nama,siswa_nis')->from('tbl_siswa a')->join('tbl_komen_tugas b', 'a.siswa_nis=b.user_komen', 'inner')->where(['b.id_forum' => $key, 'b.pertemuan' => $mgg])->order_by('siswa_nama ASC')->get()->result_array();
 
         $data['nm_mapel'] = $mapel['nm_mapel'];
         $data['dt_siswa'] = $sql;
@@ -261,7 +261,7 @@ class Absensi extends CI_Controller
     {
         // $where1 =  $this->db->get_where('tbl_pelajaran', ['id_oc' => $idpel])->row_array();
         // $where = $this->db->get_where('tbl_abs_oc', ['id_oc' => $idpel])->row_array();
-        $dtsiswa = $this->db->select('siswa_nis,siswa_nama')->from('tbl_siswa a')->join('tbl_pelajaran b', 'a.siswa_kelas_id=b.id_kelas', 'inner')->where(['b.id_pelajaran' => $idpel, 'a.oc' => '1'])->get()->result_array();
+        $dtsiswa = $this->db->select('siswa_nis,siswa_nama')->from('tbl_siswa a')->join('tbl_pelajaran b', 'a.siswa_kelas_id=b.id_kelas', 'inner')->where(['b.id_pelajaran' => $idpel, 'a.oc' => '1'])->order_by('siswa_nama ASC')->get()->result_array();
         $data['dt_siswa'] = $dtsiswa;
         $this->load->view('pengajar/layout/v_header');
         $this->load->view('pengajar/layout/v_navbar');
@@ -450,7 +450,7 @@ class Absensi extends CI_Controller
     {
         // $where1 =  $this->db->get_where('tbl_pelajaran', ['id_oc' => $idpel])->row_array();
         // $where = $this->db->get_where('tbl_abs_oc', ['id_oc' => $idpel])->row_array();
-        $dtsiswa = $this->db->select('siswa_nis,siswa_nama')->from('tbl_siswa a')->join('tbl_pelajaran b', 'a.siswa_kelas_id=b.id_kelas', 'inner')->where(['b.id_pelajaran' => $idpel, 'a.kc' => '1'])->get()->result_array();
+        $dtsiswa = $this->db->select('siswa_nis,siswa_nama')->from('tbl_siswa a')->join('tbl_pelajaran b', 'a.siswa_kelas_id=b.id_kelas', 'inner')->where(['b.id_pelajaran' => $idpel, 'a.kc' => '1'])->order_by('siswa_nama ASC')->get()->result_array();
         $data['dt_siswa'] = $dtsiswa;
         $this->load->view('pengajar/layout/v_header');
         $this->load->view('pengajar/layout/v_navbar');

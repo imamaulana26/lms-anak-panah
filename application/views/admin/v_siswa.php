@@ -66,6 +66,15 @@ if ($c['pengguna_level'] == 2) {
                 </span>
               </a>
             </li>
+            
+            <li>
+              <a href="<?php echo base_url() . 'jadwal' ?>">
+                <i class="fa fa-calendar"></i> <span>Kalendar</span>
+                <span class="pull-right-container">
+                  <small class="p pull-right"></small>
+                </span>
+              </a>
+            </li>
 
             <li>
               <a href="<?php echo base_url() . 'datalembaga' ?>">
@@ -241,25 +250,23 @@ if ($c['pengguna_level'] == 2) {
               </div>
               <!-- /.box-header -->
               <div class="box-body">
-                <div>
-                  <table id="table" class="table table-striped table-hover" cellspacing="0" width="100%">
+                  <table id="table" class="table table-striped table-hover" cellspacing="0" width="99%">
                     <thead>
                       <tr>
-                        <th>No</th>
-                        <th>NIS</th>
-                        <th>Nama Siswa</th>
-                        <th>Kelas</th>
-                        <th>Email</th>
-                        <th>No. Telepon</th>
-                        <th>Satelit</th>
-                        <th>Status Siswa</th>
-                        <th class="text-center">Aksi</th>
+                        <th style="width:80px">Photo</th>
+                        <th style="width:80px">NIS</th>
+                        <th >Nama Siswa</th>
+                        <th style="width:80px">Kelas</th>
+                        <th style="width:100px">Email</th>
+                        <th style="width:100px">No. Telepon</th>
+                        <th style="width:80px">Satelit</th>
+                        <th style="width:80px">Status</th>
+                        <th style="width:100px" class="text-center" >Aksi</th>
                       </tr>
                     </thead>
                     <tbody id="data_siswa">
                     </tbody>
                   </table>
-                </div>
               </div>
               <!-- /.box-body -->
               <div class="box">
@@ -369,6 +376,8 @@ if ($c['pengguna_level'] == 2) {
       table = $('#table').DataTable({
         'processing': true,
         'serverSide': true,
+        // $(window).width() < 450 ? "'scrollX': true",
+        // "scrollX": true,
         'order': [],
         'ajax': {
           'url': "<?= site_url('siswa/list_siswa') ?>",

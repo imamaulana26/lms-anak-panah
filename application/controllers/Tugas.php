@@ -105,6 +105,15 @@ class Tugas extends CI_Controller
 		exit();
 	}
 
+	public function hapus_lampiran()
+	{
+		if ($this->session->userdata('lampiran') != '') {
+			$this->session->unset_userdata('lampiran');
+		} else {
+			$this->db->update('tbl_materi_tugas', ['lampiran' => null], ['id' => $this->input->post('id')]);
+		}
+	}
+
 	public function tambah_tugas($id)
 	{
 		$this->db->select('*')->from('tbl_pelajaran a')
@@ -154,13 +163,25 @@ class Tugas extends CI_Controller
 		if ($akses == 3) {
 			$kd_mapel = $this->input->post('kd_mapel');
 
-			$data = array(
-				'id_forum' => $kd_mapel,
-				'judul_materi' => $this->input->post('judul_materi'),
-				'jns_materi' => $this->input->post('tipe_forum'),
-				'isi_materi' => $this->input->post('isi_materi'),
-				'lampiran' => serialize($this->session->userdata('lampiran'))
-			);
+			if ($this->session->userdata('lampiran') != null) {
+				$data = array(
+					'id_forum' => $kd_mapel,
+					'judul_materi' => $this->input->post('judul_materi'),
+					'jns_materi' => $this->input->post('tipe_forum'),
+					'isi_materi' => $this->input->post('isi_materi'),
+					'endDate' => $this->input->post('tgl_end'),
+					'lampiran' => serialize($this->session->userdata('lampiran'))
+				);
+			} else {
+				$data = array(
+					'id_forum' => $kd_mapel,
+					'judul_materi' => $this->input->post('judul_materi'),
+					'jns_materi' => $this->input->post('tipe_forum'),
+					'isi_materi' => $this->input->post('isi_materi'),
+					'endDate' => $this->input->post('tgl_end'),
+					'lampiran' => null
+				);
+			}
 
 			$cek = $this->db->get_where('tbl_materi_tugas', ['id_forum' => $kd_mapel]);
 			if ($cek->num_rows() > 0) {
@@ -194,13 +215,16 @@ class Tugas extends CI_Controller
 					'judul_materi' => $this->input->post('judul_materi'),
 					'jns_materi' => $this->input->post('tipe_forum'),
 					'isi_materi' => $this->input->post('isi_materi'),
+					'endDate' => $this->input->post('tgl_end'),
 					'lampiran' => serialize($this->session->userdata('lampiran'))
 				);
 			} else {
 				$data = array(
 					'judul_materi' => $this->input->post('judul_materi'),
 					'jns_materi' => $this->input->post('tipe_forum'),
-					'isi_materi' => $this->input->post('isi_materi')
+					'isi_materi' => $this->input->post('isi_materi'),
+					'endDate' => $this->input->post('tgl_end'),
+					'lampiran' => null
 				);
 			}
 
@@ -268,7 +292,7 @@ class Tugas extends CI_Controller
 			->from('tbl_komen_tugas a')
 			->join('tbl_siswa b', 'a.user_komen = b.siswa_nis', 'inner')
 			->join('tbl_kelas c', 'b.siswa_kelas_id = c.kelas_id', 'left')
-			->join('tbl_materi_forum d', 'a.id_forum = d.id_forum and a.pertemuan = d.pertemuan', 'inner')
+			->join('tbl_materi_tugas d', 'a.id_forum = d.id_forum and a.pertemuan = d.pertemuan', 'inner')
 			->join('tbl_pelajaran e', 'e.id_pelajaran = a.id_forum', 'inner')
 			->join('tbl_mapel f', 'e.kd_mapel = f.kd_mapel', 'inner')
 			->where(['a.id' => $key])->get()->row_array();

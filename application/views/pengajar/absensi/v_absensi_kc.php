@@ -27,18 +27,18 @@
 
             <!-- Next Agenda -->
             <div class="row">
-                <div class="offset-1 col-sm-10">
+                <div class="offset-1 col-sm-10 media-nav">
                     <div class="card card-primary card-outline">
                         <div class="card-header">
-                            <h5 class="card-title m-0">Absensi Kelas Komunitas <?= $nm_mapel ?></h5>
-                            <a href="#"><button type="button" class="btn btn-success" style="float: right;" data-toggle="modal" data-target="#modal_kelaskomunitas"><i class="fas fa-calendar-plus"></i> Tambah Tanggal</button></a>
+                            <h5 class="card-title m-0 media-width-absensi">Absensi Kelas Komunitas <?= $nm_mapel ?></h5>
+                            <button type="button" class="btn btn-success" style="float: right;" data-toggle="modal" data-target="#modal_kelaskomunitas"><i class="fas fa-calendar-plus"></i> Tambah Tanggal</button>
                         </div>
                         <div class="card-body ">
                             <div class="box">
-                                <div class="row">
                                     <div class="box-body">
                                         <div class="col-xs-12" style="width: 100%;">
                                             <div class="box-body">
+                                                <div class="table-responsive"> 
                                                 <table id="table" class="table table-striped table-hover" cellspacing="0" width="100%">
                                                     <thead>
                                                         <tr>
@@ -161,7 +161,10 @@
     <?php $this->load->view('pengajar/layout/v_js'); ?>
     <script>
         $(document).ready(function() {
-            $('#table').DataTable();
+            $('#table').DataTable({
+    "scrollX": true,
+    pagingType: $(window).width() < 450 ? "simple" : "simple_numbers"
+  });
         });
     </script>
 

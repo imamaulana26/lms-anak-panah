@@ -14,7 +14,7 @@
 
 			<!-- Tagihan -->
 			<div class="row">
-				<div class="offset-1 col-sm-10">
+				<div class="offset-1 col-sm-10 media-nav">
 					<!-- Index Prestasi -->
 					<!-- <div class="card card-primary card-outline">
 						<div class="card-header">
@@ -51,7 +51,7 @@
 
 					<form id="form">
 						<div class="row">
-							<div class="col-4">
+							<div class="col-4 media-score-dropdown">
 								<select name="kelas" id="kelas" class="form-control">
 									<option selected disabled>-- Please Select --</option>
 									<?php for ($i = 0; $i < count($kelas); $i++) : ?>
@@ -59,7 +59,7 @@
 									<?php endfor; ?>
 								</select>
 							</div>
-							<div class="col-6">
+							<div class="col-6 media-score-dropdown">
 								<select name="mapel" id="mapel" class="form-control">
 									<option selected disabled>-- Please Select --</option>
 									<?php for ($i = 0; $i < count($mapel); $i++) : ?>
@@ -103,14 +103,16 @@
 				// console.log(res.data);
 
 				if (jQuery.isEmptyObject(res) === true) {
-					html += `<div class='offset-1 col-10'>
-									<div class="alert alert-info text-center" role="alert">
+					html += `<div class='offset-1 col-10 media-nav'>
+					<div class='media-score-position'>
+									<div class="alert alert-info text-center " role="alert">
 										Belum ada nilai untuk mata pelajaran ` + $('#mapel option:selected').text() + `
+									</div>
 									</div>
 								</div>`;
 				} else {
 					for (let i = 0; i < res.length; i++) {
-						html += `<div class="col-4">
+						html += `<div class="col-4 media-score-dropdown">
 						<div class="card card-primary bg-light mb-3">
 							<div class="card-header">` + res[i].data.siswa + `</div>
 							<div class="card-body">

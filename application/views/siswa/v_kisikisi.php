@@ -27,7 +27,7 @@
 
       <!-- Tagihan -->
       <div class="row">
-        <div class="offset-1 col-sm-10">
+        <div class="offset-1 col-sm-10 media-nav">
           <!-- Index Prestasi -->
           <div class="card card-primary card-outline">
             <div class="card-header">
@@ -69,14 +69,14 @@
 </div><!-- /.container-fluid -->
 </div>
 <!-- /.content -->
-
-<?php $this->load->view('siswa/v_schedule'); ?>
-</div>
 <!-- /.content-wrapper -->
 
 <?php $this->load->view('siswa/layout/v_js'); ?>
 
 <!-- script here -->
 <script>
- $("#example1").DataTable();
+ $("#example1").DataTable({
+    "scrollX": true,
+    pagingType: $(window).width() < 574 ? "simple" : "simple_numbers"
+  });
 </script>

@@ -15,7 +15,9 @@
 <!-- Moment JS -->
 <script src="<?= base_url('assets/front-end/plugins/moment/moment.min.js') ?>"></script>
 <!-- ChartJs -->
-<script src="<?= base_url('assets/front-end/plugins/chart.js/chart.min.js') ?>"></script>
+<!--<script src="<?= base_url('assets/front-end/plugins/chart.js/chart.min.js') ?>"></script>-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
 <!-- Sweetalert2 -->
 <script src="<?= base_url('assets/front-end/plugins/sweetalert2/sweetalert2.min.js') ?>"></script>
 <!-- CK editor JS -->

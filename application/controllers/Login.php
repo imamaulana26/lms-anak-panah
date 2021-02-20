@@ -118,9 +118,9 @@ class Login extends CI_Controller
 		$data['list'] = $this->db->get()->result_array();
 
 		$data['nama_pengajar'] = $this->db->get_where('tbl_pengajar',['id_pengajar'=> $id ])->row_array();
-		
 		$this->load->view('admin/v_list_superadmin',$data);
 	}
+	
 	function hapus_hak(){
 		$this->db->update('tbl_pelajaran', ['kd_pengajar' =>NULL],['id_pelajaran'=>$this->input->post('xid')]);
 		echo "<script type='text/javascript'>alert('Hak Pengajar Telah Dihapus');window.location.replace('./superadmin');</script>";
@@ -131,8 +131,14 @@ class Login extends CI_Controller
 			'id_kelas' => strip_tags($this->input->post('xkelas')),
 			'kd_mapel' => strip_tags($this->input->post('xmapel')),
 		);
-		$this->db->update('tbl_pelajaran', ['kd_pengajar' => $this->input->post('xid')],$data);
-		echo "<script type='text/javascript'>alert('Hak Pengajar Telah Diberikan');window.location.replace('./superadmin');</script>";
+		$check = $this->db->get_where('tbl_pelajaran', $data)->num_rows();
+		if ($check > 0) {
+			$this->db->update('tbl_pelajaran', ['kd_pengajar' => $this->input->post('xid')], $data);
+			echo "<script type='text/javascript'>alert('Hak Pengajar Telah Diberikan');window.location.replace('./superadmin');</script>";
+		}else{
+			echo "<script type='text/javascript'>alert('Tidak Ada Mata Pelajaran Di Kelas Tersebut');window.location.replace('./superadmin');</script>";
+		}
+		
 	}
 
 

@@ -70,6 +70,15 @@ if ($c['pengguna_level'] == 2) {
 								</span>
 							</a>
 						</li>
+						
+						<li>
+              <a href="<?php echo base_url() . 'jadwal' ?>">
+                <i class="fa fa-calendar"></i> <span>Kalendar</span>
+                <span class="pull-right-container">
+                  <small class="p pull-right"></small>
+                </span>
+              </a>
+            </li>
 
 						<li>
 							<a href="<?php echo base_url() . 'datalembaga' ?>">

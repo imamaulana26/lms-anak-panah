@@ -67,6 +67,15 @@ $arr = array(1 => 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli'
               </span>
             </a>
           </li>
+          
+          <li>
+              <a href="<?php echo base_url() . 'jadwal' ?>">
+                <i class="fa fa-calendar"></i> <span>Kalendar</span>
+                <span class="pull-right-container">
+                  <small class="p pull-right"></small>
+                </span>
+              </a>
+            </li>
 
 
           <li class="treeview">

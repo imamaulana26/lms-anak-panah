@@ -27,17 +27,17 @@
 
             <!-- Next Agenda -->
             <div class="row">
-                <div class="offset-1 col-sm-10">
+                <div class="offset-1 col-sm-10 media-nav">
                     <div class="card card-primary card-outline">
                         <div class="card-header">
                             <h5 class="card-title m-0">Data Siswa Kelas Online</h5>
                         </div>
                         <div class="card-body ">
                             <div class="box">
-                                <div class="row">
                                     <div class="box-body">
                                         <div class="col-xs-12" style="width: 100%;">
                                             <div class="box-body">
+                                                <div class="table-responsive">
                                                 <table id="table" class="table table-striped table-hover" cellspacing="0" width="100%">
                                                     <thead>
                                                         <tr>
@@ -115,9 +115,9 @@
                                                     </tbody>
                                                 </table>
                                             </div>
+                                            </div>
                                         </div>
                                         <!-- /.box -->
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -134,6 +134,9 @@
     <?php $this->load->view('pengajar/layout/v_js'); ?>
     <script>
         $(document).ready(function() {
-            $('#table').DataTable();
+            $('#table').DataTable({
+    "scrollX": true,
+    pagingType: $(window).width() < 450 ? "simple" : "simple_numbers"
+  });
         });
     </script>

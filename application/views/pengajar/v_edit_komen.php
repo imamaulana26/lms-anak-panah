@@ -288,11 +288,11 @@
 			$(this).next('.custom-file-label').html('Choose file');
 			$(this).val('');
 		} else {
-			if (size > 2048) {
+			if (size > 1500) {
 				Swal.fire({
 					title: 'Oops!',
 					icon: 'warning',
-					text: 'Ukuran file melebihin batas 2MB!'
+					text: 'Ukuran file melebihin batas 1,5MB!'
 				});
 				$(this).next('.custom-file-label').html('Choose file');
 				$(this).val('');
@@ -353,6 +353,7 @@
 					title: respon.title,
 					text: respon.msg,
 					timer: 2000,
+					allowOutsideClick: false,
 					timerProgressBar: true,
 					showConfirmButton: false
 				}).then((result) => {
@@ -398,6 +399,7 @@
 						title: 'Sukses',
 						text: msg,
 						timer: 2000,
+						allowOutsideClick: false,
 						timerProgressBar: true,
 						// onBeforeOpen: () => {
 						// 	Swal.showLoading()

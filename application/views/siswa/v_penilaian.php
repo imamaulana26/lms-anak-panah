@@ -58,7 +58,9 @@
 										</div>
 									<?php endforeach; ?>
 								<?php else : ?>
-									<p class="text-center">Data nilai belum tersedia.</p>
+									<div class="col-md-12">
+										<p class="text-center">Data nilai belum tersedia.</p>
+									</div>
 								<?php endif; ?>
 							</div>
 						</div>

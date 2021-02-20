@@ -23,7 +23,8 @@ class M_course extends CI_Model
 				->join('tbl_pengajar c', 'a.kd_pengajar = c.id_pengajar', 'right')
 				->join('tbl_kelas d', 'a.id_kelas = d.kelas_id', 'inner')
 				->where(['c.id_pengajar' => $dt_user['id_pengajar']])
-				->order_by('id_kelas', 'ASC')
+				->order_by('a.kd_mapel ', 'ASC')
+				->order_by('a.id_kelas ', 'ASC')
 				->get();
 
 			// var_dump($data->result_array());

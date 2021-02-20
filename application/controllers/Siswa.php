@@ -6,6 +6,7 @@ class Siswa extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
+		error_reporting(0);
 		if ($this->session->userdata('masuk') != TRUE) {
 			$url = base_url('login');
 			redirect($url);
@@ -165,10 +166,10 @@ class Siswa extends CI_Controller
 	{
 		$list = $this->m_siswa->get_datatables();
 		$data = array();
-		$no = 1;
+// 		$no = 1;
 		foreach ($list as $li) {
 			$row = array();
-			$row[] = $no++;
+			$row[] = '<img src="' . base_url('assets/filesiswa/') . $li['siswa_nis'] . "/" . $li['siswa_photo'] . '" width="90px" height="auto">';
 			$row[] = $li['siswa_nis'];
 			$row[] = $li['siswa_nama'];
 			$row[] = $li['kelas_nama'];
@@ -269,6 +270,7 @@ class Siswa extends CI_Controller
 			'nama' => $dt['siswa_nama'],
 			'anak' => $dt['anak_ke'],
 			'nis' => $dt['siswa_nis'],
+			'niksiswa' => $dt['nik_siswa'],
 			'nisn' => $dt['siswa_nisn'],
 			'sekolah' => $dt['sekolah_asal'],
 			'no_telp' => $dt['siswa_no_telp'],
@@ -364,7 +366,7 @@ class Siswa extends CI_Controller
 				'ayah_nama' => strip_tags($this->input->post('xnamaayah')),
 				'ayah_nik' => strip_tags($this->input->post('xnikayah')),
 				'ayah_tempat' => strip_tags($this->input->post('xtmpayah')),
-				'ayah_tanggal' => $this->input->post('tgl_lahirayah'),
+				'ayah_tanggal' => ($this->input->post('tgl_lahirayah') === '') ? Null : $this->input->post('tgl_lahirayah'),
 				'ayah_pendidikan' => strip_tags($this->input->post('xptayah')),
 				'ayah_pekerjaan' => strip_tags($this->input->post('xkayah')),
 				'ayah_penghasilan' => strip_tags($this->input->post('xpnayah')),
@@ -373,7 +375,7 @@ class Siswa extends CI_Controller
 				'ibu_nama' => strip_tags($this->input->post('xnamaibu')),
 				'ibu_nik' => strip_tags($this->input->post('xnikibu')),
 				'ibu_tempat' => strip_tags($this->input->post('xtmpibu')),
-				'ibu_tanggal' => $this->input->post('tgl_lahiribu'),
+				'ibu_tanggal' => ($this->input->post('tgl_lahiribu') === '') ? Null : $this->input->post('tgl_lahiribu'),
 				'ibu_pendidikan' => strip_tags($this->input->post('xptibu')),
 				'ibu_pekerjaan' => strip_tags($this->input->post('xkibu')),
 				'ibu_penghasilan' => strip_tags($this->input->post('xpnibu')),
@@ -382,7 +384,7 @@ class Siswa extends CI_Controller
 				'wali_nama' => strip_tags($this->input->post('xnamawali')),
 				'wali_nik' => strip_tags($this->input->post('xnikwali')),
 				'wali_tempat' => strip_tags($this->input->post('xtmpwali')),
-				'wali_tanggal' => ($this->input->post('tgl_lahirwali') === '') ? null : $this->input->post('tgl_lahirwali'),
+				'wali_tanggal' =>($this->input->post('tgl_lahirwali') === '') ? Null : $this->input->post('tgl_lahirwali'),
 				'wali_pendidikan' => strip_tags($this->input->post('xptwali')),
 				'wali_pekerjaan' => strip_tags($this->input->post('xkwali')),
 				'wali_penghasilan' => strip_tags($this->input->post('xpnwali')),
@@ -450,7 +452,7 @@ class Siswa extends CI_Controller
 
 		$dt_siswa = array(
 			// 'siswa_nis' => $nis,
-			// 'siswa_nisn' => strip_tags($this->input->post('xnisn')),
+			'siswa_nisn' => strip_tags($this->input->post('xnisn')),
 			'siswa_nama' => strip_tags($this->input->post('xnama')),
 			'siswa_jenkel' => strip_tags($this->input->post('xjenkel')),
 			'siswa_tempat' => strip_tags($this->input->post('xtmpatlahirsiswa')),
@@ -471,7 +473,7 @@ class Siswa extends CI_Controller
 			'ayah_nama' => strip_tags($this->input->post('xnamaayah')),
 			'ayah_nik' => strip_tags($this->input->post('xnikayah')),
 			'ayah_tempat' => strip_tags($this->input->post('xtmpayah')),
-			'ayah_tanggal' => $this->input->post('tgl_lahirayah'),
+			'ayah_tanggal' => ($this->input->post('tgl_lahirayah') === '') ? Null : $this->input->post('tgl_lahirayah'),
 			'ayah_pendidikan' => strip_tags($this->input->post('xptayah')),
 			'ayah_pekerjaan' => strip_tags($this->input->post('xkayah')),
 			'ayah_penghasilan' => strip_tags($this->input->post('xpnayah')),
@@ -480,7 +482,7 @@ class Siswa extends CI_Controller
 			'ibu_nama' => strip_tags($this->input->post('xnamaibu')),
 			'ibu_nik' => strip_tags($this->input->post('xnikibu')),
 			'ibu_tempat' => strip_tags($this->input->post('xtmpibu')),
-			'ibu_tanggal' => $this->input->post('tgl_lahiribu'),
+			'ibu_tanggal' => ($this->input->post('tgl_lahiribu') === '') ? Null : $this->input->post('tgl_lahiribu'),
 			'ibu_pendidikan' => strip_tags($this->input->post('xptibu')),
 			'ibu_pekerjaan' => strip_tags($this->input->post('xkibu')),
 			'ibu_penghasilan' => strip_tags($this->input->post('xpnibu')),
@@ -489,7 +491,7 @@ class Siswa extends CI_Controller
 			'wali_nama' => strip_tags($this->input->post('xnamawali')),
 			'wali_nik' => strip_tags($this->input->post('xnikwali')),
 			'wali_tempat' => strip_tags($this->input->post('xtmpwali')),
-			'wali_tanggal' => ($this->input->post('tgl_lahirwali')=== '') ? null : $this->input->post('tgl_lahirwali'),
+			'wali_tanggal' => ($this->input->post('tgl_lahirwali') === '') ? Null : $this->input->post('tgl_lahirwali'),
 			'wali_pendidikan' => strip_tags($this->input->post('xptwali')),
 			'wali_pekerjaan' => strip_tags($this->input->post('xkwali')),
 			'wali_penghasilan' => strip_tags($this->input->post('xpnwali')),

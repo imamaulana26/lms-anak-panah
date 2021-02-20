@@ -138,6 +138,19 @@
 								<div class="form-group row">
 									<div class="offset-2 col-md-10" id="gallery"></div>
 								</div>
+
+								<div class="form-group row">
+									<label for="tgl_akhir" class="col-sm-2 col-form-label">Tanggal Berakhir</label>
+									<div class="col-sm-10">
+										<div class="input-group date">
+											<div class="input-group-addon">
+												<span class="input-group-text" style="height: 100%; border-radius: 0.25rem 0 0 0.25rem;"><i class="fa fa-fw fa-calendar"></i></span>
+											</div>
+											<input type="text" class="form-control" name="tgl_end" id="tgl_end" placeholder="yyyy-mm-dd" required>
+										</div>
+									</div>
+								</div>
+
 								<fieldset class="form-group">
 									<div class="row">
 										<label class="col-form-label col-sm-2 pt-0">Tipe Forum</label>
@@ -160,6 +173,7 @@
 								<div class="form-group row">
 									<div class="col-sm-10 offset-2">
 										<span class="btn btn-primary" id="btn_save" onclick="save_forum()">Simpan</span>
+										<span class="btn btn-danger" id="btn_hapus" style="display: none;" onclick="hapus_lampiran()">Hapus Lampiran</span>
 									</div>
 								</div>
 							</form>
@@ -312,16 +326,17 @@
 			cache: false,
 			contentType: false,
 			processData: false,
-			beforeSend: function() {
-				$('#btn_upload').attr('disabled', true);
-				$('#btn_upload').html('<i class="fa fa-fw fa-spinner fa-pulse"></i> Loading');
-			},
+			// beforeSend: function() {
+			// 	$('#btn_upload').attr('disabled', true);
+			// 	$('#btn_upload').html('<i class="fa fa-fw fa-spinner fa-pulse"></i> Loading');
+			// },
 			success: function(respon) {
 				Swal.fire({
 					icon: respon.icon,
 					title: respon.title,
 					text: respon.msg,
 					timer: 2000,
+					allowOutsideClick: false,
 					timerProgressBar: true,
 					showConfirmButton: false
 				}).then((result) => {
@@ -339,10 +354,34 @@
 										</a>`;
 				}
 				$('#gallery').html(content);
+				if (content != '') {
+					$('#btn_hapus').css('display', 'inline-block');
+				}
 			}
 		});
 		return false;
 	});
+
+	function hapus_lampiran() {
+		Swal.fire({
+			icon: 'success',
+			title: 'Sukses',
+			text: 'Lampiran berhasil dihapus',
+			timer: 2000,
+			allowOutsideClick: false,
+			timerProgressBar: true,
+			showConfirmButton: false
+		}).then((result) => {
+			$.ajax({
+				url: '<?= site_url('tugas/hapus_lampiran') ?>',
+				type: 'post',
+				success: function(data) {
+					$('#gallery').html('');
+					$('#btn_hapus').css('display', 'none');
+				}
+			});
+		});
+	}
 
 	function save_forum() {
 		var data = {
@@ -350,6 +389,7 @@
 			'kd_mapel': $('#kd_mapel').val(),
 			'judul_materi': $('#judul_materi').val(),
 			'isi_materi': editor.getData(),
+			'tgl_end': $('#tgl_end').val(),
 			'tipe_forum': $('input[name="tipe_forum"]:checked').val()
 		}
 
@@ -360,10 +400,10 @@
 			type: "POST",
 			dataType: "JSON",
 			data: data,
-			beforeSend: function() {
-				$('#btn_save').attr('disabled', true);
-				$('#btn_save').html('<i class="fa fa-fw fa-spinner fa-pulse"></i> Loading');
-			},
+			// beforeSend: function() {
+			// 	$('#btn_save').attr('disabled', true);
+			// 	$('#btn_save').html('<i class="fa fa-fw fa-spinner fa-pulse"></i> Loading');
+			// },
 			success: function(res) {
 				if (res.status) {
 					$('#exampleModal').modal('hide');
@@ -372,6 +412,7 @@
 						title: 'Sukses',
 						text: msg,
 						timer: 2000,
+						allowOutsideClick: false,
 						timerProgressBar: true,
 						// onBeforeOpen: () => {
 						// 	Swal.showLoading()

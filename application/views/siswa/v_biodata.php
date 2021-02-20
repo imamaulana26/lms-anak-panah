@@ -12,18 +12,18 @@
 		<div class="container">
 			<!-- Tagihan -->
 			<div class="row">
-				<div class="offset-1 col-sm-10">
+				<div class="offset-1 col-sm-10 media-nav">
 					<div class="card">
 						<div class="card-header">
 							<ul class="nav nav-pills" id="pills-tab" role="tablist">
 								<li class="nav-item" role="presentation">
-									<a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+									<a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Siswa</a>
 								</li>
 								<li class="nav-item" role="presentation">
-									<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Contact Person</a>
+									<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Orang Tua/Wali</a>
 								</li>
 								<li class="nav-item" role="presentation">
-									<a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#pills-setting" role="tab" aria-controls="pills-setting" aria-selected="false">Setting</a>
+									<a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#pills-setting" role="tab" aria-controls="pills-setting" aria-selected="false">Ganti Password</a>
 								</li>
 							</ul>
 						</div>

@@ -1,4 +1,8 @@
 <style>
+iframe {
+		width: -moz-available;
+		width: -webkit-fill-available;
+	}
 	/*  Bhoechie tab */
 	div.bhoechie-tab-container {
 		background-color: #ffffff;
@@ -84,6 +88,16 @@
 	.bordered {
 		border-left: 3px solid #007bff;
 	}
+	
+	@media screen and (max-width: 574px) {
+		div.bhoechie-tab-menu div.list-group>a.active:after {
+			display: none;
+		}
+
+		div.bhoechie-tab-content {
+			padding-left: 0px;
+		}
+	}
 
 	#cke_editorfr1 {
 		width: 100%;
@@ -104,7 +118,7 @@
 	<div class="content">
 		<div class="container">
 			<div class="row">
-				<div class="offset-1 col-sm-10">
+				<div class="offset-1 col-sm-10 media-nav">
 					<a href="<?= site_url('tugas/tambah_tugas/' . $this->uri->segment(2)) ?>" class="btn btn-primary float-right">Buat Tugas Baru</a>
 					<h2 class="pb-3">Tugas <?= $forum['nm_mapel'] ?></h2>
 
@@ -117,7 +131,7 @@
 											<h5>
 												Tugas Ke-<?= $val['pertemuan'] ?>
 											</h5>
-											<small><?= date('d M Y', strtotime($val['createDate'])) ?></small>
+											<small><?= date('d M Y', strtotime($val['createDate'])) ?> - <?= date('d M Y', strtotime($val['endDate'])) ?></small>
 											<p><?= word_limiter($val['judul_materi'], 2) ?></p>
 										</a>
 									<?php endforeach; ?>
@@ -152,14 +166,18 @@
 													</a>
 												<?php endif; ?>
 											<?php endif; ?>
-											<hr>
+											<hr class="media-line">
 											<div>
-												<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $val['id_forum'] . '-' . $val['pertemuan'] ?>">
-													<i class="fa fa-fw fa-reply"></i> Balas
-												</a>
+												<?php if ($val['status'] == 0) : ?>
+														<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $val['id_forum'] . '-' . $val['pertemuan'] ?>">
+															<i class="fa fa-fw fa-reply"></i> Balas
+														</a>
+													<?php endif; ?>
 												<span id="komen" data-toggle="collapse" data-target="#collapseExample-<?= $val['id'] ?>" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;">
-													<?php // $li_komen = $this->db->get_where('tbl_komen_tugas', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan']])->num_rows(); ?>
-													<!-- Lihat Komentar (<?= $li_komen ?>) -->
+													<?php 
+													$li_komen1 = $this->db->get_where('tbl_komen_tugas', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan']])->num_rows(); 
+													?>
+													 Lihat Komentar (<?= $li_komen1 ?>) 
 												</span>
 												<div class="collapse pt-3" id="show_komen-<?= $val['id_forum'] . '-' . $val['pertemuan'] ?>">
 													<div class="card card-body">
@@ -201,7 +219,7 @@
 															$rep_user = empty($siswa) ? $admin['pengguna_nama'] . ' (pengajar)' : $siswa['siswa_nama']; ?>
 															<div class="card-header bordered mt-3 d-flex">
 																<div class="col-md-1">
-																	<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
+																	<img class="media-img-width" src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" style="width: 100%;" />
 																</div>
 																<div class="col-md">
 																	<strong class="float-left"><?= $rep_user . $score ?></strong>
@@ -304,7 +322,7 @@
 																	<div class="col-lg ml-3">
 																		<div class="card-header bordered mt-3 d-flex">
 																			<div class="col-md-1">
-																				<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" />
+																				<img class="media-img-width" src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" style="width: 100%;" />
 																			</div>
 																			<div class="col-md">
 																				<strong class="float-left"><?= $rep_user . $score ?></strong>
@@ -430,7 +448,7 @@
 						<div class="col-2">
 							<label class="control-label">Input Nilai</label>
 						</div>
-						<div class="col-1">
+						<div class="col-1 media-score-nilai">
 							<input type="text" name="nilai_siswa" id="nilai_siswa" class="form-control form-control-sm" required onkeypress="return CheckNumeric()">
 						</div>
 						<div class="col">
@@ -461,7 +479,7 @@
 	});
 
 	$(document).ready(function() {
-		$('span#komen').text('Lihat Komentar (' + <?= $li_komen ?> + ')');
+// 		$('span#komen').text('Lihat Komentar (' + <?= $li_komen ?> + ')');
 
 		// forum
 		$.ajax({
@@ -541,6 +559,7 @@
 					icon: 'success',
 					text: res.msg,
 					timer: 2000,
+					allowOutsideClick: false,
 					showConfirmButton: false
 				}).then((res) => {
 					if (res.dismiss === Swal.DismissReason.timer) {
@@ -599,6 +618,7 @@
 							title: 'Sukses',
 							text: 'Tugas berhasil dihapus',
 							timer: 2000,
+							allowOutsideClick: false,
 							timerProgressBar: true,
 							// onBeforeOpen: () => {
 							// 	Swal.showLoading()
@@ -637,6 +657,7 @@
 							title: 'Sukses',
 							text: res.msg,
 							timer: 2000,
+							allowOutsideClick: false,
 							timerProgressBar: true,
 							// onBeforeOpen: () => {
 							// 	Swal.showLoading()
@@ -675,6 +696,7 @@
 							title: 'Sukses',
 							text: res.msg,
 							timer: 2000,
+							allowOutsideClick: false,
 							timerProgressBar: true,
 							// onBeforeOpen: () => {
 							// 	Swal.showLoading()

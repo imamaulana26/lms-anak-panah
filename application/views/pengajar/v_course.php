@@ -10,7 +10,7 @@
 	<!-- Main content -->
 	<div class="content">
 		<div class="container">
-			<div class="offset-1 col-sm-10">
+			<div class="offset-1 col-sm-10 media-nav">
 				<div class="row">
 					<?php foreach ($course->result_array() as $val) :
 						$n_forum = $this->db->get_where('tbl_materi_forum', ['id_forum' => $val['id_pelajaran']])->num_rows();
@@ -100,7 +100,8 @@
 						icon: 'success',
 						title: 'Data Berhasil Di Update',
 						showConfirmButton: false,
-						timer: 1500
+						timer: 1500,
+						allowOutsideClick: false
 					}).then(function() {
 						location.reload();
 					});

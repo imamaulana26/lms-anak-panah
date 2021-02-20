@@ -69,6 +69,15 @@ if ($c['pengguna_level'] == 2) {
                 </span>
               </a>
             </li>
+            
+            <li>
+              <a href="<?php echo base_url() . 'jadwal' ?>">
+                <i class="fa fa-calendar"></i> <span>Kalendar</span>
+                <span class="pull-right-container">
+                  <small class="p pull-right"></small>
+                </span>
+              </a>
+            </li>
 
             <li>
               <a href="<?php echo base_url() . 'datalembaga' ?>">
@@ -415,7 +424,7 @@ if ($c['pengguna_level'] == 2) {
                         <label class="col-sm-4 control-label">Tanggal Lahir</label>
                         <div class="col-md-4">
                           <div class="input-group date">
-                            <input type="text" class="form-control" name="tgl_lahirayah" id="xtgl_lahir" placeholder="yyyy-mm-dd" required>
+                            <input type="text" class="form-control" name="tgl_lahirayah" id="xtgl_lahir" placeholder="yyyy-mm-dd">
                             <div class="input-group-addon">
                               <span class="fa fa-fw fa-calendar"></span>
                             </div>
@@ -496,7 +505,7 @@ if ($c['pengguna_level'] == 2) {
                         <label class="col-sm-4 control-label">Tanggal Lahir</label>
                         <div class="col-md-4">
                           <div class="input-group date">
-                            <input type="text" class="form-control" name="tgl_lahiribu" id="xtgl_lahir" placeholder="yyyy-mm-dd" required>
+                            <input type="text" class="form-control" name="tgl_lahiribu" id="xtgl_lahir" placeholder="yyyy-mm-dd">
                             <div class="input-group-addon">
                               <span class="fa fa-fw fa-calendar"></span>
                             </div>
@@ -571,7 +580,7 @@ if ($c['pengguna_level'] == 2) {
                       <div class="form-group">
                         <label for="inputUserName" class="col-sm-4 control-label">Tempat Lahir</label>
                         <div class="col-sm-7">
-                          <input type="text" name="xtmpwali" class="form-control" id="inputUserName" placeholder="Tempat/Tanggal/Bulan/Tahun">
+                          <input type="text" name="xtmpwali" class="form-control" id="inputUserName" placeholder="Tempa Lahir Wali">
                         </div>
                       </div>
 

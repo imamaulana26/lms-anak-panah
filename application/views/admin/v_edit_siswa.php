@@ -249,6 +249,14 @@ if ($c['pengguna_level']==2) {
                           <input type="text" name="xanke" class="form-control" id="inputUserName" placeholder="Anak Ke - "  onkeypress="return checknumber()" maxlength="1" value="<?= $anak ?>" >
                         </div>
                       </div>
+                      
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label">NIK Siswa</label>
+                        <div class="col-sm-7">
+                          <input type="text" name="xniksiswa" class="form-control" id="inputUserName" placeholder="NIK SISWA" onkeypress="return checknumber()" value="<?= $niksiswa ?>">
+                        </div>
+                      </div>
+
 
                       <div class="form-group">
                         <label class="col-sm-4 control-label">NIS</label>
@@ -260,7 +268,7 @@ if ($c['pengguna_level']==2) {
                       <div class="form-group">
                         <label  class="col-sm-4 control-label">NISN</label>
                         <div class="col-sm-7">
-                          <input type="text" name="xnisn" class="form-control" id="inputUserName" placeholder="NISN" onkeypress="return checknumber()" value="<?= $nisn ?>" readonly>
+                          <input type="text" name="xnisn" class="form-control" id="inputUserName" placeholder="NISN" onkeypress="return checknumber()" value="<?= $nisn ?>">
                         </div>
                       </div>
 

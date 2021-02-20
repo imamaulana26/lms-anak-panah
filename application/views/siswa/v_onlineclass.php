@@ -12,7 +12,7 @@
     <div class="container">
       <!-- Kelas Online -->
       <div class="row">
-        <div class="offset-1 col-sm-10">
+        <div class="offset-1 col-sm-10 media-nav">
           <div class="card card-primary card-outline">
             <div class="card-body">
               <div class="row">
@@ -22,7 +22,8 @@
                     <div class="card" style="height: 13em">
                       <?php if ($online['aktifkan'] == 1) {
                         ?>
-                        <a href="<?= $online['link_oc']  ?>">
+                        <!--<base href="<?= $online['link_oc']  ?>" />-->
+                        <a href="<?php echo prep_url($online["link_oc"]); ?>" target="_blank">
                           <div class="card-header bg-primary">
                             <i class="fas fa-fw fa-video mr-1 blink_me" style="color: #f72121"></i> Sedang Berlangsung
                           </div>

@@ -65,6 +65,7 @@ class Jadwal extends CI_Controller
             $this->load->view('siswa/layout/v_header');
             $this->load->view('siswa/layout/v_navbar');
             $this->load->view('siswa/v_jadwal', $result);
+            $this->load->view('siswa/layout/v_footer');
         }
     }
 

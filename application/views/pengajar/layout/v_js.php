@@ -54,7 +54,7 @@
 <script>
 	$('.input-group.date').datepicker({
 		format: 'yyyy-mm-dd',
-		endDate: '0d',
+// 		endDate: '0d',
 		autoclose: true,
 		todayHighlight: true
 

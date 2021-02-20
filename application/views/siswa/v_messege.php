@@ -14,7 +14,7 @@
             <?php $notif = $this->db->get('tbl_pengumuman')->row_array();
             if ($notif['aktifkan'] > 0) { ?>
                 <div class="row">
-                    <div class="offset-1 col-sm-10">
+                    <div class="offset-1 col-sm-10 media-nav">
                         <div class="alert alert-info" role="alert">
                             <h4 class="alert-heading">Announcement!</h4>
                             <p><?= $notif['pengumuman_deskripsi'] ?></p>
@@ -27,7 +27,7 @@
 
             <!-- Tagihan -->
             <div class="row">
-                <div class="offset-1 col-sm-10">
+                <div class="offset-1 col-sm-10 media-nav">
                     <!-- Index Prestasi -->
                     <div class="card card-primary card-outline">
                         <div class="card-header">

@@ -7,7 +7,7 @@ class Detail_absensi extends CI_Controller
         parent::__construct();
         $this->load->model('M_forum', 'm_forum');
         $this->load->helper('text');
-
+        error_reporting(0);
         if ($this->session->userdata('masuk') != TRUE) {
             $url = base_url('login');
             redirect($url);
@@ -25,6 +25,9 @@ class Detail_absensi extends CI_Controller
             $this->db->insert('tbl_abs_model', ['siswa_nis' => $nis]);
             echo "<script>location.reload();</script>";
         }
+        
+        redirect(site_url('detail_absensi/absensi_tugas/' . $nis));
+        die;
         $dataunser = unserialize($dataserialize['fr_abs']);
         $data['dtforumsiswa'] = $dataunser;
         // $dataforum = $this->db->get_where('tbl_materi_forum')->result_array();

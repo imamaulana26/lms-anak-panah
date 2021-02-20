@@ -180,6 +180,15 @@ class Forum extends CI_Controller
 		}
 	}
 
+	public function hapus_lampiran()
+	{
+		if ($this->session->userdata('lampiran') != '') {
+			$this->session->unset_userdata('lampiran');
+		} else {
+			$this->db->update('tbl_materi_forum', ['lampiran' => null], ['id' => $this->input->post('id')]);
+		}
+	}
+
 	public function save_forum()
 	{
 		$this->validasi_forum();
@@ -189,13 +198,25 @@ class Forum extends CI_Controller
 		if ($akses == 3) {
 			$kd_mapel = $this->input->post('kd_mapel');
 
-			$data = array(
-				'id_forum' => $kd_mapel,
-				'judul_materi' => $this->input->post('judul_materi'),
-				'jns_materi' => $this->input->post('tipe_forum'),
-				'isi_materi' => $this->input->post('isi_materi'),
-				'lampiran' => serialize($this->session->userdata('lampiran'))
-			);
+			if ($this->session->userdata('lampiran') != null) {
+				$data = array(
+					'id_forum' => $kd_mapel,
+					'judul_materi' => $this->input->post('judul_materi'),
+					'jns_materi' => $this->input->post('tipe_forum'),
+					'isi_materi' => $this->input->post('isi_materi'),
+					'endDate' => $this->input->post('tgl_end'),
+					'lampiran' => serialize($this->session->userdata('lampiran'))
+				);
+			} else {
+				$data = array(
+					'id_forum' => $kd_mapel,
+					'judul_materi' => $this->input->post('judul_materi'),
+					'jns_materi' => $this->input->post('tipe_forum'),
+					'isi_materi' => $this->input->post('isi_materi'),
+					'endDate' => $this->input->post('tgl_end'),
+					'lampiran' => null
+				);
+			}
 
 			$cek = $this->db->get_where('tbl_materi_forum', ['id_forum' => $kd_mapel]);
 			if ($cek->num_rows() > 0) {
@@ -230,13 +251,16 @@ class Forum extends CI_Controller
 					'judul_materi' => $this->input->post('judul_materi'),
 					'jns_materi' => $this->input->post('tipe_forum'),
 					'isi_materi' => $this->input->post('isi_materi'),
+					'endDate' => $this->input->post('tgl_end'),
 					'lampiran' => serialize($this->session->userdata('lampiran'))
 				);
 			} else {
 				$data = array(
 					'judul_materi' => $this->input->post('judul_materi'),
 					'jns_materi' => $this->input->post('tipe_forum'),
-					'isi_materi' => $this->input->post('isi_materi')
+					'isi_materi' => $this->input->post('isi_materi'),
+					'endDate' => $this->input->post('tgl_end'),
+					'lampiran' => null
 				);
 			}
 

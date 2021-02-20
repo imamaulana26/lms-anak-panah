@@ -236,7 +236,7 @@ $c = $q->row_array();
                     Kalendar
                     <small></small>
                     <a class="btn btn-danger btn-flat" id="trigerjadwal"><span class="fa fa-plus"></span> Buat Event</a>
-                    <a href="<?= base_url('jadwal/jadwal_kelas') ?>" class="btn btn-info btn-flat"><span class="fa fa-cog"></span> Seting Jadwal Kelas</a>
+                    <a href="#" class="btn btn-info btn-flat"><span class="fa fa-cog"></span> Seting Jadwal Kelas</a>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -668,7 +668,7 @@ $c = $q->row_array();
                     // console.log(event.event._instance.range.start.getDate());
                     // console.log(event.event._instance.range.start.getMonth());
                     // console.log(event.event._instance.range.start);
-                    // console.log(event.event._instance.range.start.getFullYear() - 1);
+                    // console.log(event.date);
                     // console.log(event.event.defId);
                     // alert(" judulnya " + event.title);
                     Swal.fire({

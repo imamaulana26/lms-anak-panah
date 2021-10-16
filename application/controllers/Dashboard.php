@@ -76,8 +76,8 @@ class Dashboard extends CI_Controller
 			$this->load->view('siswa/v_dashboard', $data);
 			$this->load->view('siswa/layout/v_footer');
 		} else {
-			$where = $this->db->get_where('tbl_pengajar', ['nm_pengajar'=> $this->session->userdata('nama')])->row_array();
-			
+			$where = $this->db->get_where('tbl_pengajar', ['nm_pengajar' => $this->session->userdata('nama')])->row_array();
+
 			$data['oc'] = $this->db->select('*')->from('tbl_pelajaran a')
 				->join('tbl_mapel b', 'a.kd_mapel = b.kd_mapel')
 				->join('tbl_kelas c', 'a.id_kelas = c.kelas_id')
@@ -99,10 +99,10 @@ class Dashboard extends CI_Controller
 	{
 		$siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $_SESSION['username']])->row_array();
 		$mapel = $this->db->select('b.id_pelajaran, c.nm_mapel')
-		->from('tbl_nilai_onclass a')
-		->join('tbl_pelajaran b', 'a.id_pelajaran = b.id_pelajaran', 'inner')
-		->join('tbl_mapel c', 'b.kd_mapel = c.kd_mapel', 'inner')
-		->where(['a.user_siswa' => $siswa['siswa_nis']])
+			->from('tbl_nilai_onclass a')
+			->join('tbl_pelajaran b', 'a.id_pelajaran = b.id_pelajaran', 'inner')
+			->join('tbl_mapel c', 'b.kd_mapel = c.kd_mapel', 'inner')
+			->where(['a.user_siswa' => $siswa['siswa_nis']])
 			->group_by('b.id_pelajaran, c.nm_mapel')
 			->get()->result_array();
 

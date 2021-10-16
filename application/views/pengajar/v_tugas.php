@@ -1,8 +1,13 @@
 <style>
-iframe {
+	.hidden {
+		display: none;
+	}
+
+	iframe {
 		width: -moz-available;
 		width: -webkit-fill-available;
 	}
+
 	/*  Bhoechie tab */
 	div.bhoechie-tab-container {
 		background-color: #ffffff;
@@ -88,7 +93,7 @@ iframe {
 	.bordered {
 		border-left: 3px solid #007bff;
 	}
-	
+
 	@media screen and (max-width: 574px) {
 		div.bhoechie-tab-menu div.list-group>a.active:after {
 			display: none;
@@ -112,82 +117,117 @@ iframe {
 		</div><!-- /.container-fluid -->
 	</div>
 	<!-- /.content-header -->
-	<?php $li_komen = 0;
-	$page = (empty($this->session->flashdata('page'))) ? 1 : $this->session->flashdata('page'); ?>
+
 	<!-- Main content -->
 	<div class="content">
 		<div class="container">
 			<div class="row">
-				<div class="offset-1 col-sm-10 media-nav">
-					<a href="<?= site_url('tugas/tambah_tugas/' . $this->uri->segment(2)) ?>" class="btn btn-primary float-right">Buat Tugas Baru</a>
-					<h2 class="pb-3">Tugas <?= $forum['nm_mapel'] ?></h2>
-
+				<div class="col-lg media-nav">
+					<a href="#" class="btn btn-primary float-right">Buat Tugas Baru</a>
+					<h2 class="pb-3">Tugas <?= $tugas['nm_mapel'] ?></h2>
 					<div class="card card-outline">
 						<div class="card-primary card-body row bhoechie-tab-container">
 							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
-								<div class="list-group nav flex-column nav-pills">
-									<?php foreach ($tugas as $val) : ?>
-										<a href="#tugas-<?= $val['pertemuan'] ?>" class="nav-link list-group-item <?= $val['pertemuan'] == $page ? 'active' : '' ?>" id="tugas-<?= $val['pertemuan'] ?>-tab" aria-controls="tugas-<?= $val['pertemuan'] ?>" data-toggle="pill" role="tab">
+								<?php $tanggal = date('d M Y', strtotime($tugas['createDate'])) . ' - ' . date('d M Y', strtotime($tugas['endDate'])); ?>
+								<?php for ($i = 1; $i <= $total; $i++) {
+								?>
+									<div class="list-group nav flex-column nav-pills mb-1 ">
+										<a href="<?= site_url('tugas/tugas_sg/') . $this->uri->segment(3) . "/" . $i ?>" class="nav-link list-group-item <?= ($i == $this->uri->segment(4)) ? 'active' : ' '; ?>">
 											<h5>
-												Tugas Ke-<?= $val['pertemuan'] ?>
+												Tugas Ke <?= $i ?>
 											</h5>
-											<small><?= date('d M Y', strtotime($val['createDate'])) ?> - <?= date('d M Y', strtotime($val['endDate'])) ?></small>
-											<p><?= word_limiter($val['judul_materi'], 2) ?></p>
+											<small><?= ($i == $this->uri->segment(4)) ? $tanggal : '...'; ?></small>
+											<p><?= word_limiter('Lorem Ipsum Dolor', 2) ?></p>
 										</a>
-									<?php endforeach; ?>
-								</div>
+									</div>
+								<?php } ?>
 							</div>
-							<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
-								<?php foreach ($tugas as $val) : ?>
-									<div class="bhoechie-tab-content tab-pane fade <?= $val['pertemuan'] == $page ? 'show active' : '' ?>" id="tugas-<?= $val['pertemuan'] ?>" role="tabpanel" aria-labelledby="tugas-<?= $val['pertemuan'] ?>-tab">
-										<div class="card-header">
-											<label><?= $val['judul_materi'] ?> (<?= $val['jns_materi'] ?>)</label>
-											<span class="float-right">
-												<a href="<?= site_url('absensi_tgs/') . $this->uri->segment(2) . "/" . $val['pertemuan'] ?>" class="badge badge-info">Absensi</a>
-												<a href="javascript:void(0)" class="badge badge-<?= $val['status'] == 0 ? 'success' : 'danger' ?>" onclick="sts_forum('<?= $val['id'] ?>')"><?= $val['status'] == 0 ? 'Aktif' : 'Non-aktif' ?></a>
-												<a href="<?= site_url('tugas/edit_tugas/' . $val['id']) ?>" style="color: #1e7e34;"><i class="fa fa-fw fa-pencil-alt ml-3"></i></a>
-												<a href="javascript:void(0)" onclick="delete_forum('<?= $val['id'] ?>')" style="color: #dc3545;"><i class="fa fa-fw fa-times ml-3"></i></a>
-											</span>
-										</div>
-										<div class="card-body">
-											<p><?= $val['isi_materi'] ?></p>
-											<?php if (!empty($val['lampiran'])) : ?>
-												<?php if (is_array(unserialize($val['lampiran']))) : ?>
-													<p><b>Lampiran</b></p>
-													<?php foreach (unserialize($val['lampiran']) as $att) : ?>
-														<a href="<?= $att ?>" data-toggle="lightbox" data-gallery="gallery-<?= $val['id'] ?>">
-															<img src="<?= $att ?>" class="img-thumbnail" style="max-height: 80px; max-width: 80px;">
-														</a>
-													<?php endforeach; ?>
-												<?php else : ?>
-													<p><b>Lampiran</b></p>
-													<a href="<?= unserialize($val['lampiran']) ?>" data-toggle="lightbox" data-gallery="gallery-<?= $val['id'] ?>">
-														<img src="<?= unserialize($val['lampiran']) ?>" class="img-thumbnail" style="max-height: 80px; max-width: 80px;">
-													</a>
-												<?php endif; ?>
-											<?php endif; ?>
-											<hr class="media-line">
-											<div>
-												<?php if ($val['status'] == 0) : ?>
-														<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $val['id_forum'] . '-' . $val['pertemuan'] ?>">
-															<i class="fa fa-fw fa-reply"></i> Balas
-														</a>
-													<?php endif; ?>
-												<span id="komen" data-toggle="collapse" data-target="#collapseExample-<?= $val['id'] ?>" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;">
-													<?php 
-													$li_komen1 = $this->db->get_where('tbl_komen_tugas', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan']])->num_rows(); 
-													?>
-													 Lihat Komentar (<?= $li_komen1 ?>) 
-												</span>
-												<div class="collapse pt-3" id="show_komen-<?= $val['id_forum'] . '-' . $val['pertemuan'] ?>">
-													<div class="card card-body">
-														<form action="<?= site_url('tugas/submit_main') ?>" method="post" autocomplete="off" enctype="multipart/form-data">
-															<input type="hidden" name="id" value="<?= $val['id'] ?>">
-															<input type="hidden" name="id_forum" value="<?= $val['id_forum'] ?>">
-															<input type="hidden" name="pertemuan" value="<?= $val['pertemuan'] ?>">
-															<input type="hidden" name="user_komen" value="<?= $this->session->userdata('user'); ?>">
-															<textarea name="komentar" id="editorfr<?= $val['id'] ?>" placeholder="Type Here"></textarea>
 
+							<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
+								<div class="bhoechie-tab-content tab-pane fade active show" id="tugas" role="tabpanel" aria-labelledby="tugas-tab">
+									<div class="card-header">
+										<label><?= $tugas['judul_materi']  ?></label>
+										<span class="float-right">
+											<a href="#" class="badge badge-info">Absensi</a>
+											<a href="javascript:void(0)" class="badge badge" onclick="sts_forum('#')"></a>
+											<a href="#" style="color: #1e7e34;"><i class="fa fa-fw fa-pencil-alt ml-3"></i></a>
+											<a href="javascript:void(0)" onclick="delete_forum('#')" style="color: #dc3545;"><i class="fa fa-fw fa-times ml-3"></i></a>
+										</span>
+									</div>
+									<div class="card-body">
+										<p><?= $tugas['isi_materi'] ?></p>
+
+										<hr class="media-line">
+										<div>
+											<a class="float-right btn btn-sm" onclick="balas_main()">
+												<i class="fa fa-fw fa-reply"></i> Balas
+											</a>
+
+
+											<span class="btn btn-default" id="img1" onclick="load_komen_bn()">
+												belum dinilai
+											</span>
+											<span class="btn btn-default" id="img2" onclick="load_komen_sn()">
+												sudah dinilai
+											</span>
+											<!-- <span class="btn btn-default" onclick="load_komen_bn()">
+												<a href="https://www.w3schools.com" target="iframe_a">W3Schools.com</a>
+											</span>
+
+											<span class="btn btn-default" onclick="load_komen_sn()">
+												(#<?= $komen_sn['jml'] ?> Sudah Dinilai)
+											</span> -->
+										</div>
+										<!-- <div class="card-body">
+											<div class="box-body">
+												<iframe src="demo_iframe.htm" name="iframe_a" height="300px" width="100%" title="Iframe Example"></iframe>
+											</div>
+										</div> -->
+
+
+
+
+										<!-- <div class="card-body">
+											<div class="box-body">
+												<div id="load_data"></div>
+												<div id="load_data_message"></div>
+											</div>
+										</div> -->
+										<div class="card-body">
+											<div id="div1" class='hidden'>
+												<!-- belum dinilai -->
+												<div class="box-body">
+													<div id="load_data"></div>
+													<div id="load_data_message"></div>
+												</div>
+											</div>
+											<div id="div2" class='hidden'>
+												<!-- sudah dinilai -->
+												<div class="box-body">
+													<div id="load_data2"></div>
+													<div id="load_data_message2"></div>
+												</div>
+											</div>
+										</div>
+
+										<!-- text area -->
+										<div class="row" id="form_komen">
+											<div class="col-md-12" id="style_form" style="display: none;">
+												<div class="card">
+													<div class="card-header">
+														<span class="btn btn-xs btn-danger float-right" id="btn_close"><i class="fa fa-fw fa-times"></i></span>
+														<strong>Form Komentar</strong>
+													</div>
+													<div class="card-body">
+														<form id="form" method="POST" autocomplete="off" enctype="multipart/form-data">
+															<input type="hidden" class="form-control" name="id_reply" id="id_reply">
+															<input type="hidden" class="form-control" name="id_forum" id="id_forum">
+															<input type="hidden" class="form-control" name="pertemuan" id="pertemuan">
+															<input type="hidden" class="form-control" name="mention" id="mention">
+															<input type="hidden" class="form-control" name="reply_to" id="reply_to">
+															<input type="hidden" class="form-control" name="user_komen" value="<?= $_SESSION['user']; ?>">
+
+															<textarea class="form-control" id="editor" name="komentar"></textarea>
 															<div class="form-group mt-2">
 																<label>Lampirkan Gambar</label>
 																<div class="custom-file">
@@ -202,223 +242,11 @@ iframe {
 													</div>
 												</div>
 											</div>
-
-											<div class="collapse <?= $this->session->flashdata('page') ? 'show' : '' ?>" id="collapseExample-<?= $val['id'] ?>">
-												<!-- Main Comments -->
-												<div class="card-body">
-													<div class="row">
-														<?php $komen = $this->db->get_where('tbl_komen_tugas', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'reply_to' => 0]);
-														$li_komen += $komen->num_rows();
-														foreach ($komen->result_array() as $cmd) :
-															$siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $cmd['user_komen']])->row_array();
-															// $nilai = $this->db->get_where('tbl_nilai_onclass', ['user_siswa' => $cmd['user_komen'], 'id_pelajaran' => $val['id_forum'], 'pertemuan_ke' => $val['pertemuan'], 'tipe' => 'Tugas'])->num_rows();
-															$nilai = $this->db->get_where('tbl_nilai_onclass', ['user_siswa' => $cmd['user_komen'], 'id_pelajaran' => $val['id_forum'], 'pertemuan_ke' => $val['pertemuan'], 'tipe' => 'Tugas'])->row_array();
-															$score = empty($nilai['nilai']) ? '' : ' (' . $nilai['nilai'] . ' point)';
-
-															$admin = $this->db->get_where('tbl_pengguna', ['pengguna_username' => $cmd['user_komen']])->row_array();
-															$rep_user = empty($siswa) ? $admin['pengguna_nama'] . ' (pengajar)' : $siswa['siswa_nama']; ?>
-															<div class="card-header bordered mt-3 d-flex">
-																<div class="col-md-1">
-																	<img class="media-img-width" src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" style="width: 100%;" />
-																</div>
-																<div class="col-md">
-																	<strong class="float-left"><?= $rep_user . $score ?></strong>
-																	<small class="float-right text-secondary">
-																		<div class="dropdown mx-1">
-																			<a href="#" class="btn btn-link btn-xs" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-																				<i class='fa fa-ellipsis-v'></i>
-																			</a>
-																			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-																				<?php if ($admin['pengguna_username'] != $this->session->userdata('username')) : ?>
-																					<a class="dropdown-item" href="javascript:void(0)" onclick="nilai('<?= $cmd['id'] ?>')" style="font-size: 12px; color: #007bff;">
-																						<i class="fa fa-fw fa-check-square"></i> Nilai
-																					</a>
-																				<?php endif; ?>
-																				<?php if ($_SESSION['akses'] == 3 && $_SESSION['username'] == $cmd['user_komen']) : ?>
-																					<a class="dropdown-item" href="<?= site_url('tugas/edit_komen/' . $cmd['id']) ?>" style="font-size: 12px; color: #1e7e34;">
-																						<i class="fa fa-fw fa-pencil-alt"></i> Sunting
-																					</a>
-																				<?php endif; ?>
-																				<a class="dropdown-item" href="javascript:void(0)" onclick="hapus_komen('<?= $cmd['id'] ?>')" style="font-size: 12px; color: #dc3545;">
-																					<i class="fa fa-fw fa-times"></i> Hapus
-																				</a>
-																			</div>
-																		</div>
-																	</small>
-																	<small class="float-right text-secondary">
-																		<?= date('d M y', strtotime($cmd['createDate'])) ?>
-																	</small>
-																	<div class="clearfix"></div>
-																</div>
-															</div>
-															<div class="card-body bordered pb-0">
-																<p>
-																	<?= $cmd['isi_komen'] ?>
-																</p>
-																<?php if (!empty($cmd['lampiran'])) : ?>
-																	<?php if (is_array(unserialize($cmd['lampiran']))) : ?>
-																		<p><b>Lampiran</b></p>
-																		<?php foreach (unserialize($cmd['lampiran']) as $att) : ?>
-																			<a href="<?= $att ?>" data-toggle="lightbox" data-gallery="gallery-<?= $cmd['id'] ?>">
-																				<img src="<?= $att ?>" class="img-thumbnail mb-3" style="max-height: 80px; max-width: 80px;">
-																			</a>
-																		<?php endforeach; ?>
-																	<?php else : ?>
-																		<p><b>Lampiran</b></p>
-																		<a href="<?= unserialize($cmd['lampiran']) ?>" data-toggle="lightbox" data-gallery="gallery-<?= $cmd['id'] ?>">
-																			<img src="<?= unserialize($cmd['lampiran']) ?>" class="img-thumbnail mb-3" style="max-height: 80px; max-width: 80px;">
-																		</a>
-																	<?php endif; ?>
-																<?php endif; ?>
-																<div>
-																	<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $cmd['id'] ?>">
-																		<i class="fa fa-fw fa-reply"></i> Balas
-																	</a>
-																	<span data-toggle="collapse" data-target="#comments-<?= $cmd['id'] ?>" aria-expanded="false" aria-controls="comments" style="cursor: pointer;">
-																		<?php $li_reply = $this->db->get_where('tbl_komen_tugas', ['reply_to' => $cmd['id']])->num_rows(); ?>
-																		<i class="fa fa-fw fa-comments"></i> Komentar (<?= $li_reply ?>)
-																	</span>
-																</div>
-																<div class="collapse pt-3" id="show_komen-<?= $cmd['id'] ?>">
-																	<div class="card card-body">
-																		<form action="<?= site_url('tugas/submit_komen') ?>" method="post" autocomplete="off" enctype="multipart/form-data">
-																			<input type="hidden" name="id" value="<?= $val['id'] ?>">
-																			<input type="hidden" name="id_reply" value="<?= $cmd['id'] ?>">
-																			<input type="hidden" name="id_forum" value="<?= $cmd['id_forum'] ?>">
-																			<input type="hidden" name="pertemuan" value="<?= $cmd['pertemuan'] ?>">
-																			<input type="hidden" name="mention" value="<?= $cmd['user_komen'] ?>">
-																			<input type="hidden" name="reply_to" value="<?= $cmd['id'] ?>">
-																			<input type="hidden" name="user_komen" value="<?= $this->session->userdata('user'); ?>">
-																			<textarea name="komentar" id="editor<?= $cmd['id'] ?>" rows="10" cols="45" placeholder="Type Here"></textarea>
-
-																			<div class="form-group mt-2">
-																				<label>Lampirkan Gambar</label>
-																				<div class="custom-file">
-																					<input type="file" class="custom-file-input" name="gambar">
-																					<label class="custom-file-label" for="customFile">Choose file</label>
-																				</div>
-																			</div>
-																			<div class="input-group-append">
-																				<button class="btn btn-info" type="submit"><i class="fa fa-fw fa-paper-plane"></i> Submit</button>
-																			</div>
-																		</form>
-																	</div>
-																</div>
-															</div>
-
-															<?php $reply = $this->db->get_where('tbl_komen_tugas', ['id_forum' => $val['id_forum'], 'pertemuan' => $val['pertemuan'], 'reply_to' => $cmd['id']]);
-															$li_komen += $reply->num_rows();
-															foreach ($reply->result_array() as $rep) :
-																$rep_siswa = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['user_komen']])->row_array();
-																$admin = $this->db->get_where('tbl_pengguna', ['pengguna_username' => $rep['user_komen']])->row_array();
-																// $rep_nilai = $this->db->get_where('tbl_nilai_onclass', ['user_siswa' => $rep['user_komen'], 'id_pelajaran' => $val['id_forum'], 'pertemuan_ke' => $val['pertemuan'], 'tipe' => 'Tugas'])->num_rows();
-																$rep_nilai = $this->db->get_where('tbl_nilai_onclass', ['user_siswa' => $rep['user_komen'], 'id_pelajaran' => $val['id_forum'], 'pertemuan_ke' => $val['pertemuan'], 'tipe' => 'Tugas'])->row_array();
-																$score = empty($rep_nilai['nilai']) ? '' : ' (' . $rep_nilai['nilai'] . ' point)';
-
-																$rep_user = empty($rep_siswa) ? $admin['pengguna_nama'] . ' (pengajar)' : $rep_siswa['siswa_nama'];
-																$mention = $this->db->get_where('tbl_siswa', ['siswa_nis' => $rep['mention']])->row_array(); ?>
-																<!-- Reply Main Comments -->
-																<div class="collapse <?= $this->session->flashdata('mention') == $cmd['id'] ? 'show' : '' ?>" id="comments-<?= $cmd['id'] ?>">
-																	<div class="col-lg ml-3">
-																		<div class="card-header bordered mt-3 d-flex">
-																			<div class="col-md-1">
-																				<img class="media-img-width" src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid" style="width: 100%;" />
-																			</div>
-																			<div class="col-md">
-																				<strong class="float-left"><?= $rep_user . $score ?></strong>
-																				<small class="float-right text-secondary">
-																					<div class="dropdown mx-1">
-																						<a href="#" class="btn btn-link btn-xs" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-																							<i class='fa fa-ellipsis-v'></i>
-																						</a>
-																						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-																							<?php if ($admin['pengguna_username'] != $this->session->userdata('username')) : ?>
-																								<a class="dropdown-item" href="javascript:void(0)" onclick="nilai('<?= $rep['id'] ?>')" style="font-size: 12px; color: #007bff;">
-																									<i class="fa fa-fw fa-check-square"></i> Nilai
-																								</a>
-																							<?php endif; ?>
-																							<?php if ($_SESSION['akses'] == 3 && $_SESSION['username'] == $rep['user_komen']) : ?>
-																								<a class="dropdown-item" href="<?= site_url('tugas/edit_komen/' . $rep['id']) ?>" style="font-size: 12px; color: #1e7e34;">
-																									<i class="fa fa-fw fa-pencil-alt"></i> Sunting
-																								</a>
-																							<?php endif; ?>
-																							<a class="dropdown-item" href="javascript:void(0)" onclick="hapus_subkomen('<?= $rep['id'] ?>')" style="font-size: 12px; color: #dc3545;">
-																								<i class="fa fa-fw fa-times"></i> Hapus
-																							</a>
-																						</div>
-																					</div>
-																				</small>
-																				<small class="float-right text-secondary"><?= date('d M y', strtotime($rep['createDate'])) ?></small>
-																				<div class="clearfix"></div>
-																			</div>
-																		</div>
-																		<div class="card-body bordered pb-0">
-																			<blockquote>
-																				<?php $get_komen = $this->db->select('*')->from('tbl_komen_tugas a')->join('tbl_pengguna b', 'a.user_komen = b.pengguna_username', 'inner')->where(['id' => $rep['id_reply']])->get()->row_array(); ?>
-																				<b><?= $get_komen['pengguna_level'] == 3 ? $get_komen['pengguna_nama'] . ' (pengajar)' : $get_komen['pengguna_nama'] ?></b>
-
-																				<?= $get_komen['isi_komen'] ?>
-																			</blockquote>
-																			<?= $rep['isi_komen'] ?>
-
-																			<?php if (!empty($rep['lampiran'])) : ?>
-																				<?php if (is_array(unserialize($rep['lampiran']))) : ?>
-																					<p><b>Lampiran</b></p>
-																					<?php foreach (unserialize($rep['lampiran']) as $att) : ?>
-																						<a href="<?= $att ?>" data-toggle="lightbox" data-gallery="gallery-<?= $rep['id'] ?>">
-																							<img src="<?= $att ?>" class="img-thumbnail mb-3" style="max-height: 80px; max-width: 80px;">
-																						</a>
-																					<?php endforeach; ?>
-																				<?php else : ?>
-																					<p><b>Lampiran</b></p>
-																					<a href="<?= unserialize($rep['lampiran']) ?>" data-toggle="lightbox" data-gallery="gallery-<?= $rep['id'] ?>">
-																						<img src="<?= unserialize($rep['lampiran']) ?>" class="img-thumbnail mb-3" style="max-height: 80px; max-width: 80px;">
-																					</a>
-																				<?php endif; ?>
-																			<?php endif; ?>
-																			<div>
-																				<a class="float-right btn btn-sm" data-toggle="collapse" href="#show_komen-<?= $rep['id'] ?>">
-																					<i class="fa fa-fw fa-reply"></i> Balas
-																				</a>
-																			</div>
-																			<div class="collapse pt-5" id="show_komen-<?= $rep['id'] ?>">
-																				<div class="card card-body">
-																					<form action="<?= site_url('tugas/submit_komen') ?>" method="post" autocomplete="off" enctype="multipart/form-data">
-																						<input type="hidden" name="id" value="<?= $cmd['id'] ?>">
-																						<input type="hidden" name="id_reply" value="<?= $rep['id'] ?>">
-																						<input type="hidden" name="id_forum" value="<?= $rep['id_forum'] ?>">
-																						<input type="hidden" name="pertemuan" value="<?= $rep['pertemuan'] ?>">
-																						<input type="hidden" name="mention" value="<?= $rep['user_komen'] ?>">
-																						<input type="hidden" name="reply_to" value="<?= $cmd['id'] ?>">
-																						<input type="hidden" name="user_komen" value="<?= $this->session->userdata('user'); ?>">
-																						<textarea name="komentar" id="editor<?= $rep['id'] ?>" rows="10" cols="45" placeholder="Type Here"></textarea>
-
-																						<div class="form-group mt-2">
-																							<label>Lampirkan Gambar</label>
-																							<div class="custom-file">
-																								<input type="file" class="custom-file-input" name="gambar">
-																								<label class="custom-file-label" for="customFile">Choose file</label>
-																							</div>
-																						</div>
-																						<div class="input-group-append">
-																							<button class="btn btn-info" type="submit"><i class="fa fa-fw fa-paper-plane"></i> Submit</button>
-																						</div>
-																					</form>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-																<!-- End of Reply Main Comments -->
-															<?php endforeach; ?>
-														<?php endforeach; ?>
-													</div>
-													<!-- End of Main Comments -->
-												</div>
-											</div>
 										</div>
+										<!-- end text area -->
+
 									</div>
-								<?php endforeach; ?>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -428,288 +256,234 @@ iframe {
 	</div><!-- /.container -->
 </div><!-- /.content-wrapper -->
 
-<!-- Modal -->
-<div class="modal fade" id="nilaiModal" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<form method="post" action="<?= site_url($this->uri->segment(1) . '/submit_nilai') ?>" autocomplete="off">
-				<div class="modal-body">
-					<input type="hidden" name="nis_siswa" id="nis_siswa">
-					<input type="hidden" name="tugas_id" id="tugas_id">
-					<input type="hidden" name="tugas_ke" id="tugas_ke">
-					<input type="hidden" name="komen_tugas" id="komen_tugas">
-					<input type="hidden" name="lamp_tugas" id="lamp_tugas">
-					<div class="row">
-						<div class="col">
-							<p id="text"></p>
-						</div>
-					</div>
-					<div class="form-group row">
-						<div class="col-2">
-							<label class="control-label">Input Nilai</label>
-						</div>
-						<div class="col-1 media-score-nilai">
-							<input type="text" name="nilai_siswa" id="nilai_siswa" class="form-control form-control-sm" required onkeypress="return CheckNumeric()">
-						</div>
-						<div class="col">
-							<small class="form-text text-muted">Range 10 - 100</small>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					<button type="submit" class="btn btn-primary">Submit</button>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-
 <?php $this->load->view('pengajar/v_schedule') ?>
 </div>
 
 <?php $this->load->view('pengajar/layout/v_js'); ?>
-
+<!-- ajax load -->
 <script>
-	var method;
-
 	$(document).on("click", '[data-toggle="lightbox"]', function(event) {
 		event.preventDefault();
 		$(this).ekkoLightbox();
 	});
 
 	$(document).ready(function() {
-// 		$('span#komen').text('Lihat Komentar (' + <?= $li_komen ?> + ')');
+		CKEDITOR.replace('editor');
 
-		// forum
-		$.ajax({
-			url: "<?= site_url('tugas/datafr_id/') ?>" + <?= $this->uri->segment(2); ?>,
-			context: document.body,
-			dataType: 'json',
-			success: function(data) {
-				for (var i = 0; i < data.length; i++) {
-					CKEDITOR.replace('editorfr' + data[i].id);
-				}
-			}
+		$("#img1").on('click', function() {
+			$("#div1").fadeIn();
+			$("#div2").fadeOut();
+		});
+		$("#img2").on('click', function() {
+			$("#div2").fadeIn();
+			$("#div1").fadeOut();
 		});
 
-		// balasan
-		$.ajax({
-			url: "<?= site_url('tugas/data_id/') ?>" + <?= $this->uri->segment(2); ?>,
-			context: document.body,
-			dataType: 'json',
-			success: function(data) {
-				for (var i = 0; i < data.length; i++) {
-					CKEDITOR.replace('editor' + data[i].id);
-				}
-			}
+		$('input[type="file"]').on('change', function() {
+			//get the file name
+			var file = $(this).val();
+			var fileName = file.replace('C:\\fakepath\\', '');
+			//replace the "Choose a file" label
+			$(this).next('.custom-file-label').html(fileName);
 		});
-	});
 
-	$('input[type="file"]').on('change', function() {
-		//get the file name
-		var file = $(this).val();
-		var fileName = file.replace('C:\\fakepath\\', '');
-		//replace the "Choose a file" label
-		$(this).next('.custom-file-label').html(fileName);
-	});
-
-	$('#exampleModal').on('hidden.bs.modal', function() {
-		$('input, textarea').removeClass('is-invalid');
-		$('span.help-block').empty();
-	});
-
-	$('input, textarea').keypress(function() {
-		$(this).removeClass('is-invalid');
-		$(this).next().empty();
-	});
-
-	$('#myTab.nav-link').on('click', function(e) {
-		e.preventDefault()
-		$(this).tab('show')
+		$('#btn_close').on('click', function() {
+			$('#section_komen').removeClass();
+			$('#form_komen').fadeOut();
+			$('body').css('overflow', 'auto');
+		});
 	});
 </script>
 
 <script>
-	<?php $msg = $this->session->flashdata('msg');
-	if (!empty($msg)) :
-		if ($msg['status'] == false) : ?>
-			Swal.fire({
-				title: 'Oops!',
-				text: '<?= $msg['text'] ?>',
-				icon: 'warning',
-			});
-		<?php else : ?>
-			Swal.fire({
-				title: 'Success',
-				text: '<?= $msg['text'] ?>',
-				icon: 'success',
-			});
-	<?php endif;
-	endif; ?>
+	var url = $(location).attr('href');
+	var segments = url.split('/');
+	var id = segments[6];
+	var prt = segments[7];
 
-	function sts_forum(id) {
-		$.ajax({
-			url: '<?= site_url('tugas/upd_status/') ?>' + id,
-			type: 'POST',
-			dataType: 'JSON',
-			success: function(res) {
-				Swal.fire({
-					title: 'Sukses',
-					icon: 'success',
-					text: res.msg,
-					timer: 2000,
-					allowOutsideClick: false,
-					showConfirmButton: false
-				}).then((res) => {
-					if (res.dismiss === Swal.DismissReason.timer) {
-						location.reload();
+	function lazzy_loader(limit) {
+		var output = '';
+		for (var count = 0; count < limit; count++) {
+			output += '<div class="post_data mt-3">';
+			output += '<p><span class="content-placeholder" style="width:100%; height: 30px;">&nbsp;</span></p>';
+			output += '<p><span class="content-placeholder" style="width:100%; height: 100px;">&nbsp;</span></p>';
+			output += '</div>';
+		}
+		$('#load_data_message').html(output);
+		$('#load_data_message2').html(output);
+	}
+
+	//komen yang sudah dinilai
+	function load_komen_sn() {
+		var limit = 3;
+		var start = 0;
+		var action = 'inactive';
+
+		$('#load_data2').empty();
+		lazzy_loader(limit);
+
+		function load_data_sn(limit, start) {
+			// $("#load_data").empty();
+			$.ajax({
+				url: "<?php echo base_url(); ?>tugas/fetch_sn",
+				method: "POST",
+				data: {
+					limit: limit,
+					start: start,
+					id_tugas: id,
+					pertemuan: prt
+				},
+				cache: false,
+				success: function(data) {
+					$('#load_data_message2').html("");
+					if (data == '') {
+						action = 'active';
+					} else {
+						action = 'inactive';
+						$('#load_data2').append(data);
 					}
-				})
+				}
+			})
+		}
+
+		if (action == 'inactive') {
+			action = 'active';
+			load_data_sn(limit, start);
+		}
+
+		$(window).scroll(function() {
+			if ($(window).scrollTop() + $(window).height() > $("#load_data2").height() && action == 'inactive') {
+				lazzy_loader(limit);
+				action = 'active';
+				start = start + limit;
+				setTimeout(function() {
+					load_data_sn(limit, start);
+				}, 1000);
 			}
 		});
-	}
+	};
 
-	function nilai(id) {
-		let url = "<?= site_url($this->uri->segment(1) . '/get_komen/') ?>" + id;
+	//komen belum dinilai
+	function load_komen_bn() {
+		var limit = 3;
+		var start = 0;
+		var action = 'inactive';
 
-		$('#nilaiModal').modal('show');
+		$('#load_data').empty();
+		lazzy_loader(limit);
 
-		$.ajax({
-			url: url,
-			type: 'get',
-			dataType: 'json',
-			success: function(data) {
-				var komen = data.komen;
-				var nilai = (data.nilai == null) ? '' : data.nilai.nilai;
-				var text = `Berikan nilai kepada <b>` + komen.siswa_nama + `</b> - <b>` + komen.kelas_nama + `</b> 
-				untuk <b><?= ucfirst($this->uri->segment(1)); ?> ` + komen.nm_mapel + ` pertemuan ke-` + komen.pertemuan + `</b> tentang <b>` + komen.judul_materi + ` (` + komen.jns_materi + `)</b>`;
-				$('#text').html(text);
+		function load_data_bn(limit, start) {
+			// $("#load_data2").empty();
+			$.ajax({
+				url: "<?php echo base_url(); ?>tugas/fetch",
+				method: "POST",
+				data: {
+					limit: limit,
+					start: start,
+					id_tugas: id,
+					pertemuan: prt
+				},
+				cache: false,
+				success: function(data) {
+					$('#load_data_message').html("");
+					if (data == '') {
+						action = 'active';
+					} else {
+						action = 'inactive';
+						$('#load_data').append(data);
+					}
+				}
+			})
+		}
 
-				$('#nis_siswa').val(komen.siswa_nis);
-				$('#tugas_id').val('<?= $this->uri->segment(2) ?>');
-				$('#tugas_ke').val(komen.pertemuan);
-				$('#komen_tugas').val(komen.isi_komen);
-				$('#lamp_tugas').val(komen.lampiran);
-				$('#nilai_siswa').val(nilai);
+		if (action == 'inactive') {
+			action = 'active';
+			load_data_bn(limit, start);
+		}
+
+		$(window).scroll(function() {
+			if ($(window).scrollTop() + $(window).height() > $("#load_data").height() && action == 'inactive') {
+				lazzy_loader(limit);
+				action = 'active';
+				start = start + limit;
+				setTimeout(function() {
+					load_data_bn(limit, start);
+				}, 1000);
 			}
 		});
+	};
+
+
+	function balas_main() {
+		// $(window).scrollTop(0);
+
+		$('#form').attr('action', '<?= site_url('tugas/submit_main') ?>');
+
+		$('#section_komen').addClass('block');
+		$('#form_komen').fadeIn();
+		// $('#form_komen').animate({width: "50%", height: "50%"}, 'slow');
+		$('#style_form').css({
+			'display': 'unset',
+			'position': 'absolute',
+			'z-index': '1036',
+			'bottom': '0',
+			'top': '0',
+			'right': '10%',
+			'transform': 'translate(-50 % , -50 % )'
+		});
+		$("html, body").animate({
+			scrollTop: $("#style_form").offset().top
+		}, 500);
+		$('body').css('overflow', 'hidden');
+
+		$('#id_reply').val('');
+		$('#id_forum').val(id);
+		$('#pertemuan').val(prt);
+		$('#mention').val('');
+		$('#reply_to').val('');
 	}
 
-	function delete_forum(id) {
-		Swal.fire({
-			title: 'Hapus tugas ini?',
-			text: "Tugas yang dihapus tidak bisa dikembalikan lagi!",
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Hapus',
-			cancelButtonText: 'Tidak'
-		}).then((result) => {
-			if (result.value) {
-				$.ajax({
-					url: "<?= site_url('tugas/delete_tugas/') ?>" + id,
-					type: "POST",
-					dataType: "JSON",
-					success: function(res) {
-						Swal.fire({
-							icon: 'success',
-							title: 'Sukses',
-							text: 'Tugas berhasil dihapus',
-							timer: 2000,
-							allowOutsideClick: false,
-							timerProgressBar: true,
-							// onBeforeOpen: () => {
-							// 	Swal.showLoading()
-							// },
-							showConfirmButton: false
-						}).then((result) => {
-							if (result.dismiss === Swal.DismissReason.timer) {
-								location.reload();
-							}
-						})
-					}
-				});
-			}
-		})
-	}
+	function balas_komen(id) {
+		// $(window).scrollTop(0);
 
-	function hapus_komen(id) {
-		Swal.fire({
-			title: 'Hapus komentar ini?',
-			text: "Komentar yang dihapus tidak bisa dikembalikan lagi!",
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Hapus',
-			cancelButtonText: 'Tidak'
-		}).then((result) => {
-			if (result.value) {
-				$.ajax({
-					url: "<?= site_url('tugas/delete_komen/') ?>" + id,
-					type: "POST",
-					dataType: "JSON",
-					success: function(res) {
-						Swal.fire({
-							icon: 'success',
-							title: 'Sukses',
-							text: res.msg,
-							timer: 2000,
-							allowOutsideClick: false,
-							timerProgressBar: true,
-							// onBeforeOpen: () => {
-							// 	Swal.showLoading()
-							// },
-							showConfirmButton: false
-						}).then((result) => {
-							if (result.dismiss === Swal.DismissReason.timer) {
-								location.reload();
-							}
-						})
-					}
-				});
-			}
-		})
-	}
+		$('#section_komen').addClass('block');
+		$('#form_komen').fadeIn();
+		// $('#form_komen').animate({width: "50%", height: "50%"}, 'slow');
+		$('#style_form').css({
+			'display': 'unset',
+			'position': 'absolute',
+			'z-index': '1036',
+			'bottom': '0',
+			'top': '0',
+			// 'top': '10 %',
+			'right': '10 %',
+			'transform': 'translate(-50 % , -50 % )'
+		});
+		$("html, body").animate({
+			scrollTop: $("#style_form").offset().top
+		}, 500);
+		$('body').css('overflow', 'hidden');
 
-	function hapus_subkomen(id) {
-		Swal.fire({
-			title: 'Hapus komentar ini?',
-			text: "Komentar yang dihapus tidak bisa dikembalikan lagi!",
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Hapus',
-			cancelButtonText: 'Tidak'
-		}).then((result) => {
-			if (result.value) {
-				$.ajax({
-					url: "<?= site_url('tugas/delete_subkomen/') ?>" + id,
-					type: "POST",
-					dataType: "JSON",
-					success: function(res) {
-						Swal.fire({
-							icon: 'success',
-							title: 'Sukses',
-							text: res.msg,
-							timer: 2000,
-							allowOutsideClick: false,
-							timerProgressBar: true,
-							// onBeforeOpen: () => {
-							// 	Swal.showLoading()
-							// },
-							showConfirmButton: false
-						}).then((result) => {
-							if (result.dismiss === Swal.DismissReason.timer) {
-								location.reload();
-							}
-						})
-					}
-				});
+		$('#section_komen').addClass('block');
+		$('#form_komen').fadeIn();
+		$('body').css('overflow', 'hidden');
+
+		$.ajax({
+			url: "<?= site_url('tugas/get_komen/') ?>" + id,
+			type: "POST",
+			dataType: "JSON",
+			success: function(respon) {
+				var respon = respon.komen;
+
+				$('#form').attr('action', '<?= site_url('tugas/submit_komen') ?>');
+
+				$('#id_reply').val(id);
+				$('#id_forum').val(respon.id_pelajaran);
+				$('#pertemuan').val(respon.pertemuan);
+				$('#mention').val(respon.siswa_nis);
+				$('#reply_to').val(id);
 			}
-		})
+		});
 	}
 </script>
+<!--end of ajax load-- >

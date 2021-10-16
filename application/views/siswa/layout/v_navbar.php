@@ -53,61 +53,125 @@
 
 		<!-- Right navbar links -->
 		<div>
-		<ul class="order-1 order-md-3 navbar-nav navbar-no-expand media-float">
-			<li class="nav-item dropdown">
-				<a href="<?= site_url('inbox') ?>" class="nav-link">
-					<?php $sumMail = $this->db->select_sum('inbox_status')->from('tbl_inbox')->where('inbox_kontak', $this->session->userdata('username'))->get()->row_array(); ?>
-					<i class="fa fa-envelope"></i><?= $sumMail['inbox_status'] > 0 ? '<small class="badge badge-notify text-center">' . $sumMail['inbox_status'] . '</small>' : ''; ?>
-				</a>
-			</li>
-			<li class="nav-item dropdown">
-				<?php $notif = $this->db->select('*')->from('tbl_pengguna a')
-					->join('tbl_komen_forum b', 'b.user_komen = a.pengguna_username')
-					->join('tbl_materi_forum c', 'b.id_forum = c.id_forum and b.pertemuan = c.pertemuan', 'inner')
-					->join('tbl_pelajaran d', ' b.id_forum = d.id_pelajaran')
-					->join('tbl_mapel e', ' d.kd_mapel = e.kd_mapel')
-					->where(['b.mention' => $this->session->userdata('username')])->limit(4)->get();
-				$count = $this->db->select('*')->from('tbl_pengguna a')
-					->join('tbl_komen_forum b', 'b.user_komen = a.pengguna_username')
-					->join('tbl_materi_forum c', 'b.id_forum = c.id_forum and b.pertemuan = c.pertemuan', 'inner')
-					->join('tbl_pelajaran d', ' b.id_forum = d.id_pelajaran')
-					->join('tbl_mapel e', ' d.kd_mapel = e.kd_mapel')
-					->where(['b.mention' => $this->session->userdata('username')])->get()->num_rows(); ?>
+			<ul class="order-1 order-md-3 navbar-nav navbar-no-expand media-float">
+				<li class="nav-item dropdown">
+					<a href="<?= site_url('inbox') ?>" class="nav-link">
+						<?php $sumMail = $this->db->select_sum('inbox_status')->from('tbl_inbox')->where('inbox_kontak', $this->session->userdata('username'))->get()->row_array(); ?>
+						<i class="fa fa-envelope"></i><?= $sumMail['inbox_status'] > 0 ? '<small class="badge badge-notify text-center">' . $sumMail['inbox_status'] . '</small>' : ''; ?>
+					</a>
+				</li>
+				<li class="nav-item dropdown">
+					<?php $notif = $this->db->select('*')->from('tbl_pengguna a')
+						->join('tbl_komen_forum b', 'b.user_komen = a.pengguna_username')
+						->join('tbl_materi_forum c', 'b.id_forum = c.id_forum and b.pertemuan = c.pertemuan', 'inner')
+						->join('tbl_pelajaran d', ' b.id_forum = d.id_pelajaran')
+						->join('tbl_mapel e', ' d.kd_mapel = e.kd_mapel')
+						->where(['b.mention' => $this->session->userdata('username')])->limit(4)->get();
+					$count = $this->db->select('*')->from('tbl_pengguna a')
+						->join('tbl_komen_forum b', 'b.user_komen = a.pengguna_username')
+						->join('tbl_materi_forum c', 'b.id_forum = c.id_forum and b.pertemuan = c.pertemuan', 'inner')
+						->join('tbl_pelajaran d', ' b.id_forum = d.id_pelajaran')
+						->join('tbl_mapel e', ' d.kd_mapel = e.kd_mapel')
+						->where(['b.mention' => $this->session->userdata('username')])->get()->num_rows(); ?>
 
-				<a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell"></i><?= $count > 0 ? '<small class="badge badge-notify text-center">' . $count . '</small>' : '' ?></a>
-				<?php if ($count > 0) : ?>
-					<ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow" style="width: 280px;">
-						<?php foreach ($notif->result_array() as $res) : ?>
-							<a href="<?= site_url('forum/' . $res['id_forum']) ?>" class="dropdown-item">
-								<div class="media">
-									<div class="media-body">
-										<h3 class="dropdown-item-title pb-1"><?= $res['pengguna_nama']; ?></h3>
-										<div class="row">
-											<div class="col-sm-1 mr-2"><i class="fa fa-comments"></i></div>
-											<div class="col-sm">
-												<p class="text-sm">Berkomentar pada forum <br><?= $res['judul_materi']; ?></p>
+					<a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell"></i><?= $count > 0 ? '<small class="badge badge-notify text-center">' . $count . '</small>' : '' ?></a>
+					<?php if ($count > 0) : ?>
+						<ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow" style="width: 280px;">
+							<?php foreach ($notif->result_array() as $res) : ?>
+								<a href="<?= site_url('forum/' . $res['id_forum']) ?>" class="dropdown-item">
+									<div class="media">
+										<div class="media-body">
+											<h3 class="dropdown-item-title pb-1"><?= $res['pengguna_nama']; ?></h3>
+											<div class="row">
+												<div class="col-sm-1 mr-2"><i class="fa fa-comments"></i></div>
+												<div class="col-sm">
+													<p class="text-sm">Berkomentar pada forum <br><?= $res['judul_materi']; ?></p>
+												</div>
 											</div>
+											<!-- <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p> -->
 										</div>
-										<!-- <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p> -->
 									</div>
-								</div>
-								<!-- Message End -->
-							</a>
-							<li class="dropdown-divider"></li>
-						<?php endforeach; ?>
-						<li class="text-center"><a href="<?= site_url('notifikasi') ?>" class="dropdown-item">Lihat semua komentar</a></li>
+									<!-- Message End -->
+								</a>
+								<li class="dropdown-divider"></li>
+							<?php endforeach; ?>
+							<li class="text-center"><a href="<?= site_url('notifikasi') ?>" class="dropdown-item">Lihat semua komentar</a></li>
+						</ul>
+					<?php endif; ?>
+				</li>
+				<li class="nav-item dropdown">
+					<?php
+					$this->db->select('*')->from('tbl_siswa a')
+						->join('tbl_pelajaran b', 'a.siswa_kelas_id = b.id_kelas', 'left')
+						->join('tbl_materi_tugas c', 'b.id_pelajaran = c.id_forum', 'right')
+						->where(['a.siswa_nis' => $_SESSION['username']]);
+					$siswa = $this->db->get()->result_array();
+
+					$arr_1 = array();
+					foreach ($siswa as $dt) {
+						$row = array();
+
+						$row['nis'] = $dt['siswa_nis'];
+						$row['forum'] = $dt['id_forum'] . ' - ' . $dt['pertemuan'];
+						$row['judul_materi'] = $dt['judul_materi'];
+
+						$arr_1[] = $row;
+					}
+
+					$log_tugas = $this->db->get_where('tbl_log_forum', ['nisn_siswa' => $_SESSION['username']])->result_array();
+					$arr_2 = array();
+					foreach ($log_tugas as $dt) {
+						$row = array();
+
+						$exp = explode('::', $dt['log_tugas']);
+						for ($i = 0; $i < count($exp); $i++) {
+							$row['nis'] = $dt['nisn_siswa'];
+							$row['forum'] = $dt['id_forum'] . ' - ' . $exp[$i];
+
+							$arr_2[] = $row;
+						}
+					}
+
+					$not_yet = array();
+					foreach ($arr_1 as $key => $val) {
+						$row = array();
+						if (array_search($val['forum'], array_column($arr_2, 'forum')) === false) {
+							$exp = explode(' - ', $val['forum']);
+							$row['forum'] = $exp[0];
+							$row['pertemuan'] = $exp[1];
+							$row['materi'] = $val['judul_materi'];
+
+							$not_yet[] = $row;
+						}
+					} ?>
+					<a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-clipboard-list"></i><?= count($not_yet) > 0 ? '<small class="badge badge-notify text-center">' . count($not_yet) . '</small>' : '' ?></a>
+					<?php if (count($not_yet) > 0) : ?>
+						<ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow" style="width: 280px;">
+							<?php foreach ($not_yet as $res) : ?>
+								<a href="<?= site_url('tugas/' . $res['forum']) ?>" class="dropdown-item">
+									<div class="media">
+										<div class="media-body">
+											<div class="row">
+												<div class="col-sm-1 mr-2"><i class="fa fa-tasks"></i> <?= $res['materi']; ?></div>
+											</div>
+											<p class="text-sm text-muted"><?= 'Tugas Ke-' . $res['pertemuan'] . ' belum dikerjankan' ?></p>
+										</div>
+									</div>
+									<!-- Message End -->
+								</a>
+							<?php endforeach; ?>
+						</ul>
+					<?php endif; ?>
+				</li>
+				<li class="nav-item dropdown">
+					<a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fas fa-user-circle"></i></a>
+					<ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+						<li><a href="<?= site_url('biodata') ?>" class="dropdown-item">Profile</a></li>
+						<li><a href="<?= site_url('login/logout') ?>" class="dropdown-item">Log Out</a></li>
 					</ul>
-				<?php endif; ?>
-			</li>
-			<li class="nav-item dropdown">
-				<a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fas fa-user-circle"></i></a>
-				<ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-					<li><a href="<?= site_url('biodata') ?>" class="dropdown-item">Profile</a></li>
-					<li><a href="<?= site_url('login/logout') ?>" class="dropdown-item">Log Out</a></li>
-				</ul>
-			</li>
-		</ul>
-		<img class="media-logo-show" src="<?= base_url('assets/images/mylogo.png') ?>" alt="logo" style="display: none; width: 20%; float:right">
+				</li>
+			</ul>
+			<img class="media-logo-show" src="<?= base_url('assets/images/mylogo.png') ?>" alt="logo" style="display: none; width: 20%; float:right">
 		</div>
 	</div>
 </nav>
@@ -149,6 +213,13 @@
 					<a href="<?= site_url('keuangan_siswa') ?>" class="nav-link" id="schedule">Keuangan</a>
 					<a href="<?= site_url('dashboard/penilaian') ?>" class="nav-link" id="score">Score</a>
 					<a href="<?= site_url('detail_absensi/absensi_forum/') . $this->session->userdata('username') ?>" class="nav-link" id="absensi">Absensi</a>
+
+					<!-- <form action="http://localhost/lms-rest-server/api/auth" method="post"> -->
+					<form action="http://lms-api.anakpanah.online/api/auth" method="POST">
+						<input type="hidden" name="username" value="<?= $_SESSION['username'] ?>">
+						<input type="hidden" name="password" value="<?= $_SESSION['username'] ?>">
+						<button type="submit" class="btn btn-link">Ujian</button>
+					</form>
 				</div>
 
 				<button aria-label="Previous" class="glider-prev">&#8249;</button>

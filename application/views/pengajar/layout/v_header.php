@@ -58,6 +58,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			margin: 0px 0px 10px 0px;
 			padding: .5em .7rem;
 		}
+
 		@media screen and (max-width: 574px) {
 			.media-nav {
 				margin-left: 0 !important;
@@ -107,28 +108,33 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				right: 5%;
 				width: 110%;
 			}
-			.media-score-dropdown{
-			    width: 100%;
-                flex: unset;
-                max-width: unset;
-                padding-bottom: 10px;
+
+			.media-score-dropdown {
+				width: 100%;
+				flex: unset;
+				max-width: unset;
+				padding-bottom: 10px;
 			}
-			.media-score-nilai{
-			    width: 50%;
-                flex: unset;
-                max-width: unset;
-                padding-bottom: 10px;
+
+			.media-score-nilai {
+				width: 50%;
+				flex: unset;
+				max-width: unset;
+				padding-bottom: 10px;
 			}
-			.media-score-position{
-			    position: relative;
-left: 10%;
+
+			.media-score-position {
+				position: relative;
+				left: 10%;
 			}
-			.media-width-absensi{
-			    width: 50%;
+
+			.media-width-absensi {
+				width: 50%;
 			}
 		}
 	</style>
 </head>
 
 <body class="hold-transition sidebar-collapse layout-top-nav">
+	<section id="section_komen"></section>
 	<div class="wrapper" style="height: 100%;">

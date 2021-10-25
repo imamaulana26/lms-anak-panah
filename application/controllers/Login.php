@@ -7,10 +7,23 @@ class Login extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('m_login');
+		$this->load->helper('date');
+		date_default_timezone_set("Asia/Jakarta");
 	}
 
 	function index()
 	{
+		// echo "<script>window.location.replace('http://maintance.anakpanah.online/');</script>";
+		// 		$format_tgl = "%Y-%m-%d";
+		// 		$format_jam = "%H:%i:%s";
+		// 		$now = @mdate($format_tgl);
+		// 		$now_jam =  @mdate($format_jam);
+		// 		$this->db->update('tbl_materi_tugas', ['status' => 1], ['endDate <' => $now]);
+		//update tugas otomatis
+		// 		$this->db->update('tbl_pelajaran', ['aktifkan' => 0], ['tgl_oc <' => $now]);
+		//update kelas online otomatis
+		// 		$this->db->update('tbl_pelajaran', ['aktifkan' => 0], ['tgl_oc <=' => $now, 'time_end <' => $now_jam]);
+		//update kelas online otomatis
 		$this->load->view('admin/v_login');
 	}
 
@@ -48,13 +61,23 @@ class Login extends CI_Controller
 				$this->session->set_userdata('nama', $user_nama);
 				$this->session->set_userdata('username', $user_pengguna);
 			} elseif ($xcadmin['pengguna_level'] == 2) {
+				$csiswa = $this->m_login->ceksiswa($u);
+
 				$this->session->set_userdata('akses', 2);
 				$idadmin = $xcadmin['pengguna_id'];
 				$user_nama = $xcadmin['pengguna_nama'];
 				$user_pengguna = $xcadmin['pengguna_username'];
-				$this->session->set_userdata('idadmin', $idadmin);
-				$this->session->set_userdata('nama', $user_nama);
-				$this->session->set_userdata('username', $user_pengguna);
+
+				$sess = array(
+					'idadmin' => $idadmin,
+					'nama' => $user_nama,
+					'kc' => $csiswa['kc'],
+					'oc' => $csiswa['oc'],
+					'username' => $user_pengguna,
+					'kelas' => $csiswa['siswa_kelas_id'],
+					'pengguna_level' => $xcadmin['pengguna_level']
+				);
+				$this->session->set_userdata($sess);
 			} else {
 				$this->session->set_userdata('akses', 3);
 				$idadmin = $xcadmin['pengguna_id'];
@@ -90,43 +113,45 @@ class Login extends CI_Controller
 		if ($this->session->userdata('id') != 'b1307saj' && $this->session->userdata('pw') != 'b1307saj') {
 			redirect('login', 'refresh');
 		}
-		$data['list'] = $this->db->get_where('tbl_pengguna',['pengguna_level '=> 1])->result_array();
-		$this->load->view('admin/v_superadmin',$data);
+		$data['list'] = $this->db->get_where('tbl_pengguna', ['pengguna_level ' => 1])->result_array();
+		$this->load->view('admin/v_superadmin', $data);
 	}
 
 	function list_data()
-	{	
-		if ($this->input->post('data')==3) {
+	{
+		if ($this->input->post('data') == 3) {
 			$this->db->select('*');
 			$this->db->from('tbl_pengguna a');
-			$this->db->join('tbl_pengajar b', 'a.pengguna_nama=b.nm_pengajar','inner');
+			$this->db->join('tbl_pengajar b', 'a.pengguna_nama=b.nm_pengajar', 'inner');
 			$this->db->where(['a.pengguna_level' => 3]);
 			$data['list'] = $this->db->get()->result_array();
+		} else {
+			$data['list'] = $this->db->get_where('tbl_pengguna', ['pengguna_level' => $this->input->post('data')])->result_array();
 		}
-		else{
-			$data['list'] = $this->db->get_where('tbl_pengguna',['pengguna_level'=> $this->input->post('data') ])->result_array();
-		}
-		$this->load->view('admin/v_superadmin',$data);
+		$this->load->view('admin/v_superadmin', $data);
 	}
-	function list_hak($id){
+	function list_hak($id)
+	{
 		// $data['list'] = $this->db->get_where('tbl_pelajaran',['kd_pengajar'=> $id ])->result_array();
 		$this->db->select('*');
 		$this->db->from('tbl_pelajaran a');
-		$this->db->join('tbl_mapel b', 'a.kd_mapel=b.kd_mapel','inner');
-		$this->db->join('tbl_kelas c', 'a.id_kelas=c.kelas_id','left');
+		$this->db->join('tbl_mapel b', 'a.kd_mapel=b.kd_mapel', 'inner');
+		$this->db->join('tbl_kelas c', 'a.id_kelas=c.kelas_id', 'left');
 		$this->db->where(['a.kd_pengajar' => $id]);
 		$data['list'] = $this->db->get()->result_array();
 
-		$data['nama_pengajar'] = $this->db->get_where('tbl_pengajar',['id_pengajar'=> $id ])->row_array();
-		$this->load->view('admin/v_list_superadmin',$data);
+		$data['nama_pengajar'] = $this->db->get_where('tbl_pengajar', ['id_pengajar' => $id])->row_array();
+		$this->load->view('admin/v_list_superadmin', $data);
 	}
-	
-	function hapus_hak(){
-		$this->db->update('tbl_pelajaran', ['kd_pengajar' =>NULL],['id_pelajaran'=>$this->input->post('xid')]);
+
+	function hapus_hak()
+	{
+		$this->db->update('tbl_pelajaran', ['kd_pengajar' => NULL], ['id_pelajaran' => $this->input->post('xid')]);
 		echo "<script type='text/javascript'>alert('Hak Pengajar Telah Dihapus');window.location.replace('./superadmin');</script>";
 	}
 
-	function save_pengajar(){
+	function save_pengajar()
+	{
 		$data = array(
 			'id_kelas' => strip_tags($this->input->post('xkelas')),
 			'kd_mapel' => strip_tags($this->input->post('xmapel')),
@@ -135,10 +160,9 @@ class Login extends CI_Controller
 		if ($check > 0) {
 			$this->db->update('tbl_pelajaran', ['kd_pengajar' => $this->input->post('xid')], $data);
 			echo "<script type='text/javascript'>alert('Hak Pengajar Telah Diberikan');window.location.replace('./superadmin');</script>";
-		}else{
+		} else {
 			echo "<script type='text/javascript'>alert('Tidak Ada Mata Pelajaran Di Kelas Tersebut');window.location.replace('./superadmin');</script>";
 		}
-		
 	}
 
 
@@ -182,7 +206,7 @@ class Login extends CI_Controller
 		);
 
 		if ($this->input->post('xtype') == 3) {
-			$this->db->insert('tbl_pengajar', ['nm_pengajar'=>strip_tags($this->input->post('xnama'))]);
+			$this->db->insert('tbl_pengajar', ['nm_pengajar' => strip_tags($this->input->post('xnama'))]);
 		}
 		$this->db->insert('tbl_pengguna', $data);
 		echo "<script type='text/javascript'>alert('Admin Berhasil Ditambahkan');window.location.replace('./superadmin');</script>";
@@ -197,7 +221,7 @@ class Login extends CI_Controller
 
 		if ($this->input->post('xhak') == 3) {
 			$this->db->delete('tbl_pengajar', ['id_pengajar' => $this->input->post('xipdeng')]);
-			$this->db->update('tbl_pelajaran', ['kd_pengajar' => NULL ],['kd_pengajar'=>$this->input->post('xipdeng')]);
+			$this->db->update('tbl_pelajaran', ['kd_pengajar' => NULL], ['kd_pengajar' => $this->input->post('xipdeng')]);
 		}
 		$this->db->delete('tbl_pengguna', ['pengguna_id' => $this->input->post('xid')]);
 		echo "<script type='text/javascript'>alert('User Berhasil Dihapus');window.location.replace('./superadmin');</script>";
@@ -212,7 +236,7 @@ class Login extends CI_Controller
 		echo $password;
 		exit();
 	}
-	
+
 	function logout()
 	{
 		$this->session->sess_destroy();

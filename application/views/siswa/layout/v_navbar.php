@@ -214,12 +214,14 @@
 					<a href="<?= site_url('dashboard/penilaian') ?>" class="nav-link" id="score">Score</a>
 					<a href="<?= site_url('detail_absensi/absensi_forum/') . $this->session->userdata('username') ?>" class="nav-link" id="absensi">Absensi</a>
 
-					<!-- <form action="http://localhost/lms-rest-server/api/auth" method="post"> -->
-					<form action="http://lms-api.anakpanah.online/api/auth" method="POST">
+					<a href="http://localhost/lms-ujian-online/auth" class="nav-link" id="ujian">Ujian</a>
+
+					<!-- <form action="http://localhost/lms-ujian-online/auth" method="post"> -->
+					<!-- <form action="http://localhost/lms-rest-server/api/auth" method="post">
 						<input type="hidden" name="username" value="<?= $_SESSION['username'] ?>">
 						<input type="hidden" name="password" value="<?= $_SESSION['username'] ?>">
 						<button type="submit" class="btn btn-link">Ujian</button>
-					</form>
+					</form> -->
 				</div>
 
 				<button aria-label="Previous" class="glider-prev">&#8249;</button>
